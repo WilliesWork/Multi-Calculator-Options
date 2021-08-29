@@ -5,3 +5,7 @@ export interface BallSurfaceArea {
     area: number;
 
 }
+export interface surfaceAreaI {
+    radius: string;
+    method: string;
+}
