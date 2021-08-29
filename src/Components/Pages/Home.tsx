@@ -3,11 +3,11 @@ import TopBar from '../../Common/TopBar'
 
 const Home = () => {
     return (
-        <> 
-     <TopBar />
+        <>
+            <TopBar />
         </>
-        
-        
+
+
     )
 }
 
