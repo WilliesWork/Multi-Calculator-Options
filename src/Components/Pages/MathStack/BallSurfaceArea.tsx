@@ -5,8 +5,7 @@ import { Button, TextField } from '@material-ui/core'
 
 const BallSurfaceArea = () => {
   const [initialFormValues] = React.useState({
-    surfaceArea: 0,
-    area: 0
+    radius: 0
   })
   return (
         <div>
@@ -20,21 +19,16 @@ const BallSurfaceArea = () => {
                     <form onSubmit={handleSubmit}>
                         <div>
                             <TextField
-                                label="Surface Area"
-                                id="surfaceArea"
+                                label="Radius"
+                                id="radius"
                                 placeholder="0.0"
                                 variant="outlined"
                                 size="small"
+                                value={values.radius}
+                                onChange={handleChange}
+
                             />
-                            <span style={{ padding: 20 }}>
-                            <TextField
-                                label="Area"
-                                id="area"
-                                placeholder="0.0"
-                                variant="outlined"
-                                size="small"
-                            />
-                            </span>
+
                             <div>
                                 <Button variant="outlined" color="primary" type="submit">
                                     Calculate
