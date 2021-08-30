@@ -1,11 +1,17 @@
 .App {
   text-align: center;
-  background-image: url('./Common/Assets/Images/HomeBackground.jpg');
-  background-color: #cccccc; /* Used if the image is unavailable */
-  height: 500px; /* You must set a specified height */
+  /*background-image: url('./Common/Assets/Images/HomeBackground.jpg'); */
+ }
+
+.HomeContainer {
+  background-color: #d1dde9;; /* Used if the image is unavailable */
+  height: 350px; /* You must set a specified height */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
+  background-size: auto; /* Resize the background image to cover the entire container */
+  background-origin: padding-box;
+  background-clip: border-box;
+
 }
 
 

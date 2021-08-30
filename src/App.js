@@ -3,6 +3,7 @@ import React from 'react'
 import './App.css'
 import Home from './Components/Pages/Home'
 import BallSurfaceArea from './Components/Pages/MathStack/BallSurfaceArea'
+import CubeSurfaceArea from './Components/Pages/MathStack/CubeSurfaceArea'
 
 function App () {
   return (
@@ -13,6 +14,9 @@ function App () {
       </div>
       <div>
         <BallSurfaceArea />
+      </div>
+      <div>
+        <CubeSurfaceArea />
       </div>
     </div>
 

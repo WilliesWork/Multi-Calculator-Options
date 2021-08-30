@@ -1,5 +1,6 @@
+/* eslint-disable camelcase */
 import axios from 'axios'
-import { surfaceAreaI } from '../Types/MathStack'
+import { ConeAreaI, cubeAreaI, surfaceAreaI } from '../Types/MathStack'
 
 export const CalculateSurfaceArea = async (calculateArea: surfaceAreaI) => {
   try {
@@ -25,5 +26,50 @@ export const CalculateSurfaceArea = async (calculateArea: surfaceAreaI) => {
       success: false,
       payload: 'Unexpected Error'
     }
+  }
+}
+
+export const CalculateCubeSurfaceArea = async (calculateCubeArea: cubeAreaI) => {
+  try {
+    const { data } = await axios.post('http://165.56.32.222/api/calculator/surface-areas', calculateCubeArea)
+
+    const { statusCode, statusDescription, area, cubeSurfaceArea, errors } = data
+    const message = {
+      CubeSurfaceArea: cubeSurfaceArea,
+      Area: area
+    }
+    console.log(errors)
+    if (statusCode === 100 && statusDescription === 'success') {
+      return { success: statusDescription, payload: message }
+    }
+    if (statusCode === 102) {
+      return { success: statusDescription, payload: errors.edge_length }
+    }
+    throw new Error('===> Responded with unexpected error')
+  } catch (err) {
+    return { success: false, payload: 'SERVER ERROR' }
+  }
+}
+
+export const calculateConeSurfaceArea = async (calculateConeArea: ConeAreaI) => {
+  try {
+    const { data } = await axios.post('http://165.56.32.222/api/calculator/surface-areas', calculateConeArea)
+
+    const { statusCode, statusDescription, base_surface_area, lateral_surface_area, coneSurfaceArea, errors } = data
+
+    const message = {
+      baseSurfaceArea: base_surface_area,
+      lateralSurefaceArea: lateral_surface_area,
+      ConeSurfaceArea: coneSurfaceArea
+    }
+
+    if (statusCode === 100 && statusDescription === 'success') {
+      return { success: statusDescription, payload: message }
+    }
+    if (statusCode === 102) {
+      return { success: statusDescription, payload: errors }
+    }
+  } catch (err) {
+    return { success: false, payload: 'SERVER ERROR' }
   }
 }
