@@ -18,8 +18,8 @@ export interface cubeAreaI {
 }
 
 export interface ConeAreaI {
-    base_surface_area: number;
-    lateral_surface_area: number;
-    coneSurfaceArea: number
+  radius: string;
+  height: string;
+  method: string;
 
 }
