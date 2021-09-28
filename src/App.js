@@ -1,25 +1,36 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
+import { Provider } from 'react-redux'
 import './App.css'
+import Drawer from './Common/Drawer'
+import { store } from './redux/store'
+import {makeStyles } from '@material-ui/core'
 import Home from './Components/Pages/Home'
-import BallSurfaceArea from './Components/Pages/MathStack/BallSurfaceArea'
-import CubeSurfaceArea from './Components/Pages/MathStack/CubeSurfaceArea'
+import AppRoutes from './routes/AppRoutes'
+import { BrowserRouter as Router} from 'react-router-dom'
+
+const useStyles = makeStyles({
+container: {
+  display: 'flex',
+}
+})
 
 function App () {
+  const {container} = useStyles()
+
   return (
-    <div>
-      <div className="App">
-        <Home />
+    <Router>
+ <Provider store={store}>
+      <div className={container}>
+      <Drawer />
+      <AppRoutes />
+      </div>
+     
 
-      </div>
-      <div>
-        <BallSurfaceArea />
-      </div>
-      <div>
-        <CubeSurfaceArea />
-      </div>
-    </div>
-
+    </Provider>
+    </Router>
+   
+    
   )
 }
 

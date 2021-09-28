@@ -11,6 +11,7 @@
   background-size: auto; /* Resize the background image to cover the entire container */
   background-origin: padding-box;
   background-clip: border-box;
+  width: 100%;
 
 }
 

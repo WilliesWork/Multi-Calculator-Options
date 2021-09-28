@@ -7,7 +7,8 @@ import { cubeAreaI } from '../../../Types/MathStack'
 
 const CubeSurfaceArea = () => {
   const [initialFormValues] = React.useState({
-    edge_length: ''
+    edge_length: '',
+    edge_unit: ''
   })
   const [Result, setResult] = React.useState({
     cubeSurfaceArea: 0,
@@ -22,11 +23,13 @@ const CubeSurfaceArea = () => {
                 onSubmit={async ({
 
                   // eslint-disable-next-line camelcase
-                  edge_length
+                  edge_length,
+                  edge_unit
 
                 }, { setSubmitting, resetForm }) => {
                   const payload: cubeAreaI = {
                     edge_length,
+                    edge_unit,
                     method: 'cubeSurfaceAreaCalculator'
                   }
                   console.log(JSON.stringify(payload))
