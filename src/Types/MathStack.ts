@@ -20,18 +20,11 @@ export interface cubeAreaI {
 }
 
 export interface ConeAreaI {
-<<<<<<< HEAD
     radius: string;
     radius_unit: string;
     height: string;
     height_unit: string;
     method: string;
-=======
-  radius: string;
-  height: string;
-  method: string;
-
->>>>>>> c91563b2b8f115502e0954a0a28bcc0046ee9ab2
 }
 
 export interface RectangularAreaI {
