@@ -1,10 +1,13 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useEffect } from 'react'
-import '../../App.css'
-import TopBar from '../../Common/TopBar'
-import { makeStyles } from '@material-ui/core'
-import { fetchGetUnits } from '../../redux/slice/GetUnits'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from "react";
+import "../../App.css";
+import TopBar from "../../Common/TopBar";
+import { makeStyles, TextField } from "@material-ui/core";
+import { fetchGetUnits } from "../../redux/slice/GetUnits";
+import { useDispatch } from "react-redux";
+import { MATH_LOGO } from "../../Common/Assets/Images/Images";
+import image1 from "../../Common/financial-calculator.jpg";
+import { FinancialCals } from "../../Common/MathUnits";
 
 const useStyles = makeStyles({
   // paper: {
@@ -18,59 +21,102 @@ const useStyles = makeStyles({
   // },
   paper: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: "column",
+    display: "flex",
   },
   exchangeRates: {
-    flexDirection: 'row',
-    display: 'flex',
-    justifyContent: 'space-around'
+    flexDirection: "row",
+    display: "flex",
+    justifyContent: "space-around",
   },
   currencyConverter: {
-    backgroundColor: 'grey',
-    width: '80%',
-    height: '300px',
-    marginLeft: '12%',
-    borderRadius: '5px',
-    boxShadow: '5px 3px 3px blue'
+    backgroundColor: "#f5f5f5 ",
+    width: "80%",
+    height: "300px",
+    marginLeft: "12%",
+    borderRadius: "5px",
+    boxShadow: "5px 3px 3px #eeeeee ",
+  },
+  converterContent: {
+    flexDirection: "row",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: 'center',
+    marginTop: '100px'
   },
   calculatorOptions: {
-   flexDirection: 'column',
+    flexDirection: "column",
+    marginTop: 100,
+    marginLeft: "12%",
   },
-})
+});
 const Home = () => {
-  const { paper, currencyConverter,exchangeRates } = useStyles()
-  const dispatch = useDispatch()
+  const {
+    paper,
+    currencyConverter,
+    exchangeRates,
+    calculatorOptions,
+    converterContent,
+  } = useStyles();
+  const dispatch = useDispatch();
   useEffect(() => {
     const bootStrap = () => {
-      dispatch(fetchGetUnits())
-    }
-    bootStrap()
-  }, [])
+      dispatch(fetchGetUnits());
+    };
+    bootStrap();
+  }, []);
   return (
     <>
-     
-        <div className={paper}>
-          <div className={exchangeRates}>
+      <div className={paper}>
+        <div className={exchangeRates}>
           <p>Dollar 22.0</p>
           <p>Pound 20.2</p>
           <p>Euro 25.6</p>
           <p>Rand 1.50</p>
-          </div>
-          <div className={currencyConverter}>
-            <p>Exchange</p>
-          </div>
-          <div>
-            <img src={} />
-
-          </div>
-         
         </div>
-     
-      
+        <div className={currencyConverter}>
+          <p>Calculatormap Currency Converter</p>
+          <div className={converterContent}>
+            <p>Amount</p>
+            <TextField
+              label="Amount"
+              id="radiusValue"
+              name="radius"
+              placeholder="0.0"
+              variant="outlined"
+              size="small"
+            />
 
+            <p>From</p>
+            <TextField
+              label="Amount"
+              id="radiusValue"
+              name="radius"
+              placeholder="0.0"
+              variant="outlined"
+              size="small"
+            />
+            <p>To</p>
+            <TextField
+              label="Amount"
+              id="radiusValue"
+              name="radius"
+              placeholder="0.0"
+              variant="outlined"
+              size="small"
+            />
+
+          </div>
+        </div>
+        <div className={calculatorOptions}>
+          <img src={image1} alt="LOGO" />
+          {FinancialCals.map((number) => {
+            return <li>{number}</li>;
+          })}
+        </div>
+      </div>
     </>
+  );
+};
 
-  )
-}
-
-export default Home
+export default Home;

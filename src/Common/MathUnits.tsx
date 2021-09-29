@@ -39,3 +39,20 @@ export const Units = [   {
     "unit": "nm"
 }
 ]
+
+
+export const FinancialCals = [
+    'Mortgage Calculator',
+    'Loan Calculator',
+    'Auto Loan Calculator',
+    'Interest Calculator',
+    'Payment Calculator',
+    'Retirement Calculator',
+    'Amortization Calculator',
+    'Investment Calculator',
+    'Inflation Calculator',
+    'Finance Calculator',
+    'Income Tax Calculator',
+    'Compound Interest Calculator',
+    'Salary Calculator',
+    'Interest Rate Calculator']
