@@ -1,27 +1,33 @@
 import React from 'react'
 import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
-import { useSelector } from 'react-redux'
 
-import { calculateRectangularArea } from '../../../Services/MathStack'
-import { RectangularAreaI } from '../../../Types'
+import { CalculateSurfaceArea } from '../../../Services/MathStack'
+import { EllipsoidSurfaceAreaI } from '../../../Types'
+import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
 import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, INPUT_TYPE } from './../../../Common/shared'
-// import axios from 'axios'
+import {
+  CALCULATORS,
+  BUTTONS,
+  LABELS,
+  PLACEHOLDERS,
+  IDS,
+  INPUT_TYPE
+} from './../../../Common/shared'
 
-const RectangularSurfaceArea = () => {
-  const classes = useStyles();
+const EllipsoidSurfaceArea = () => {
+  const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    length: '',
-    length_unit: '',
-    width: '',
-    width_unit: '',
-    height: '',
-    height_unit: ''
+    axis1: '',
+    axis1_unit: '',
+    axis2: '',
+    axis2_unit: '',
+    axis3: '',
+    axis3_unit: ''
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
@@ -32,34 +38,32 @@ const RectangularSurfaceArea = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.rectSurfArea}
+          {CALCULATORS.ellipsoidSurfArea}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          length,
-          length_unit,
-          width,
-          width_unit,
-          height,
-          height_unit
-
-
+          axis1,
+          axis1_unit,
+          axis2,
+          axis2_unit,
+          axis3,
+          axis3_unit
         }, { setSubmitting, resetForm }) => {
-          const payload: RectangularAreaI = {
-            length,
-            length_unit,
-            width,
-            width_unit,
-            height,
-            height_unit,
+          const payload: EllipsoidSurfaceAreaI = {
+            axis1,
+            axis1_unit,
+            axis2,
+            axis2_unit,
+            axis3,
+            axis3_unit,
             method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            const { payload: calsurfaceArea } = await calculateRectangularArea(payload)
+            /* const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
             console.log('=====>', calsurfaceArea)
             if (typeof calsurfaceArea === 'object') {
               console.log(calsurfaceArea)
@@ -68,70 +72,34 @@ const RectangularSurfaceArea = () => {
                 Area: calsurfaceArea.Area
               })
             }
-            resetForm()
+            resetForm() */
           } catch (err) {
             console.log('====>', err)
           }
         }}
-
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <div className="form-group col-8">
-                <label htmlFor="length">{LABELS.length}</label>
+                <label htmlFor="axis1">{LABELS.axis1}</label>
                 <input
                   type={INPUT_TYPE.number}
                   className="form-control"
-                  id="length"
+                  id="axis1"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.length}
+                  value={values.axis1}
                   onChange={handleChange}
                 />
               </div>
 
               <div className="form-group col">
-                <label htmlFor="length_units">{LABELS.unit}</label>
+                <label htmlFor="axis1_unit">{LABELS.unit}</label>
                 <select
-                  id="length_units"
+                  id="axis1_unit"
                   className="form-control"
-                  value={values.length_unit}
-                  onChange={handleChange('length_units')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-
-            <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="width">{LABELS.width}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="width"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.width}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="form-group col">
-                <label htmlFor="width_units">{LABELS.unit}</label>
-                <select
-                  id="width_units"
-                  className="form-control"
-                  value={values.width_unit}
-                  onChange={handleChange('width_units')}
+                  value={values.axis1_unit}
+                  onChange={handleChange('axis1_unit')}
                 >
                   <option selected>Select unit</option>
                   {Units.map(({ name, unit }) => (
@@ -148,24 +116,24 @@ const RectangularSurfaceArea = () => {
 
             <div className="form-row">
               <div className="form-group col-8">
-                <label htmlFor="height">{LABELS.height}</label>
+                <label htmlFor="axis2">{LABELS.axis2}</label>
                 <input
                   type={INPUT_TYPE.number}
                   className="form-control"
-                  id="height"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.height}
+                  id="axis2"
+                  placeholder="0"
+                  value={values.axis2}
                   onChange={handleChange}
                 />
               </div>
 
               <div className="form-group col">
-                <label htmlFor="length_units">{LABELS.unit}</label>
+                <label htmlFor="axis2_unit">{LABELS.unit}</label>
                 <select
-                  id="length_units"
+                  id="axis2_unit"
                   className="form-control"
-                  value={values.length_unit}
-                  onChange={handleChange('lenght_units')}
+                  value={values.axis2_unit}
+                  onChange={handleChange('axis1_unit')}
                 >
                   <option selected>Select unit</option>
                   {Units.map(({ name, unit }) => (
@@ -180,6 +148,39 @@ const RectangularSurfaceArea = () => {
               </div>
             </div>
 
+            <div className="form-row">
+              <div className="form-group col-8">
+                <label htmlFor="axis3">{LABELS.axis3}</label>
+                <input
+                  type={INPUT_TYPE.number}
+                  className="form-control"
+                  id="axis3"
+                  placeholder="0"
+                  value={values.axis3}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="form-group col">
+                <label htmlFor="axis3_unit">{LABELS.unit}</label>
+                <select
+                  id="axis3_unit"
+                  className="form-control"
+                  value={values.axis3_unit}
+                  onChange={handleChange('axis3_unit')}
+                >
+                  <option selected>Select unit</option>
+                  {Units.map(({ name, unit }) => (
+                    <option
+                      key={unit}
+                      value={unit}
+                    >
+                      {name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
 
             <div className="form mb-3">
               <Button
@@ -191,7 +192,6 @@ const RectangularSurfaceArea = () => {
                 {BUTTONS.calculate}
               </Button>
             </div>
-
             <div className="text-center mb-3">
               <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
               <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
@@ -206,4 +206,4 @@ const RectangularSurfaceArea = () => {
   )
 }
 
-export default RectangularSurfaceArea
+export default EllipsoidSurfaceArea

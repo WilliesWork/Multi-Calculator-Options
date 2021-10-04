@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import axios from 'axios'
 import { BASE_URL } from '../Common/AppUrl'
-import { ConeAreaI, cubeAreaI, RectangularAreaI, surfaceAreaI } from '../Types/MathStack'
+import { ConeAreaI, CubeAreaI, RectangularAreaI, SurfaceAreaI } from '../Types'
 
-export const CalculateSurfaceArea = async (calculateArea: surfaceAreaI) => {
+export const CalculateSurfaceArea = async (calculateArea: SurfaceAreaI | CubeAreaI | RectangularAreaI | ConeAreaI) => {
   try {
     const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, calculateArea)
 
@@ -25,7 +25,7 @@ export const CalculateSurfaceArea = async (calculateArea: surfaceAreaI) => {
   }
 }
 
-export const CalculateCubeSurfaceArea = async (calculateCubeArea: cubeAreaI) => {
+export const CalculateCubeSurfaceArea = async (calculateCubeArea: CubeAreaI) => {
   try {
     const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, calculateCubeArea)
 
@@ -94,7 +94,7 @@ export const calculateCylindricalTank = async (calculateCylindricalArea: ConeAre
 
 export const calculateRectangularArea = async (rectangularArea: RectangularAreaI) => {
   try {
-    const {data} = await axios.post(`${BASE_URL}/api/calculator/math`, rectangularArea)
+    const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, rectangularArea)
 
     const { statusCode, statusDescription, message, error } = data
 
@@ -105,7 +105,7 @@ export const calculateRectangularArea = async (rectangularArea: RectangularAreaI
       return { success: statusDescription, payload: message }
     }
     throw new Error('===> Responded with unexpected error')
-  }catch(err){
+  } catch (err) {
     return { success: false, payload: 'SERVER ERROR' }
   }
 }

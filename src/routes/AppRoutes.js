@@ -1,10 +1,16 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import Home from "../Components/Pages/Home";
-import BallSurfaceArea from "../Components/Pages/MathStack/BallSurfaceArea";
-import RectangularSurfaceArea from "../Components/Pages/MathStack/RectangularSurfaceArea";
-//
+import {
+  Home,
+  BallSurfaceArea,
+  RectangularSurfaceArea,
+  ConeSurfaceArea,
+  CubeSurfaceArea,
+  CylindricalTank,
+  Math,
+} from "./../Components/Pages";
+
 function AppRoutes() {
   const pages = [
     {
@@ -13,16 +19,20 @@ function AppRoutes() {
       name: "Home",
     },
     {
+      component: Math,
+      path: "/math",
+      name: "Math Calculators",
+    },
+    {
       component: RectangularSurfaceArea,
       path: "/MathStack/RectangularSurfaceArea",
       name: "Product Details",
     },
     {
-        component: BallSurfaceArea,
-        path: "/MathStack/BallSurfaceArea",
-        name: "Product Details",
-      },
-    
+      component: BallSurfaceArea,
+      path: "/MathStack/BallSurfaceArea",
+      name: "Product Details",
+    },
   ];
 
   return (

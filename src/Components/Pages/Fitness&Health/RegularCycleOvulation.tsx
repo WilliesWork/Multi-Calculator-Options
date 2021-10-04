@@ -1,51 +1,50 @@
-// eslint-disable-next-line no-use-before-define
 import React from 'react'
 import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
-import { CalculateSurfaceArea } from '../../../Services/MathStack'
-import { SurfaceAreaI } from '../../../Types'
 import { useSelector } from 'react-redux'
+
+import { CalculateSurfaceArea } from '../../../Services/MathStack'
+import { RegularCycleOvulationI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
-// import axios from 'axios'
 
-const BallSurfaceArea = () => {
+const RegularCycleOvulation = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    radius: '',
-    radius_unit: ''
+    cycle_days: '',
+    previous_cycle_start_date: ''
   })
   const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-    Area: 0
+    importantDatesForCurrentCycle: "",
+    importantDatesNextSixCycles: ""
   })
 
   return (
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.ballSurfArea}
+          {CALCULATORS.regularCycleOvulation}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          radius,
-          radius_unit
+          cycle_days,
+          previous_cycle_start_date
         }, { setSubmitting, resetForm }) => {
-          const payload: SurfaceAreaI = {
-            radius,
-            radius_unit,
+          const payload: RegularCycleOvulationI = {
+            cycle_days,
+            previous_cycle_start_date,
             method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
+            /* const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
             console.log('=====>', calsurfaceArea)
             if (typeof calsurfaceArea === 'object') {
               console.log(calsurfaceArea)
@@ -54,7 +53,7 @@ const BallSurfaceArea = () => {
                 Area: calsurfaceArea.Area
               })
             }
-            resetForm()
+            resetForm() */
           } catch (err) {
             console.log('====>', err)
           }
@@ -63,36 +62,28 @@ const BallSurfaceArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="radius">{LABELS.radius}</label>
+              <div className="form-group col-6">
+                <label htmlFor="previous_cycle_start_date">{LABELS.previousCycleStartDate}</label>
                 <input
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.date}
                   className="form-control"
-                  id="radius"
+                  id="previous_cycle_start_date"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.radius}
+                  value={values.previous_cycle_start_date}
                   onChange={handleChange}
                 />
               </div>
 
-              <div className="form-group col">
-                <label htmlFor="radius_unit">{LABELS.unit}</label>
-                <select
-                  id="radius_unit"
+              <div className="form-group col-6">
+                <label htmlFor="cycle_days">{LABELS.cycleDays}</label>
+                <input
+                  type={INPUT_TYPE.number}
                   className="form-control"
-                  value={values.radius_unit}
-                  onChange={handleChange('radius_unit')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
+                  id="cycle_days"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.cycle_days}
+                  onChange={handleChange}
+                />
               </div>
             </div>
 
@@ -107,8 +98,8 @@ const BallSurfaceArea = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1">Important dates for current cycle: {Result.importantDatesForCurrentCycle}</Typography>
+              <Typography variant="subtitle1">Important dates for next 6 cycles: {Result.importantDatesNextSixCycles}</Typography>
             </div>
 
           </form>
@@ -120,4 +111,4 @@ const BallSurfaceArea = () => {
   )
 }
 
-export default BallSurfaceArea
+export default RegularCycleOvulation

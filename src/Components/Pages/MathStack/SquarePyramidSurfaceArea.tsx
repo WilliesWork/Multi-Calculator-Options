@@ -1,25 +1,22 @@
 import React from 'react'
 import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
-import { useSelector } from 'react-redux'
 
-import { calculateRectangularArea } from '../../../Services/MathStack'
-import { RectangularAreaI } from '../../../Types'
+import { CalculateSurfaceArea } from '../../../Services/MathStack'
+import { SquarePyramidSurfaceAreaI } from '../../../Types'
+import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
 import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, INPUT_TYPE } from './../../../Common/shared'
-// import axios from 'axios'
 
-const RectangularSurfaceArea = () => {
-  const classes = useStyles();
+const SquarePyramidSurfaceArea = () => {
+  const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    length: '',
-    length_unit: '',
-    width: '',
-    width_unit: '',
+    base_edge: '',
+    base_edge_unit: '',
     height: '',
     height_unit: ''
   })
@@ -32,34 +29,28 @@ const RectangularSurfaceArea = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.rectSurfArea}
+          {CALCULATORS.squarePyramidSurfArea}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          length,
-          length_unit,
-          width,
-          width_unit,
+          base_edge,
+          base_edge_unit,
           height,
           height_unit
-
-
         }, { setSubmitting, resetForm }) => {
-          const payload: RectangularAreaI = {
-            length,
-            length_unit,
-            width,
-            width_unit,
+          const payload: SquarePyramidSurfaceAreaI = {
+            base_edge,
+            base_edge_unit,
             height,
             height_unit,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'sqaurePyramidSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            const { payload: calsurfaceArea } = await calculateRectangularArea(payload)
+            /* const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
             console.log('=====>', calsurfaceArea)
             if (typeof calsurfaceArea === 'object') {
               console.log(calsurfaceArea)
@@ -68,70 +59,34 @@ const RectangularSurfaceArea = () => {
                 Area: calsurfaceArea.Area
               })
             }
-            resetForm()
+            resetForm() */
           } catch (err) {
             console.log('====>', err)
           }
         }}
-
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <div className="form-group col-8">
-                <label htmlFor="length">{LABELS.length}</label>
+                <label htmlFor="base_edge">{LABELS.baseEdge}</label>
                 <input
                   type={INPUT_TYPE.number}
                   className="form-control"
-                  id="length"
+                  id="base_edge"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.length}
+                  value={values.base_edge}
                   onChange={handleChange}
                 />
               </div>
 
               <div className="form-group col">
-                <label htmlFor="length_units">{LABELS.unit}</label>
+                <label htmlFor="base_edge_unit">{LABELS.unit}</label>
                 <select
-                  id="length_units"
+                  id="base_edge_unit"
                   className="form-control"
-                  value={values.length_unit}
-                  onChange={handleChange('length_units')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-
-            <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="width">{LABELS.width}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="width"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.width}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="form-group col">
-                <label htmlFor="width_units">{LABELS.unit}</label>
-                <select
-                  id="width_units"
-                  className="form-control"
-                  value={values.width_unit}
-                  onChange={handleChange('width_units')}
+                  value={values.base_edge_unit}
+                  onChange={handleChange('base_edge_unit')}
                 >
                   <option selected>Select unit</option>
                   {Units.map(({ name, unit }) => (
@@ -160,12 +115,12 @@ const RectangularSurfaceArea = () => {
               </div>
 
               <div className="form-group col">
-                <label htmlFor="length_units">{LABELS.unit}</label>
+                <label htmlFor="height_unit">{LABELS.unit}</label>
                 <select
-                  id="length_units"
+                  id="height_unit"
                   className="form-control"
-                  value={values.length_unit}
-                  onChange={handleChange('lenght_units')}
+                  value={values.height_unit}
+                  onChange={handleChange('height_unit')}
                 >
                   <option selected>Select unit</option>
                   {Units.map(({ name, unit }) => (
@@ -180,7 +135,6 @@ const RectangularSurfaceArea = () => {
               </div>
             </div>
 
-
             <div className="form mb-3">
               <Button
                 variant="outlined"
@@ -191,7 +145,6 @@ const RectangularSurfaceArea = () => {
                 {BUTTONS.calculate}
               </Button>
             </div>
-
             <div className="text-center mb-3">
               <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
               <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
@@ -206,4 +159,4 @@ const RectangularSurfaceArea = () => {
   )
 }
 
-export default RectangularSurfaceArea
+export default SquarePyramidSurfaceArea
