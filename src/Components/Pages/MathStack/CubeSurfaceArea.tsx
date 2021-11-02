@@ -2,13 +2,11 @@
 import React from 'react'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSelector } from 'react-redux'
 
-import { CalculateCubeSurfaceArea } from '../../../Services/MathStack'
 import { CubeAreaI } from '../../../Types'
 import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, INPUT_TYPE } from './../../../Common/shared'
 
 const CubeSurfaceArea = () => {
   const classes = useStyles();
@@ -43,16 +41,16 @@ const CubeSurfaceArea = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            const { payload: calculateCubeArea } = await CalculateCubeSurfaceArea(payload)
-            console.log('=====>', calculateCubeArea)
-            if (typeof calculateCubeArea === 'object') {
-              console.log(calculateCubeArea)
-              setResult({
-                cubeSurfaceArea: calculateCubeArea.CubeSurfaceArea,
-                Area: calculateCubeArea.Area
-              })
-            }
-            resetForm()
+            // const { payload: calculateCubeArea } = await CalculateCubeSurfaceArea(payload)
+            // console.log('=====>', calculateCubeArea)
+            // if (typeof calculateCubeArea === 'object') {
+            //   console.log(calculateCubeArea)
+            //   setResult({
+            //     cubeSurfaceArea: calculateCubeArea.CubeSurfaceArea,
+            //     Area: calculateCubeArea.Area
+            //   })
+            // }
+            // resetForm()
           } catch (err) {
             console.log('====>', err)
           }

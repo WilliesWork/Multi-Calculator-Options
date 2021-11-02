@@ -19,10 +19,10 @@ const CapsuleSurfaceArea = () => {
     height: "",
     height_unit: ''
   })
-  const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-    Area: 0
-  })
+  // const [Result, setResult] = React.useState({
+  //   surfaceArea: 0,
+  //   Area: 0
+  // })
 
   return (
     <div>
@@ -49,16 +49,16 @@ const CapsuleSurfaceArea = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            /* const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
+           const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
             console.log('=====>', calsurfaceArea)
             if (typeof calsurfaceArea === 'object') {
               console.log(calsurfaceArea)
-              setResult({
-                surfaceArea: calsurfaceArea.surfaceAreas,
-                Area: calsurfaceArea.Area
-              })
+              // setResult({
+              //   surfaceArea: calsurfaceArea,
+              //   Area: calsurfaceArea.Area
+              // })
             }
-            resetForm() */
+            resetForm() 
           } catch (err) {
             console.log('====>', err)
           }
@@ -145,8 +145,8 @@ const CapsuleSurfaceArea = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1">Surface Area:</Typography>
+              <Typography variant="subtitle1"> Area: </Typography>
             </div>
 
           </form>

@@ -3,7 +3,7 @@ import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { calculateRectangularArea } from '../../../Services/MathStack'
+// import { calculateRectangularArea } from '../../../Services/MathStack'
 import { RectangularAreaI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import { Units } from '../../../Common/MathUnits'
@@ -59,16 +59,16 @@ const RectangularSurfaceArea = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            const { payload: calsurfaceArea } = await calculateRectangularArea(payload)
-            console.log('=====>', calsurfaceArea)
-            if (typeof calsurfaceArea === 'object') {
-              console.log(calsurfaceArea)
-              setResult({
-                surfaceArea: calsurfaceArea.surfaceAreas,
-                Area: calsurfaceArea.Area
-              })
-            }
-            resetForm()
+            // const { payload: calsurfaceArea } = await calculateRectangularArea(payload)
+            // console.log('=====>', calsurfaceArea)
+            // if (typeof calsurfaceArea === 'object') {
+            //   console.log(calsurfaceArea)
+            //   setResult({
+            //     surfaceArea: calsurfaceArea.surfaceAreas,
+            //     Area: calsurfaceArea.Area
+            //   })
+            // }
+            // resetForm()
           } catch (err) {
             console.log('====>', err)
           }

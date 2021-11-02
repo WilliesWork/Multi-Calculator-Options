@@ -1,9 +1,10 @@
 /* eslint-disable camelcase */
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { BASE_URL } from '../Common/AppUrl'
-import { ConeAreaI, CubeAreaI, RectangularAreaI, SurfaceAreaI } from '../Types'
+import { BodyMassIndexI, CapsuleSurfaceAreaI, ConeAreaI, CubeAreaI, LeanBodyMassI, RectangularAreaI, RegularCycleOvulationI, SurfaceAreaI } from '../Types'
+import { BloodAlcoholContentI, BMRKatchMcArdleI, BodyFatPercentageBmiI, BodyMassIndexMethodTwoI, InternationSytemBfcI, LeanBodyMassPeterFormulaI, USCustomarySystemBfcI } from '../Types/HealthInterfaces'
 
-export const CalculateSurfaceArea = async (calculateArea: SurfaceAreaI | CubeAreaI | RectangularAreaI | ConeAreaI) => {
+export const CalculateSurfaceArea = async (calculateArea: SurfaceAreaI | CubeAreaI | RectangularAreaI | ConeAreaI| CapsuleSurfaceAreaI) => {
   try {
     const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, calculateArea)
 
@@ -18,6 +19,8 @@ export const CalculateSurfaceArea = async (calculateArea: SurfaceAreaI | CubeAre
 
     throw new Error('Responded with unexpected Error')
   } catch (err) {
+    const {response} = err.response as AxiosError
+    console.log(response)
     return {
       success: false,
       payload: 'Unexpected Error'
@@ -25,87 +28,112 @@ export const CalculateSurfaceArea = async (calculateArea: SurfaceAreaI | CubeAre
   }
 }
 
-export const CalculateCubeSurfaceArea = async (calculateCubeArea: CubeAreaI) => {
+export const calculateHealth = async (calculateHealthPayload: RegularCycleOvulationI | LeanBodyMassI | BodyMassIndexI | LeanBodyMassPeterFormulaI | BodyMassIndexMethodTwoI |BMRKatchMcArdleI | BloodAlcoholContentI | USCustomarySystemBfcI | InternationSytemBfcI | BodyFatPercentageBmiI) => {
   try {
-    const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, calculateCubeArea)
+    const { data } = await axios.post(`${BASE_URL}/api/calculator/health`, calculateHealthPayload)
 
     const { statusCode, statusDescription, message, error } = data
-
-    console.log(error)
-    if (statusCode === 100 && statusDescription === 'success') {
+    console.log(message, error)
+    if (statusCode === 100) {
       return { success: statusDescription, payload: message }
     }
     if (statusCode === 102) {
-      return { success: statusDescription, payload: message }
+      return { success: false, payload: 'Server Error' }
     }
-    throw new Error('===> Responded with unexpected error')
+
+    throw new Error('Responded with unexpected Error')
   } catch (err) {
-    return { success: false, payload: 'SERVER ERROR' }
+    const {response} = err.response as AxiosError
+    console.log(response)
+    return {
+      success: false,
+      payload: 'Unexpected Error'
+    }
   }
 }
 
-export const calculateConeSurfaceArea = async (calculateConeArea: ConeAreaI) => {
-  try {
-    const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, calculateConeArea)
 
-    const { statusCode, statusDescription, base_surface_area, lateral_surface_area, coneSurfaceArea, errors } = data
+// export const CalculateCubeSurfaceArea = async (calculateCubeArea: CubeAreaI) => {
+//   try {
+//     const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, calculateCubeArea)
 
-    const message = {
-      baseSurfaceArea: Number(base_surface_area),
-      lateralSurefaceArea: Number(lateral_surface_area),
-      coneSurfaceArea: Number(coneSurfaceArea)
-    }
+//     const { statusCode, statusDescription, message, error } = data
 
-    if (statusCode === 100 && statusDescription === 'success') {
-      return { success: statusDescription, payload: message }
-    }
-    if (statusCode === 102) {
-      return { success: statusDescription, payload: errors }
-    }
-    throw new Error('====> Unexpected Response')
-  } catch (err) {
-    return { success: false, payload: 'SERVER ERROR' }
-  }
-}
+//     console.log(error)
+//     if (statusCode === 100 && statusDescription === 'success') {
+//       return { success: statusDescription, payload: message }
+//     }
+//     if (statusCode === 102) {
+//       return { success: statusDescription, payload: message }
+//     }
+//     throw new Error('===> Responded with unexpected error')
+//   } catch (err) {
+//     return { success: false, payload: 'SERVER ERROR' }
+//   }
+// }
 
-export const calculateCylindricalTank = async (calculateCylindricalArea: ConeAreaI) => {
-  try {
-    const { data } = await axios.post('http://165.56.32.222/api/calculator/surface-areas', calculateCylindricalArea)
+// export const calculateConeSurfaceArea = async (calculateConeArea: ConeAreaI) => {
+//   try {
+//     const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, calculateConeArea)
 
-    const { base_surface_area, cylindricalTankSurfaceArea, lateral_surface_area, statusDescription, statusCode, errors } = data
+//     const { statusCode, statusDescription, base_surface_area, lateral_surface_area, coneSurfaceArea, errors } = data
 
-    const message = {
-      baseSurfaceArea: Number(base_surface_area),
-      lateralSurefaceArea: Number(lateral_surface_area),
-      cylindricalTank: Number(cylindricalTankSurfaceArea)
-    }
+//     const message = {
+//       baseSurfaceArea: Number(base_surface_area),
+//       lateralSurefaceArea: Number(lateral_surface_area),
+//       coneSurfaceArea: Number(coneSurfaceArea)
+//     }
 
-    if (statusCode === 100 && statusDescription === 'success') {
-      return { success: statusDescription, payload: message }
-    }
-    if (statusCode === 102) {
-      return { success: statusDescription, payload: errors }
-    }
-    throw new Error('====> Unexpected Response')
-  } catch (err) {
-    return { success: false, payload: 'SERVER ERROR' }
-  }
-}
+//     if (statusCode === 100 && statusDescription === 'success') {
+//       return { success: statusDescription, payload: message }
+//     }
+//     if (statusCode === 102) {
+//       return { success: statusDescription, payload: errors }
+//     }
+//     throw new Error('====> Unexpected Response')
+//   } catch (err) {
+//     return { success: false, payload: 'SERVER ERROR' }
+//   }
+// }
 
-export const calculateRectangularArea = async (rectangularArea: RectangularAreaI) => {
-  try {
-    const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, rectangularArea)
+// export const calculateCylindricalTank = async (calculateCylindricalArea: ConeAreaI) => {
+//   try {
+//     const { data } = await axios.post('http://165.56.32.222/api/calculator/surface-areas', calculateCylindricalArea)
 
-    const { statusCode, statusDescription, message, error } = data
+//     const { base_surface_area, cylindricalTankSurfaceArea, lateral_surface_area, statusDescription, statusCode, errors } = data
 
-    if (statusCode === 100 && statusDescription === 'success') {
-      return { success: statusDescription, payload: message }
-    }
-    if (statusCode === 102) {
-      return { success: statusDescription, payload: message }
-    }
-    throw new Error('===> Responded with unexpected error')
-  } catch (err) {
-    return { success: false, payload: 'SERVER ERROR' }
-  }
-}
+//     const message = {
+//       baseSurfaceArea: Number(base_surface_area),
+//       lateralSurefaceArea: Number(lateral_surface_area),
+//       cylindricalTank: Number(cylindricalTankSurfaceArea)
+//     }
+
+//     if (statusCode === 100 && statusDescription === 'success') {
+//       return { success: statusDescription, payload: message }
+//     }
+//     if (statusCode === 102) {
+//       return { success: statusDescription, payload: errors }
+//     }
+//     throw new Error('====> Unexpected Response')
+//   } catch (err) {
+//     return { success: false, payload: 'SERVER ERROR' }
+//   }
+// }
+
+// export const calculateRectangularArea = async (rectangularArea: RectangularAreaI) => {
+//   try {
+//     const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, rectangularArea)
+
+//     const { statusCode, statusDescription, message, error } = data
+
+//     if (statusCode === 100 && statusDescription === 'success') {
+//       return { success: statusDescription, payload: message }
+//     }
+//     if (statusCode === 102) {
+//       return { success: statusDescription, payload: message }
+//     }
+//     throw new Error('===> Responded with unexpected error')
+//   } catch (err) {
+//     return { success: false, payload: 'SERVER ERROR' }
+//   }
+// }
