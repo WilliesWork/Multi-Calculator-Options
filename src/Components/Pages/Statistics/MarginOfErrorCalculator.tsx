@@ -9,6 +9,7 @@ import { RootState } from '../../../redux/store'
 import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import CustomForm from '../../custom/CustomForm'
 
 const MarginOfErrorCalculator = () => {
   const classes = useStyles()
@@ -63,47 +64,34 @@ const MarginOfErrorCalculator = () => {
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="z_score">{LABELS.zScore}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="z_score"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.z_score}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
 
-            <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="standard_deviation">{LABELS.standardDeviation}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="standard_deviation"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.standard_deviation}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+            <CustomForm
+              label={LABELS.zScore}
+              type={INPUT_TYPE.number}
+              id="z_score"
+              placeholder={PLACEHOLDERS.number}
+              value={values.z_score}
+              onChange={handleChange}
+            />
 
-            <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="sample_size">{LABELS.sampleSize}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="sample_size"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.sample_size}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+            <CustomForm
+              label={LABELS.standardDeviation}
+              type={INPUT_TYPE.number}
+              id="standard_deviation"
+              placeholder={PLACEHOLDERS.number}
+              value={values.standard_deviation}
+              onChange={handleChange}
+            />
+
+            <CustomForm
+              label={LABELS.sampleSize}
+              type={INPUT_TYPE.number}
+              id="sample_size"
+              placeholder={PLACEHOLDERS.number}
+              value={values.sample_size}
+              onChange={handleChange}
+            />
+
 
             <div className="form mb-3">
               <Button

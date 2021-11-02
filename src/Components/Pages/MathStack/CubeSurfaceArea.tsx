@@ -9,6 +9,7 @@ import { CubeAreaI } from '../../../Types'
 import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import { CustomForm, CustomSelect } from '../../custom'
 
 const CubeSurfaceArea = () => {
   const classes = useStyles();
@@ -61,37 +62,21 @@ const CubeSurfaceArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="edge_length">{LABELS.edgeLength}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="edge_length"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.edge_length}
-                  onChange={handleChange}
-                />
-              </div>
+              <CustomForm
+                label={LABELS.edgeLength}
+                type={INPUT_TYPE.number}
+                id="edge_length"
+                placeholder={PLACEHOLDERS.number}
+                value={values.edge_length}
+                onChange={handleChange}
+              />
 
-              <div className="form-group col">
-                <label htmlFor="edge_unit">{LABELS.unit}</label>
-                <select
-                  id="edge_unit"
-                  className="form-control"
-                  value={values.edge_unit}
-                  onChange={handleChange('edge_unit')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <CustomSelect
+                label={LABELS.unit}
+                id="edge_unit"
+                value={values.edge_unit}
+                onChange={handleChange('edge_unit')}
+              />
             </div>
 
             <div className="form mb-3">

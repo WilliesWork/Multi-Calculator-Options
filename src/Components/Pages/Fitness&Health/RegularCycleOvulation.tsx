@@ -9,6 +9,7 @@ import { RootState } from '../../../redux/store'
 import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import { CustomForm, CustomSelect } from '../../custom'
 
 const RegularCycleOvulation = () => {
   const classes = useStyles()
@@ -62,29 +63,25 @@ const RegularCycleOvulation = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
-              <div className="form-group col-6">
-                <label htmlFor="previous_cycle_start_date">{LABELS.previousCycleStartDate}</label>
-                <input
-                  type={INPUT_TYPE.date}
-                  className="form-control"
-                  id="previous_cycle_start_date"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.previous_cycle_start_date}
-                  onChange={handleChange}
-                />
-              </div>
+              <CustomForm
+                label={LABELS.previousCycleStartDate}
+                type={INPUT_TYPE.date}
+                id="previous_cycle_start_date"
+                placeholder={PLACEHOLDERS.number}
+                value={values.previous_cycle_start_date}
+                onChange={handleChange}
+              />
+            </div>
 
-              <div className="form-group col-6">
-                <label htmlFor="cycle_days">{LABELS.cycleDays}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="cycle_days"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.cycle_days}
-                  onChange={handleChange}
-                />
-              </div>
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.cycleDays}
+                type={INPUT_TYPE.number}
+                id="cycle_days"
+                placeholder={PLACEHOLDERS.number}
+                value={values.cycle_days}
+                onChange={handleChange}
+              />
             </div>
 
             <div className="form mb-3">

@@ -9,6 +9,7 @@ import { RootState } from '../../../redux/store'
 import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import { CustomForm, CustomSelect } from '../../custom'
 
 const LeanBodyMass = () => {
   const classes = useStyles()
@@ -69,86 +70,53 @@ const LeanBodyMass = () => {
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="height">{LABELS.height}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="height"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.height}
-                  onChange={handleChange}
-                />
-              </div>
 
-              <div className="form-group col">
-                <label htmlFor="height_unit">{LABELS.unit}</label>
-                <select
-                  id="height_unit"
-                  className="form-control"
-                  value={values.height_unit}
-                  onChange={handleChange('height_unit')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.height}
+                type={INPUT_TYPE.number}
+                id="height"
+                placeholder={PLACEHOLDERS.number}
+                value={values.height}
+                onChange={handleChange}
+              />
+
+              <CustomSelect
+                label={LABELS.unit}
+                id="height_unit"
+                value={values.height_unit}
+                onChange={handleChange('height_unit')}
+              />
+
             </div>
 
             <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="weight">{LABELS.weight}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="weight"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.weight}
-                  onChange={handleChange}
-                />
-              </div>
+              <CustomForm
+                label={LABELS.weight}
+                type={INPUT_TYPE.number}
+                id="weight"
+                placeholder={PLACEHOLDERS.number}
+                value={values.weight}
+                onChange={handleChange}
+              />
 
-              <div className="form-group col">
-                <label htmlFor="weight_unit">{LABELS.unit}</label>
-                <select
-                  id="weight_unit"
-                  className="form-control"
-                  value={values.weight_unit}
-                  onChange={handleChange('weight_unit')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <CustomSelect
+                label={LABELS.unit}
+                id="weight_unit"
+                value={values.weight_unit}
+                onChange={handleChange('weight_unit')}
+              />
             </div>
 
             <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="gender">{LABELS.gender}</label>
-                <input
-                  type={INPUT_TYPE.text}
-                  className="form-control"
-                  id="gender"
-                  placeholder={PLACEHOLDERS.gender}
-                  value={values.height}
-                  onChange={handleChange}
-                />
-              </div>
+              <CustomForm
+                label={LABELS.gender}
+                type={INPUT_TYPE.text}
+                id="gender"
+                placeholder={PLACEHOLDERS.gender}
+                value={values.gender}
+                onChange={handleChange}
+              />
             </div>
 
             <div className="form mb-3">

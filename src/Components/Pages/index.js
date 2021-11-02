@@ -18,3 +18,5 @@ export { default as SampleSizeCalculator } from "./Statistics/SampleSizeCalculat
 
 export { default as Home } from "./Home";
 export { default as Math } from "./Math";
+export { default as Statistics } from "./Statistics";
+export { default as Health } from "./Health";

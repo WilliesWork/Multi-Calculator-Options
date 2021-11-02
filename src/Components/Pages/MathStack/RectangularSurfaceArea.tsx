@@ -9,6 +9,7 @@ import { RootState } from '../../../redux/store'
 import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, INPUT_TYPE } from './../../../Common/shared'
+import { CustomForm, CustomSelect } from '../../custom'
 // import axios from 'axios'
 
 const RectangularSurfaceArea = () => {
@@ -78,106 +79,58 @@ const RectangularSurfaceArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="length">{LABELS.length}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="length"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.length}
-                  onChange={handleChange}
-                />
-              </div>
+              <CustomForm
+                label={LABELS.length}
+                type={INPUT_TYPE.number}
+                id="length"
+                placeholder={PLACEHOLDERS.number}
+                value={values.length}
+                onChange={handleChange}
+              />
 
-              <div className="form-group col">
-                <label htmlFor="length_units">{LABELS.unit}</label>
-                <select
-                  id="length_units"
-                  className="form-control"
-                  value={values.length_unit}
-                  onChange={handleChange('length_units')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <CustomSelect
+                label={LABELS.unit}
+                id="length_unit"
+                value={values.length_unit}
+                onChange={handleChange('length_unit')}
+              />
             </div>
 
 
             <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="width">{LABELS.width}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="width"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.width}
-                  onChange={handleChange}
-                />
-              </div>
+              <CustomForm
+                label={LABELS.width}
+                type={INPUT_TYPE.number}
+                id="width"
+                placeholder={PLACEHOLDERS.number}
+                value={values.width}
+                onChange={handleChange}
+              />
 
-              <div className="form-group col">
-                <label htmlFor="width_units">{LABELS.unit}</label>
-                <select
-                  id="width_units"
-                  className="form-control"
-                  value={values.width_unit}
-                  onChange={handleChange('width_units')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <CustomSelect
+                label={LABELS.unit}
+                id="width_unit"
+                value={values.width_unit}
+                onChange={handleChange('width_unit')}
+              />
             </div>
 
             <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="height">{LABELS.height}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="height"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.height}
-                  onChange={handleChange}
-                />
-              </div>
+              <CustomForm
+                label={LABELS.height}
+                type={INPUT_TYPE.number}
+                id="height"
+                placeholder={PLACEHOLDERS.number}
+                value={values.height}
+                onChange={handleChange}
+              />
 
-              <div className="form-group col">
-                <label htmlFor="length_units">{LABELS.unit}</label>
-                <select
-                  id="length_units"
-                  className="form-control"
-                  value={values.length_unit}
-                  onChange={handleChange('lenght_units')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <CustomSelect
+                label={LABELS.unit}
+                id="height_unit"
+                value={values.height_unit}
+                onChange={handleChange('height_unit')}
+              />
             </div>
 
 
