@@ -8,8 +8,8 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     flex: 1,
-    marginTop: 40,
-    marginBottom: 20,
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(3),
   },
   appBar: {
     flexGrow: 1,
