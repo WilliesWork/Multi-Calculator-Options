@@ -9,6 +9,7 @@ import { RootState } from '../../../redux/store'
 import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import { CustomForm, CustomSelect } from '../../custom'
 // import axios from 'axios'
 
 const BallSurfaceArea = () => {
@@ -63,37 +64,21 @@ const BallSurfaceArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="radius">{LABELS.radius}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="radius"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.radius}
-                  onChange={handleChange}
-                />
-              </div>
+              <CustomForm
+                label={LABELS.radius}
+                type={INPUT_TYPE.number}
+                id="radius"
+                placeholder={PLACEHOLDERS.number}
+                value={values.radius}
+                onChange={handleChange}
+              />
 
-              <div className="form-group col">
-                <label htmlFor="radius_unit">{LABELS.unit}</label>
-                <select
-                  id="radius_unit"
-                  className="form-control"
-                  value={values.radius_unit}
-                  onChange={handleChange('radius_unit')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <CustomSelect
+                label={LABELS.unit}
+                id="radius_unit"
+                value={values.radius_unit}
+                onChange={handleChange('radius_unit')}
+              />
             </div>
 
             <div className="form mb-3">

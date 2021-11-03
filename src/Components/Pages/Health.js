@@ -8,9 +8,9 @@ import { BodyMassIndex, LeanBodyMass, RegularCycleOvulation } from "./index";
 import useStyles from "./../../Styling/CustomStyles";
 
 const Health = () => {
-  const classes = useStyles;
+  const classes = useStyles();
   return (
-    <Container>
+    <Container className={classes.container}>
       <Grid item xs={12}>
         <Typography variant="h6" className="text-center">
           FITNESS AND HEALTH CALCULATORS

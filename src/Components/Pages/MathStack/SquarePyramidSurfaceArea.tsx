@@ -9,6 +9,7 @@ import { RootState } from '../../../redux/store'
 import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, INPUT_TYPE } from './../../../Common/shared'
+import { CustomForm, CustomSelect } from '../../custom'
 
 const SquarePyramidSurfaceArea = () => {
   const classes = useStyles()
@@ -68,71 +69,39 @@ const SquarePyramidSurfaceArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="base_edge">{LABELS.baseEdge}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="base_edge"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.base_edge}
-                  onChange={handleChange}
-                />
-              </div>
+              <CustomForm
+                label={LABELS.baseEdge}
+                type={INPUT_TYPE.number}
+                id="base_edge"
+                placeholder={PLACEHOLDERS.number}
+                value={values.base_edge}
+                onChange={handleChange}
+              />
 
-              <div className="form-group col">
-                <label htmlFor="base_edge_unit">{LABELS.unit}</label>
-                <select
-                  id="base_edge_unit"
-                  className="form-control"
-                  value={values.base_edge_unit}
-                  onChange={handleChange('base_edge_unit')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <CustomSelect
+                label={LABELS.unit}
+                id="base_edge_unit"
+                value={values.base_edge_unit}
+                onChange={handleChange('base_edge_unit')}
+              />
             </div>
 
             <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="height">{LABELS.height}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="height"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.height}
-                  onChange={handleChange}
-                />
-              </div>
+              <CustomForm
+                label={LABELS.height}
+                type={INPUT_TYPE.number}
+                id="height"
+                placeholder={PLACEHOLDERS.number}
+                value={values.height}
+                onChange={handleChange}
+              />
 
-              <div className="form-group col">
-                <label htmlFor="height_unit">{LABELS.unit}</label>
-                <select
-                  id="height_unit"
-                  className="form-control"
-                  value={values.height_unit}
-                  onChange={handleChange('height_unit')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <CustomSelect
+                label={LABELS.unit}
+                id="height_unit"
+                value={values.height_unit}
+                onChange={handleChange('height_unit')}
+              />
             </div>
 
             <div className="form mb-3">

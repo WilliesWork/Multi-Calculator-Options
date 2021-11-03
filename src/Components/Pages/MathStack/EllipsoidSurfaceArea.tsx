@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
 import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
+import { CustomForm, CustomSelect } from '../../custom'
 import {
   CALCULATORS,
   BUTTONS,
@@ -81,105 +82,57 @@ const EllipsoidSurfaceArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="axis1">{LABELS.axis1}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="axis1"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.axis1}
-                  onChange={handleChange}
-                />
-              </div>
+              <CustomForm
+                label={LABELS.axis1}
+                type={INPUT_TYPE.number}
+                id="axis1"
+                placeholder={PLACEHOLDERS.number}
+                value={values.axis1}
+                onChange={handleChange}
+              />
 
-              <div className="form-group col">
-                <label htmlFor="axis1_unit">{LABELS.unit}</label>
-                <select
-                  id="axis1_unit"
-                  className="form-control"
-                  value={values.axis1_unit}
-                  onChange={handleChange('axis1_unit')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <CustomSelect
+                label={LABELS.unit}
+                id="axis1_unit"
+                value={values.axis1_unit}
+                onChange={handleChange('axis1_unit')}
+              />
             </div>
 
             <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="axis2">{LABELS.axis2}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="axis2"
-                  placeholder="0"
-                  value={values.axis2}
-                  onChange={handleChange}
-                />
-              </div>
+              <CustomForm
+                label={LABELS.axis2}
+                type={INPUT_TYPE.number}
+                id="axis2"
+                placeholder={PLACEHOLDERS.number}
+                value={values.axis2}
+                onChange={handleChange}
+              />
 
-              <div className="form-group col">
-                <label htmlFor="axis2_unit">{LABELS.unit}</label>
-                <select
-                  id="axis2_unit"
-                  className="form-control"
-                  value={values.axis2_unit}
-                  onChange={handleChange('axis1_unit')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <CustomSelect
+                label={LABELS.unit}
+                id="axis2_unit"
+                value={values.axis2_unit}
+                onChange={handleChange('axis2_unit')}
+              />
             </div>
 
             <div className="form-row">
-              <div className="form-group col-8">
-                <label htmlFor="axis3">{LABELS.axis3}</label>
-                <input
-                  type={INPUT_TYPE.number}
-                  className="form-control"
-                  id="axis3"
-                  placeholder="0"
-                  value={values.axis3}
-                  onChange={handleChange}
-                />
-              </div>
+              <CustomForm
+                label={LABELS.axis3}
+                type={INPUT_TYPE.number}
+                id="axis3"
+                placeholder={PLACEHOLDERS.number}
+                value={values.axis3}
+                onChange={handleChange}
+              />
 
-              <div className="form-group col">
-                <label htmlFor="axis3_unit">{LABELS.unit}</label>
-                <select
-                  id="axis3_unit"
-                  className="form-control"
-                  value={values.axis3_unit}
-                  onChange={handleChange('axis3_unit')}
-                >
-                  <option selected>Select unit</option>
-                  {Units.map(({ name, unit }) => (
-                    <option
-                      key={unit}
-                      value={unit}
-                    >
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <CustomSelect
+                label={LABELS.unit}
+                id="axis3_unit"
+                value={values.axis3_unit}
+                onChange={handleChange('axis3_unit')}
+              />
             </div>
 
             <div className="form mb-3">

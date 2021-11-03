@@ -7,9 +7,9 @@ import useStyles from "./../../Styling/CustomStyles";
 import { MarginOfErrorCalculator, SampleSizeCalculator } from "./index";
 
 const Statistics = () => {
-  const classes = useStyles;
+  const classes = useStyles();
   return (
-    <Container>
+    <Container className={classes.container}>
       <Typography variant="h6" className="text-center">
         STATISTICS CALCULATORS
       </Typography>

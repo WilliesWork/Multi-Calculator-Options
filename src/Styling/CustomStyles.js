@@ -6,9 +6,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
+  container: {
+    flex: 1,
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(3),
+  },
   appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
+    flexGrow: 1,
+    marginBottom: theme.spacing(3),
     backgroundColor: "white",
   },
   drawer: {

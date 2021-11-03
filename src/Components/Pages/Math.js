@@ -18,9 +18,9 @@ import {
 } from "./index";
 
 const Math = () => {
-  const classes = useStyles;
+  const classes = useStyles();
   return (
-    <Container>
+    <Container className={classes.container}>
       <Typography variant="h6" className="text-center">
         MATH CALCULATORS
       </Typography>

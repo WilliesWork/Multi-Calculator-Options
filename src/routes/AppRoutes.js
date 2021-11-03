@@ -1,37 +1,24 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
-import {
-  Home,
-  BallSurfaceArea,
-  RectangularSurfaceArea,
-  ConeSurfaceArea,
-  CubeSurfaceArea,
-  CylindricalTank,
-  Math,
-} from "./../Components/Pages";
+import { Math, Statistics, Health } from "./../Components/Pages";
 
 function AppRoutes() {
   const pages = [
     {
-      component: Home,
-      path: "/",
-      name: "Home",
-    },
-    {
       component: Math,
-      path: "/math",
+      path: "/",
       name: "Math Calculators",
     },
     {
-      component: RectangularSurfaceArea,
-      path: "/MathStack/RectangularSurfaceArea",
-      name: "Product Details",
+      component: Health,
+      path: "/fitness&health",
+      name: "Fitness and Health Calculators",
     },
     {
-      component: BallSurfaceArea,
-      path: "/MathStack/BallSurfaceArea",
-      name: "Product Details",
+      component: Statistics,
+      path: "/statistics",
+      name: "Statistics Calculators",
     },
   ];
 

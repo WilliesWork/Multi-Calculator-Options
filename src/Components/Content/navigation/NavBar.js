@@ -3,29 +3,48 @@ import Box from "@material-ui/core/Box";
 import { purple } from "@material-ui/core/colors";
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { usePointNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/point";
-import { Font, FontProvider } from "../../Font";
-import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Divider from "@material-ui/core/Divider";
-import { NestedMenuDrawer } from "..";
+import { useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
-import AppRoutes from "./../../../routes/AppRoutes";
 import useStyles from "./../../../Styling/CustomStyles";
-
-const NavBar = React.memo(function PointNavigationMenu() {
+import { Font, FontProvider } from "../../Font";
+const NavBar = (props) => {
+  let history = useHistory();
   const classes = useStyles();
-  const [index, setIndex] = React.useState(1);
+  const [index, setIndex] = React.useState(0);
 
-  const handleClick = (i) => (e) => {
+  const handleClick = (i, path) => (e) => {
     e.preventDefault();
+    history.push(path);
     setIndex(i);
   };
 
+  const navLinks = [
+    {
+      linkName: "Math",
+      tag: "div",
+      idx: 0,
+      onClick: handleClick(0, "/"),
+    },
+    {
+      linkName: "Fitness and Health",
+      tag: "div",
+      idx: 1,
+      onClick: handleClick(1, "/fitness&health"),
+    },
+    {
+      linkName: "Statistics",
+      tag: "div",
+      idx: 2,
+      onClick: handleClick(2, "/statistics"),
+    },
+  ];
+
   return (
-    <Box height={56} display={"flex"}>
+    <Box height={46} display={"flex"}>
       <div className={classes.root}>
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar}>
@@ -33,61 +52,22 @@ const NavBar = React.memo(function PointNavigationMenu() {
             {/* Top Nav */}
             <FontProvider fonts={[{ font: "Varela Round" }]}>
               <NavMenu useStyles={usePointNavigationMenuStyles}>
-                <NavItem
-                  as={"div"}
-                  active={index === 0}
-                  onClick={handleClick(0)}
-                >
-                  <Font>Home</Font>
-                </NavItem>
-                <NavItem
-                  as={"div"}
-                  active={index === 1}
-                  onClick={handleClick(1)}
-                >
-                  <Font>Shops</Font>
-                </NavItem>
-                <NavItem
-                  as={"div"}
-                  active={index === 2}
-                  onClick={handleClick(2)}
-                >
-                  <Font>Portfolio</Font>
-                </NavItem>
-                <NavItem
-                  as={"div"}
-                  active={index === 3}
-                  onClick={handleClick(3)}
-                >
-                  <Font>Blog</Font>
-                </NavItem>
+                {navLinks.map((item) => {
+                  const { linkName, tag, idx, onClick } = item;
+                  return (
+                    <NavItem as={tag} active={index === idx} onClick={onClick}>
+                      <Font>{linkName}</Font>
+                    </NavItem>
+                  );
+                })}
               </NavMenu>
             </FontProvider>
             {/* End Top Nav */}
           </Toolbar>
         </AppBar>
-        <Drawer
-          className={classes.drawer}
-          variant="permanent"
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          anchor="left"
-        >
-          <div className={classes.toolbar} />
-          <Divider />
-          <NestedMenuDrawer />
-        </Drawer>
-
-        {/* MAIN BODY */}
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <AppRoutes />
-        </main>
-        {/* END MAIN BODY */}
       </div>
     </Box>
   );
-});
+};
 
-export default NavBar;
+export default withRouter(NavBar);
