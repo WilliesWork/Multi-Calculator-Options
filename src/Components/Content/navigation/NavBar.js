@@ -41,6 +41,18 @@ const NavBar = (props) => {
       idx: 2,
       onClick: handleClick(2, "/statistics"),
     },
+    {
+      linkName: "Finance",
+      tag: "div",
+      idx: 3,
+      onClick: handleClick(3, "/finance"),
+    },
+    {
+      linkName: "Other",
+      tag: "div",
+      idx: 4,
+      onClick: handleClick(4, "/other_calculators"),
+    },
   ];
 
   return (

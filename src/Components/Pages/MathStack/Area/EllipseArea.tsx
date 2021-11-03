@@ -1,25 +1,23 @@
 import React from 'react'
-import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
-
-import { CalculateSurfaceArea } from '../../../Services/AppCalculatorsApi'
-import { SphericalCapSurfaceAreaI } from '../../../Types'
+import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, INPUT_TYPE } from './../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
 
-const SphericalCapSurfaceArea = () => {
+import { EllipseAreaI } from '../../../../Types'
+import { RootState } from '../../../../redux/store'
+import useStyles from '../../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomForm, CustomSelect } from '../../../custom'
+
+const EllipseArea = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    radius: '',
-    radius_unit: '',
-    height: '',
-    height_unit: ''
+    semi_major_axes_a: "",
+    semi_major_axes_a_unit: "",
+    semi_major_axes_b: "",
+    semi_major_axes_b_unit: "",
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
@@ -30,37 +28,37 @@ const SphericalCapSurfaceArea = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.sphericalCapSurfArea}
+          {CALCULATORS.ellipseArea}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          radius,
-          radius_unit,
-          height,
-          height_unit,
+          semi_major_axes_a,
+          semi_major_axes_a_unit,
+          semi_major_axes_b,
+          semi_major_axes_b_unit,
         }, { setSubmitting, resetForm }) => {
-          const payload: SphericalCapSurfaceAreaI = {
-            radius,
-            radius_unit,
-            height,
-            height_unit,
-            method: 'sphericalCapSurfaceAreaCalculator'
+          const payload: EllipseAreaI = {
+            semi_major_axes_a,
+            semi_major_axes_a_unit,
+            semi_major_axes_b,
+            semi_major_axes_b_unit,
+            // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            /* const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-            console.log('=====>', calsurfaceArea)
-            if (typeof calsurfaceArea === 'object') {
-              console.log(calsurfaceArea)
-              setResult({
-                surfaceArea: calsurfaceArea.surfaceAreas,
-                Area: calsurfaceArea.Area
-              })
-            }
-            resetForm() */
+            // const { payload: calsurfaceArea } = await calculateEllipseArea(payload)
+            // console.log('=====>', calsurfaceArea)
+            // if (typeof calsurfaceArea === 'object') {
+            //   console.log(calsurfaceArea)
+            //   setResult({
+            //     surfaceArea: calsurfaceArea.surfaceAreas,
+            //     Area: calsurfaceArea.Area
+            //   })
+            // }
+            // resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -70,37 +68,37 @@ const SphericalCapSurfaceArea = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.radius}
+                label={LABELS.semiMajorAxesA}
                 type={INPUT_TYPE.number}
-                id="radius"
+                id="semi_major_axes_a"
                 placeholder={PLACEHOLDERS.number}
-                value={values.radius}
+                value={values.semi_major_axes_a}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="radius_unit"
-                value={values.radius_unit}
-                onChange={handleChange('radius_unit')}
+                id="semi_major_axes_a_unit"
+                value={values.semi_major_axes_a_unit}
+                onChange={handleChange('semi_major_axes_a_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.height}
+                label={LABELS.semiMajorAxesB}
                 type={INPUT_TYPE.number}
-                id="height"
+                id="semi_major_axes_b"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
+                value={values.semi_major_axes_b}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
+                id="semi_major_axes_b_unit"
+                value={values.semi_major_axes_b_unit}
+                onChange={handleChange('semi_major_axes_b_unit')}
               />
             </div>
 
@@ -114,8 +112,8 @@ const SphericalCapSurfaceArea = () => {
                 {BUTTONS.calculate}
               </Button>
             </div>
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
               <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
             </div>
 
@@ -123,9 +121,8 @@ const SphericalCapSurfaceArea = () => {
         )}
 
       </Formik>
-
     </div>
   )
 }
 
-export default SphericalCapSurfaceArea
+export default EllipseArea

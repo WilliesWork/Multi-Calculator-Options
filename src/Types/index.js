@@ -10,14 +10,72 @@ export {
   SquarePyramidSurfaceAreaI,
   EllipsoidSurfaceAreaI,
   SurfaceAreaI,
+  ParallelogramAreaI,
+  EllipseAreaI,
+  TrapezoidAreaI,
+  TriangleAreaI,
+  CircleAreaI,
+  SectorAreaI,
+  SphereVolumeCalculatorI,
+  ConeVolumeCalculatorI,
+  CubeVolumeCalculatorI,
+  CylinderVolumeCalculatorI,
+  RectangularTankVolumeI,
+  CapsuleVolumeCalculatorI,
+  SphericalCapVolumeI,
+  SquarePyramidVolumeI,
+  EllipsoidVolumeCalculatorI,
+  TubeVolumeCalculatorI,
+  ConicalFrustumVolumeI,
 } from "./MathInterfaces";
 
 export {
   LeanBodyMassI,
   BodyMassIndexI,
   RegularCycleOvulationI,
+  LeanBodyMassPeterFormulaI,
+  BodyMassIndexMethodTwoI,
+  BMRKatchMcArdleI,
+  BloodAlcoholContentI,
+  USCustomarySystemBfcI,
+  InternationSytemBfcI,
+  BodyFatPercentageBmiI,
+  DueDateNaegeleRule,
+  PeroidCalculator,
+  DueDateMittendorfWilliamI,
+  DuBoisBodySurfaceAreaI,
+  WholeBodyMassFormular,
+  MostellerBodySurfaceAreaI,
+  HaycockBodySurfaceAreaI,
+  GehanAndGeorgeSurfaceAreaI,
+  BoydFormulaSurfaceAreaI,
+  TakaSchlichBodySurfaceAreaI,
+  TakaSchlichBodySurfaceAreaI,
+  SinglePointWithKnownSlope,
+  ProbabilityOfASeriesOfIndpendentEventsI,
 } from "./HealthInterfaces";
 
-export {} from "./FinanceInterfaces";
+export {
+  PaybackWithinTimeframeI,
+  MortgagePayoffWithLoanTermI,
+  MortgagePayOffWithoutLoanTermI,
+  AmortizedLoanFixedAmountI,
+  DefearedPaymentsLumpsumAtMaturityI,
+  BondPayBackPredeterminedI,
+  PresentValueI,
+  PresentValueOfPeriodicalDepositI,
+  ProfitMarginCalculatorI,
+  StockTradingMarginI,
+  InflationCalculatorCpiDataI,
+  PayBackACertainAmountI,
+} from "./FinanceInterfaces";
 
 export { MarginErrorI, SampleSizeI } from "./StatisticsInterfaces";
+
+export {
+  ConcreteSquareFootingI,
+  CircularSlapI,
+  CurbAndGutterBarrierI,
+  StairsConcreateI,
+  HoleColumnI,
+} from "./OtherCalculatorInterfaces";

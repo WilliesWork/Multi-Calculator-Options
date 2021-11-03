@@ -20,6 +20,7 @@ export interface RegularCycleOvulationI {
   previous_cycle_start_date: string;
   method: string;
 }
+
 // Going down
 export interface LeanBodyMassPeterFormulaI {
   height: string;
@@ -34,10 +35,9 @@ export interface BodyMassIndexMethodTwoI {
   height_unit: string;
   weight: string;
   weight_unit: string;
-  
 }
 
-export interface  BMRKatchMcArdleI{
+export interface BMRKatchMcArdleI {
   fat: string;
   weight: string;
   weight_unit: string;
@@ -50,7 +50,6 @@ export interface BloodAlcoholContentI {
   hours_of_drinking: string;
   minutes_of_drinking: string;
   number_of_standard_drinks: string;
-  
 }
 
 export interface USCustomarySystemBfcI {
@@ -101,7 +100,7 @@ export interface DueDateMittendorfWilliamI {
 }
 
 // Done 10 from top
-//Call these in your forms. 
+//Call these in your forms.
 //Type Your payload using its respective type
 
 export interface DuBoisBodySurfaceAreaI {
@@ -133,13 +132,11 @@ export interface HaycockBodySurfaceAreaI {
   weight_unit: string;
 }
 
-
 export interface GehanAndGeorgeSurfaceAreaI {
   height: string;
   height_unit: string;
   weight: string;
   weight_unit: string;
-
 }
 
 export interface BoydFormulaSurfaceAreaI {
@@ -147,9 +144,7 @@ export interface BoydFormulaSurfaceAreaI {
   height_unit: string;
   weight: string;
   weight_unit: string;
-
 }
-
 
 export interface TakahiraBodySurfaceAreaI {
   height: string;
@@ -164,15 +159,13 @@ export interface TakaSchlichBodySurfaceAreaI {
   weight: string;
   weight_unit: string;
   gender: string;
-
 }
 //note: endpoint called if 1 point and the slope are known
-export interface SinglePointWithKnownSlope  {
+export interface SinglePointWithKnownSlope {
   y_1: string;
   distance: string;
   x_1: string;
   slope: string;
-
 }
 
 export interface ProbabilityOfASeriesOfIndpendentEventsI {

@@ -5,16 +5,33 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "./../../Styling/CustomStyles";
 import {
-  ConeSurfaceArea,
-  CubeSurfaceArea,
+  CircleArea,
+  ConeArea,
+  CubeArea,
   CylindricalTank,
-  RectangularSurfaceArea,
+  EllipseArea,
+  ParallelogramArea,
+  RectangularArea,
+  SectorArea,
+  TrapezoidArea,
+  TriangleArea,
   BallSurfaceArea,
   CapsuleSurfaceArea,
+  ConicalFrustrumSurfaceArea,
+  EllipsoidSurfaceArea,
   SphericalCapSurfaceArea,
   SquarePyramidSurfaceArea,
-  EllipsoidSurfaceArea,
-  ConicalFrustrumSurfaceArea,
+  CapsuleVolume,
+  ConeVolume,
+  ConicalFrustumVolume,
+  CubeVolume,
+  CylinderVolume,
+  EllipsoidVolume,
+  RectangularTankVolume,
+  SphereVolume,
+  SphericalCapVolume,
+  SquarePyramidVolume,
+  TubeVolume,
 } from "./index";
 
 const Math = () => {
@@ -26,39 +43,13 @@ const Math = () => {
       </Typography>
       <hr />
 
+      {/* SURFACE AREA */}
+      <Typography variant="subtitle2" className="text-center">
+        SURFACE AREA
+      </Typography>
+      <hr />
+
       <Grid container xs={12} spacing={2}>
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
-            <ConeSurfaceArea />
-          </Paper>
-        </Grid>
-
-        <hr />
-
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
-            <CubeSurfaceArea />
-          </Paper>
-        </Grid>
-
-        <hr />
-
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
-            <CylindricalTank />
-          </Paper>
-        </Grid>
-
-        <hr />
-
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
-            <RectangularSurfaceArea />
-          </Paper>
-        </Grid>
-
-        <hr />
-
         <Grid item xs={6}>
           <Paper className={classes.paper2}>
             <BallSurfaceArea />
@@ -73,13 +64,19 @@ const Math = () => {
 
         <Grid item xs={6}>
           <Paper className={classes.paper2}>
-            <SphericalCapSurfaceArea />
+            <ConicalFrustrumSurfaceArea />
           </Paper>
         </Grid>
 
         <Grid item xs={6}>
           <Paper className={classes.paper2}>
-            <ConicalFrustrumSurfaceArea />
+            <EllipsoidSurfaceArea />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <SphericalCapSurfaceArea />
           </Paper>
         </Grid>
 
@@ -88,10 +85,148 @@ const Math = () => {
             <SquarePyramidSurfaceArea />
           </Paper>
         </Grid>
+      </Grid>
+
+      {/* AREA */}
+      <hr />
+      <Typography variant="subtitle2" className="text-center">
+        AREA
+      </Typography>
+      <hr />
+
+      <Grid container xs={12} spacing={2}>
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <CircleArea />
+          </Paper>
+        </Grid>
 
         <Grid item xs={6}>
           <Paper className={classes.paper2}>
-            <EllipsoidSurfaceArea />
+            <ConeArea />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <CubeArea />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <CylindricalTank />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <EllipseArea />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <ParallelogramArea />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <RectangularArea />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <SectorArea />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <TrapezoidArea />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <TriangleArea />
+          </Paper>
+        </Grid>
+      </Grid>
+
+      {/* VOLUME */}
+      <hr />
+      <Typography variant="subtitle2" className="text-center">
+        VOLUME
+      </Typography>
+      <hr />
+
+      <Grid container xs={12} spacing={2}>
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <CapsuleVolume />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <ConeVolume />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <ConicalFrustumVolume />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <CubeVolume />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <CylinderVolume />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <EllipsoidVolume />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <RectangularTankVolume />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <SphereVolume />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <SphericalCapVolume />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <SquarePyramidVolume />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <TubeVolume />
           </Paper>
         </Grid>
       </Grid>

@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 
 // MATH INTERFACES
+
+// Surface Area
 export interface BallSurfaceArea {
   statusCode: number;
   statusDescription: string;
@@ -14,7 +16,6 @@ export interface SurfaceAreaI {
 }
 
 export interface CubeAreaI {
-  // eslint-disable-next-line camelcase
   edge_length: string;
   edge_unit: string;
   method: string;
@@ -97,6 +98,7 @@ export interface RectangleAreaI {
   width_unit: string;
 }
 
+// start here
 export interface ParallelogramAreaI {
   breadth: string;
   breadth_unit: string;
@@ -104,14 +106,14 @@ export interface ParallelogramAreaI {
   height_unit: string;
 }
 
-export interface ElipseAreaI {
+export interface EllipseAreaI {
   semi_major_axes_a: string;
   semi_major_axes_a_unit: string;
   semi_major_axes_b: string;
   semi_major_axes_b_unit: string;
 }
 
-export interface TrapeZoidAreaI {
+export interface TrapezoidAreaI {
   base1: string;
   base1_unit: string;
   base2: string;
@@ -129,7 +131,7 @@ export interface TriangleAreaI {
   sideC_unit: string;
 }
 
-export interface CirlceAreaI {
+export interface CircleAreaI {
   radius: string;
   radius_unit: string;
 }
@@ -141,6 +143,7 @@ export interface SectorAreaI {
   angle_unit: string;
 }
 
+// Volume
 export interface SphereVolumeCalculatorI {
   radius: string;
   radius_unit: string;
@@ -155,8 +158,9 @@ export interface ConeVolumeCalculatorI {
 
 export interface CubeVolumeCalculatorI {
   edge_length: string;
-  edge_unit: string;
+  edge_length_unit: string;
 }
+
 export interface CylinderVolumeCalculatorI {
   radius: string;
   radius_unit: string;
@@ -164,7 +168,7 @@ export interface CylinderVolumeCalculatorI {
   height: string;
 }
 
-export interface RetangularTankVolumeI {
+export interface RectangularTankVolumeI {
   length: string;
   length_unit: string;
   width: string;
@@ -203,7 +207,7 @@ export interface EllipsoidVolumeCalculatorI {
   axis3_unit: string;
 }
 
-export interface  TubeVolumeCalculatorI{
+export interface TubeVolumeCalculatorI {
   outer_diameter: string;
   outer_diameter_unit: string;
   inner_diameter: string;
@@ -220,4 +224,3 @@ export interface ConicalFrustumVolumeI {
   height_unit: string;
   height: string;
 }
-

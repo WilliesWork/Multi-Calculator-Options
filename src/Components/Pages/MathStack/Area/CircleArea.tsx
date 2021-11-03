@@ -1,27 +1,23 @@
-// eslint-disable-next-line no-use-before-define
 import React from 'react'
-import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
-import { CalculateSurfaceArea } from '../../../Services/AppCalculatorsApi'
-import { SurfaceAreaI } from '../../../Types'
+import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
-// import axios from 'axios'
 
-const BallSurfaceArea = () => {
+import { CircleAreaI } from '../../../../Types'
+import { RootState } from '../../../../redux/store'
+import useStyles from '../../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomForm, CustomSelect } from '../../../custom'
+
+const CircleArea = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    radius: '',
-    radius_unit: ''
+    radius: "",
+    radius_unit: "",
   })
   const [Result, setResult] = React.useState({
-    surfaceArea: 0,
     Area: 0
   })
 
@@ -29,7 +25,7 @@ const BallSurfaceArea = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.ballSurfArea}
+          {CALCULATORS.circleArea}
         </Typography>
       </Grid>
 
@@ -39,14 +35,14 @@ const BallSurfaceArea = () => {
           radius,
           radius_unit
         }, { setSubmitting, resetForm }) => {
-          const payload: SurfaceAreaI = {
+          const payload: CircleAreaI = {
             radius,
-            radius_unit,
-            method: 'ballSurfaceAreaCalculator'
+            radius_unit
+            // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
+            // const { payload: calsurfaceArea } = await calculateCircleArea(payload)
             // console.log('=====>', calsurfaceArea)
             // if (typeof calsurfaceArea === 'object') {
             //   console.log(calsurfaceArea)
@@ -91,8 +87,8 @@ const BallSurfaceArea = () => {
                 {BUTTONS.calculate}
               </Button>
             </div>
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
               <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
             </div>
 
@@ -100,9 +96,8 @@ const BallSurfaceArea = () => {
         )}
 
       </Formik>
-
     </div>
   )
 }
 
-export default BallSurfaceArea
+export default CircleArea

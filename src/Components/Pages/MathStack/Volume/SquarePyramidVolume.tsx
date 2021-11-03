@@ -1,66 +1,63 @@
 import React from 'react'
-import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
-
-import { CalculateSurfaceArea } from '../../../Services/AppCalculatorsApi'
-import { SquarePyramidSurfaceAreaI } from '../../../Types'
+import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, INPUT_TYPE } from './../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
 
-const SquarePyramidSurfaceArea = () => {
+import { SquarePyramidVolumeI } from '../../../../Types'
+import { RootState } from '../../../../redux/store'
+import useStyles from '../../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomForm, CustomSelect } from '../../../custom'
+
+const SquarePyramidVolume = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    base_edge: '',
-    base_edge_unit: '',
-    height: '',
-    height_unit: ''
+    base: "",
+    base_unit: "",
+    height: "",
+    height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-    Area: 0
+    Volume: 0
   })
 
   return (
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.squarePyramidSurfArea}
+          {CALCULATORS.squarePyramidVol}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          base_edge,
-          base_edge_unit,
+          base,
+          base_unit,
           height,
-          height_unit
+          height_unit,
         }, { setSubmitting, resetForm }) => {
-          const payload: SquarePyramidSurfaceAreaI = {
-            base_edge,
-            base_edge_unit,
+          const payload: SquarePyramidVolumeI = {
+            base,
+            base_unit,
             height,
             height_unit,
-            method: 'sqaurePyramidSurfaceAreaCalculator'
+            // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            /* const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-            console.log('=====>', calsurfaceArea)
-            if (typeof calsurfaceArea === 'object') {
-              console.log(calsurfaceArea)
-              setResult({
-                surfaceArea: calsurfaceArea.surfaceAreas,
-                Area: calsurfaceArea.Area
-              })
-            }
-            resetForm() */
+            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
+            // console.log('=====>', calsurfaceArea)
+            // if (typeof calsurfaceArea === 'object') {
+            //   console.log(calsurfaceArea)
+            //   setResult({
+            //     surfaceArea: calsurfaceArea.surfaceAreas,
+            //     Area: calsurfaceArea.Area
+            //   })
+            // }
+            // resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -70,19 +67,19 @@ const SquarePyramidSurfaceArea = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.baseEdge}
+                label={LABELS.base}
                 type={INPUT_TYPE.number}
-                id="base_edge"
+                id="base"
                 placeholder={PLACEHOLDERS.number}
-                value={values.base_edge}
+                value={values.base}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="base_edge_unit"
-                value={values.base_edge_unit}
-                onChange={handleChange('base_edge_unit')}
+                id="base_unit"
+                value={values.base_unit}
+                onChange={handleChange('base_unit')}
               />
             </div>
 
@@ -114,18 +111,17 @@ const SquarePyramidSurfaceArea = () => {
                 {BUTTONS.calculate}
               </Button>
             </div>
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
             </div>
 
           </form>
         )}
 
       </Formik>
-
     </div>
   )
 }
 
-export default SquarePyramidSurfaceArea
+export default SquarePyramidVolume
