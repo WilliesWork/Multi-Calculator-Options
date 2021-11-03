@@ -102,4 +102,82 @@ export interface DueDateMittendorfWilliamI {
 
 // Done 10 from top
 //Call these in your forms. 
-//Type Your payload using it respective type
+//Type Your payload using its respective type
+
+export interface DuBoisBodySurfaceAreaI {
+  height: string;
+  height_unit: string;
+  weight: string;
+  weight_unit: string;
+}
+
+//note: endpoint spelt with all I assume it should be whole
+export interface WholeBodyMassFormular {
+  height: string;
+  height_unit: string;
+  weight: string;
+  weight_unit: string;
+}
+
+export interface MostellerBodySurfaceAreaI {
+  height: string;
+  height_unit: string;
+  weight: string;
+  weight_unit: string;
+}
+
+export interface HaycockBodySurfaceAreaI {
+  height: string;
+  height_unit: string;
+  weight: string;
+  weight_unit: string;
+}
+
+
+export interface GehanAndGeorgeSurfaceAreaI {
+  height: string;
+  height_unit: string;
+  weight: string;
+  weight_unit: string;
+
+}
+
+export interface BoydFormulaSurfaceAreaI {
+  height: string;
+  height_unit: string;
+  weight: string;
+  weight_unit: string;
+
+}
+
+
+export interface TakahiraBodySurfaceAreaI {
+  height: string;
+  height_unit: string;
+  weight: string;
+  weight_unit: string;
+}
+
+export interface TakaSchlichBodySurfaceAreaI {
+  height: string;
+  height_unit: string;
+  weight: string;
+  weight_unit: string;
+  gender: string;
+
+}
+//note: endpoint called if 1 point and the slope are known
+export interface SinglePointWithKnownSlope  {
+  y_1: string;
+  distance: string;
+  x_1: string;
+  slope: string;
+
+}
+
+export interface ProbabilityOfASeriesOfIndpendentEventsI {
+  event_a: string;
+  event_b: string;
+  a_repeat_times: string;
+  b_repeat_times: string;
+}

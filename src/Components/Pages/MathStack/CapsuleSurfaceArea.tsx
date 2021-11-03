@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
-import { CalculateSurfaceArea } from '../../../Services/MathStack'
+import { CalculateSurfaceArea } from '../../../Services/AppCalculatorsApi'
 import { CapsuleSurfaceAreaI } from '../../../Types'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
@@ -49,16 +49,16 @@ const CapsuleSurfaceArea = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-           const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-            console.log('=====>', calsurfaceArea)
-            if (typeof calsurfaceArea === 'object') {
-              console.log(calsurfaceArea)
-              // setResult({
-              //   surfaceArea: calsurfaceArea,
-              //   Area: calsurfaceArea.Area
-              // })
-            }
-            resetForm() 
+          //  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
+          //   console.log('=====>', calsurfaceArea)
+          //   if (typeof calsurfaceArea === 'object') {
+          //     console.log(calsurfaceArea)
+          //     // setResult({
+          //     //   surfaceArea: calsurfaceArea,
+          //     //   Area: calsurfaceArea.Area
+          //     // })
+          //   }
+          //   resetForm() 
           } catch (err) {
             console.log('====>', err)
           }

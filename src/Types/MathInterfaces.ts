@@ -89,3 +89,135 @@ export interface SphericalCapSurfaceAreaI {
   height_unit: string;
   method: string;
 }
+
+export interface RectangleAreaI {
+  length: string;
+  length_unit: string;
+  width: string;
+  width_unit: string;
+}
+
+export interface ParallelogramAreaI {
+  breadth: string;
+  breadth_unit: string;
+  height: string;
+  height_unit: string;
+}
+
+export interface ElipseAreaI {
+  semi_major_axes_a: string;
+  semi_major_axes_a_unit: string;
+  semi_major_axes_b: string;
+  semi_major_axes_b_unit: string;
+}
+
+export interface TrapeZoidAreaI {
+  base1: string;
+  base1_unit: string;
+  base2: string;
+  base2_unit: string;
+  height: string;
+  height_unit: string;
+}
+
+export interface TriangleAreaI {
+  sideA: string;
+  sideA_unit: string;
+  sideB: string;
+  sideB_unit: string;
+  sideC: string;
+  sideC_unit: string;
+}
+
+export interface CirlceAreaI {
+  radius: string;
+  radius_unit: string;
+}
+
+export interface SectorAreaI {
+  radius: string;
+  radius_unit: string;
+  angle: string;
+  angle_unit: string;
+}
+
+export interface SphereVolumeCalculatorI {
+  radius: string;
+  radius_unit: string;
+}
+
+export interface ConeVolumeCalculatorI {
+  radius: string;
+  radius_unit: string;
+  height: string;
+  height_unit: string;
+}
+
+export interface CubeVolumeCalculatorI {
+  edge_length: string;
+  edge_unit: string;
+}
+export interface CylinderVolumeCalculatorI {
+  radius: string;
+  radius_unit: string;
+  height_unit: string;
+  height: string;
+}
+
+export interface RetangularTankVolumeI {
+  length: string;
+  length_unit: string;
+  width: string;
+  width_unit: string;
+  height: string;
+  height_unit: string;
+}
+
+export interface CapsuleVolumeCalculatorI {
+  radius: string;
+  radius_unit: string;
+  height: string;
+  height_unit: string;
+}
+
+export interface SphericalCapVolumeI {
+  radius: string;
+  radius_unit: string;
+  height_unit: string;
+  height: string;
+}
+
+export interface SquarePyramidVolumeI {
+  base: string;
+  base_unit: string;
+  height_unit: string;
+  height: string;
+}
+
+export interface EllipsoidVolumeCalculatorI {
+  axis1: string;
+  axis1_unit: string;
+  axis2: string;
+  axis2_unit: string;
+  axis3: string;
+  axis3_unit: string;
+}
+
+export interface  TubeVolumeCalculatorI{
+  outer_diameter: string;
+  outer_diameter_unit: string;
+  inner_diameter: string;
+  inner_diameter_unit: string;
+  length: string;
+  length_unit: string;
+}
+
+export interface ConicalFrustumVolumeI {
+  top_radius: string;
+  top_radius_unit: string;
+  bottom_radius: string;
+  bottom_radius_unit: string;
+  height_unit: string;
+  height: string;
+}
+

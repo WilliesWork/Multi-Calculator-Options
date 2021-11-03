@@ -2,7 +2,7 @@ import React from 'react'
 import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
 
-import { CalculateSurfaceArea } from '../../../Services/MathStack'
+import { CalculateSurfaceArea } from '../../../Services/AppCalculatorsApi'
 import { SquarePyramidSurfaceAreaI } from '../../../Types'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
