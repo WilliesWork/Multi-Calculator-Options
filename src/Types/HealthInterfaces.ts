@@ -181,3 +181,40 @@ export interface ProbabilityOfASeriesOfIndpendentEventsI {
   a_repeat_times: string;
   b_repeat_times: string;
 }
+
+export interface FujimotoFormulaSurfaceAreaI {
+  height: string;
+  height_unit: string;
+  weight: string;
+  weight_unit: string;
+
+}
+
+export interface DueDateParikhsRuleI {
+  first_date_of_last_period: string;
+  days: string;
+}
+
+export interface DueDateWoodsRuleI {
+  first_date_of_last_period: string;
+  days: string;
+  type: string;
+}
+
+export interface BmrMifflinJeorEquationI {
+  height: string;
+  height_unit: string;
+  weight: string;
+  weight_unit: string;
+  gender: string;
+  age: number;
+}
+
+export interface BmrMifflinHarrisBenedictI {
+  height: string;
+  height_unit: string;
+  weight: string;
+  weight_unit: string;
+  gender: string;
+  age: number;
+}
