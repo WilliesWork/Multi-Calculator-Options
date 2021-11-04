@@ -1,45 +1,35 @@
 import React from 'react'
-import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
-
-import { CalculateSurfaceArea } from '../../../Services/AppCalculatorsApi'
-import { EllipsoidSurfaceAreaI } from '../../../Types'
+import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CustomForm, CustomSelect } from '../../custom'
-import {
-  CALCULATORS,
-  BUTTONS,
-  LABELS,
-  PLACEHOLDERS,
-  IDS,
-  INPUT_TYPE
-} from './../../../Common/shared'
 
-const EllipsoidSurfaceArea = () => {
+import { EllipsoidVolumeCalculatorI } from '../../../../Types'
+import { RootState } from '../../../../redux/store'
+import useStyles from '../../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomForm, CustomSelect } from '../../../custom'
+
+const EllipsoidVolume = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    axis1: '',
-    axis1_unit: '',
-    axis2: '',
-    axis2_unit: '',
-    axis3: '',
-    axis3_unit: ''
+    axis1: "",
+    axis1_unit: "",
+    axis2: "",
+    axis2_unit: "",
+    axis3: "",
+    axis3_unit: "",
   })
   const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-    Area: 0
+    Volume: 0
   })
 
   return (
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.ellipsoidSurfArea}
+          {CALCULATORS.ellipsoidVol}
         </Typography>
       </Grid>
 
@@ -51,29 +41,29 @@ const EllipsoidSurfaceArea = () => {
           axis2,
           axis2_unit,
           axis3,
-          axis3_unit
+          axis3_unit,
         }, { setSubmitting, resetForm }) => {
-          const payload: EllipsoidSurfaceAreaI = {
+          const payload: EllipsoidVolumeCalculatorI = {
             axis1,
             axis1_unit,
             axis2,
             axis2_unit,
             axis3,
             axis3_unit,
-            method: 'ballSurfaceAreaCalculator'
+            // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            /* const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-            console.log('=====>', calsurfaceArea)
-            if (typeof calsurfaceArea === 'object') {
-              console.log(calsurfaceArea)
-              setResult({
-                surfaceArea: calsurfaceArea.surfaceAreas,
-                Area: calsurfaceArea.Area
-              })
-            }
-            resetForm() */
+            // const { payload: calsurfaceArea } = await calculateEllipsoidVolume(payload)
+            // console.log('=====>', calsurfaceArea)
+            // if (typeof calsurfaceArea === 'object') {
+            //   console.log(calsurfaceArea)
+            //   setResult({
+            //     surfaceArea: calsurfaceArea.surfaceAreas,
+            //     Area: calsurfaceArea.Area
+            //   })
+            // }
+            // resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -145,18 +135,17 @@ const EllipsoidSurfaceArea = () => {
                 {BUTTONS.calculate}
               </Button>
             </div>
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
             </div>
 
           </form>
         )}
 
       </Formik>
-
     </div>
   )
 }
 
-export default EllipsoidSurfaceArea
+export default EllipsoidVolume

@@ -1,66 +1,54 @@
 import React from 'react'
-import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
+import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
-// import { calculateRectangularArea } from '../../../Services/MathStack'
-import { RectangularAreaI } from '../../../Types'
+import { BondPayBackPredeterminedI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
-// import axios from 'axios'
 
-const RectangularSurfaceArea = () => {
-  const classes = useStyles();
+const BondPayBackPredetermined = () => {
+  const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    length: '',
-    length_unit: '',
-    width: '',
-    width_unit: '',
-    height: '',
-    height_unit: ''
+    interest_rate: "",
+    predetermined_amount: "",
+    number_of_months: "",
+    number_of_years: "",
   })
   const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-    Area: 0
+    Answer: 0
   })
 
   return (
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.rectSurfArea}
+          {CALCULATORS.bondPayBackPredetermined}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          length,
-          length_unit,
-          width,
-          width_unit,
-          height,
-          height_unit
-
-
+          interest_rate,
+          predetermined_amount,
+          number_of_months,
+          number_of_years,
         }, { setSubmitting, resetForm }) => {
-          const payload: RectangularAreaI = {
-            length,
-            length_unit,
-            width,
-            width_unit,
-            height,
-            height_unit,
-            method: 'ballSurfaceAreaCalculator'
+          const payload: BondPayBackPredeterminedI = {
+            interest_rate,
+            predetermined_amount,
+            number_of_months,
+            number_of_years,
+            // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateRectangularArea(payload)
+            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
             // console.log('=====>', calsurfaceArea)
             // if (typeof calsurfaceArea === 'object') {
             //   console.log(calsurfaceArea)
@@ -74,62 +62,50 @@ const RectangularSurfaceArea = () => {
             console.log('====>', err)
           }
         }}
-
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.length}
+                label={LABELS.interestRate}
                 type={INPUT_TYPE.number}
-                id="length"
+                id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
-                value={values.length}
+                value={values.interest_rate}
                 onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="length_unit"
-                value={values.length_unit}
-                onChange={handleChange('length_unit')}
-              />
-            </div>
-
-
-            <div className="form-row">
-              <CustomForm
-                label={LABELS.width}
-                type={INPUT_TYPE.number}
-                id="width"
-                placeholder={PLACEHOLDERS.number}
-                value={values.width}
-                onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="width_unit"
-                value={values.width_unit}
-                onChange={handleChange('width_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.height}
+                label={LABELS.predeterminedAmount}
                 type={INPUT_TYPE.number}
-                id="height"
+                id="predetermined_amount"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
+                value={values.predetermined_amount}
                 onChange={handleChange}
               />
+            </div>
 
-              <CustomSelect
-                label={LABELS.unit}
-                id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.numberOfMonths}
+                type={INPUT_TYPE.number}
+                id="number_of_months"
+                placeholder={PLACEHOLDERS.number}
+                value={values.number_of_months}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.numberOfYears}
+                type={INPUT_TYPE.number}
+                id="number_of_years"
+                placeholder={PLACEHOLDERS.number}
+                value={values.number_of_years}
+                onChange={handleChange}
               />
             </div>
 
@@ -146,17 +122,15 @@ const RectangularSurfaceArea = () => {
             </div>
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
             </div>
 
           </form>
         )}
 
       </Formik>
-
     </div>
   )
 }
 
-export default RectangularSurfaceArea
+export default BondPayBackPredetermined

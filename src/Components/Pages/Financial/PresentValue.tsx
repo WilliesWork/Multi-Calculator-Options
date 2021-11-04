@@ -3,54 +3,52 @@ import { Button, Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
-import { ConeAreaI } from '../../../Types'
+import { PresentValueI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const ConeSurfaceArea = () => {
+const PresentValue = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    radius: "",
-    radius_unit: "",
-    height: "",
-    height_unit: "",
+    interest_rate: "",
+    predetermined_amount: "",
+    number_of_months: "",
+    number_of_years: "",
   })
   const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-    Area: 0
+    Answer: 0
   })
 
   return (
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.coneSurfArea}
+          {CALCULATORS.presentValue}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          radius,
-          radius_unit,
-          height,
-          height_unit,
+          interest_rate,
+          predetermined_amount,
+          number_of_months,
+          number_of_years,
         }, { setSubmitting, resetForm }) => {
-          const payload: ConeAreaI = {
-            radius,
-            radius_unit,
-            height,
-            height_unit,
-            method: 'ballSurfaceAreaCalculator'
+          const payload: PresentValueI = {
+            interest_rate,
+            predetermined_amount,
+            number_of_months,
+            number_of_years,
+            // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateConeSurfaceArea(payload)
+            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
             // console.log('=====>', calsurfaceArea)
             // if (typeof calsurfaceArea === 'object') {
             //   console.log(calsurfaceArea)
@@ -69,39 +67,48 @@ const ConeSurfaceArea = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.radius}
+                label={LABELS.interestRate}
                 type={INPUT_TYPE.number}
-                id="radius"
+                id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
-                value={values.radius}
+                value={values.interest_rate}
                 onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="radius_unit"
-                value={values.radius_unit}
-                onChange={handleChange('radius_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.height}
+                label={LABELS.predeterminedAmount}
                 type={INPUT_TYPE.number}
-                id="height"
+                id="predetermined_amount"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
+                value={values.predetermined_amount}
                 onChange={handleChange}
               />
+            </div>
 
-              <CustomSelect
-                label={LABELS.unit}
-                id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.numberOfMonths}
+                type={INPUT_TYPE.number}
+                id="number_of_months"
+                placeholder={PLACEHOLDERS.number}
+                value={values.number_of_months}
+                onChange={handleChange}
               />
             </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.numberOfYears}
+                type={INPUT_TYPE.number}
+                id="number_of_years"
+                placeholder={PLACEHOLDERS.number}
+                value={values.number_of_years}
+                onChange={handleChange}
+              />
+            </div>
+
 
             <div className="form mb-3">
               <Button
@@ -115,8 +122,7 @@ const ConeSurfaceArea = () => {
             </div>
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
             </div>
 
           </form>
@@ -127,4 +133,4 @@ const ConeSurfaceArea = () => {
   )
 }
 
-export default ConeSurfaceArea
+export default PresentValue

@@ -3,27 +3,26 @@ import React from 'react'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { CubeAreaI } from '../../../Types'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CubeAreaI } from '../../../../Types'
+import useStyles from '../../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomForm, CustomSelect } from '../../../custom'
 
-const CubeSurfaceArea = () => {
+const CubeArea = () => {
   const classes = useStyles();
   const [initialFormValues] = React.useState({
     edge_length: '',
     edge_unit: ''
   })
   const [Result, setResult] = React.useState({
-    cubeSurfaceArea: 0,
+    CubeArea: 0,
     Area: 0
   })
   return (
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.cubeSurfArea}
+          {CALCULATORS.cubeArea}
         </Typography>
       </Grid>
 
@@ -38,16 +37,16 @@ const CubeSurfaceArea = () => {
           const payload: CubeAreaI = {
             edge_length,
             edge_unit,
-            method: 'cubeSurfaceAreaCalculator'
+            method: 'cubeAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calculateCubeArea } = await CalculateCubeSurfaceArea(payload)
+            // const { payload: calculateCubeArea } = await CalculateCubeArea(payload)
             // console.log('=====>', calculateCubeArea)
             // if (typeof calculateCubeArea === 'object') {
             //   console.log(calculateCubeArea)
             //   setResult({
-            //     cubeSurfaceArea: calculateCubeArea.CubeSurfaceArea,
+            //     CubeArea: calculateCubeArea.CubeArea,
             //     Area: calculateCubeArea.Area
             //   })
             // }
@@ -89,7 +88,6 @@ const CubeSurfaceArea = () => {
             </div>
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.cubeSurfaceArea}</Typography>
               <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
             </div>
 
@@ -100,4 +98,4 @@ const CubeSurfaceArea = () => {
   )
 }
 
-export default CubeSurfaceArea
+export default CubeArea

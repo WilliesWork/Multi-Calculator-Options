@@ -1,10 +1,3 @@
-// STATISTICS INTERFACES
-// export interface SampleSizeI {
-//   confience_level: string;
-//   margin_of_error: string;
-//   population_proportion: string;
-//   method: string;
-// }
 export interface PaybackWithinTimeframeI {
   interest_rate: string;
   credit_card_balance: string;
@@ -12,16 +5,14 @@ export interface PaybackWithinTimeframeI {
   year: string;
 }
 
-
-export interface MortagePayoffWithLoanTermI {
+export interface MortgagePayoffWithLoanTermI {
   interest_rate: string;
   total_payments_years: string;
   payments_made_years: string;
   loan_amount: string;
 }
 
-
-export interface MortagePayOffWithoutLoanTermI {
+export interface MortgagePayOffWithoutLoanTermI {
   interest_rate: string;
   monthly_payment: string;
   principal_balance: string;
@@ -48,8 +39,7 @@ export interface BondPayBackPredeterminedI {
   number_of_months: string;
 }
 
-
-export interface  PresentValueI{
+export interface PresentValueI {
   interest_rate: string;
   predetermined_amount: string;
   number_of_years: string;
@@ -63,11 +53,9 @@ export interface PresentValueOfPeriodicalDepositI {
   number_of_months: string;
 }
 
-
 export interface ProfitMarginCalculatorI {
   sales_revenue: string;
   cost: string;
-
 }
 
 export interface StockTradingMarginI {
@@ -81,16 +69,8 @@ export interface InflationCalculatorCpiDataI {
   price_in_base: string;
 }
 
-export interface PayBackACertainAmount {
+export interface PayBackACertainAmountI {
   interest_rate: string;
   credit_card_balance: string;
   monthly_payment: string;
 }
-
-
-
-
-
-
-
-
