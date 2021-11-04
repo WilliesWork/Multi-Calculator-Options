@@ -1,26 +1,25 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
+import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { ConcreteSquareFootingI } from '../../../Types'
+import { BodyFatPercentageBmiI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const ConcreteSquareFooting = () => {
+const BodyFatPercentageBmi = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    length: "",
-    length_unit: "",
-    width: "",
-    width_unit: "",
-    breadth: "",
-    breadth_unit: "",
-    quantity: ""
+    height: '',
+    height_unit: '',
+    weight: '',
+    weight_unit: '',
+    gender: '',
+    age: '',
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -30,43 +29,41 @@ const ConcreteSquareFooting = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.concreteSquareFooting}
+          {CALCULATORS.bodyFatPercentageBmi}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          length,
-          length_unit,
-          width,
-          width_unit,
-          breadth,
-          breadth_unit,
-          quantity,
+          height,
+          height_unit,
+          weight,
+          weight_unit,
+          gender,
+          age,
         }, { setSubmitting, resetForm }) => {
-          const payload: ConcreteSquareFootingI = {
-            length,
-            length_unit,
-            width,
-            width_unit,
-            breadth,
-            breadth_unit,
-            quantity
-            // method: 'ballSurfaceAreaCalculator'
+          const payload: BodyFatPercentageBmiI = {
+            height,
+            height_unit,
+            weight,
+            weight_unit,
+            gender,
+            age,
+            //  method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
+             console.log('=====>', calsurfaceArea)
+             if (typeof calsurfaceArea === 'object') {
+               console.log(calsurfaceArea)
+               setResult({
+                 surfaceArea: calsurfaceArea.surfaceAreas,
+                 Area: calsurfaceArea.Area
+               })
+             }
+             resetForm() */
           } catch (err) {
             console.log('====>', err)
           }
@@ -76,65 +73,58 @@ const ConcreteSquareFooting = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.length}
+                label={LABELS.height}
                 type={INPUT_TYPE.number}
-                id="length"
+                id="height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.length}
+                value={values.height}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="length_unit"
-                value={values.length_unit}
-                onChange={handleChange('length_unit')}
+                id="height_unit"
+                value={values.height_unit}
+                onChange={handleChange('height_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.width}
+                label={LABELS.weight}
                 type={INPUT_TYPE.number}
-                id="width"
+                id="weight"
                 placeholder={PLACEHOLDERS.number}
-                value={values.width}
+                value={values.weight}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="width_unit"
-                value={values.width_unit}
-                onChange={handleChange('width_unit')}
+                id="weight_unit"
+                value={values.weight_unit}
+                onChange={handleChange('weight_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.breadth}
-                type={INPUT_TYPE.number}
-                id="breadth"
-                placeholder={PLACEHOLDERS.number}
-                value={values.breadth}
+                label={LABELS.gender}
+                type={INPUT_TYPE.text}
+                id="gender"
+                placeholder={PLACEHOLDERS.gender}
+                value={values.gender}
                 onChange={handleChange}
               />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="breadth_unit"
-                value={values.breadth_unit}
-                onChange={handleChange('breadth_unit')}
-              />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.quantity}
+                label={LABELS.age}
                 type={INPUT_TYPE.number}
-                id="quantity"
+                id="age"
                 placeholder={PLACEHOLDERS.number}
-                value={values.quantity}
+                value={values.age}
                 onChange={handleChange}
               />
             </div>
@@ -149,17 +139,17 @@ const ConcreteSquareFooting = () => {
                 {BUTTONS.calculate}
               </Button>
             </div>
-
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
             </div>
 
           </form>
         )}
 
       </Formik>
+
     </div>
   )
 }
 
-export default ConcreteSquareFooting
+export default BodyFatPercentageBmi

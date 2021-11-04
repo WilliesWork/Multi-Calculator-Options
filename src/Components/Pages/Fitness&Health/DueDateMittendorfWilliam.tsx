@@ -3,23 +3,19 @@ import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { CalculateSurfaceArea } from '../../../Services/AppCalculatorsApi'
-import { BodyMassIndexI } from '../../../Types'
+import { DueDateMittendorfWilliamI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const BodyMassIndex = () => {
+const DueDateMittendorfWilliam = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    height: '',
-    height_unit: '',
-    weight: '',
-    weight_unit: ''
+    first_date_of_last_period: '',
+    type: ''
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -29,24 +25,20 @@ const BodyMassIndex = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.bodyMassIndex}
+          {CALCULATORS.dueDateMittendorfWilliam}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          height,
-          height_unit,
-          weight,
-          weight_unit
+          first_date_of_last_period,
+          type,
         }, { setSubmitting, resetForm }) => {
-          const payload: BodyMassIndexI = {
-            height,
-            height_unit,
-            weight,
-            weight_unit,
-            method: 'bodyMassIndexCalculator'
+          const payload: DueDateMittendorfWilliamI = {
+            first_date_of_last_period,
+            type,
+            //  method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -69,37 +61,23 @@ const BodyMassIndex = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.height}
-                type={INPUT_TYPE.number}
-                id="height"
-                placeholder={PLACEHOLDERS.number}
-                value={values.height}
+                label={LABELS.firstDateofLastPeriod}
+                type={INPUT_TYPE.date}
+                id="first_date_of_last_period"
+                placeholder={PLACEHOLDERS.date}
+                value={values.first_date_of_last_period}
                 onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.weight}
-                type={INPUT_TYPE.number}
-                id="weight"
-                placeholder={PLACEHOLDERS.number}
-                value={values.weight}
+                label={LABELS.type}
+                type={INPUT_TYPE.text}
+                id="type"
+                placeholder={PLACEHOLDERS.type}
+                value={values.type}
                 onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="weight_unit"
-                value={values.weight_unit}
-                onChange={handleChange('weight_unit')}
               />
             </div>
 
@@ -126,4 +104,4 @@ const BodyMassIndex = () => {
   )
 }
 
-export default BodyMassIndex
+export default DueDateMittendorfWilliam

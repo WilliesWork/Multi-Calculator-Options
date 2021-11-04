@@ -2,17 +2,17 @@
 import axios, { AxiosError } from 'axios'
 import { BASE_URL } from '../Common/AppUrl'
 import { BodyMassIndexI, CapsuleSurfaceAreaI, ConeAreaI, CubeAreaI, LeanBodyMassI, RectangularAreaI, RegularCycleOvulationI, SurfaceAreaI } from '../Types'
-import * as FinancialFormulars from '../Types/FinanceInterfaces'
-import * as MatheMaticalFormulars from '../Types/MathInterfaces'
-import * as HealthFormulars from '../Types/HealthInterfaces'
-import * as OtherFormulars from '../Types/OtherCalculatorInterfaces'
+import * as FinancialFormulas from '../Types/FinanceInterfaces'
+import * as MatheMaticalFormulas from '../Types/MathInterfaces'
+import * as HealthFormulas from '../Types/HealthInterfaces'
+import * as OtherFormulas from '../Types/OtherCalculatorInterfaces'
 
 export const CalculateSurfaceArea = async (calculateArea: SurfaceAreaI | CubeAreaI | RectangularAreaI | ConeAreaI | CapsuleSurfaceAreaI
-  | MatheMaticalFormulars.TubeVolumeCalculatorI | MatheMaticalFormulars.TriangleAreaI | MatheMaticalFormulars.TrapezoidAreaI
-  | MatheMaticalFormulars.SquarePyramidVolumeI | MatheMaticalFormulars.SquarePyramidSurfaceAreaI | MatheMaticalFormulars.SphericalCapVolumeI | MatheMaticalFormulars.SphericalCapSurfaceAreaI
-  | MatheMaticalFormulars.SphereVolumeCalculatorI | MatheMaticalFormulars.SectorAreaI | MatheMaticalFormulars.RectangularTankVolumeI | MatheMaticalFormulars.RectangleAreaI | MatheMaticalFormulars.ParallelogramAreaI | MatheMaticalFormulars.EllipsoidVolumeCalculatorI | MatheMaticalFormulars.EllipsoidSurfaceAreaI
-  | MatheMaticalFormulars.EllipseAreaI | MatheMaticalFormulars.CylindricalTankAreaI | MatheMaticalFormulars.CylinderVolumeCalculatorI | MatheMaticalFormulars.CubeVolumeCalculatorI
-  | MatheMaticalFormulars.ConicalFrustumVolumeI | MatheMaticalFormulars.ConicalFrustrumSurfaceAreaI | MatheMaticalFormulars.ConeVolumeCalculatorI | MatheMaticalFormulars.CircleAreaI | MatheMaticalFormulars.CapsuleVolumeCalculatorI) => {
+  | MatheMaticalFormulas.TubeVolumeCalculatorI | MatheMaticalFormulas.TriangleAreaI | MatheMaticalFormulas.TrapezoidAreaI
+  | MatheMaticalFormulas.SquarePyramidVolumeI | MatheMaticalFormulas.SquarePyramidSurfaceAreaI | MatheMaticalFormulas.SphericalCapVolumeI | MatheMaticalFormulas.SphericalCapSurfaceAreaI
+  | MatheMaticalFormulas.SphereVolumeCalculatorI | MatheMaticalFormulas.SectorAreaI | MatheMaticalFormulas.RectangularTankVolumeI | MatheMaticalFormulas.RectangleAreaI | MatheMaticalFormulas.ParallelogramAreaI | MatheMaticalFormulas.EllipsoidVolumeCalculatorI | MatheMaticalFormulas.EllipsoidSurfaceAreaI
+  | MatheMaticalFormulas.EllipseAreaI | MatheMaticalFormulas.CylindricalTankAreaI | MatheMaticalFormulas.CylinderVolumeCalculatorI | MatheMaticalFormulas.CubeVolumeCalculatorI
+  | MatheMaticalFormulas.ConicalFrustumVolumeI | MatheMaticalFormulas.ConicalFrustrumSurfaceAreaI | MatheMaticalFormulas.ConeVolumeCalculatorI | MatheMaticalFormulas.CircleAreaI | MatheMaticalFormulas.CapsuleVolumeCalculatorI) => {
   try {
     const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, calculateArea)
 
@@ -36,9 +36,9 @@ export const CalculateSurfaceArea = async (calculateArea: SurfaceAreaI | CubeAre
   }
 }
 
-export const calculateHealth = async (calculateHealthPayload: HealthFormulars.BMRKatchMcArdleI | HealthFormulars.BloodAlcoholContentI | HealthFormulars.BodyFatPercentageBmiI | HealthFormulars.BodyMassIndexI | HealthFormulars.BodyMassIndexMethodTwoI | HealthFormulars.BoydFormulaSurfaceAreaI | HealthFormulars.DuBoisBodySurfaceAreaI | HealthFormulars.DueDateMittendorfWilliamI
-  | HealthFormulars.DueDateNaegeleRule | HealthFormulars.GehanAndGeorgeSurfaceAreaI | HealthFormulars.HaycockBodySurfaceAreaI | HealthFormulars.InternationSytemBfcI | HealthFormulars.LeanBodyMassI | HealthFormulars.LeanBodyMassPeterFormulaI | HealthFormulars.MostellerBodySurfaceAreaI | HealthFormulars.PeroidCalculator | HealthFormulars.ProbabilityOfASeriesOfIndpendentEventsI
-  | HealthFormulars.RegularCycleOvulationI | HealthFormulars.SinglePointWithKnownSlope | HealthFormulars.TakaSchlichBodySurfaceAreaI | HealthFormulars.TakahiraBodySurfaceAreaI | HealthFormulars.USCustomarySystemBfcI | HealthFormulars.WholeBodyMassFormular | HealthFormulars.WholeBodyMassFormular) => {
+export const calculateHealth = async (calculateHealthPayload: HealthFormulas.BMRKatchMcArdleI | HealthFormulas.BloodAlcoholContentI | HealthFormulas.BodyFatPercentageBmiI | HealthFormulas.BodyMassIndexI | HealthFormulas.BodyMassIndexMethodTwoI | HealthFormulas.BoydFormulaSurfaceAreaI | HealthFormulas.DuBoisBodySurfaceAreaI | HealthFormulas.DueDateMittendorfWilliamI
+  | HealthFormulas.DueDateNaegeleRuleI | HealthFormulas.GehanAndGeorgeSurfaceAreaI | HealthFormulas.HaycockBodySurfaceAreaI | HealthFormulas.InternationalSystemBfcI | HealthFormulas.LeanBodyMassI | HealthFormulas.LeanBodyMassPeterFormulaI | HealthFormulas.MostellerBodySurfaceAreaI | HealthFormulas.PeroidCalculatorI | HealthFormulas.ProbabilityOfASeriesOfIndpendentEventsI
+  | HealthFormulas.RegularCycleOvulationI | HealthFormulas.SinglePointWithKnownSlopeI | HealthFormulas.TakaSchlichBodySurfaceAreaI | HealthFormulas.TakahiraBodySurfaceAreaI | HealthFormulas.USCustomarySystemBfcI | HealthFormulas.WholeBodyMassFormulaI | HealthFormulas.WholeBodyMassFormulaI) => {
   try {
     const { data } = await axios.post(`${BASE_URL}/api/calculator/health`, calculateHealthPayload)
 
@@ -62,10 +62,10 @@ export const calculateHealth = async (calculateHealthPayload: HealthFormulars.BM
   }
 }
 
-export const calculateFinances = async (calculateFinancialPayload: FinancialFormulars.AmortizedLoanFixedAmountI | FinancialFormulars.BondPayBackPredeterminedI
-  | FinancialFormulars.DefearedPaymentsLumpsumAtMaturityI | FinancialFormulars.InflationCalculatorCpiDataI | FinancialFormulars.MortgagePayOffWithoutLoanTermI |
-  FinancialFormulars.MortgagePayoffWithLoanTermI | FinancialFormulars.PayBackACertainAmountI
-  | FinancialFormulars.PaybackWithinTimeframeI | FinancialFormulars.PresentValueI | FinancialFormulars.PresentValueOfPeriodicalDepositI | FinancialFormulars.ProfitMarginCalculatorI | FinancialFormulars.StockTradingMarginI) => {
+export const calculateFinances = async (calculateFinancialPayload: FinancialFormulas.AmortizedLoanFixedAmountI | FinancialFormulas.BondPayBackPredeterminedI
+  | FinancialFormulas.DefearedPaymentsLumpsumAtMaturityI | FinancialFormulas.InflationCalculatorCpiDataI | FinancialFormulas.MortgagePayOffWithoutLoanTermI |
+  FinancialFormulas.MortgagePayoffWithLoanTermI | FinancialFormulas.PayBackACertainAmountI
+  | FinancialFormulas.PaybackWithinTimeframeI | FinancialFormulas.PresentValueI | FinancialFormulas.PresentValueOfPeriodicalDepositI | FinancialFormulas.ProfitMarginCalculatorI | FinancialFormulas.StockTradingMarginI) => {
   try {
     const { data } = await axios.post(`${BASE_URL}/api/calculator/finacial`, calculateFinancialPayload)
 
@@ -89,8 +89,8 @@ export const calculateFinances = async (calculateFinancialPayload: FinancialForm
   }
 }
 
-export const calculateOthers = async (calculateOtherFormulaePayload: OtherFormulars.CircularSlapI | OtherFormulars.ConcreteSquareFootingI | OtherFormulars.CurbAndGutterBarrierI
-  | OtherFormulars.HoleColumnI | OtherFormulars.StairsConcreateI) => {
+export const calculateOthers = async (calculateOtherFormulaePayload: OtherFormulas.CircularSlapI | OtherFormulas.ConcreteSquareFootingI | OtherFormulas.CurbAndGutterBarrierI
+  | OtherFormulas.HoleColumnI | OtherFormulas.StairsConcreateI) => {
   try {
     const { data } = await axios.post(`${BASE_URL}/api/calculator/other`, calculateOtherFormulaePayload)
 

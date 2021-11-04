@@ -3,15 +3,13 @@ import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { CalculateSurfaceArea } from '../../../Services/AppCalculatorsApi'
-import { BodyMassIndexI } from '../../../Types'
+import { WholeBodyMassFormulaI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const BodyMassIndex = () => {
+const WholeBodyMassFormula = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
@@ -29,7 +27,7 @@ const BodyMassIndex = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.bodyMassIndex}
+          {CALCULATORS.wholeBodyMassFormula}
         </Typography>
       </Grid>
 
@@ -41,12 +39,12 @@ const BodyMassIndex = () => {
           weight,
           weight_unit
         }, { setSubmitting, resetForm }) => {
-          const payload: BodyMassIndexI = {
+          const payload: WholeBodyMassFormulaI = {
             height,
             height_unit,
             weight,
             weight_unit,
-            method: 'bodyMassIndexCalculator'
+            //  method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -126,4 +124,4 @@ const BodyMassIndex = () => {
   )
 }
 
-export default BodyMassIndex
+export default WholeBodyMassFormula

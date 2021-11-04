@@ -4,22 +4,22 @@ import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { CalculateSurfaceArea } from '../../../Services/AppCalculatorsApi'
-import { BodyMassIndexI } from '../../../Types'
+import { ProbabilityOfASeriesOfIndpendentEventsI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const BodyMassIndex = () => {
+const ProbabilityOfASeriesOfIndpendentEvents = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    height: '',
-    height_unit: '',
-    weight: '',
-    weight_unit: ''
+    event_a: '',
+    a_repeat_times: '',
+    event_b: '',
+    b_repeat_times: ''
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -29,24 +29,24 @@ const BodyMassIndex = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.bodyMassIndex}
+          {CALCULATORS.probabilityOfASeriesOfIndpendentEvents}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          height,
-          height_unit,
-          weight,
-          weight_unit
+          event_a,
+          a_repeat_times,
+          event_b,
+          b_repeat_times
         }, { setSubmitting, resetForm }) => {
-          const payload: BodyMassIndexI = {
-            height,
-            height_unit,
-            weight,
-            weight_unit,
-            method: 'bodyMassIndexCalculator'
+          const payload: ProbabilityOfASeriesOfIndpendentEventsI = {
+            event_a,
+            a_repeat_times,
+            event_b,
+            b_repeat_times,
+            //  method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -69,37 +69,41 @@ const BodyMassIndex = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.height}
+                label={LABELS.eventA}
                 type={INPUT_TYPE.number}
-                id="height"
+                id="event_a"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
+                value={values.event_a}
                 onChange={handleChange}
               />
 
-              <CustomSelect
-                label={LABELS.unit}
-                id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
+              <CustomForm
+                label={LABELS.aRepeatTimes}
+                type={INPUT_TYPE.number}
+                id="a_repeat_times"
+                placeholder={PLACEHOLDERS.number}
+                value={values.a_repeat_times}
+                onChange={handleChange}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.weight}
+                label={LABELS.eventB}
                 type={INPUT_TYPE.number}
-                id="weight"
+                id="event_b"
                 placeholder={PLACEHOLDERS.number}
-                value={values.weight}
+                value={values.event_b}
                 onChange={handleChange}
               />
 
-              <CustomSelect
-                label={LABELS.unit}
-                id="weight_unit"
-                value={values.weight_unit}
-                onChange={handleChange('weight_unit')}
+              <CustomForm
+                label={LABELS.bRepeatTimes}
+                type={INPUT_TYPE.number}
+                id="b_repeat_times"
+                placeholder={PLACEHOLDERS.number}
+                value={values.b_repeat_times}
+                onChange={handleChange}
               />
             </div>
 
@@ -126,4 +130,4 @@ const BodyMassIndex = () => {
   )
 }
 
-export default BodyMassIndex
+export default ProbabilityOfASeriesOfIndpendentEvents

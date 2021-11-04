@@ -1,3 +1,4 @@
+// Area
 export { default as CircleArea } from "./MathStack/Area/CircleArea";
 export { default as ConeArea } from "./MathStack/Area/ConeArea";
 export { default as CubeArea } from "./MathStack/Area/CubeArea";
@@ -9,6 +10,7 @@ export { default as SectorArea } from "./MathStack/Area/SectorArea";
 export { default as TrapezoidArea } from "./MathStack/Area/TrapezoidArea";
 export { default as TriangleArea } from "./MathStack/Area/TriangleArea";
 
+// Surface Area
 export { default as BallSurfaceArea } from "./MathStack/SurfaceArea/BallSurfaceArea";
 export { default as CapsuleSurfaceArea } from "./MathStack/SurfaceArea/CapsuleSurfaceArea";
 export { default as ConicalFrustrumSurfaceArea } from "./MathStack/SurfaceArea/ConicalFrustrumSurfaceArea";
@@ -16,6 +18,7 @@ export { default as EllipsoidSurfaceArea } from "./MathStack/SurfaceArea/Ellipso
 export { default as SphericalCapSurfaceArea } from "./MathStack/SurfaceArea/SphericalCapSurfaceArea";
 export { default as SquarePyramidSurfaceArea } from "./MathStack/SurfaceArea/SquarePyramidSurfaceArea";
 
+// Volume
 export { default as CapsuleVolume } from "./MathStack/Volume/CapsuleVolume";
 export { default as ConeVolume } from "./MathStack/Volume/ConeVolume";
 export { default as ConicalFrustumVolume } from "./MathStack/Volume/ConicalFrustumVolume";
@@ -28,15 +31,43 @@ export { default as SphericalCapVolume } from "./MathStack/Volume/SphericalCapVo
 export { default as SquarePyramidVolume } from "./MathStack/Volume/SquarePyramidVolume";
 export { default as TubeVolume } from "./MathStack/Volume/TubeVolume";
 
+// Fitness & Health
+export { default as BloodAlcoholContent } from "./Fitness&Health/BloodAlcoholContent";
+export { default as BMRKatchMcArdle } from "./Fitness&Health/BMRKatchMcArdle";
+export { default as BodyFatPercentageBmi } from "./Fitness&Health/BodyFatPercentageBmi";
 export { default as BodyMassIndex } from "./Fitness&Health/BodyMassIndex";
+export { default as BodyMassIndexMethodTwo } from "./Fitness&Health/BodyMassIndexMethodTwo";
+export { default as BoydFormulaSurfaceArea } from "./Fitness&Health/BoydFormulaSurfaceArea";
+export { default as DuBoisBodySurfaceArea } from "./Fitness&Health/DuBoisBodySurfaceArea";
+export { default as DueDateMittendorfWilliam } from "./Fitness&Health/DueDateMittendorfWilliam";
+export { default as DueDateNaegeleRule } from "./Fitness&Health/DueDateNaegeleRule";
+export { default as GehanAndGeorgeSurfaceArea } from "./Fitness&Health/GehanAndGeorgeSurfaceArea";
+export { default as HaycockBodySurfaceArea } from "./Fitness&Health/HaycockBodySurfaceArea";
+export { default as InternationalSystemBfc } from "./Fitness&Health/InternationalSystemBfc";
 export { default as LeanBodyMass } from "./Fitness&Health/LeanBodyMass";
+export { default as LeanBodyMassPeterFormula } from "./Fitness&Health/LeanBodyMassPeterFormula";
+export { default as MostellerBodySurfaceArea } from "./Fitness&Health/MostellerBodySurfaceArea";
+export { default as PeroidCalculator } from "./Fitness&Health/PeroidCalculator";
+export { default as ProbabilityOfASeriesOfIndpendentEvents } from "./Fitness&Health/ProbabilityOfASeriesOfIndpendentEvents";
 export { default as RegularCycleOvulation } from "./Fitness&Health/RegularCycleOvulation";
+export { default as SinglePointWithKnownSlope } from "./Fitness&Health/SinglePointWithKnownSlope";
+export { default as TakaSchlichBodySurfaceArea } from "./Fitness&Health/TakaSchlichBodySurfaceArea";
+export { default as TakahiraBodySurfaceArea } from "./Fitness&Health/TakahiraBodySurfaceArea";
+export { default as USCustomarySystemBfc } from "./Fitness&Health/USCustomarySystemBfc";
+export { default as WholeBodyMassFormula } from "./Fitness&Health/WholeBodyMassFormula";
 
+// Statistics
 export { default as MarginOfErrorCalculator } from "./Statistics/MarginOfErrorCalculator";
 export { default as SampleSizeCalculator } from "./Statistics/SampleSizeCalculator";
 
+// Other
+export { default as CircularSlap } from "./Other/CircularSlap";
 export { default as ConcreteSquareFooting } from "./Other/ConcreteSquareFooting";
+export { default as CurbAndGutterBarrier } from "./Other/CurbAndGutterBarrier";
+export { default as HoleColumn } from "./Other/HoleColumn";
+export { default as StairsConcreate } from "./Other/StairsConcreate";
 
+// Financial
 export { default as AmortizedLoanFixedAmount } from "./Financial/AmortizedLoanFixedAmount";
 export { default as BondPayBackPredetermined } from "./Financial/BondPayBackPredetermined";
 export { default as DefearedPaymentsLumpsumAtMaturity } from "./Financial/DefearedPaymentsLumpsumAtMaturity";

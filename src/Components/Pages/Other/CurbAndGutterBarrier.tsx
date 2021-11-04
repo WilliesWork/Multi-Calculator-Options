@@ -3,24 +3,28 @@ import { Button, Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
-import { ConcreteSquareFootingI } from '../../../Types'
+import { CurbAndGutterBarrierI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const ConcreteSquareFooting = () => {
+const CurbAndGutterBarrier = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    length: "",
-    length_unit: "",
-    width: "",
-    width_unit: "",
-    breadth: "",
-    breadth_unit: "",
-    quantity: ""
+    curb_depth: '',
+    curb_depth_unit: '',
+    curb_height: '',
+    curb_height_unit: '',
+    flag_thickness: '',
+    flag_thickness_unit: '',
+    gutter_width: '',
+    gutter_width_unit: '',
+    length: '',
+    length_unit: '',
+    quantity: '',
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -30,29 +34,37 @@ const ConcreteSquareFooting = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.concreteSquareFooting}
+          {CALCULATORS.curbAndGutterBarrier}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
+          curb_depth,
+          curb_depth_unit,
+          curb_height,
+          curb_height_unit,
+          flag_thickness,
+          flag_thickness_unit,
+          gutter_width,
+          gutter_width_unit,
           length,
           length_unit,
-          width,
-          width_unit,
-          breadth,
-          breadth_unit,
           quantity,
         }, { setSubmitting, resetForm }) => {
-          const payload: ConcreteSquareFootingI = {
+          const payload: CurbAndGutterBarrierI = {
+            curb_depth,
+            curb_depth_unit,
+            curb_height,
+            curb_height_unit,
+            flag_thickness,
+            flag_thickness_unit,
+            gutter_width,
+            gutter_width_unit,
             length,
             length_unit,
-            width,
-            width_unit,
-            breadth,
-            breadth_unit,
-            quantity
+            quantity,
             // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
@@ -74,6 +86,79 @@ const ConcreteSquareFooting = () => {
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.curbDepth}
+                type={INPUT_TYPE.number}
+                id="curb_depth"
+                placeholder={PLACEHOLDERS.number}
+                value={values.curb_depth}
+                onChange={handleChange}
+              />
+
+              <CustomSelect
+                label={LABELS.unit}
+                id="curb_depth_unit"
+                value={values.curb_depth_unit}
+                onChange={handleChange('curb_depth_unit')}
+              />
+            </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.curbHeight}
+                type={INPUT_TYPE.number}
+                id="curb_height"
+                placeholder={PLACEHOLDERS.number}
+                value={values.curb_height}
+                onChange={handleChange}
+              />
+
+              <CustomSelect
+                label={LABELS.unit}
+                id="curb_height_unit"
+                value={values.curb_height_unit}
+                onChange={handleChange('curb_height_unit')}
+              />
+            </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.flagThickness}
+                type={INPUT_TYPE.number}
+                id="flag_thickness"
+                placeholder={PLACEHOLDERS.number}
+                value={values.flag_thickness}
+                onChange={handleChange}
+              />
+
+              <CustomSelect
+                label={LABELS.unit}
+                id="flag_thickness_unit"
+                value={values.flag_thickness_unit}
+                onChange={handleChange('flag_thickness_unit')}
+              />
+            </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.gutterWidth}
+                type={INPUT_TYPE.number}
+                id="gutter_width"
+                placeholder={PLACEHOLDERS.number}
+                value={values.gutter_width}
+                onChange={handleChange}
+              />
+
+              <CustomSelect
+                label={LABELS.unit}
+                id="gutter_width_unit"
+                value={values.gutter_width_unit}
+                onChange={handleChange('gutter_width_unit')}
+              />
+            </div>
+
             <div className="form-row">
               <CustomForm
                 label={LABELS.length}
@@ -89,42 +174,6 @@ const ConcreteSquareFooting = () => {
                 id="length_unit"
                 value={values.length_unit}
                 onChange={handleChange('length_unit')}
-              />
-            </div>
-
-            <div className="form-row">
-              <CustomForm
-                label={LABELS.width}
-                type={INPUT_TYPE.number}
-                id="width"
-                placeholder={PLACEHOLDERS.number}
-                value={values.width}
-                onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="width_unit"
-                value={values.width_unit}
-                onChange={handleChange('width_unit')}
-              />
-            </div>
-
-            <div className="form-row">
-              <CustomForm
-                label={LABELS.breadth}
-                type={INPUT_TYPE.number}
-                id="breadth"
-                placeholder={PLACEHOLDERS.number}
-                value={values.breadth}
-                onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="breadth_unit"
-                value={values.breadth_unit}
-                onChange={handleChange('breadth_unit')}
               />
             </div>
 
@@ -162,4 +211,4 @@ const ConcreteSquareFooting = () => {
   )
 }
 
-export default ConcreteSquareFooting
+export default CurbAndGutterBarrier

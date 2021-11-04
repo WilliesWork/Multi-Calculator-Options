@@ -3,23 +3,21 @@ import { Button, Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
-import { ConcreteSquareFootingI } from '../../../Types'
+import { HoleColumnI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const ConcreteSquareFooting = () => {
+const HoleColumn = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    length: "",
-    length_unit: "",
-    width: "",
-    width_unit: "",
-    breadth: "",
-    breadth_unit: "",
+    diameter: "",
+    diameter_unit: "",
+    height: "",
+    height_unit: "",
     quantity: ""
   })
   const [Result, setResult] = React.useState({
@@ -30,28 +28,24 @@ const ConcreteSquareFooting = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.concreteSquareFooting}
+          {CALCULATORS.holeColumn}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          length,
-          length_unit,
-          width,
-          width_unit,
-          breadth,
-          breadth_unit,
+          diameter,
+          diameter_unit,
+          height,
+          height_unit,
           quantity,
         }, { setSubmitting, resetForm }) => {
-          const payload: ConcreteSquareFootingI = {
-            length,
-            length_unit,
-            width,
-            width_unit,
-            breadth,
-            breadth_unit,
+          const payload: HoleColumnI = {
+            diameter,
+            diameter_unit,
+            height,
+            height_unit,
             quantity
             // method: 'ballSurfaceAreaCalculator'
           }
@@ -76,57 +70,40 @@ const ConcreteSquareFooting = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.length}
+                label={LABELS.diameter}
                 type={INPUT_TYPE.number}
-                id="length"
+                id="diameter"
                 placeholder={PLACEHOLDERS.number}
-                value={values.length}
+                value={values.diameter}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="length_unit"
-                value={values.length_unit}
-                onChange={handleChange('length_unit')}
+                id="diameter_unit"
+                value={values.diameter_unit}
+                onChange={handleChange('diameter_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.width}
+                label={LABELS.height}
                 type={INPUT_TYPE.number}
-                id="width"
+                id="height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.width}
+                value={values.height}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="width_unit"
-                value={values.width_unit}
-                onChange={handleChange('width_unit')}
+                id="height_unit"
+                value={values.height_unit}
+                onChange={handleChange('height_unit')}
               />
             </div>
 
-            <div className="form-row">
-              <CustomForm
-                label={LABELS.breadth}
-                type={INPUT_TYPE.number}
-                id="breadth"
-                placeholder={PLACEHOLDERS.number}
-                value={values.breadth}
-                onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="breadth_unit"
-                value={values.breadth_unit}
-                onChange={handleChange('breadth_unit')}
-              />
-            </div>
 
             <div className="form-row">
               <CustomForm
@@ -162,4 +139,4 @@ const ConcreteSquareFooting = () => {
   )
 }
 
-export default ConcreteSquareFooting
+export default HoleColumn

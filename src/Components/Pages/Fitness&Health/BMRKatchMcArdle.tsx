@@ -3,21 +3,18 @@ import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { CalculateSurfaceArea } from '../../../Services/AppCalculatorsApi'
-import { BodyMassIndexI } from '../../../Types'
+import { BMRKatchMcArdleI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const BodyMassIndex = () => {
+const BMRKatchMcArdle = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    height: '',
-    height_unit: '',
+    fat: '',
     weight: '',
     weight_unit: ''
   })
@@ -29,24 +26,22 @@ const BodyMassIndex = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.bodyMassIndex}
+          {CALCULATORS.bMRKatchMcArdle}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          height,
-          height_unit,
+          fat,
           weight,
           weight_unit
         }, { setSubmitting, resetForm }) => {
-          const payload: BodyMassIndexI = {
-            height,
-            height_unit,
+          const payload: BMRKatchMcArdleI = {
+            fat,
             weight,
             weight_unit,
-            method: 'bodyMassIndexCalculator'
+            // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -69,19 +64,12 @@ const BodyMassIndex = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.height}
+                label={LABELS.fat}
                 type={INPUT_TYPE.number}
-                id="height"
+                id="fat"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
+                value={values.fat}
                 onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 
@@ -126,4 +114,4 @@ const BodyMassIndex = () => {
   )
 }
 
-export default BodyMassIndex
+export default BMRKatchMcArdle

@@ -65,7 +65,7 @@ export interface USCustomarySystemBfcI {
   waist_unit: string;
 }
 
-export interface InternationSytemBfcI {
+export interface InternationalSystemBfcI {
   height: string;
   neck: string;
   gender: string;
@@ -82,13 +82,13 @@ export interface BodyFatPercentageBmiI {
   age: string;
 }
 
-export interface DueDateNaegeleRule {
+export interface DueDateNaegeleRuleI {
   first_date_of_last_period: string;
   days: string;
   method: string;
 }
 
-export interface PeroidCalculator {
+export interface PeroidCalculatorI {
   start_date_of_last_cycle: string;
   cycle_length: string;
   last_period_days: string;
@@ -111,7 +111,7 @@ export interface DuBoisBodySurfaceAreaI {
 }
 
 //note: endpoint spelt with all I assume it should be whole
-export interface WholeBodyMassFormular {
+export interface WholeBodyMassFormulaI {
   height: string;
   height_unit: string;
   weight: string;
@@ -160,8 +160,9 @@ export interface TakaSchlichBodySurfaceAreaI {
   weight_unit: string;
   gender: string;
 }
+
 //note: endpoint called if 1 point and the slope are known
-export interface SinglePointWithKnownSlope {
+export interface SinglePointWithKnownSlopeI {
   y_1: string;
   distance: string;
   x_1: string;
