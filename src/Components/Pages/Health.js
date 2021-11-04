@@ -7,6 +7,8 @@ import Typography from "@material-ui/core/Typography";
 import {
   BloodAlcoholContent,
   BMRKatchMcArdle,
+  BmrMifflinHarrisBenedict,
+  BmrMifflinJeorEquation,
   BodyFatPercentageBmi,
   BodyMassIndex,
   BodyMassIndexMethodTwo,
@@ -14,6 +16,9 @@ import {
   DuBoisBodySurfaceArea,
   DueDateMittendorfWilliam,
   DueDateNaegeleRule,
+  DueDateParikhsRule,
+  DueDateWoodsRule,
+  FujimotoFormulaSurfaceArea,
   GehanAndGeorgeSurfaceArea,
   HaycockBodySurfaceArea,
   InternationalSystemBfc,
@@ -52,6 +57,18 @@ const Health = () => {
         <Grid item xs={6}>
           <Paper className={classes.paper2}>
             <BMRKatchMcArdle />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <BmrMifflinHarrisBenedict />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <BmrMifflinJeorEquation />
           </Paper>
         </Grid>
 
@@ -100,6 +117,24 @@ const Health = () => {
         <Grid item xs={6}>
           <Paper className={classes.paper2}>
             <DueDateNaegeleRule />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <DueDateParikhsRule />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <DueDateWoodsRule />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <FujimotoFormulaSurfaceArea />
           </Paper>
         </Grid>
 

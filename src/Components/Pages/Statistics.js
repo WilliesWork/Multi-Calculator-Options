@@ -3,8 +3,14 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+
 import useStyles from "./../../Styling/CustomStyles";
-import { MarginOfErrorCalculator, SampleSizeCalculator } from "./index";
+import {
+  MarginOfErrorCalculator,
+  ProbablityOfTwoEvents,
+  ProbablitySolverForTwoEvents,
+  SampleSizeCalculator,
+} from "./index";
 
 const Statistics = () => {
   const classes = useStyles();
@@ -22,7 +28,17 @@ const Statistics = () => {
           </Paper>
         </Grid>
 
-        <hr />
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <ProbablityOfTwoEvents />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <ProbablitySolverForTwoEvents />
+          </Paper>
+        </Grid>
 
         <Grid item xs={6}>
           <Paper className={classes.paper2}>

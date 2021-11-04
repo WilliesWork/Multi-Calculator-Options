@@ -7,9 +7,18 @@ import Typography from "@material-ui/core/Typography";
 import {
   CircularSlap,
   ConcreteSquareFooting,
+  ConductorResitor,
   CurbAndGutterBarrier,
+  ElapsedTimeMethod,
   HoleColumn,
+  HorsepowerCalculation,
+  HostingBandwidth,
+  ParrallelResitor,
+  SeriesResistor,
+  SlopeCalculatorForTwoKnownPoints,
   StairsConcreate,
+  TrapSpeedMethod,
+  WebsiteBandwidth,
 } from "./index";
 import useStyles from "./../../Styling/CustomStyles";
 
@@ -39,7 +48,19 @@ function Other() {
 
         <Grid item xs={6}>
           <Paper className={classes.paper2}>
+            <ConductorResitor />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
             <CurbAndGutterBarrier />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <ElapsedTimeMethod />
           </Paper>
         </Grid>
 
@@ -51,7 +72,49 @@ function Other() {
 
         <Grid item xs={6}>
           <Paper className={classes.paper2}>
+            <HorsepowerCalculation />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <HostingBandwidth />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <ParrallelResitor />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <SeriesResistor />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <SlopeCalculatorForTwoKnownPoints />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
             <StairsConcreate />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <TrapSpeedMethod />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <WebsiteBandwidth />
           </Paper>
         </Grid>
       </Grid>

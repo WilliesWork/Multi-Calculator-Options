@@ -3,23 +3,19 @@ import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { CalculateSurfaceArea } from '../../../Services/AppCalculatorsApi'
-import { SampleSizeI } from '../../../Types'
+import { ProbablityOfTwoEventsI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import CustomForm from '../../custom/CustomForm'
 
-const SampleSizeCalculator = () => {
+const ProbablityOfTwoEvents = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    z_score: '',
-    population_size: '',
-    standard_deviation: '',
-    margin_of_error: ''
+    event_a: '',
+    event_b: '',
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -29,24 +25,20 @@ const SampleSizeCalculator = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.sampleSize}
+          {CALCULATORS.probablityOfTwoEvents}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          z_score,
-          population_size,
-          standard_deviation,
-          margin_of_error
+          event_a,
+          event_b,
         }, { setSubmitting, resetForm }) => {
-          const payload: SampleSizeI = {
-            z_score,
-            population_size,
-            standard_deviation,
-            margin_of_error,
-            method: 'sampleSizeCalculator'
+          const payload: ProbablityOfTwoEventsI = {
+            event_a,
+            event_b,
+            //  method: 'ProbablityOfTwoEvents'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -69,40 +61,23 @@ const SampleSizeCalculator = () => {
           <form onSubmit={handleSubmit} className="form-container">
 
             <CustomForm
-              label={LABELS.zScore}
+              label={LABELS.eventA}
               type={INPUT_TYPE.number}
-              id="z_score"
+              id="event_a"
               placeholder={PLACEHOLDERS.number}
-              value={values.z_score}
+              value={values.event_a}
               onChange={handleChange}
             />
 
             <CustomForm
-              label={LABELS.standardDeviation}
+              label={LABELS.eventB}
               type={INPUT_TYPE.number}
-              id="standard_deviation"
+              id="event_b"
               placeholder={PLACEHOLDERS.number}
-              value={values.standard_deviation}
+              value={values.event_b}
               onChange={handleChange}
             />
 
-            <CustomForm
-              label={LABELS.populationSize}
-              type={INPUT_TYPE.number}
-              id="population_size"
-              placeholder={PLACEHOLDERS.number}
-              value={values.population_size}
-              onChange={handleChange}
-            />
-
-            <CustomForm
-              label={LABELS.marginOfError}
-              type={INPUT_TYPE.number}
-              id="margin_of_error"
-              placeholder={PLACEHOLDERS.number}
-              value={values.margin_of_error}
-              onChange={handleChange}
-            />
 
             <div className="form mb-3">
               <Button
@@ -127,4 +102,4 @@ const SampleSizeCalculator = () => {
   )
 }
 
-export default SampleSizeCalculator
+export default ProbablityOfTwoEvents

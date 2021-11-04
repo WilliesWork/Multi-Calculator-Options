@@ -51,14 +51,14 @@ export interface HoleColumnI {
   height: string;
   quantity: string;
 }
+
+// new
 export interface SlopeCalculatorForTwoKnownPointsI {
   y_1: string;
   y_2: string;
   x_1: string;
   x_2: string;
-
 }
-
 
 export interface ElapsedTimeMethodI {
   weight: string;
@@ -104,11 +104,11 @@ export interface WebsiteBandwidthI {
   page_views_unit: string;
   page_size: string;
   page_size_unit: string;
-  redunday_factor: string;
+  redundancy_factor: string;
 }
 
-
-export interface HostingBandwidth {
+export interface HostingBandwidthI {
   monthly_usage: string;
   monthly_usage_unit: string;
 }
+// end 11/04/2021

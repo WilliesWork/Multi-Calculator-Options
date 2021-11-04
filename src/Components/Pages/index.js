@@ -34,6 +34,8 @@ export { default as TubeVolume } from "./MathStack/Volume/TubeVolume";
 // Fitness & Health
 export { default as BloodAlcoholContent } from "./Fitness&Health/BloodAlcoholContent";
 export { default as BMRKatchMcArdle } from "./Fitness&Health/BMRKatchMcArdle";
+export { default as BmrMifflinHarrisBenedict } from "./Fitness&Health/BmrMifflinHarrisBenedict";
+export { default as BmrMifflinJeorEquation } from "./Fitness&Health/BmrMifflinJeorEquation";
 export { default as BodyFatPercentageBmi } from "./Fitness&Health/BodyFatPercentageBmi";
 export { default as BodyMassIndex } from "./Fitness&Health/BodyMassIndex";
 export { default as BodyMassIndexMethodTwo } from "./Fitness&Health/BodyMassIndexMethodTwo";
@@ -41,6 +43,9 @@ export { default as BoydFormulaSurfaceArea } from "./Fitness&Health/BoydFormulaS
 export { default as DuBoisBodySurfaceArea } from "./Fitness&Health/DuBoisBodySurfaceArea";
 export { default as DueDateMittendorfWilliam } from "./Fitness&Health/DueDateMittendorfWilliam";
 export { default as DueDateNaegeleRule } from "./Fitness&Health/DueDateNaegeleRule";
+export { default as DueDateParikhsRule } from "./Fitness&Health/DueDateParikhsRule";
+export { default as DueDateWoodsRule } from "./Fitness&Health/DueDateWoodsRule";
+export { default as FujimotoFormulaSurfaceArea } from "./Fitness&Health/FujimotoFormulaSurfaceArea";
 export { default as GehanAndGeorgeSurfaceArea } from "./Fitness&Health/GehanAndGeorgeSurfaceArea";
 export { default as HaycockBodySurfaceArea } from "./Fitness&Health/HaycockBodySurfaceArea";
 export { default as InternationalSystemBfc } from "./Fitness&Health/InternationalSystemBfc";
@@ -58,14 +63,25 @@ export { default as WholeBodyMassFormula } from "./Fitness&Health/WholeBodyMassF
 
 // Statistics
 export { default as MarginOfErrorCalculator } from "./Statistics/MarginOfErrorCalculator";
+export { default as ProbablityOfTwoEvents } from "./Statistics/ProbablityOfTwoEvents";
+export { default as ProbablitySolverForTwoEvents } from "./Statistics/ProbablitySolverForTwoEvents";
 export { default as SampleSizeCalculator } from "./Statistics/SampleSizeCalculator";
 
 // Other
 export { default as CircularSlap } from "./Other/CircularSlap";
 export { default as ConcreteSquareFooting } from "./Other/ConcreteSquareFooting";
+export { default as ConductorResitor } from "./Other/ConductorResitor";
 export { default as CurbAndGutterBarrier } from "./Other/CurbAndGutterBarrier";
+export { default as ElapsedTimeMethod } from "./Other/ElapsedTimeMethod";
 export { default as HoleColumn } from "./Other/HoleColumn";
+export { default as HorsepowerCalculation } from "./Other/HorsepowerCalculation";
+export { default as HostingBandwidth } from "./Other/HostingBandwidth";
+export { default as ParrallelResitor } from "./Other/ParrallelResitor";
+export { default as SeriesResistor } from "./Other/SeriesResistor";
+export { default as SlopeCalculatorForTwoKnownPoints } from "./Other/SlopeCalculatorForTwoKnownPoints";
 export { default as StairsConcreate } from "./Other/StairsConcreate";
+export { default as TrapSpeedMethod } from "./Other/TrapSpeedMethod";
+export { default as WebsiteBandwidth } from "./Other/WebsiteBandwidth";
 
 // Financial
 export { default as AmortizedLoanFixedAmount } from "./Financial/AmortizedLoanFixedAmount";
