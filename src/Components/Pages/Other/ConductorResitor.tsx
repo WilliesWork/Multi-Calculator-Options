@@ -3,24 +3,22 @@ import { Button, Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
-import { ConcreteSquareFootingI } from '../../../Types'
+import { ConductorResitorI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const ConcreteSquareFooting = () => {
+const ConductorResitor = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
     length: "",
     length_unit: "",
-    width: "",
-    width_unit: "",
-    breadth: "",
-    breadth_unit: "",
-    quantity: ""
+    diameter: "",
+    diameter_unit: "",
+    conductivity: ""
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -30,7 +28,7 @@ const ConcreteSquareFooting = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.concreteSquareFooting}
+          {CALCULATORS.conductorResitor}
         </Typography>
       </Grid>
 
@@ -39,20 +37,16 @@ const ConcreteSquareFooting = () => {
         onSubmit={async ({
           length,
           length_unit,
-          width,
-          width_unit,
-          breadth,
-          breadth_unit,
-          quantity,
+          diameter,
+          diameter_unit,
+          conductivity,
         }, { setSubmitting, resetForm }) => {
-          const payload: ConcreteSquareFootingI = {
+          const payload: ConductorResitorI = {
             length,
             length_unit,
-            width,
-            width_unit,
-            breadth,
-            breadth_unit,
-            quantity
+            diameter,
+            diameter_unit,
+            conductivity
             // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
@@ -94,47 +88,30 @@ const ConcreteSquareFooting = () => {
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.width}
+                label={LABELS.diameter}
                 type={INPUT_TYPE.number}
-                id="width"
+                id="diameter"
                 placeholder={PLACEHOLDERS.number}
-                value={values.width}
+                value={values.diameter}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="width_unit"
-                value={values.width_unit}
-                onChange={handleChange('width_unit')}
+                id="diameter_unit"
+                value={values.diameter_unit}
+                onChange={handleChange('diameter_unit')}
               />
             </div>
 
-            <div className="form-row">
-              <CustomForm
-                label={LABELS.breadth}
-                type={INPUT_TYPE.number}
-                id="breadth"
-                placeholder={PLACEHOLDERS.number}
-                value={values.breadth}
-                onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="breadth_unit"
-                value={values.breadth_unit}
-                onChange={handleChange('breadth_unit')}
-              />
-            </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.quantity}
+                label={LABELS.conductivity}
                 type={INPUT_TYPE.number}
-                id="quantity"
+                id="conductivity"
                 placeholder={PLACEHOLDERS.number}
-                value={values.quantity}
+                value={values.conductivity}
                 onChange={handleChange}
               />
             </div>
@@ -162,4 +139,4 @@ const ConcreteSquareFooting = () => {
   )
 }
 
-export default ConcreteSquareFooting
+export default ConductorResitor

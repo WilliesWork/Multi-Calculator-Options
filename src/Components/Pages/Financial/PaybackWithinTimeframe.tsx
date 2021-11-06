@@ -20,7 +20,7 @@ const PaybackWithinTimeframe = () => {
     year: "",
   })
   const [Result, setResult] = React.useState({
-    Payback: 0
+    Answer: 0
   })
 
   return (
@@ -122,7 +122,7 @@ const PaybackWithinTimeframe = () => {
             </div>
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Payback: {Result.Payback}</Typography>
+              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
             </div>
 
           </form>

@@ -38,21 +38,26 @@ export {
   BMRKatchMcArdleI,
   BloodAlcoholContentI,
   USCustomarySystemBfcI,
-  InternationSytemBfcI,
+  InternationalSystemBfcI,
   BodyFatPercentageBmiI,
-  DueDateNaegeleRule,
-  PeroidCalculator,
+  DueDateNaegeleRuleI,
+  PeroidCalculatorI,
   DueDateMittendorfWilliamI,
   DuBoisBodySurfaceAreaI,
-  WholeBodyMassFormular,
+  WholeBodyMassFormulaI,
   MostellerBodySurfaceAreaI,
   HaycockBodySurfaceAreaI,
   GehanAndGeorgeSurfaceAreaI,
   BoydFormulaSurfaceAreaI,
+  TakahiraBodySurfaceAreaI,
   TakaSchlichBodySurfaceAreaI,
-  TakaSchlichBodySurfaceAreaI,
-  SinglePointWithKnownSlope,
+  SinglePointWithKnownSlopeI,
   ProbabilityOfASeriesOfIndpendentEventsI,
+  FujimotoFormulaSurfaceAreaI,
+  DueDateParikhsRuleI,
+  DueDateWoodsRuleI,
+  BmrMifflinHarrisBenedictI,
+  BmrMifflinJeorEquationI,
 } from "./HealthInterfaces";
 
 export {
@@ -70,7 +75,12 @@ export {
   PayBackACertainAmountI,
 } from "./FinanceInterfaces";
 
-export { MarginErrorI, SampleSizeI } from "./StatisticsInterfaces";
+export {
+  MarginErrorI,
+  SampleSizeI,
+  ProbablityOfTwoEventsI,
+  ProbablitySolverForTwoEventsI,
+} from "./StatisticsInterfaces";
 
 export {
   ConcreteSquareFootingI,
@@ -78,4 +88,13 @@ export {
   CurbAndGutterBarrierI,
   StairsConcreateI,
   HoleColumnI,
+  SlopeCalculatorForTwoKnownPointsI,
+  ElapsedTimeMethodI,
+  TrapSpeedMethodI,
+  ParrallelResitorI,
+  SeriesResistorI,
+  ConductorResitorI,
+  HorsepowerCalculationI,
+  WebsiteBandwidthI,
+  HostingBandwidthI,
 } from "./OtherCalculatorInterfaces";

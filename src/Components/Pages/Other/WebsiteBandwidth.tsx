@@ -3,24 +3,22 @@ import { Button, Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
-import { ConcreteSquareFootingI } from '../../../Types'
+import { WebsiteBandwidthI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const ConcreteSquareFooting = () => {
+const WebsiteBandwidth = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    length: "",
-    length_unit: "",
-    width: "",
-    width_unit: "",
-    breadth: "",
-    breadth_unit: "",
-    quantity: ""
+    page_views: "",
+    page_views_unit: "",
+    page_size: "",
+    page_size_unit: "",
+    redundancy_factor: ""
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -30,29 +28,25 @@ const ConcreteSquareFooting = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.concreteSquareFooting}
+          {CALCULATORS.websiteBandwidth}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          length,
-          length_unit,
-          width,
-          width_unit,
-          breadth,
-          breadth_unit,
-          quantity,
+          page_views,
+          page_views_unit,
+          page_size,
+          page_size_unit,
+          redundancy_factor,
         }, { setSubmitting, resetForm }) => {
-          const payload: ConcreteSquareFootingI = {
-            length,
-            length_unit,
-            width,
-            width_unit,
-            breadth,
-            breadth_unit,
-            quantity
+          const payload: WebsiteBandwidthI = {
+            page_views,
+            page_views_unit,
+            page_size,
+            page_size_unit,
+            redundancy_factor
             // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
@@ -76,65 +70,48 @@ const ConcreteSquareFooting = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.length}
+                label={LABELS.pageViews}
                 type={INPUT_TYPE.number}
-                id="length"
+                id="page_views"
                 placeholder={PLACEHOLDERS.number}
-                value={values.length}
+                value={values.page_views}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="length_unit"
-                value={values.length_unit}
-                onChange={handleChange('length_unit')}
+                id="page_views_unit"
+                value={values.page_views_unit}
+                onChange={handleChange('page_views_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.width}
+                label={LABELS.pageSize}
                 type={INPUT_TYPE.number}
-                id="width"
+                id="page_size"
                 placeholder={PLACEHOLDERS.number}
-                value={values.width}
+                value={values.page_size}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="width_unit"
-                value={values.width_unit}
-                onChange={handleChange('width_unit')}
+                id="page_size_unit"
+                value={values.page_size_unit}
+                onChange={handleChange('page_size_unit')}
               />
             </div>
 
-            <div className="form-row">
-              <CustomForm
-                label={LABELS.breadth}
-                type={INPUT_TYPE.number}
-                id="breadth"
-                placeholder={PLACEHOLDERS.number}
-                value={values.breadth}
-                onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="breadth_unit"
-                value={values.breadth_unit}
-                onChange={handleChange('breadth_unit')}
-              />
-            </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.quantity}
+                label={LABELS.redundancyFactor}
                 type={INPUT_TYPE.number}
-                id="quantity"
+                id="redundancy_factor"
                 placeholder={PLACEHOLDERS.number}
-                value={values.quantity}
+                value={values.redundancy_factor}
                 onChange={handleChange}
               />
             </div>
@@ -162,4 +139,4 @@ const ConcreteSquareFooting = () => {
   )
 }
 
-export default ConcreteSquareFooting
+export default WebsiteBandwidth

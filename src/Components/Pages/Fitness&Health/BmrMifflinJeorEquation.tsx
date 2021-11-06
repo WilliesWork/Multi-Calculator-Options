@@ -3,14 +3,13 @@ import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { BodyMassIndexI } from '../../../Types'
+import { BmrMifflinJeorEquationI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const BodyMassIndex = () => {
+const BmrMifflinJeorEquation = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
@@ -18,7 +17,9 @@ const BodyMassIndex = () => {
     height: '',
     height_unit: '',
     weight: '',
-    weight_unit: ''
+    weight_unit: '',
+    gender: '',
+    age: 0
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -28,7 +29,7 @@ const BodyMassIndex = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.bodyMassIndex}
+          {CALCULATORS.bmrMifflinJeorEquation}
         </Typography>
       </Grid>
 
@@ -38,14 +39,18 @@ const BodyMassIndex = () => {
           height,
           height_unit,
           weight,
-          weight_unit
+          weight_unit,
+          gender,
+          age
         }, { setSubmitting, resetForm }) => {
-          const payload: BodyMassIndexI = {
+          const payload: BmrMifflinJeorEquationI = {
             height,
             height_unit,
             weight,
             weight_unit,
-            method: 'bodyMassIndexCalculator'
+            gender,
+            age
+            // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -102,6 +107,28 @@ const BodyMassIndex = () => {
               />
             </div>
 
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.gender}
+                type={INPUT_TYPE.text}
+                id="gender"
+                placeholder={PLACEHOLDERS.gender}
+                value={values.gender}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.age}
+                type={INPUT_TYPE.number}
+                id="age"
+                placeholder={PLACEHOLDERS.number}
+                value={values.age}
+                onChange={handleChange}
+              />
+            </div>
+
             <div className="form mb-3">
               <Button
                 variant="outlined"
@@ -125,4 +152,4 @@ const BodyMassIndex = () => {
   )
 }
 
-export default BodyMassIndex
+export default BmrMifflinJeorEquation

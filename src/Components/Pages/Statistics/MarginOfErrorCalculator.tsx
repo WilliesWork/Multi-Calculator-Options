@@ -19,7 +19,7 @@ const MarginOfErrorCalculator = () => {
     standard_deviation: ''
   })
   const [Result, setResult] = React.useState({
-    marginOfError: 0
+    Answer: 0
   })
 
   return (
@@ -102,7 +102,7 @@ const MarginOfErrorCalculator = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Margin of Error: {Result.marginOfError}</Typography>
+              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
             </div>
 
           </form>

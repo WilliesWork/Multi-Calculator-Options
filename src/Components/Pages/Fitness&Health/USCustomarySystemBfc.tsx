@@ -3,22 +3,27 @@ import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { BodyMassIndexI } from '../../../Types'
+import { USCustomarySystemBfcI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const BodyMassIndex = () => {
+const USCustomarySystemBfc = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
-    weight: '',
-    weight_unit: ''
+    neck: '',
+    neck_unit: '',
+    hip: '',
+    hip_unit: '',
+    waist: '',
+    waist_unit: '',
+    abdomen: '',
+    gender: '',
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -28,7 +33,7 @@ const BodyMassIndex = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.bodyMassIndex}
+          {CALCULATORS.usCustomarySystemBfc}
         </Typography>
       </Grid>
 
@@ -37,15 +42,27 @@ const BodyMassIndex = () => {
         onSubmit={async ({
           height,
           height_unit,
-          weight,
-          weight_unit
+          neck,
+          neck_unit,
+          hip,
+          hip_unit,
+          waist,
+          waist_unit,
+          abdomen,
+          gender,
         }, { setSubmitting, resetForm }) => {
-          const payload: BodyMassIndexI = {
+          const payload: USCustomarySystemBfcI = {
             height,
             height_unit,
-            weight,
-            weight_unit,
-            method: 'bodyMassIndexCalculator'
+            neck,
+            neck_unit,
+            hip,
+            hip_unit,
+            waist,
+            waist_unit,
+            abdomen,
+            gender,
+            //   method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -86,19 +103,77 @@ const BodyMassIndex = () => {
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.weight}
+                label={LABELS.neck}
                 type={INPUT_TYPE.number}
-                id="weight"
+                id="neck"
                 placeholder={PLACEHOLDERS.number}
-                value={values.weight}
+                value={values.neck}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="weight_unit"
-                value={values.weight_unit}
-                onChange={handleChange('weight_unit')}
+                id="neck_unit"
+                value={values.neck_unit}
+                onChange={handleChange('neck_unit')}
+              />
+            </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.hip}
+                type={INPUT_TYPE.number}
+                id="hip"
+                placeholder={PLACEHOLDERS.number}
+                value={values.hip}
+                onChange={handleChange}
+              />
+
+              <CustomSelect
+                label={LABELS.unit}
+                id="hip_unit"
+                value={values.hip_unit}
+                onChange={handleChange('hip_unit')}
+              />
+            </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.waist}
+                type={INPUT_TYPE.number}
+                id="waist"
+                placeholder={PLACEHOLDERS.number}
+                value={values.waist}
+                onChange={handleChange}
+              />
+
+              <CustomSelect
+                label={LABELS.unit}
+                id="waist_unit"
+                value={values.waist_unit}
+                onChange={handleChange('waist_unit')}
+              />
+            </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.abdomen}
+                type={INPUT_TYPE.number}
+                id="abdomen"
+                placeholder={PLACEHOLDERS.number}
+                value={values.abdomen}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.gender}
+                type={INPUT_TYPE.text}
+                id="gender"
+                placeholder={PLACEHOLDERS.gender}
+                value={values.gender}
+                onChange={handleChange}
               />
             </div>
 
@@ -125,4 +200,4 @@ const BodyMassIndex = () => {
   )
 }
 
-export default BodyMassIndex
+export default USCustomarySystemBfc

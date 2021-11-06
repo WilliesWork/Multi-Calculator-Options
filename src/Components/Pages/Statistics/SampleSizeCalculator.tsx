@@ -20,7 +20,7 @@ const SampleSizeCalculator = () => {
     margin_of_error: ''
   })
   const [Result, setResult] = React.useState({
-    sampleSize: 0
+    Answer: 0
   })
 
   return (
@@ -113,7 +113,7 @@ const SampleSizeCalculator = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Sample Size: {Result.sampleSize}</Typography>
+              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
             </div>
 
           </form>

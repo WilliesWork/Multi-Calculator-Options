@@ -3,22 +3,23 @@ import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { BodyMassIndexI } from '../../../Types'
+import { BloodAlcoholContentI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const BodyMassIndex = () => {
+const BloodAlcoholContent = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    height: '',
-    height_unit: '',
     weight: '',
-    weight_unit: ''
+    weight_unit: '',
+    gender: '',
+    hours_of_drinking: '',
+    minutes_of_drinking: '',
+    number_of_standard_drinks: '',
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -28,24 +29,28 @@ const BodyMassIndex = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.bodyMassIndex}
+          {CALCULATORS.bloodAlcoholContent}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          height,
-          height_unit,
           weight,
-          weight_unit
+          weight_unit,
+          gender,
+          hours_of_drinking,
+          minutes_of_drinking,
+          number_of_standard_drinks,
         }, { setSubmitting, resetForm }) => {
-          const payload: BodyMassIndexI = {
-            height,
-            height_unit,
+          const payload: BloodAlcoholContentI = {
             weight,
             weight_unit,
-            method: 'bodyMassIndexCalculator'
+            gender,
+            hours_of_drinking,
+            minutes_of_drinking,
+            number_of_standard_drinks,
+            //method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -66,23 +71,6 @@ const BodyMassIndex = () => {
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-row">
-              <CustomForm
-                label={LABELS.height}
-                type={INPUT_TYPE.number}
-                id="height"
-                placeholder={PLACEHOLDERS.number}
-                value={values.height}
-                onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
-              />
-            </div>
 
             <div className="form-row">
               <CustomForm
@@ -99,6 +87,50 @@ const BodyMassIndex = () => {
                 id="weight_unit"
                 value={values.weight_unit}
                 onChange={handleChange('weight_unit')}
+              />
+            </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.gender}
+                type={INPUT_TYPE.text}
+                id="gender"
+                placeholder={PLACEHOLDERS.gender}
+                value={values.gender}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.hoursOfDrinking}
+                type={INPUT_TYPE.number}
+                id="hours_of_drinking"
+                placeholder={PLACEHOLDERS.number}
+                value={values.hours_of_drinking}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.minutesOfDrinking}
+                type={INPUT_TYPE.number}
+                id="minutes_of_drinking"
+                placeholder={PLACEHOLDERS.number}
+                value={values.minutes_of_drinking}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.numberOfStandardDrinks}
+                type={INPUT_TYPE.number}
+                id="number_of_standard_drinks"
+                placeholder={PLACEHOLDERS.number}
+                value={values.number_of_standard_drinks}
+                onChange={handleChange}
               />
             </div>
 
@@ -125,4 +157,4 @@ const BodyMassIndex = () => {
   )
 }
 
-export default BodyMassIndex
+export default BloodAlcoholContent

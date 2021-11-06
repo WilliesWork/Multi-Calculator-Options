@@ -3,24 +3,21 @@ import { Button, Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
-import { ConcreteSquareFootingI } from '../../../Types'
+import { SlopeCalculatorForTwoKnownPointsI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const ConcreteSquareFooting = () => {
+const SlopeCalculatorForTwoKnownPoints = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    length: "",
-    length_unit: "",
-    width: "",
-    width_unit: "",
-    breadth: "",
-    breadth_unit: "",
-    quantity: ""
+    y_1: '',
+    y_2: '',
+    x_1: '',
+    x_2: '',
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -30,29 +27,23 @@ const ConcreteSquareFooting = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.concreteSquareFooting}
+          {CALCULATORS.slopeCalculatorForTwoKnownPoints}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          length,
-          length_unit,
-          width,
-          width_unit,
-          breadth,
-          breadth_unit,
-          quantity,
+          y_1,
+          y_2,
+          x_1,
+          x_2,
         }, { setSubmitting, resetForm }) => {
-          const payload: ConcreteSquareFootingI = {
-            length,
-            length_unit,
-            width,
-            width_unit,
-            breadth,
-            breadth_unit,
-            quantity
+          const payload: SlopeCalculatorForTwoKnownPointsI = {
+            y_1,
+            y_2,
+            x_1,
+            x_2,
             // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
@@ -76,65 +67,44 @@ const ConcreteSquareFooting = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.length}
+                label={LABELS.x1}
                 type={INPUT_TYPE.number}
-                id="length"
+                id="x_1"
                 placeholder={PLACEHOLDERS.number}
-                value={values.length}
+                value={values.x_1}
                 onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="length_unit"
-                value={values.length_unit}
-                onChange={handleChange('length_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.width}
+                label={LABELS.y1}
                 type={INPUT_TYPE.number}
-                id="width"
+                id="y_1"
                 placeholder={PLACEHOLDERS.number}
-                value={values.width}
+                value={values.y_1}
                 onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="width_unit"
-                value={values.width_unit}
-                onChange={handleChange('width_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.breadth}
+                label={LABELS.x2}
                 type={INPUT_TYPE.number}
-                id="breadth"
+                id="x_2"
                 placeholder={PLACEHOLDERS.number}
-                value={values.breadth}
+                value={values.x_2}
                 onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="breadth_unit"
-                value={values.breadth_unit}
-                onChange={handleChange('breadth_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.quantity}
+                label={LABELS.y2}
                 type={INPUT_TYPE.number}
-                id="quantity"
+                id="y_2"
                 placeholder={PLACEHOLDERS.number}
-                value={values.quantity}
+                value={values.y_2}
                 onChange={handleChange}
               />
             </div>
@@ -162,4 +132,4 @@ const ConcreteSquareFooting = () => {
   )
 }
 
-export default ConcreteSquareFooting
+export default SlopeCalculatorForTwoKnownPoints

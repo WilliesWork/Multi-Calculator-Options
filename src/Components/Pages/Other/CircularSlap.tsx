@@ -3,23 +3,23 @@ import { Button, Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
-import { ConcreteSquareFootingI } from '../../../Types'
+import { CircularSlapI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const ConcreteSquareFooting = () => {
+const CircularSlap = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
     length: "",
     length_unit: "",
-    width: "",
-    width_unit: "",
-    breadth: "",
-    breadth_unit: "",
+    outer_diameter: "",
+    outer_diameter_unit: "",
+    inner_diameter: "",
+    inner_diameter_unit: "",
     quantity: ""
   })
   const [Result, setResult] = React.useState({
@@ -30,7 +30,7 @@ const ConcreteSquareFooting = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.concreteSquareFooting}
+          {CALCULATORS.circularSlap}
         </Typography>
       </Grid>
 
@@ -39,19 +39,19 @@ const ConcreteSquareFooting = () => {
         onSubmit={async ({
           length,
           length_unit,
-          width,
-          width_unit,
-          breadth,
-          breadth_unit,
+          outer_diameter,
+          outer_diameter_unit,
+          inner_diameter,
+          inner_diameter_unit,
           quantity,
         }, { setSubmitting, resetForm }) => {
-          const payload: ConcreteSquareFootingI = {
+          const payload: CircularSlapI = {
             length,
             length_unit,
-            width,
-            width_unit,
-            breadth,
-            breadth_unit,
+            outer_diameter,
+            outer_diameter_unit,
+            inner_diameter,
+            inner_diameter_unit,
             quantity
             // method: 'ballSurfaceAreaCalculator'
           }
@@ -94,37 +94,37 @@ const ConcreteSquareFooting = () => {
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.width}
+                label={LABELS.outerDiameter}
                 type={INPUT_TYPE.number}
-                id="width"
+                id="outer_diameter"
                 placeholder={PLACEHOLDERS.number}
-                value={values.width}
+                value={values.outer_diameter}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="width_unit"
-                value={values.width_unit}
-                onChange={handleChange('width_unit')}
+                id="outer_diameter_unit"
+                value={values.outer_diameter_unit}
+                onChange={handleChange('outer_diameter_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.breadth}
+                label={LABELS.innerDiameter}
                 type={INPUT_TYPE.number}
-                id="breadth"
+                id="inner_diameter"
                 placeholder={PLACEHOLDERS.number}
-                value={values.breadth}
+                value={values.inner_diameter}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="breadth_unit"
-                value={values.breadth_unit}
-                onChange={handleChange('breadth_unit')}
+                id="inner_diameter_unit"
+                value={values.inner_diameter_unit}
+                onChange={handleChange('inner_diameter_unit')}
               />
             </div>
 
@@ -162,4 +162,4 @@ const ConcreteSquareFooting = () => {
   )
 }
 
-export default ConcreteSquareFooting
+export default CircularSlap

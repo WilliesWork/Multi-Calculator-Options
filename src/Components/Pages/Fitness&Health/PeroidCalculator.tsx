@@ -3,22 +3,20 @@ import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { BodyMassIndexI } from '../../../Types'
+import { PeroidCalculatorI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const BodyMassIndex = () => {
+const PeroidCalculator = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    height: '',
-    height_unit: '',
-    weight: '',
-    weight_unit: ''
+    start_date_of_last_cycle: '',
+    cycle_length: '',
+    last_period_days: ''
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -28,24 +26,22 @@ const BodyMassIndex = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.bodyMassIndex}
+          {CALCULATORS.peroidCalculator}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          height,
-          height_unit,
-          weight,
-          weight_unit
+          start_date_of_last_cycle,
+          cycle_length,
+          last_period_days,
         }, { setSubmitting, resetForm }) => {
-          const payload: BodyMassIndexI = {
-            height,
-            height_unit,
-            weight,
-            weight_unit,
-            method: 'bodyMassIndexCalculator'
+          const payload: PeroidCalculatorI = {
+            start_date_of_last_cycle,
+            cycle_length,
+            last_period_days,
+            // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -68,37 +64,34 @@ const BodyMassIndex = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.height}
-                type={INPUT_TYPE.number}
-                id="height"
+                label={LABELS.previousCycleStartDate}
+                type={INPUT_TYPE.date}
+                id="start_date_of_last_cycle"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
+                value={values.start_date_of_last_cycle}
                 onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.weight}
+                label={LABELS.cycleLength}
                 type={INPUT_TYPE.number}
-                id="weight"
+                id="cycle_length"
                 placeholder={PLACEHOLDERS.number}
-                value={values.weight}
+                value={values.cycle_length}
                 onChange={handleChange}
               />
+            </div>
 
-              <CustomSelect
-                label={LABELS.unit}
-                id="weight_unit"
-                value={values.weight_unit}
-                onChange={handleChange('weight_unit')}
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.lastPeriodDays}
+                type={INPUT_TYPE.number}
+                id="last_period_days"
+                placeholder={PLACEHOLDERS.number}
+                value={values.last_period_days}
+                onChange={handleChange}
               />
             </div>
 
@@ -125,4 +118,4 @@ const BodyMassIndex = () => {
   )
 }
 
-export default BodyMassIndex
+export default PeroidCalculator

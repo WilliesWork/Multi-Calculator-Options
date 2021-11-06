@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 
 import { LeanBodyMassI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
@@ -22,7 +21,7 @@ const LeanBodyMass = () => {
     gender: ''
   })
   const [Result, setResult] = React.useState({
-    leanBodyMass: 0
+    Answer: 0
   })
 
   return (
@@ -48,7 +47,7 @@ const LeanBodyMass = () => {
             weight,
             weight_unit,
             gender,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'leanBodyMassCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -129,7 +128,7 @@ const LeanBodyMass = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Lean Body Mass: {Result.leanBodyMass}</Typography>
+              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
             </div>
 
           </form>

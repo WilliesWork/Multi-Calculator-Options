@@ -3,22 +3,20 @@ import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { BodyMassIndexI } from '../../../Types'
+import { DueDateWoodsRuleI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const BodyMassIndex = () => {
+const DueDateWoodsRule = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    height: '',
-    height_unit: '',
-    weight: '',
-    weight_unit: ''
+    first_date_of_last_period: '',
+    days: '',
+    type: '',
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -28,24 +26,22 @@ const BodyMassIndex = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.bodyMassIndex}
+          {CALCULATORS.dueDateWoodsRule}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          height,
-          height_unit,
-          weight,
-          weight_unit
+          first_date_of_last_period,
+          days,
+          type,
         }, { setSubmitting, resetForm }) => {
-          const payload: BodyMassIndexI = {
-            height,
-            height_unit,
-            weight,
-            weight_unit,
-            method: 'bodyMassIndexCalculator'
+          const payload: DueDateWoodsRuleI = {
+            first_date_of_last_period,
+            days,
+            type,
+            //  method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -68,37 +64,34 @@ const BodyMassIndex = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.height}
-                type={INPUT_TYPE.number}
-                id="height"
+                label={LABELS.firstDateofLastPeriod}
+                type={INPUT_TYPE.date}
+                id="first_date_of_last_period"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
+                value={values.first_date_of_last_period}
                 onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 
             <div className="form-row">
               <CustomForm
-                label={LABELS.weight}
+                label={LABELS.days}
                 type={INPUT_TYPE.number}
-                id="weight"
+                id="days"
                 placeholder={PLACEHOLDERS.number}
-                value={values.weight}
+                value={values.days}
                 onChange={handleChange}
               />
+            </div>
 
-              <CustomSelect
-                label={LABELS.unit}
-                id="weight_unit"
-                value={values.weight_unit}
-                onChange={handleChange('weight_unit')}
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.type}
+                type={INPUT_TYPE.text}
+                id="type"
+                placeholder={PLACEHOLDERS.type}
+                value={values.type}
+                onChange={handleChange}
               />
             </div>
 
@@ -125,4 +118,4 @@ const BodyMassIndex = () => {
   )
 }
 
-export default BodyMassIndex
+export default DueDateWoodsRule

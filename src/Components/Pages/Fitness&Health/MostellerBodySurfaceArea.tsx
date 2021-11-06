@@ -3,14 +3,13 @@ import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { BodyMassIndexI } from '../../../Types'
+import { MostellerBodySurfaceAreaI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const BodyMassIndex = () => {
+const MostellerBodySurfaceArea = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
@@ -28,7 +27,7 @@ const BodyMassIndex = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.bodyMassIndex}
+          {CALCULATORS.mostellerBodySurfaceArea}
         </Typography>
       </Grid>
 
@@ -40,12 +39,12 @@ const BodyMassIndex = () => {
           weight,
           weight_unit
         }, { setSubmitting, resetForm }) => {
-          const payload: BodyMassIndexI = {
+          const payload: MostellerBodySurfaceAreaI = {
             height,
             height_unit,
             weight,
-            weight_unit,
-            method: 'bodyMassIndexCalculator'
+            weight_unit
+            // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -125,4 +124,4 @@ const BodyMassIndex = () => {
   )
 }
 
-export default BodyMassIndex
+export default MostellerBodySurfaceArea

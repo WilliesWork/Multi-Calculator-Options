@@ -3,24 +3,18 @@ import { Button, Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
-import { ConcreteSquareFootingI } from '../../../Types'
+import { SeriesResistorI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const ConcreteSquareFooting = () => {
+const SeriesResistor = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    length: "",
-    length_unit: "",
-    width: "",
-    width_unit: "",
-    breadth: "",
-    breadth_unit: "",
-    quantity: ""
+    resistance_values: "",
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -30,29 +24,17 @@ const ConcreteSquareFooting = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.concreteSquareFooting}
+          {CALCULATORS.seriesResistor}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          length,
-          length_unit,
-          width,
-          width_unit,
-          breadth,
-          breadth_unit,
-          quantity,
+          resistance_values,
         }, { setSubmitting, resetForm }) => {
-          const payload: ConcreteSquareFootingI = {
-            length,
-            length_unit,
-            width,
-            width_unit,
-            breadth,
-            breadth_unit,
-            quantity
+          const payload: SeriesResistorI = {
+            resistance_values,
             // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
@@ -76,68 +58,15 @@ const ConcreteSquareFooting = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <CustomForm
-                label={LABELS.length}
+                label={LABELS.resistanceValues}
                 type={INPUT_TYPE.number}
-                id="length"
+                id="resistance_values"
                 placeholder={PLACEHOLDERS.number}
-                value={values.length}
-                onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="length_unit"
-                value={values.length_unit}
-                onChange={handleChange('length_unit')}
-              />
-            </div>
-
-            <div className="form-row">
-              <CustomForm
-                label={LABELS.width}
-                type={INPUT_TYPE.number}
-                id="width"
-                placeholder={PLACEHOLDERS.number}
-                value={values.width}
-                onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="width_unit"
-                value={values.width_unit}
-                onChange={handleChange('width_unit')}
-              />
-            </div>
-
-            <div className="form-row">
-              <CustomForm
-                label={LABELS.breadth}
-                type={INPUT_TYPE.number}
-                id="breadth"
-                placeholder={PLACEHOLDERS.number}
-                value={values.breadth}
-                onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="breadth_unit"
-                value={values.breadth_unit}
-                onChange={handleChange('breadth_unit')}
-              />
-            </div>
-
-            <div className="form-row">
-              <CustomForm
-                label={LABELS.quantity}
-                type={INPUT_TYPE.number}
-                id="quantity"
-                placeholder={PLACEHOLDERS.number}
-                value={values.quantity}
+                value={values.resistance_values}
                 onChange={handleChange}
               />
             </div>
+
 
             <div className="form mb-3">
               <Button
@@ -162,4 +91,4 @@ const ConcreteSquareFooting = () => {
   )
 }
 
-export default ConcreteSquareFooting
+export default SeriesResistor

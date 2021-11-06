@@ -3,14 +3,13 @@ import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { BodyMassIndexI } from '../../../Types'
+import { LeanBodyMassPeterFormulaI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const BodyMassIndex = () => {
+const LeanBodyMassPeterFormula = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
@@ -18,7 +17,8 @@ const BodyMassIndex = () => {
     height: '',
     height_unit: '',
     weight: '',
-    weight_unit: ''
+    weight_unit: '',
+    gender: ''
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -28,7 +28,7 @@ const BodyMassIndex = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.bodyMassIndex}
+          {CALCULATORS.leanBodyMassPetersFormula}
         </Typography>
       </Grid>
 
@@ -38,14 +38,16 @@ const BodyMassIndex = () => {
           height,
           height_unit,
           weight,
-          weight_unit
+          weight_unit,
+          gender
         }, { setSubmitting, resetForm }) => {
-          const payload: BodyMassIndexI = {
+          const payload: LeanBodyMassPeterFormulaI = {
             height,
             height_unit,
             weight,
             weight_unit,
-            method: 'bodyMassIndexCalculator'
+            gender
+            //  method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -102,6 +104,17 @@ const BodyMassIndex = () => {
               />
             </div>
 
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.gender}
+                type={INPUT_TYPE.text}
+                id="gender"
+                placeholder={PLACEHOLDERS.gender}
+                value={values.gender}
+                onChange={handleChange}
+              />
+            </div>
+
             <div className="form mb-3">
               <Button
                 variant="outlined"
@@ -125,4 +138,4 @@ const BodyMassIndex = () => {
   )
 }
 
-export default BodyMassIndex
+export default LeanBodyMassPeterFormula

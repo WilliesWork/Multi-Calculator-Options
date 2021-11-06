@@ -1,24 +1,24 @@
 import React from 'react'
-import { Formik } from 'formik'
 import { Button, Typography, Grid } from '@material-ui/core'
+import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
-import { BodyMassIndexI } from '../../../Types'
+import { HoleColumnI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
-import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
+import useStyles from '../../../Styling/CustomStyles'
+import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
 
-const BodyMassIndex = () => {
+const HoleColumn = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    height: '',
-    height_unit: '',
-    weight: '',
-    weight_unit: ''
+    diameter: "",
+    diameter_unit: "",
+    height: "",
+    height_unit: "",
+    quantity: ""
   })
   const [Result, setResult] = React.useState({
     Answer: 0
@@ -28,37 +28,39 @@ const BodyMassIndex = () => {
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.bodyMassIndex}
+          {CALCULATORS.holeColumn}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
+          diameter,
+          diameter_unit,
           height,
           height_unit,
-          weight,
-          weight_unit
+          quantity,
         }, { setSubmitting, resetForm }) => {
-          const payload: BodyMassIndexI = {
+          const payload: HoleColumnI = {
+            diameter,
+            diameter_unit,
             height,
             height_unit,
-            weight,
-            weight_unit,
-            method: 'bodyMassIndexCalculator'
+            quantity
+            // method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
+            // console.log('=====>', calsurfaceArea)
+            // if (typeof calsurfaceArea === 'object') {
+            //   console.log(calsurfaceArea)
+            //   setResult({
+            //     surfaceArea: calsurfaceArea.surfaceAreas,
+            //     Area: calsurfaceArea.Area
+            //   })
+            // }
+            // resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -66,6 +68,24 @@ const BodyMassIndex = () => {
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
+            <div className="form-row">
+              <CustomForm
+                label={LABELS.diameter}
+                type={INPUT_TYPE.number}
+                id="diameter"
+                placeholder={PLACEHOLDERS.number}
+                value={values.diameter}
+                onChange={handleChange}
+              />
+
+              <CustomSelect
+                label={LABELS.unit}
+                id="diameter_unit"
+                value={values.diameter_unit}
+                onChange={handleChange('diameter_unit')}
+              />
+            </div>
+
             <div className="form-row">
               <CustomForm
                 label={LABELS.height}
@@ -84,21 +104,15 @@ const BodyMassIndex = () => {
               />
             </div>
 
+
             <div className="form-row">
               <CustomForm
-                label={LABELS.weight}
+                label={LABELS.quantity}
                 type={INPUT_TYPE.number}
-                id="weight"
+                id="quantity"
                 placeholder={PLACEHOLDERS.number}
-                value={values.weight}
+                value={values.quantity}
                 onChange={handleChange}
-              />
-
-              <CustomSelect
-                label={LABELS.unit}
-                id="weight_unit"
-                value={values.weight_unit}
-                onChange={handleChange('weight_unit')}
               />
             </div>
 
@@ -112,17 +126,17 @@ const BodyMassIndex = () => {
                 {BUTTONS.calculate}
               </Button>
             </div>
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
             </div>
 
           </form>
         )}
 
       </Formik>
-
     </div>
   )
 }
 
-export default BodyMassIndex
+export default HoleColumn
