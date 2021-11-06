@@ -7,7 +7,7 @@ import * as MatheMaticalFormulars from '../Types/MathInterfaces'
 import * as HealthFormulars from '../Types/HealthInterfaces'
 import * as OtherFormulars from '../Types/OtherCalculatorInterfaces'
 
-export const CalculateSurfaceArea = async (calculateArea: SurfaceAreaI | CubeAreaI | RectangularAreaI | ConeAreaI | CapsuleSurfaceAreaI
+export const calculateMath = async (calculateArea: SurfaceAreaI | CubeAreaI | RectangularAreaI | ConeAreaI | CapsuleSurfaceAreaI
   | MatheMaticalFormulars.TubeVolumeCalculatorI | MatheMaticalFormulars.TriangleAreaI | MatheMaticalFormulars.TrapezoidAreaI
   | MatheMaticalFormulars.SquarePyramidVolumeI | MatheMaticalFormulars.SquarePyramidSurfaceAreaI | MatheMaticalFormulars.SphericalCapVolumeI | MatheMaticalFormulars.SphericalCapSurfaceAreaI
   | MatheMaticalFormulars.SphereVolumeCalculatorI | MatheMaticalFormulars.SectorAreaI | MatheMaticalFormulars.RectangularTankVolumeI | MatheMaticalFormulars.RectangleAreaI | MatheMaticalFormulars.ParallelogramAreaI | MatheMaticalFormulars.EllipsoidVolumeCalculatorI | MatheMaticalFormulars.EllipsoidSurfaceAreaI
@@ -35,6 +35,47 @@ export const CalculateSurfaceArea = async (calculateArea: SurfaceAreaI | CubeAre
     }
   }
 }
+export const checkMomoBalance = async (trialCalculate: ConeAreaI | CapsuleSurfaceAreaI ) => {
+  try {
+    const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, trialCalculate);
+
+    const { statusCode, message } = data;
+    if (statusCode === 100) {
+      // console.log('This is ', message)
+      return { success: true, payload: message };
+    }
+
+    throw new Error('Responded with unexpected Error');
+  } catch (err) {
+    console.log(JSON.stringify({err}, null, 2))
+    const {response} = err as AxiosError
+
+    if (response && typeof response.data.statusCode === 'number') {
+
+      const {data: {statusCode, message}, } = response
+
+      if (statusCode === 401){
+        return {
+          success: false,
+          payload: message
+        }
+      }
+  
+      if (statusCode === 404){
+        return{
+          success: false,
+          payload: message
+        }
+      }
+    }
+
+
+    return {
+      success: false,
+      payload: 'Unexpected Error',
+    };
+  }
+};
 
 export const calculateHealth = async (calculateHealthPayload: HealthFormulars.BMRKatchMcArdleI | HealthFormulars.BloodAlcoholContentI | HealthFormulars.BodyFatPercentageBmiI | HealthFormulars.BodyMassIndexI | HealthFormulars.BodyMassIndexMethodTwoI | HealthFormulars.BoydFormulaSurfaceAreaI | HealthFormulars.DuBoisBodySurfaceAreaI | HealthFormulars.DueDateMittendorfWilliamI
   | HealthFormulars.DueDateNaegeleRule | HealthFormulars.GehanAndGeorgeSurfaceAreaI | HealthFormulars.HaycockBodySurfaceAreaI | HealthFormulars.InternationSytemBfcI | HealthFormulars.LeanBodyMassI | HealthFormulars.LeanBodyMassPeterFormulaI | HealthFormulars.MostellerBodySurfaceAreaI | HealthFormulars.PeroidCalculator | HealthFormulars.ProbabilityOfASeriesOfIndpendentEventsI

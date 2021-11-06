@@ -8,6 +8,7 @@ import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../../custom'
+import { calculateMath, checkMomoBalance } from '../../../../Services/AppCalculatorsApi'
 
 const ConeArea = () => {
   const classes = useStyles()
@@ -45,12 +46,12 @@ const ConeArea = () => {
             radius_unit,
             height,
             height_unit,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'coneSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateConeArea(payload)
-            // console.log('=====>', calsurfaceArea)
+            const { payload: coneArea } = await checkMomoBalance(payload)
+            console.log('=====>', coneArea)
             // if (typeof calsurfaceArea === 'object') {
             //   console.log(calsurfaceArea)
             //   setResult({
@@ -58,7 +59,7 @@ const ConeArea = () => {
             //     Area: calsurfaceArea.Area
             //   })
             // }
-            // resetForm()
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
