@@ -7,37 +7,32 @@ import * as MatheMaticalFormulas from '../Types/MathInterfaces'
 import * as HealthFormulas from '../Types/HealthInterfaces'
 import * as OtherFormulas from '../Types/OtherCalculatorInterfaces'
 
-export const calculateMath = async (calculateArea: SurfaceAreaI | CubeAreaI | RectangularAreaI | ConeAreaI | CapsuleSurfaceAreaI
-  | MatheMaticalFormulas.TubeVolumeCalculatorI | MatheMaticalFormulas.TriangleAreaI | MatheMaticalFormulas.TrapezoidAreaI
-  | MatheMaticalFormulas.SquarePyramidVolumeI | MatheMaticalFormulas.SquarePyramidSurfaceAreaI | MatheMaticalFormulas.SphericalCapVolumeI | MatheMaticalFormulas.SphericalCapSurfaceAreaI
-  | MatheMaticalFormulas.SphereVolumeCalculatorI | MatheMaticalFormulas.SectorAreaI | MatheMaticalFormulas.RectangularTankVolumeI | MatheMaticalFormulas.RectangleAreaI | MatheMaticalFormulas.ParallelogramAreaI | MatheMaticalFormulas.EllipsoidVolumeCalculatorI | MatheMaticalFormulas.EllipsoidSurfaceAreaI
-  | MatheMaticalFormulas.EllipseAreaI | MatheMaticalFormulas.CylindricalTankAreaI | MatheMaticalFormulas.CylinderVolumeCalculatorI | MatheMaticalFormulas.CubeVolumeCalculatorI
-  | MatheMaticalFormulas.ConicalFrustumVolumeI | MatheMaticalFormulas.ConicalFrustrumSurfaceAreaI | MatheMaticalFormulas.ConeVolumeCalculatorI | MatheMaticalFormulas.CircleAreaI | MatheMaticalFormulas.CapsuleVolumeCalculatorI) => {
-  try {
-    const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, calculateArea)
+// export const calculateMath = async (calculateArea: MatheMaticalFormulas.AllMathCalculators) => {
+//   try {
+//     const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, calculateArea)
 
-    const { statusCode, statusDescription, message, error } = data
-    console.log(message, error)
-    if (statusCode === 100) {
-      return { success: statusDescription, payload: message }
-    }
-    if (statusCode === 102) {
-      return { success: false, payload: 'Server Error' }
-    }
+//     const { statusCode, statusDescription, message, error } = data
+//     console.log(message, error)
+//     if (statusCode === 100) {
+//       return { success: statusDescription, payload: message }
+//     }
+//     if (statusCode === 102) {
+//       return { success: false, payload: 'Server Error' }
+//     }
 
-    throw new Error('Responded with unexpected Error')
-  } catch (err) {
-    const { response } = err as AxiosError
-    console.log(response)
-    return {
-      success: false,
-      payload: 'Unexpected Error'
-    }
-  }
-}
-export const checkMomoBalance = async (trialCalculate: ConeAreaI | CapsuleSurfaceAreaI ) => {
+//     throw new Error('Responded with unexpected Error')
+//   } catch (err) {
+//     const { response } = err as AxiosError
+//     console.log(response)
+//     return {
+//       success: false,
+//       payload: 'Unexpected Error'
+//     }
+//   }
+// }
+export const calculateMath = async (calculateArea: MatheMaticalFormulas.AllMathCalculators ) => {
   try {
-    const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, trialCalculate);
+    const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, calculateArea);
 
     const { statusCode, message } = data;
     if (statusCode === 100) {

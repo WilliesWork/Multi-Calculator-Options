@@ -8,7 +8,8 @@ import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../../custom'
-import { calculateMath, checkMomoBalance } from '../../../../Services/AppCalculatorsApi'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
+import { ConeAreaResultI } from '../../../../Types/PaylaodResponeI'
 
 const ConeArea = () => {
   const classes = useStyles()
@@ -20,9 +21,12 @@ const ConeArea = () => {
     height: "",
     height_unit: "",
   })
-  const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-    Area: 0
+  const [Result, setResult] = React.useState<ConeAreaResultI>({
+    $lateralSurfaceArea: 0,
+    baseSurfaceSrea: 0,
+    totalConeSurfaceArea: 0,
+    units: ''
+
   })
 
   return (
@@ -50,8 +54,17 @@ const ConeArea = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            const { payload: coneArea } = await checkMomoBalance(payload)
+            const { payload: coneArea } = await calculateMath(payload)
             console.log('=====>', coneArea)
+            if (typeof coneArea === 'object'){
+              const {$lateralSurfaceArea, totalConeSurfaceArea, baseSurfaceSrea, units}  : ConeAreaResultI= coneArea
+              setResult({ $lateralSurfaceArea: $lateralSurfaceArea,
+                baseSurfaceSrea: baseSurfaceSrea,
+                totalConeSurfaceArea: totalConeSurfaceArea,
+                units: units
+              })
+              
+            }
             // if (typeof calsurfaceArea === 'object') {
             //   console.log(calsurfaceArea)
             //   setResult({
@@ -115,7 +128,13 @@ const ConeArea = () => {
             </div>
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1">LateralSurfaceArea: {Result.$lateralSurfaceArea} </Typography>
+              <Typography variant="subtitle1">BaseSurfaceArea: {Result.baseSurfaceSrea} </Typography>
+              <Typography variant="subtitle1">TotalConeSurfaceArea: {Result.totalConeSurfaceArea} </Typography>
+              <Typography variant="subtitle1">Units: {Result.units} </Typography>
+
+
+
             </div>
 
           </form>

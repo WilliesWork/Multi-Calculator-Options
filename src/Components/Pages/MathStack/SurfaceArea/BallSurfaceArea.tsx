@@ -22,7 +22,8 @@ const BallSurfaceArea = () => {
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
-    Area: 0
+    Area: 0,
+    unit: '',
   })
 
   return (
@@ -49,10 +50,13 @@ const BallSurfaceArea = () => {
             const { payload: calsurfaceArea } = await calculateMath(payload)
             console.log('=====>', calsurfaceArea)
             if (typeof calsurfaceArea === 'object') {
+              const {surfaceArea, area, unit } = calsurfaceArea
               console.log(calsurfaceArea)
               setResult({
-                surfaceArea: calsurfaceArea.surfaceAreas,
-                Area: calsurfaceArea.Area
+                surfaceArea: surfaceArea,
+                Area: area,
+                unit: unit
+
               })
             }
             resetForm()
@@ -94,6 +98,8 @@ const BallSurfaceArea = () => {
             <div className="text-center mb-3">
               <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
               <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Units: {Result.unit}</Typography>
+
             </div>
 
           </form>

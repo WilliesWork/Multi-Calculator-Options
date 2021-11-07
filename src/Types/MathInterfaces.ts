@@ -3,6 +3,7 @@
 // MATH INTERFACES
 
 // Surface Area
+
 export interface BallSurfaceArea {
   statusCode: number;
   statusDescription: string;
@@ -56,8 +57,8 @@ export interface SquarePyramidSurfaceAreaI {
 }
 
 export interface CapsuleSurfaceAreaI {
-  base_radius: string;
-  base_radius_unit: string;
+  radius: string;
+  radius_unit: string;
   height: string;
   height_unit: string;
   method: string;
@@ -134,6 +135,7 @@ export interface TriangleAreaI {
 export interface CircleAreaI {
   radius: string;
   radius_unit: string;
+  method: string
 }
 
 export interface SectorAreaI {
@@ -142,6 +144,9 @@ export interface SectorAreaI {
   angle: string;
   angle_unit: string;
 }
+
+
+
 
 // Volume
 export interface SphereVolumeCalculatorI {
@@ -226,3 +231,13 @@ export interface ConicalFrustumVolumeI {
 }
 
 //end 11/04/2021
+
+export type AllMathCalculators = 
+BallSurfaceArea | SurfaceAreaI | CubeAreaI 
+| ConeAreaI | RectangularAreaI | CylindricalTankAreaI
+| SquarePyramidVolumeI | CapsuleSurfaceAreaI | ConicalFrustrumSurfaceAreaI 
+| EllipsoidSurfaceAreaI | SphericalCapSurfaceAreaI | RectangleAreaI 
+| ParallelogramAreaI | EllipseAreaI | TrapezoidAreaI | TriangleAreaI 
+| CircleAreaI | SectorAreaI | SphereVolumeCalculatorI 
+| CubeVolumeCalculatorI | CylinderVolumeCalculatorI | RectangularTankVolumeI 
+| CapsuleVolumeCalculatorI | SphericalCapVolumeI | ConicalFrustrumSurfaceAreaI

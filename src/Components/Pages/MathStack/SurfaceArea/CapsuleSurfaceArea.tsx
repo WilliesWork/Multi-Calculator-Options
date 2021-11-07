@@ -8,21 +8,24 @@ import { Units } from '../../../../Common/MathUnits'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const CapsuleSurfaceArea = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    base_radius: '',
-    base_radius_unit: '',
+    radius: '',
+    radius_unit: '',
     height: "",
     height_unit: ''
   })
-  // const [Result, setResult] = React.useState({
-  //   surfaceArea: 0,
-  //   Area: 0
-  // })
+  const [Result, setResult] = React.useState({
+    surfaceArea: 0,
+    submittedradius: 0,
+    submitted_heigh: 0,
+    units: ''
+  })
 
   return (
     <div>
@@ -35,30 +38,34 @@ const CapsuleSurfaceArea = () => {
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          base_radius,
-          base_radius_unit,
+          radius,
+          radius_unit,
           height,
           height_unit
         }, { setSubmitting, resetForm }) => {
           const payload: CapsuleSurfaceAreaI = {
-            base_radius,
-            base_radius_unit,
+            radius,
+            radius_unit,
             height,
             height_unit,
-            method: 'capsuleSurfaceAreaCalculator'
+            method: 'CapsuleSurfaceArea'
           }
           console.log(JSON.stringify(payload))
           try {
-            //  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-            //   console.log('=====>', calsurfaceArea)
-            //   if (typeof calsurfaceArea === 'object') {
+             const { payload: calsurfaceArea } = await calculateMath(payload)
+              console.log('=====>', calsurfaceArea)
+              if (typeof calsurfaceArea === 'object') {
+                const {surfaceArea, units, submittedradius, submitted_height} = calsurfaceArea
             //     console.log(calsurfaceArea)
-            //     // setResult({
-            //     //   surfaceArea: calsurfaceArea,
-            //     //   Area: calsurfaceArea.Area
-            //     // })
+                setResult({
+                  surfaceArea: surfaceArea,
+                  submitted_heigh: submitted_height ,
+                  submittedradius: submittedradius,
+                  units: units
+                })
             //   }
-            //   resetForm() 
+              }
+              resetForm() 
           } catch (err) {
             console.log('====>', err)
           }
@@ -70,17 +77,17 @@ const CapsuleSurfaceArea = () => {
               <CustomForm
                 label={LABELS.baseRadius}
                 type={INPUT_TYPE.number}
-                id="base_radius"
+                id="radius"
                 placeholder={PLACEHOLDERS.number}
-                value={values.base_radius}
+                value={values.radius}
                 onChange={handleChange}
               />
 
               <CustomSelect
                 label={LABELS.unit}
-                id="base_radius_unit"
-                value={values.base_radius_unit}
-                onChange={handleChange('base_radius_unit')}
+                id="radius_unit"
+                value={values.radius_unit}
+                onChange={handleChange('radius_unit')}
               />
             </div>
 
@@ -113,8 +120,12 @@ const CapsuleSurfaceArea = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area:</Typography>
-              <Typography variant="subtitle1"> Area: </Typography>
+              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
+              <Typography variant="subtitle1"> Submitted Radius: {Result.submittedradius} </Typography>
+              <Typography variant="subtitle1"> Submitted Height: {Result.submitted_heigh} </Typography>
+              <Typography variant="subtitle1"> Units: {Result.units} </Typography>
+
+
             </div>
 
           </form>
