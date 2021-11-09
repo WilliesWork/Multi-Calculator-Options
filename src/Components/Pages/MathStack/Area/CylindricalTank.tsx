@@ -9,6 +9,7 @@ import { Units } from '../../../../Common/MathUnits'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const CylindricalTank = () => {
   const classes = useStyles();
@@ -22,7 +23,9 @@ const CylindricalTank = () => {
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
-    Area: 0
+   baseSurfaceArea: 0,
+   lateralSurfaceArea: 0,
+   units: ''
   })
 
   return (
@@ -46,20 +49,22 @@ const CylindricalTank = () => {
             radius_unit,
             height,
             height_unit,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'cylindricalTankSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylindricalTank(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: cylindricalTank } = await calculateMath(payload)
+            console.log('=====>', cylindricalTank)
+            if (typeof cylindricalTank === 'object') {
+              const {cylindricalTankSurfaceArea,base_surface_area, lateral_surface_area, units} = cylindricalTank
+              setResult({
+                surfaceArea: cylindricalTankSurfaceArea,
+                baseSurfaceArea: base_surface_area,
+                lateralSurfaceArea: lateral_surface_area,
+                units: units
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -116,7 +121,11 @@ const CylindricalTank = () => {
             </div>
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Tank Surface Area: {Result.surfaceArea}</Typography>
+              <Typography variant="subtitle1"> Base Surface Area: {Result.baseSurfaceArea}</Typography>
+              <Typography variant="subtitle1"> Lateral Surface Area: {Result.lateralSurfaceArea}</Typography>
+              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
+
             </div>
 
           </form>

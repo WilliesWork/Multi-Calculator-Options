@@ -112,6 +112,7 @@ export interface EllipseAreaI {
   semi_major_axes_a_unit: string;
   semi_major_axes_b: string;
   semi_major_axes_b_unit: string;
+  method: string
 }
 
 export interface TrapezoidAreaI {

@@ -8,6 +8,7 @@ import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const CircleArea = () => {
   const classes = useStyles()
@@ -18,7 +19,10 @@ const CircleArea = () => {
     radius_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Area: 0
+    Area: 0,
+    units: '',
+    Submitted_radius: '',
+    Submitted_unit: ''
   })
 
   return (
@@ -37,21 +41,23 @@ const CircleArea = () => {
         }, { setSubmitting, resetForm }) => {
           const payload: CircleAreaI = {
             radius,
-            radius_unit
-            // method: 'ballSurfaceAreaCalculator'
+            radius_unit,
+            method: 'circleArea'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCircleArea(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: circleArea } = await calculateMath(payload)
+            console.log('=====>', circleArea)
+            if (typeof circleArea === 'object') {
+              const {area, units, submittedradius, submittedunit} = circleArea
+              setResult({
+                Area: area,
+                units: units,
+                Submitted_radius : submittedradius,
+                Submitted_unit: submittedunit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -90,6 +96,10 @@ const CircleArea = () => {
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Submitted Radius: {Result.Submitted_radius}</Typography>
+              <Typography variant="subtitle1"> Submitted Unit: {Result.Submitted_unit}</Typography>
+              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
+
             </div>
 
           </form>
