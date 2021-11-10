@@ -8,6 +8,7 @@ import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const CapsuleVolume = () => {
   const classes = useStyles()
@@ -20,7 +21,12 @@ const CapsuleVolume = () => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0
+    volumeInRadiusUnit: 0,
+    volumeInHeightUnit: 0,
+    radiusInheightUnit: 0,
+    heightInradiusUnit: 0,
+    submittedradius: 0,
+    submitted_height: 0,
   })
 
   return (
@@ -44,20 +50,30 @@ const CapsuleVolume = () => {
             radius_unit,
             height,
             height_unit,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'CapsuleVolumeCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: capsuleVolume } = await calculateMath(payload)
+            console.log('=====>', capsuleVolume)
+            if (typeof capsuleVolume === 'object') {
+              //For now only working if you use different units
+              const { volumeInRadiusUnit,
+                volumeInHeightUnit,
+                radiusInheightUnit,
+                heightInradiusUnit,
+                submittedradius,
+                submitted_height } = capsuleVolume
+              setResult({
+                volumeInHeightUnit: volumeInHeightUnit,
+                volumeInRadiusUnit: volumeInRadiusUnit,
+                radiusInheightUnit: radiusInheightUnit,
+                submitted_height: submitted_height,
+                submittedradius: submittedradius,
+               heightInradiusUnit: heightInradiusUnit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -113,7 +129,14 @@ const CapsuleVolume = () => {
             </div>
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Volume in Radius: {Result.volumeInRadiusUnit}</Typography>
+              <Typography variant="subtitle1"> Volume in Height: {Result.volumeInHeightUnit}</Typography>
+              <Typography variant="subtitle1"> Submitted Radius: {Result.submittedradius}</Typography>
+              <Typography variant="subtitle1"> Submitted Height: {Result.submitted_height}</Typography>
+              <Typography variant="subtitle1"> Radius in Height: {Result.radiusInheightUnit}</Typography>
+              <Typography variant="subtitle1"> Height in Radius: {Result.heightInradiusUnit}</Typography>
+
+
             </div>
 
           </form>

@@ -8,6 +8,7 @@ import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const ConeVolume = () => {
   const classes = useStyles()
@@ -20,7 +21,10 @@ const ConeVolume = () => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0
+    Volume: 0,
+    radius: '',
+    height: '',
+    units: ''
   })
 
   return (
@@ -44,20 +48,22 @@ const ConeVolume = () => {
             radius_unit,
             height,
             height_unit,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'ConeVolumeCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateConeVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: coneVolume } = await calculateMath(payload)
+            const {volume_a, units, radius, height } = coneVolume
+            console.log('=====>', coneVolume)
+            if (typeof coneVolume === 'object') {
+              setResult({
+               Volume: volume_a,
+               radius: radius,
+               height: height,
+               units: units
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -114,6 +120,10 @@ const ConeVolume = () => {
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
+              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
+              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
+
             </div>
 
           </form>

@@ -8,6 +8,7 @@ import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const CylinderVolume = () => {
   const classes = useStyles()
@@ -20,7 +21,12 @@ const CylinderVolume = () => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0
+    Volume: 0,
+    radius_unit: '',
+    radius: '',
+    height: 0,
+    height_unit: '',
+    units: ''
   })
 
   return (
@@ -44,20 +50,24 @@ const CylinderVolume = () => {
             radius_unit,
             height,
             height_unit,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'CylinderVolumeCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: cylindricalVolume } = await calculateMath(payload)
+            console.log('=====>', cylindricalVolume)
+            const { volume, units, radius, radius_unit, height, height_unit } = cylindricalVolume
+            if (typeof cylindricalVolume === 'object') {
+              setResult({
+                Volume: volume,
+                radius: radius,
+                radius_unit: radius_unit,
+                height: height,
+                height_unit: height_unit,
+                units: units
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -114,6 +124,13 @@ const CylinderVolume = () => {
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
+              <Typography variant="subtitle1"> Radius Unit: {Result.radius_unit}</Typography>
+              <Typography variant="subtitle1"> height: {Result.height}</Typography>
+              <Typography variant="subtitle1"> height unit: {Result.height_unit}</Typography>
+              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
+
+
             </div>
 
           </form>

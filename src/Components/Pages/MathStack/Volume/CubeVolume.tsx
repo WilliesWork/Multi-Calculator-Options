@@ -8,6 +8,8 @@ import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
+import { AxiosError } from 'axios'
 
 const CubeVolume = () => {
   const classes = useStyles()
@@ -37,13 +39,13 @@ const CubeVolume = () => {
         }, { setSubmitting, resetForm }) => {
           const payload: CubeVolumeCalculatorI = {
             edge_length,
-            edge_length_unit
-            // method: 'ballSurfaceAreaCalculator'
+            edge_length_unit,
+            method: 'CubeVolumeCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCubeVolume(payload)
-            // console.log('=====>', calsurfaceArea)
+            const { payload: cubeVolume } = await calculateMath(payload)
+            console.log('=====>', cubeVolume)
             // if (typeof calsurfaceArea === 'object') {
             //   console.log(calsurfaceArea)
             //   setResult({
@@ -53,7 +55,8 @@ const CubeVolume = () => {
             // }
             // resetForm()
           } catch (err) {
-            console.log('====>', err)
+            const { response } = err as AxiosError
+            console.log('====>', response)
           }
         }}
       >
