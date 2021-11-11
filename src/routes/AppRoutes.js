@@ -2,7 +2,9 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 import {
-  Math,
+  Volume,
+  SurfaceArea,
+  Area,
   Statistics,
   Health,
   Finance,
@@ -12,9 +14,19 @@ import {
 function AppRoutes() {
   const pages = [
     {
-      component: Math,
+      component: Volume,
       path: "/",
-      name: "Math Calculators",
+      name: "Volume Calculators",
+    },
+    {
+      component: SurfaceArea,
+      path: "/surface_area",
+      name: "Surface Area Calculators",
+    },
+    {
+      component: Area,
+      path: "/area",
+      name: "Area Calculators",
     },
     {
       component: Health,

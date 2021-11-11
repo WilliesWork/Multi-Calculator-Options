@@ -17,8 +17,8 @@ import {
   PresentValueOfPeriodicalDeposit,
   ProfitMarginCalculator,
   StockTradingMargin,
-} from "./index";
-import useStyles from "./../../Styling/CustomStyles";
+} from "../index";
+import useStyles from "../../../Styling/CustomStyles";
 
 function Finance() {
   const classes = useStyles();

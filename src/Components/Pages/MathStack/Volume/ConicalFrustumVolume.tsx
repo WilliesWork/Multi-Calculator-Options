@@ -7,7 +7,7 @@ import { ConicalFrustumVolumeI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CustomForm, CustomSelect, Label } from '../../../custom'
 
 const ConicalFrustumVolume = () => {
   const classes = useStyles()
@@ -72,8 +72,8 @@ const ConicalFrustumVolume = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.topRadius} />
               <CustomForm
-                label={LABELS.topRadius}
                 type={INPUT_TYPE.number}
                 id="top_radius"
                 placeholder={PLACEHOLDERS.number}
@@ -82,7 +82,6 @@ const ConicalFrustumVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="top_radius_unit"
                 value={values.top_radius_unit}
                 onChange={handleChange('top_radius_unit')}
@@ -90,8 +89,8 @@ const ConicalFrustumVolume = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.bottomRadius} />
               <CustomForm
-                label={LABELS.bottomRadius}
                 type={INPUT_TYPE.number}
                 id="bottom_radius"
                 placeholder={PLACEHOLDERS.number}
@@ -100,7 +99,6 @@ const ConicalFrustumVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="bottom_radius_unit"
                 value={values.bottom_radius_unit}
                 onChange={handleChange('bottom_radius_unit')}
@@ -108,8 +106,9 @@ const ConicalFrustumVolume = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.topRadius} />
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -118,7 +117,6 @@ const ConicalFrustumVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}

@@ -5,4 +5,6 @@ export {
   LABELS,
   IDS,
   INPUT_TYPE,
+  COLORS,
+  CALC_LABELS,
 } from "./constants";

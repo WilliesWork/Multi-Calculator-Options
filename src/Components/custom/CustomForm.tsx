@@ -1,10 +1,9 @@
 import * as React from 'react'
 
 const CustomForm = (props: any) => {
-  const { label, type, id, placeholder, value, onChange } = props
+  const { label, type, id, placeholder, value, onChange, colValue } = props
   return (
-    <div className="form-group col-8">
-      <label htmlFor={id}>{label}</label>
+    <div className="form-group col">
       <input
         type={type}
         className="form-control"

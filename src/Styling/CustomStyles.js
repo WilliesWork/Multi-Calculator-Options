@@ -1,4 +1,5 @@
 import { alpha, makeStyles } from "@material-ui/core/styles";
+import { COLORS } from "./../Common/shared";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -13,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     flexGrow: 1,
-    marginBottom: theme.spacing(3),
-    backgroundColor: "white",
+    marginBottom: theme.spacing(2),
+    backgroundColor: COLORS.primary,
   },
   drawer: {
     width: drawerWidth,
@@ -69,8 +70,18 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "none",
     color: theme.palette.text.secondary,
   },
+  paperBackground: {
+    padding: theme.spacing(2),
+    margin: theme.spacing(2),
+    textAlign: "none",
+    color: theme.palette.text.secondary,
+    backgroundColor: COLORS.paper_background,
+  },
   formControl: {
     padding: theme.spacing(2),
+  },
+  image: {
+    height: theme.spacing(3),
   },
 }));
 

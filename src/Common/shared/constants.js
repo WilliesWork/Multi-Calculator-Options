@@ -236,3 +236,20 @@ export const INPUT_TYPE = {
   range: "range",
   submit: "submit",
 };
+
+export const COLORS = {
+  primary: "#58C4A0",
+  secondary: "#F1EFE8",
+  light_text_color: "#F0ECEC",
+  background: "#F0ECEC",
+  paper_background: "#A8A79F",
+  text: "#595959",
+};
+
+export const CALC_LABELS = {
+  math: "| Math Calculators",
+  finance: "| Financial Calculators",
+  health: "| Fitness & Health Calculators",
+  statistics: "| Statistical Calculators",
+  other: "| Other Calculators",
+};

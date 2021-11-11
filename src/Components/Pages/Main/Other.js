@@ -19,8 +19,8 @@ import {
   StairsConcreate,
   TrapSpeedMethod,
   WebsiteBandwidth,
-} from "./index";
-import useStyles from "./../../Styling/CustomStyles";
+} from "../index";
+import useStyles from "../../../Styling/CustomStyles";
 
 function Other() {
   const classes = useStyles();

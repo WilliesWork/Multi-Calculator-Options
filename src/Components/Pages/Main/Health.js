@@ -33,8 +33,8 @@ import {
   TakahiraBodySurfaceArea,
   USCustomarySystemBfc,
   WholeBodyMassFormula,
-} from "./index";
-import useStyles from "./../../Styling/CustomStyles";
+} from "../index";
+import useStyles from "../../../Styling/CustomStyles";
 
 const Health = () => {
   const classes = useStyles();

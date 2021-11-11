@@ -5,7 +5,6 @@ const CustomSelect = (props: any) => {
   const { label, id, value, onChange } = props
   return (
     <div className="form-group col">
-      <label htmlFor={id}>{label}</label>
       <select
         id={id}
         className="form-control"

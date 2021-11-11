@@ -1,1 +1,0 @@
-export const MATH_LOGO = require('../Images/MathImage.jpg')

@@ -24,11 +24,12 @@ export const FontProvider = (
 export const Font = ({
   index = 0,
   weight,
+  color,
   children,
-}: React.PropsWithChildren<{ index?: number; weight?: number }>) => {
+}: React.PropsWithChildren<{ index?: number; weight?: number; color?: string }>) => {
   const ctx = React.useContext(FontContext);
   const { font } = ctx[index] || {};
   return (
-    <span style={{ fontFamily: font, fontWeight: weight }}>{children}</span>
+    <span style={{ fontFamily: font, fontWeight: weight, color: color }}>{children}</span>
   );
 };

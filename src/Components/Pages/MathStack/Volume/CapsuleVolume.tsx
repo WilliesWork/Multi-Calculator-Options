@@ -7,7 +7,7 @@ import { CapsuleVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CustomForm, CustomSelect, Figure, Label } from '../../../custom'
 
 const CapsuleVolume = () => {
   const classes = useStyles()
@@ -65,53 +65,63 @@ const CapsuleVolume = () => {
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-row">
-              <CustomForm
-                label={LABELS.radius}
-                type={INPUT_TYPE.number}
-                id="radius"
-                placeholder={PLACEHOLDERS.number}
-                value={values.radius}
-                onChange={handleChange}
-              />
+            <Grid container xs>
+              <Grid item xs>
+                <div className='form-row'>
+                  <Figure />
+                </div>
+              </Grid>
 
-              <CustomSelect
-                label={LABELS.unit}
-                id="radius_unit"
-                value={values.radius_unit}
-                onChange={handleChange('radius_unit')}
-              />
-            </div>
+              <Grid item xs>
+                <div className="form-row">
 
-            <div className="form-row">
-              <CustomForm
-                label={LABELS.height}
-                type={INPUT_TYPE.number}
-                id="height"
-                placeholder={PLACEHOLDERS.number}
-                value={values.height}
-                onChange={handleChange}
-              />
+                  <Label title={LABELS.radius} />
 
-              <CustomSelect
-                label={LABELS.unit}
-                id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
-              />
-            </div>
+                  <CustomForm
+                    type={INPUT_TYPE.number}
+                    id="radius"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.radius}
+                    onChange={handleChange}
+                  />
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+                  <CustomSelect
+                    id="radius_unit"
+                    value={values.radius_unit}
+                    onChange={handleChange('radius_unit')}
+                  />
+                </div>
 
+                <div className="form-row">
+                  <Label title={LABELS.height} />
+
+                  <CustomForm
+                    type={INPUT_TYPE.number}
+                    id="height"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.height}
+                    onChange={handleChange}
+                  />
+
+                  <CustomSelect
+                    id="height_unit"
+                    value={values.height_unit}
+                    onChange={handleChange('height_unit')}
+                  />
+                </div>
+
+                <div className="form mb-3">
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    type="submit"
+                    className="btn btn-primary"
+                  >
+                    {BUTTONS.calculate}
+                  </Button>
+                </div>
+              </Grid>
+            </Grid>
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
             </div>

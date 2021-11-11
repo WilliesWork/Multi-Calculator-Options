@@ -4,13 +4,13 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
-import useStyles from "./../../Styling/CustomStyles";
+import useStyles from "../../../Styling/CustomStyles";
 import {
   MarginOfErrorCalculator,
   ProbablityOfTwoEvents,
   ProbablitySolverForTwoEvents,
   SampleSizeCalculator,
-} from "./index";
+} from "../index";
 
 const Statistics = () => {
   const classes = useStyles();
