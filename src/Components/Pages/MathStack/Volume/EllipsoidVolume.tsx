@@ -8,6 +8,7 @@ import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const EllipsoidVolume = () => {
   const classes = useStyles()
@@ -22,7 +23,11 @@ const EllipsoidVolume = () => {
     axis3_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0
+    Volume: 0,
+    submitted_axis3: 0,
+    submitted_axis2: 0,
+    submitted_axis1: 0,
+    units: '',
   })
 
   return (
@@ -50,20 +55,23 @@ const EllipsoidVolume = () => {
             axis2_unit,
             axis3,
             axis3_unit,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'EllipsoidVolumeCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateEllipsoidVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: ellipsoidVolume } = await calculateMath(payload)
+            console.log('=====>', ellipsoidVolume)
+            const {volume, units, submittedaxis1, submitted_axis2, submitted_axis3} = ellipsoidVolume
+            if (typeof ellipsoidVolume === 'object') {
+              setResult({
+               Volume: volume,
+               submitted_axis1: submittedaxis1,
+               submitted_axis2: submitted_axis2,
+               submitted_axis3: submitted_axis3,
+               units: units
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -138,6 +146,12 @@ const EllipsoidVolume = () => {
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Submitted axis 1: {Result.submitted_axis1}</Typography>
+              <Typography variant="subtitle1"> Submitted axis 2: {Result.submitted_axis2}</Typography>
+              <Typography variant="subtitle1"> Submitted axis 3: {Result.submitted_axis3}</Typography>
+              <Typography variant="subtitle1"> units: {Result.units}</Typography>
+
+
             </div>
 
           </form>

@@ -7,7 +7,12 @@ import { ConicalFrustumVolumeI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+<<<<<<< HEAD
 import { CustomForm, CustomSelect, Label } from '../../../custom'
+=======
+import { CustomForm, CustomSelect } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
+>>>>>>> 0516ca12cf9a019fcf5affa722a7b58d59cf6a97
 
 const ConicalFrustumVolume = () => {
   const classes = useStyles()
@@ -22,7 +27,11 @@ const ConicalFrustumVolume = () => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0
+    Volume: 0,
+    topRadius: 0,
+    bottomRadius: 0,
+    height: 0,
+    units: ''
   })
 
   return (
@@ -50,20 +59,23 @@ const ConicalFrustumVolume = () => {
             bottom_radius_unit,
             height,
             height_unit,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'ConicalFrustumVolumeCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateConicalFrustumVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: conicalFrustrumVolume } = await calculateMath(payload)
+            console.log('=====>', conicalFrustrumVolume)
+            const { volume, units, r, R, h } = conicalFrustrumVolume
+            if (typeof conicalFrustrumVolume === 'object') {
+              setResult({
+                Volume: volume,
+                topRadius: R,
+                bottomRadius: R,
+                height: h,
+                units: units
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -136,6 +148,11 @@ const ConicalFrustumVolume = () => {
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Top Radius: {Result.topRadius}</Typography>
+              <Typography variant="subtitle1"> Bottom Radius: {Result.bottomRadius}</Typography>
+              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
+              <Typography variant="subtitle1"> Units : {Result.units}</Typography>
+
             </div>
 
           </form>

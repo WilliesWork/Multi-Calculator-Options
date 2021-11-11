@@ -160,11 +160,13 @@ export interface ConeVolumeCalculatorI {
   radius_unit: string;
   height: string;
   height_unit: string;
+  method: string
 }
 
 export interface CubeVolumeCalculatorI {
   edge_length: string;
   edge_length_unit: string;
+  method: string
 }
 
 export interface CylinderVolumeCalculatorI {
@@ -172,6 +174,7 @@ export interface CylinderVolumeCalculatorI {
   radius_unit: string;
   height_unit: string;
   height: string;
+  method: string
 }
 
 export interface RectangularTankVolumeI {
@@ -188,6 +191,7 @@ export interface CapsuleVolumeCalculatorI {
   radius_unit: string;
   height: string;
   height_unit: string;
+  method: string
 }
 
 export interface SphericalCapVolumeI {
@@ -211,6 +215,7 @@ export interface EllipsoidVolumeCalculatorI {
   axis2_unit: string;
   axis3: string;
   axis3_unit: string;
+  method: string
 }
 
 export interface TubeVolumeCalculatorI {
@@ -229,6 +234,7 @@ export interface ConicalFrustumVolumeI {
   bottom_radius_unit: string;
   height_unit: string;
   height: string;
+  method: string
 }
 
 //end 11/04/2021
