@@ -40,8 +40,7 @@ const DueDateNaegeleRule = () => {
           const payload: DueDateNaegeleRuleI = {
             first_date_of_last_period,
             days,
-            method,
-            //  method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

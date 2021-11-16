@@ -1,18 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { ConeVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-<<<<<<< HEAD
-import { CustomForm, CustomSelect, Label } from '../../../custom'
-=======
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
->>>>>>> 0516ca12cf9a019fcf5affa722a7b58d59cf6a97
 
 const ConeVolume = () => {
   const classes = useStyles()
@@ -26,8 +22,8 @@ const ConeVolume = () => {
   })
   const [Result, setResult] = React.useState({
     Volume: 0,
-    radius: '',
-    height: '',
+    radius: 0,
+    height: 0,
     units: ''
   })
 
@@ -57,14 +53,14 @@ const ConeVolume = () => {
           console.log(JSON.stringify(payload))
           try {
             const { payload: coneVolume } = await calculateMath(payload)
-            const {volume_a, units, radius, height } = coneVolume
+            const { volume, units, radius, height } = coneVolume
             console.log('=====>', coneVolume)
             if (typeof coneVolume === 'object') {
               setResult({
-               Volume: volume_a,
-               radius: radius,
-               height: height,
-               units: units
+                Volume: volume,
+                radius: radius,
+                height: height,
+                units: units
               })
             }
             resetForm()
@@ -109,16 +105,7 @@ const ConeVolume = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>

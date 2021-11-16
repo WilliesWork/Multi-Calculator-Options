@@ -5,10 +5,9 @@
 // Surface Area
 
 export interface BallSurfaceArea {
-  statusCode: number;
-  statusDescription: string;
-  surfaceArea: number;
-  area: number;
+  radius: string;
+  radius_unit: string;
+  method: string;
 }
 export interface SurfaceAreaI {
   radius: string;
@@ -97,6 +96,7 @@ export interface RectangleAreaI {
   length_unit: string;
   width: string;
   width_unit: string;
+  method: string;
 }
 
 // start here
@@ -105,6 +105,7 @@ export interface ParallelogramAreaI {
   breadth_unit: string;
   height: string;
   height_unit: string;
+  method: string;
 }
 
 export interface EllipseAreaI {
@@ -112,7 +113,7 @@ export interface EllipseAreaI {
   semi_major_axes_a_unit: string;
   semi_major_axes_b: string;
   semi_major_axes_b_unit: string;
-  method: string
+  method: string;
 }
 
 export interface TrapezoidAreaI {
@@ -122,6 +123,7 @@ export interface TrapezoidAreaI {
   base2_unit: string;
   height: string;
   height_unit: string;
+  method: string;
 }
 
 export interface TriangleAreaI {
@@ -131,12 +133,13 @@ export interface TriangleAreaI {
   sideB_unit: string;
   sideC: string;
   sideC_unit: string;
+  method: string;
 }
 
 export interface CircleAreaI {
   radius: string;
   radius_unit: string;
-  method: string
+  method: string;
 }
 
 export interface SectorAreaI {
@@ -144,15 +147,14 @@ export interface SectorAreaI {
   radius_unit: string;
   angle: string;
   angle_unit: string;
+  method: string;
 }
-
-
-
 
 // Volume
 export interface SphereVolumeCalculatorI {
   radius: string;
   radius_unit: string;
+  method: string;
 }
 
 export interface ConeVolumeCalculatorI {
@@ -160,13 +162,13 @@ export interface ConeVolumeCalculatorI {
   radius_unit: string;
   height: string;
   height_unit: string;
-  method: string
+  method: string;
 }
 
 export interface CubeVolumeCalculatorI {
   edge_length: string;
-  edge_length_unit: string;
-  method: string
+  edge_unit: string;
+  method: string;
 }
 
 export interface CylinderVolumeCalculatorI {
@@ -174,7 +176,7 @@ export interface CylinderVolumeCalculatorI {
   radius_unit: string;
   height_unit: string;
   height: string;
-  method: string
+  method: string;
 }
 
 export interface RectangularTankVolumeI {
@@ -184,6 +186,7 @@ export interface RectangularTankVolumeI {
   width_unit: string;
   height: string;
   height_unit: string;
+  method: string;
 }
 
 export interface CapsuleVolumeCalculatorI {
@@ -191,7 +194,7 @@ export interface CapsuleVolumeCalculatorI {
   radius_unit: string;
   height: string;
   height_unit: string;
-  method: string
+  method: string;
 }
 
 export interface SphericalCapVolumeI {
@@ -199,6 +202,7 @@ export interface SphericalCapVolumeI {
   radius_unit: string;
   height_unit: string;
   height: string;
+  method: string;
 }
 
 export interface SquarePyramidVolumeI {
@@ -206,6 +210,7 @@ export interface SquarePyramidVolumeI {
   base_unit: string;
   height_unit: string;
   height: string;
+  method: string;
 }
 
 export interface EllipsoidVolumeCalculatorI {
@@ -215,7 +220,7 @@ export interface EllipsoidVolumeCalculatorI {
   axis2_unit: string;
   axis3: string;
   axis3_unit: string;
-  method: string
+  method: string;
 }
 
 export interface TubeVolumeCalculatorI {
@@ -225,6 +230,7 @@ export interface TubeVolumeCalculatorI {
   inner_diameter_unit: string;
   length: string;
   length_unit: string;
+  method: string;
 }
 
 export interface ConicalFrustumVolumeI {
@@ -234,17 +240,36 @@ export interface ConicalFrustumVolumeI {
   bottom_radius_unit: string;
   height_unit: string;
   height: string;
-  method: string
+  method: string;
 }
 
 //end 11/04/2021
 
-export type AllMathCalculators = 
-BallSurfaceArea | SurfaceAreaI | CubeAreaI 
-| ConeAreaI | RectangularAreaI | CylindricalTankAreaI
-| SquarePyramidVolumeI | CapsuleSurfaceAreaI | ConicalFrustrumSurfaceAreaI 
-| EllipsoidSurfaceAreaI | SphericalCapSurfaceAreaI | RectangleAreaI 
-| ParallelogramAreaI | EllipseAreaI | TrapezoidAreaI | TriangleAreaI 
-| CircleAreaI | SectorAreaI | SphereVolumeCalculatorI 
-| CubeVolumeCalculatorI | CylinderVolumeCalculatorI | RectangularTankVolumeI 
-| CapsuleVolumeCalculatorI | SphericalCapVolumeI | ConicalFrustrumSurfaceAreaI
+export type AllMathCalculators =
+  | BallSurfaceArea
+  | SurfaceAreaI
+  | CubeAreaI
+  | ConeAreaI
+  | RectangularAreaI
+  | CylindricalTankAreaI
+  | SquarePyramidVolumeI
+  | CapsuleSurfaceAreaI
+  | ConicalFrustrumSurfaceAreaI
+  | EllipsoidSurfaceAreaI
+  | SphericalCapSurfaceAreaI
+  | SquarePyramidSurfaceAreaI
+  | RectangleAreaI
+  | ParallelogramAreaI
+  | EllipseAreaI
+  | TrapezoidAreaI
+  | TriangleAreaI
+  | CircleAreaI
+  | SectorAreaI
+  | SphereVolumeCalculatorI
+  | CubeVolumeCalculatorI
+  | CylinderVolumeCalculatorI
+  | RectangularTankVolumeI
+  | CapsuleVolumeCalculatorI
+  | SphericalCapVolumeI
+  | ConicalFrustrumSurfaceAreaI
+  | TubeVolumeCalculatorI;

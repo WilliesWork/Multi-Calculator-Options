@@ -1,18 +1,18 @@
 import React from 'react'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { CylindricalTankAreaI } from '../../../../Types'
+import { ConeAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
-import { Units } from '../../../../Common/MathUnits'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
+import { ConeAreaResultI } from '../../../../Types/PaylaodResponeI'
 
-const CylindricalTank = () => {
-  const classes = useStyles();
+const ConeSurfArea = () => {
+  const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
@@ -21,18 +21,18 @@ const CylindricalTank = () => {
     height: "",
     height_unit: "",
   })
-  const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-   baseSurfaceArea: 0,
-   lateralSurfaceArea: 0,
-   units: ''
+  const [Result, setResult] = React.useState<ConeAreaResultI>({
+    $lateralSurfaceArea: 0,
+    baseSurfaceSrea: 0,
+    totalConeSurfaceArea: 0,
+    units: ''
   })
 
   return (
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.cylindricalTankArea}
+          {CALCULATORS.coneSurfArea}
         </Typography>
       </Grid>
 
@@ -44,38 +44,38 @@ const CylindricalTank = () => {
           height,
           height_unit,
         }, { setSubmitting, resetForm }) => {
-          const payload: CylindricalTankAreaI = {
+          const payload: ConeAreaI = {
             radius,
             radius_unit,
             height,
             height_unit,
-            method: 'cylindricalTankSurfaceAreaCalculator'
+            method: 'coneSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            const { payload: cylindricalTank } = await calculateMath(payload)
-            console.log('=====>', cylindricalTank)
-            if (typeof cylindricalTank === 'object') {
-              const {cylindricalTankSurfaceArea,base_surface_area, lateral_surface_area, units} = cylindricalTank
+            const { payload: coneArea } = await calculateMath(payload)
+            console.log('=====>', coneArea)
+            if (typeof coneArea === 'object') {
+              const { $lateralSurfaceArea, totalConeSurfaceArea, baseSurfaceSrea, units }: ConeAreaResultI = coneArea
               setResult({
-                surfaceArea: cylindricalTankSurfaceArea,
-                baseSurfaceArea: base_surface_area,
-                lateralSurfaceArea: lateral_surface_area,
+                $lateralSurfaceArea: $lateralSurfaceArea,
+                baseSurfaceSrea: baseSurfaceSrea,
+                totalConeSurfaceArea: totalConeSurfaceArea,
                 units: units
               })
+
             }
             resetForm()
           } catch (err) {
             console.log('====>', err)
           }
         }}
-
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.radius} />
               <CustomForm
-                label={LABELS.radius}
                 type={INPUT_TYPE.number}
                 id="radius"
                 placeholder={PLACEHOLDERS.number}
@@ -84,7 +84,6 @@ const CylindricalTank = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="radius_unit"
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
@@ -92,8 +91,8 @@ const CylindricalTank = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -102,30 +101,19 @@ const CylindricalTank = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Tank Surface Area: {Result.surfaceArea}</Typography>
-              <Typography variant="subtitle1"> Base Surface Area: {Result.baseSurfaceArea}</Typography>
-              <Typography variant="subtitle1"> Lateral Surface Area: {Result.lateralSurfaceArea}</Typography>
-              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-
+              <Typography variant="subtitle1">LateralSurfaceArea: {Result.$lateralSurfaceArea} </Typography>
+              <Typography variant="subtitle1">BaseSurfaceArea: {Result.baseSurfaceSrea} </Typography>
+              <Typography variant="subtitle1">TotalConeSurfaceArea: {Result.totalConeSurfaceArea} </Typography>
+              <Typography variant="subtitle1">Units: {Result.units} </Typography>
             </div>
 
           </form>
@@ -136,4 +124,4 @@ const CylindricalTank = () => {
   )
 }
 
-export default CylindricalTank
+export default ConeSurfArea

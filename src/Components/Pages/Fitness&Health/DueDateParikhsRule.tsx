@@ -38,7 +38,7 @@ const DueDateParikhsRule = () => {
           const payload: DueDateParikhsRuleI = {
             first_date_of_last_period,
             days,
-            //  method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

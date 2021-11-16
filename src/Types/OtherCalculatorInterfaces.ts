@@ -6,6 +6,7 @@ export interface ConcreteSquareFootingI {
   breadth: string;
   breadth_unit: string;
   quantity: string;
+  method: string;
 }
 
 export interface CircularSlapI {
@@ -16,6 +17,7 @@ export interface CircularSlapI {
   inner_diameter: string;
   inner_diameter_unit: string;
   quantity: string;
+  method: string;
 }
 
 export interface CurbAndGutterBarrierI {
@@ -30,6 +32,7 @@ export interface CurbAndGutterBarrierI {
   length: string;
   length_unit: string;
   quantity: string;
+  method: string;
 }
 
 export interface StairsConcreateI {
@@ -42,6 +45,7 @@ export interface StairsConcreateI {
   platform_depth: string;
   platform_depth_unit: string;
   steps: string;
+  method: string;
 }
 
 export interface HoleColumnI {
@@ -50,6 +54,7 @@ export interface HoleColumnI {
   height_unit: string;
   height: string;
   quantity: string;
+  method: string;
 }
 
 // new
@@ -58,6 +63,7 @@ export interface SlopeCalculatorForTwoKnownPointsI {
   y_2: string;
   x_1: string;
   x_2: string;
+  method: string;
 }
 
 export interface ElapsedTimeMethodI {
@@ -65,6 +71,7 @@ export interface ElapsedTimeMethodI {
   weight_unit: string;
   time: string;
   time_unit: string;
+  method: string;
 }
 
 export interface TrapSpeedMethodI {
@@ -72,14 +79,17 @@ export interface TrapSpeedMethodI {
   weight_unit: string;
   speed: string;
   speed_unit: string;
+  method: string;
 }
 
 export interface ParrallelResitorI {
   resistance_values: string;
+  method: string;
 }
 
 export interface SeriesResistorI {
   resistance_values: string;
+  method: string;
 }
 
 export interface ConductorResitorI {
@@ -88,6 +98,7 @@ export interface ConductorResitorI {
   diameter: string;
   diameter_unit: string;
   conductivity: string;
+  method: string;
 }
 
 export interface HorsepowerCalculationI {
@@ -97,6 +108,7 @@ export interface HorsepowerCalculationI {
   distance_unit: string;
   time: string;
   time_unit: string;
+  method: string;
 }
 
 export interface WebsiteBandwidthI {
@@ -105,10 +117,28 @@ export interface WebsiteBandwidthI {
   page_size: string;
   page_size_unit: string;
   redundancy_factor: string;
+  method: string;
 }
 
 export interface HostingBandwidthI {
   monthly_usage: string;
   monthly_usage_unit: string;
+  method: string;
 }
 // end 11/04/2021
+
+export type AllOtherCalculators =
+  | ConcreteSquareFootingI
+  | CircularSlapI
+  | CurbAndGutterBarrierI
+  | StairsConcreateI
+  | HoleColumnI
+  | SlopeCalculatorForTwoKnownPointsI
+  | ElapsedTimeMethodI
+  | TrapSpeedMethodI
+  | ParrallelResitorI
+  | SeriesResistorI
+  | ConductorResitorI
+  | HorsepowerCalculationI
+  | WebsiteBandwidthI
+  | HostingBandwidthI;

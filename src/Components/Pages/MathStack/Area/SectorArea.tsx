@@ -1,13 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { SectorAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const SectorArea = () => {
   const classes = useStyles()
@@ -20,8 +21,10 @@ const SectorArea = () => {
     angle_unit: "",
   })
   const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-    Area: 0
+    area: 0,
+    radius: 0,
+    angle: 0,
+    unit: ''
   })
 
   return (
@@ -45,20 +48,23 @@ const SectorArea = () => {
             radius_unit,
             angle,
             angle_unit,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'sectorArea'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateSectorArea(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: sectorArea } = await calculateMath(payload)
+            console.log('=====>', sectorArea)
+            const { area, unit, radius, angle
+            } = sectorArea
+            if (typeof sectorArea === 'object') {
+              setResult({
+                area: area,
+                radius: radius,
+                angle: angle,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -67,8 +73,8 @@ const SectorArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.radius} />
               <CustomForm
-                label={LABELS.radius}
                 type={INPUT_TYPE.number}
                 id="radius"
                 placeholder={PLACEHOLDERS.number}
@@ -77,7 +83,6 @@ const SectorArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="radius_unit"
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
@@ -85,8 +90,8 @@ const SectorArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.angle} />
               <CustomForm
-                label={LABELS.angle}
                 type={INPUT_TYPE.number}
                 id="angle"
                 placeholder={PLACEHOLDERS.number}
@@ -95,26 +100,19 @@ const SectorArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="angle_unit"
                 value={values.angle_unit}
                 onChange={handleChange('angle_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Area: {Result.area}</Typography>
+              <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
+              <Typography variant="subtitle1"> Angle: {Result.angle}</Typography>
+              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
             </div>
 
           </form>

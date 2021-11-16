@@ -50,7 +50,7 @@ const BodyFatPercentageBmi = () => {
             weight_unit,
             gender,
             age,
-            //  method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

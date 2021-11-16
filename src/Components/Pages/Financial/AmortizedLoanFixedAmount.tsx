@@ -44,7 +44,7 @@ const AmortizedLoanFixedAmount = () => {
             present_value,
             number_of_months,
             number_of_years,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'amortizedLoanFixeAmount'
           }
           console.log(JSON.stringify(payload))
           try {

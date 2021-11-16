@@ -46,8 +46,8 @@ const LeanBodyMassPeterFormula = () => {
             height_unit,
             weight,
             weight_unit,
-            gender
-            //  method: 'ballSurfaceAreaCalculator'
+            gender,
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

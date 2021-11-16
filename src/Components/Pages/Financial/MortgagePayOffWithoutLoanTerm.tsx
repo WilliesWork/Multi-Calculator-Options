@@ -41,7 +41,7 @@ const MortgagePayOffWithoutLoanTerm = () => {
             interest_rate,
             principal_balance,
             monthly_payment,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'mortagePayOffCalculatorWithoutLoanTerm'
           }
           console.log(JSON.stringify(payload))
           try {

@@ -1,12 +1,14 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
+
 import { SquarePyramidSurfaceAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const SquarePyramidSurfaceArea = () => {
   const classes = useStyles()
@@ -20,7 +22,9 @@ const SquarePyramidSurfaceArea = () => {
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
-    Area: 0
+    base_edge: 0,
+    height: 0,
+    unit: '',
   })
 
   return (
@@ -44,20 +48,23 @@ const SquarePyramidSurfaceArea = () => {
             base_edge_unit,
             height,
             height_unit,
-            method: 'sqaurePyramidSurfaceAreaCalculator'
+            method: 'SquarePyramidSurfaceArea'
           }
           console.log(JSON.stringify(payload))
           try {
-            /* const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-            console.log('=====>', calsurfaceArea)
-            if (typeof calsurfaceArea === 'object') {
-              console.log(calsurfaceArea)
+            const { payload: SquarePyramidSurfaceArea } = await calculateMath(payload)
+            console.log('=====>', SquarePyramidSurfaceArea)
+            const { surfaceArea, base_edge, height, unit
+            } = SquarePyramidSurfaceArea
+            if (typeof SquarePyramidSurfaceArea === 'object') {
               setResult({
-                surfaceArea: calsurfaceArea.surfaceAreas,
-                Area: calsurfaceArea.Area
+                surfaceArea: surfaceArea,
+                base_edge: base_edge,
+                height: height,
+                unit: unit
               })
             }
-            resetForm() */
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -66,8 +73,8 @@ const SquarePyramidSurfaceArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.baseEdge} />
               <CustomForm
-                label={LABELS.baseEdge}
                 type={INPUT_TYPE.number}
                 id="base_edge"
                 placeholder={PLACEHOLDERS.number}
@@ -76,7 +83,6 @@ const SquarePyramidSurfaceArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="base_edge_unit"
                 value={values.base_edge_unit}
                 onChange={handleChange('base_edge_unit')}
@@ -84,8 +90,8 @@ const SquarePyramidSurfaceArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -94,26 +100,19 @@ const SquarePyramidSurfaceArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
               <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Base Edge: {Result.base_edge}</Typography>
+              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
+              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
             </div>
 
           </form>

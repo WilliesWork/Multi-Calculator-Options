@@ -1,13 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { TriangleAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const TriangleArea = () => {
   const classes = useStyles()
@@ -22,8 +23,11 @@ const TriangleArea = () => {
     sideC_unit: "",
   })
   const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-    Area: 0
+    area: 0,
+    sideA: 0,
+    sideB: 0,
+    sideC: 0,
+    unit: ''
   })
 
   return (
@@ -51,20 +55,24 @@ const TriangleArea = () => {
             sideB_unit,
             sideC,
             sideC_unit,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'TriangleArea'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateTriangleArea(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: TriangleArea } = await calculateMath(payload)
+            console.log('=====>', TriangleArea)
+            const { area, unit, sideA, sideB, sideC
+            } = TriangleArea
+            if (typeof TriangleArea === 'object') {
+              setResult({
+                area: area,
+                sideA: sideA,
+                sideB: sideB,
+                sideC: sideC,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -73,8 +81,8 @@ const TriangleArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.sideA} />
               <CustomForm
-                label={LABELS.sideA}
                 type={INPUT_TYPE.number}
                 id="sideA"
                 placeholder={PLACEHOLDERS.number}
@@ -83,7 +91,6 @@ const TriangleArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="sideA_unit"
                 value={values.sideA_unit}
                 onChange={handleChange('sideA_unit')}
@@ -91,8 +98,8 @@ const TriangleArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.sideB} />
               <CustomForm
-                label={LABELS.sideB}
                 type={INPUT_TYPE.number}
                 id="sideB"
                 placeholder={PLACEHOLDERS.number}
@@ -101,7 +108,6 @@ const TriangleArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="sideB_unit"
                 value={values.sideB_unit}
                 onChange={handleChange('sideB_unit')}
@@ -109,8 +115,8 @@ const TriangleArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.sideC} />
               <CustomForm
-                label={LABELS.sideC}
                 type={INPUT_TYPE.number}
                 id="sideC"
                 placeholder={PLACEHOLDERS.number}
@@ -119,26 +125,20 @@ const TriangleArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="sideC_unit"
                 value={values.sideC_unit}
                 onChange={handleChange('sideC_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Area: {Result.area}</Typography>
+              <Typography variant="subtitle1"> Side A: {Result.sideA}</Typography>
+              <Typography variant="subtitle1"> Side B: {Result.sideB}</Typography>
+              <Typography variant="subtitle1"> Side C: {Result.sideC}</Typography>
+              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
             </div>
 
           </form>

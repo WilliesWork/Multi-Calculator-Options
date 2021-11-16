@@ -7,32 +7,12 @@ import Typography from "@material-ui/core/Typography";
 import useStyles from "../../../Styling/CustomStyles";
 import {
   CircleArea,
-  ConeArea,
-  CubeArea,
-  CylindricalTank,
   EllipseArea,
   ParallelogramArea,
   RectangularArea,
   SectorArea,
   TrapezoidArea,
   TriangleArea,
-  BallSurfaceArea,
-  CapsuleSurfaceArea,
-  ConicalFrustrumSurfaceArea,
-  EllipsoidSurfaceArea,
-  SphericalCapSurfaceArea,
-  SquarePyramidSurfaceArea,
-  CapsuleVolume,
-  ConeVolume,
-  ConicalFrustumVolume,
-  CubeVolume,
-  CylinderVolume,
-  EllipsoidVolume,
-  RectangularTankVolume,
-  SphereVolume,
-  SphericalCapVolume,
-  SquarePyramidVolume,
-  TubeVolume,
 } from "../index";
 
 function Area() {
@@ -50,24 +30,6 @@ function Area() {
             <Grid item xs={12}>
               <Paper className={classes.paper2}>
                 <CircleArea />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <ConeArea />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <CubeArea />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <CylindricalTank />
               </Paper>
             </Grid>
 

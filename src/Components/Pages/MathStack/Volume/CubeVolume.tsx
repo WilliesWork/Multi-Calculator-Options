@@ -1,15 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { CubeVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
-import { AxiosError } from 'axios'
 
 const CubeVolume = () => {
   const classes = useStyles()
@@ -17,10 +16,12 @@ const CubeVolume = () => {
   console.log(measures)
   const [initialFormValues] = React.useState({
     edge_length: "",
-    edge_length_unit: "",
+    edge_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0
+    Volume: 0,
+    edge_length: 0,
+    units: '',
   })
 
   return (
@@ -35,36 +36,37 @@ const CubeVolume = () => {
         initialValues={initialFormValues}
         onSubmit={async ({
           edge_length,
-          edge_length_unit
+          edge_unit
         }, { setSubmitting, resetForm }) => {
           const payload: CubeVolumeCalculatorI = {
             edge_length,
-            edge_length_unit,
+            edge_unit,
             method: 'CubeVolumeCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
             const { payload: cubeVolume } = await calculateMath(payload)
             console.log('=====>', cubeVolume)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { volume, units, edge_length
+            } = cubeVolume
+            if (typeof cubeVolume === 'object') {
+              setResult({
+                Volume: volume,
+                edge_length: edge_length,
+                units: units
+              })
+            }
+            resetForm()
           } catch (err) {
-            const { response } = err as AxiosError
-            console.log('====>', response)
+            console.log('====>', err)
           }
         }}
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.edgeLength} />
               <CustomForm
-                label={LABELS.edgeLength}
                 type={INPUT_TYPE.number}
                 id="edge_length"
                 placeholder={PLACEHOLDERS.number}
@@ -73,33 +75,26 @@ const CubeVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
-                id="edge_length_unit"
-                value={values.edge_length_unit}
-                onChange={handleChange('edge_length_unit')}
+                id="edge_unit"
+                value={values.edge_unit}
+                onChange={handleChange('edge_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Edge Length: {Result.edge_length}</Typography>
+              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
+
             </div>
 
           </form>
         )}
 
       </Formik>
-    </div>
+    </div >
   )
 }
 

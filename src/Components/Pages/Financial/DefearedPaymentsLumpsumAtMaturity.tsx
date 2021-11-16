@@ -44,7 +44,7 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
             loan_amount,
             number_of_months,
             number_of_years,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'DeferedPaymentLumpSumAtMaturity'
           }
           console.log(JSON.stringify(payload))
           try {

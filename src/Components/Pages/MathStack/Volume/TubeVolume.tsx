@@ -1,13 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { TubeVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const TubeVolume = () => {
   const classes = useStyles()
@@ -22,7 +23,11 @@ const TubeVolume = () => {
     length_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0
+    Volume: 0,
+    outer_diameter: 0,
+    inner_diameter: 0,
+    length: 0,
+    units: ''
   })
 
   return (
@@ -54,16 +59,19 @@ const TubeVolume = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateTubeVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: tubeVolume } = await calculateMath(payload)
+            console.log('=====>', tubeVolume)
+            const { volume, units, outer_diameter, inner_diameter, length } = tubeVolume
+            if (typeof tubeVolume === 'object') {
+              setResult({
+                Volume: volume,
+                outer_diameter: outer_diameter,
+                inner_diameter: inner_diameter,
+                length: length,
+                units: units
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -72,8 +80,8 @@ const TubeVolume = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.outerDiameter} />
               <CustomForm
-                label={LABELS.outerDiameter}
                 type={INPUT_TYPE.number}
                 id="outer_diameter"
                 placeholder={PLACEHOLDERS.number}
@@ -82,7 +90,6 @@ const TubeVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="outer_diameter_unit"
                 value={values.outer_diameter_unit}
                 onChange={handleChange('outer_diameter_unit')}
@@ -90,8 +97,8 @@ const TubeVolume = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.innerDiameter} />
               <CustomForm
-                label={LABELS.innerDiameter}
                 type={INPUT_TYPE.number}
                 id="inner_diameter"
                 placeholder={PLACEHOLDERS.number}
@@ -100,7 +107,6 @@ const TubeVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="inner_diameter_unit"
                 value={values.inner_diameter_unit}
                 onChange={handleChange('inner_diameter_unit')}
@@ -108,8 +114,8 @@ const TubeVolume = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.length} />
               <CustomForm
-                label={LABELS.length}
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
@@ -118,26 +124,20 @@ const TubeVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="length_unit"
                 value={values.length_unit}
                 onChange={handleChange('length_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Outer Diameter: {Result.outer_diameter}</Typography>
+              <Typography variant="subtitle1"> Inner Diameter: {Result.inner_diameter}</Typography>
+              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
+
             </div>
 
           </form>

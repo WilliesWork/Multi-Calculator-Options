@@ -38,7 +38,7 @@ const DueDateMittendorfWilliam = () => {
           const payload: DueDateMittendorfWilliamI = {
             first_date_of_last_period,
             type,
-            //  method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -100,7 +100,7 @@ const DueDateMittendorfWilliam = () => {
 
       </Formik>
 
-    </div>
+    </div >
   )
 }
 

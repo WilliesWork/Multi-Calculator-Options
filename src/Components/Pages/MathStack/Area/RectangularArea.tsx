@@ -1,14 +1,14 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { RectangularAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
-import { Units } from '../../../../Common/MathUnits'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const RectangularArea = () => {
   const classes = useStyles();
@@ -23,8 +23,11 @@ const RectangularArea = () => {
     height_unit: ''
   })
   const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-    Area: 0
+    area: 0,
+    length: 0,
+    width: 0,
+    height: 0,
+    unit: ''
   })
 
   return (
@@ -44,8 +47,6 @@ const RectangularArea = () => {
           width_unit,
           height,
           height_unit
-
-
         }, { setSubmitting, resetForm }) => {
           const payload: RectangularAreaI = {
             length,
@@ -54,20 +55,24 @@ const RectangularArea = () => {
             width_unit,
             height,
             height_unit,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'rectangleArea'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateRectangularArea(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: rectangleArea } = await calculateMath(payload)
+            console.log('=====>', rectangleArea)
+            const { area, unit, length, width, height
+            } = rectangleArea
+            if (typeof rectangleArea === 'object') {
+              setResult({
+                area: area,
+                length: length,
+                width: width,
+                height: height,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -77,8 +82,8 @@ const RectangularArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.length} />
               <CustomForm
-                label={LABELS.length}
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
@@ -87,7 +92,6 @@ const RectangularArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="length_unit"
                 value={values.length_unit}
                 onChange={handleChange('length_unit')}
@@ -96,8 +100,8 @@ const RectangularArea = () => {
 
 
             <div className="form-row">
+              <Label title={LABELS.width} />
               <CustomForm
-                label={LABELS.width}
                 type={INPUT_TYPE.number}
                 id="width"
                 placeholder={PLACEHOLDERS.number}
@@ -106,7 +110,6 @@ const RectangularArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="width_unit"
                 value={values.width_unit}
                 onChange={handleChange('width_unit')}
@@ -114,8 +117,8 @@ const RectangularArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -124,7 +127,6 @@ const RectangularArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -132,19 +134,14 @@ const RectangularArea = () => {
             </div>
 
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Area: {Result.area}</Typography>
+              <Typography variant="subtitle1"> Length: {Result.length}</Typography>
+              <Typography variant="subtitle1"> Width: {Result.width}</Typography>
+              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
+              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
             </div>
 
           </form>

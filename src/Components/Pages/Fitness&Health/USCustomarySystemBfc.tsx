@@ -62,7 +62,7 @@ const USCustomarySystemBfc = () => {
             waist_unit,
             abdomen,
             gender,
-            //   method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

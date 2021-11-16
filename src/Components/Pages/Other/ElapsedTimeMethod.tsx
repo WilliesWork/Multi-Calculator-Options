@@ -7,7 +7,8 @@ import { ElapsedTimeMethodI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const ElapsedTimeMethod = () => {
   const classes = useStyles()
@@ -20,7 +21,8 @@ const ElapsedTimeMethod = () => {
     time_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    elapsedTime: 0,
+    unit: ''
   })
 
   return (
@@ -44,20 +46,21 @@ const ElapsedTimeMethod = () => {
             weight_unit,
             time,
             time_unit,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'TheElapsedTimeMethod'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: elapsedTimeMethod } = await calculateOthers(payload)
+            console.log('=====>', elapsedTimeMethod)
+            const { elapsedTime, unit,
+            } = elapsedTimeMethod
+            if (typeof elapsedTimeMethod === 'object') {
+              setResult({
+                elapsedTime: elapsedTime,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -66,8 +69,8 @@ const ElapsedTimeMethod = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.weight} />
               <CustomForm
-                label={LABELS.weight}
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}
@@ -76,7 +79,6 @@ const ElapsedTimeMethod = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="weight_unit"
                 value={values.weight_unit}
                 onChange={handleChange('weight_unit')}
@@ -84,8 +86,8 @@ const ElapsedTimeMethod = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.time} />
               <CustomForm
-                label={LABELS.time}
                 type={INPUT_TYPE.number}
                 id="time"
                 placeholder={PLACEHOLDERS.number}
@@ -94,27 +96,16 @@ const ElapsedTimeMethod = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="time_unit"
                 value={values.time_unit}
                 onChange={handleChange('time_unit')}
               />
             </div>
 
-
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Elapsed Time: {Result.elapsedTime}{Result.unit}</Typography>
             </div>
 
           </form>

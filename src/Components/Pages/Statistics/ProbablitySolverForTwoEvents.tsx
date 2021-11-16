@@ -1,13 +1,14 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
+
 import { ProbablitySolverForTwoEventsI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import CustomForm from '../../custom/CustomForm'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { calculateStatistics } from '../../../Services/AppCalculatorsApi'
+import { CustomBtn, Label, CustomForm } from '../../custom'
 
 const ProbablitySolverForTwoEvents = () => {
   const classes = useStyles()
@@ -24,7 +25,8 @@ const ProbablitySolverForTwoEvents = () => {
     probability_of_neither_a_nor_b_occuring: '',
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    probability: 0,
+    unit: ''
   })
 
   return (
@@ -56,20 +58,20 @@ const ProbablitySolverForTwoEvents = () => {
             probability_that_a_or_b_or_both_occur,
             probability_that_a_or_b_occurs_but_not_both,
             probability_of_neither_a_nor_b_occuring,
-            //  method: 'ProbablitySolverForTwoEvents'
+            method: 'ProbabilitySolverForTwoEvents'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: probabilitySolverForTwoEvents } = await calculateStatistics(payload)
+            console.log('=====>', probabilitySolverForTwoEvents)
+            const { probability, unit } = probabilitySolverForTwoEvents
+            if (typeof probabilitySolverForTwoEvents === 'object') {
+              setResult({
+                probability: probability,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -78,91 +80,100 @@ const ProbablitySolverForTwoEvents = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
 
-            <CustomForm
-              label={LABELS.probabilityOfA}
-              type={INPUT_TYPE.number}
-              id="probability_of_a"
-              placeholder={PLACEHOLDERS.number}
-              value={values.probability_of_a}
-              onChange={handleChange}
-            />
-
-            <CustomForm
-              label={LABELS.probabilityOfB}
-              type={INPUT_TYPE.number}
-              id="probability_of_b"
-              placeholder={PLACEHOLDERS.number}
-              value={values.probability_of_b}
-              onChange={handleChange}
-            />
-
-            <CustomForm
-              label={LABELS.probabilityOfANotOccuring}
-              type={INPUT_TYPE.number}
-              id="probability_of_a_not_occuring"
-              placeholder={PLACEHOLDERS.number}
-              value={values.probability_of_a_not_occuring}
-              onChange={handleChange}
-            />
-
-            <CustomForm
-              label={LABELS.probabilityOfBNotOccuring}
-              type={INPUT_TYPE.number}
-              id="probability_of_b_not_occuring"
-              placeholder={PLACEHOLDERS.number}
-              value={values.probability_of_b_not_occuring}
-              onChange={handleChange}
-            />
-
-            <CustomForm
-              label={LABELS.probabilityOfAAndBBothOccuring}
-              type={INPUT_TYPE.number}
-              id="probability_of_a_and_b_both_occuring"
-              placeholder={PLACEHOLDERS.number}
-              value={values.probability_of_a_and_b_both_occuring}
-              onChange={handleChange}
-            />
-
-            <CustomForm
-              label={LABELS.probabilityThatAOrBOrBothOccur}
-              type={INPUT_TYPE.number}
-              id="probability_that_a_or_b_or_both_occur"
-              placeholder={PLACEHOLDERS.number}
-              value={values.probability_that_a_or_b_or_both_occur}
-              onChange={handleChange}
-            />
-
-            <CustomForm
-              label={LABELS.probabilityThatAOrBOccursButNotBoth}
-              type={INPUT_TYPE.number}
-              id="probability_that_a_or_b_occurs_but_not_both"
-              placeholder={PLACEHOLDERS.number}
-              value={values.probability_that_a_or_b_occurs_but_not_both}
-              onChange={handleChange}
-            />
-
-            <CustomForm
-              label={LABELS.probabilityOfNeitherANorBOccuring}
-              type={INPUT_TYPE.number}
-              id="probability_of_neither_a_nor_b_occuring"
-              placeholder={PLACEHOLDERS.number}
-              value={values.probability_of_neither_a_nor_b_occuring}
-              onChange={handleChange}
-            />
-
-
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
+            <div className="form-row">
+              <Label title={LABELS.probabilityOfA} />
+              <CustomForm
+                type={INPUT_TYPE.number}
+                id="probability_of_a"
+                placeholder={PLACEHOLDERS.number}
+                value={values.probability_of_a}
+                onChange={handleChange}
+              />
             </div>
+
+            <div className="form-row">
+              <Label title={LABELS.probabilityOfB} />
+              <CustomForm
+                type={INPUT_TYPE.number}
+                id="probability_of_b"
+                placeholder={PLACEHOLDERS.number}
+                value={values.probability_of_b}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <Label title={LABELS.probabilityOfANotOccuring} />
+              <CustomForm
+                type={INPUT_TYPE.number}
+                id="probability_of_a_not_occuring"
+                placeholder={PLACEHOLDERS.number}
+                value={values.probability_of_a_not_occuring}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <Label title={LABELS.probabilityOfBNotOccuring} />
+              <CustomForm
+                type={INPUT_TYPE.number}
+                id="probability_of_b_not_occuring"
+                placeholder={PLACEHOLDERS.number}
+                value={values.probability_of_b_not_occuring}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <Label title={LABELS.probabilityOfAAndBBothOccuring} />
+              <CustomForm
+                type={INPUT_TYPE.number}
+                id="probability_of_a_and_b_both_occuring"
+                placeholder={PLACEHOLDERS.number}
+                value={values.probability_of_a_and_b_both_occuring}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <Label title={LABELS.probabilityThatAOrBOrBothOccur} />
+              <CustomForm
+                type={INPUT_TYPE.number}
+                id="probability_that_a_or_b_or_both_occur"
+                placeholder={PLACEHOLDERS.number}
+                value={values.probability_that_a_or_b_or_both_occur}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <Label title={LABELS.probabilityThatAOrBOccursButNotBoth} />
+              <CustomForm
+                type={INPUT_TYPE.number}
+                id="probability_that_a_or_b_occurs_but_not_both"
+                placeholder={PLACEHOLDERS.number}
+                value={values.probability_that_a_or_b_occurs_but_not_both}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <Label title={LABELS.probabilityOfNeitherANorBOccuring} />
+              <CustomForm
+                type={INPUT_TYPE.number}
+                id="probability_of_neither_a_nor_b_occuring"
+                placeholder={PLACEHOLDERS.number}
+                value={values.probability_of_neither_a_nor_b_occuring}
+                onChange={handleChange}
+              />
+            </div>
+
+            <CustomBtn />
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">
+                Probability: {Result.probability}{Result.unit}
+              </Typography>
             </div>
 
           </form>

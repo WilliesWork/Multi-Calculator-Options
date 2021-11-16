@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux'
 import { CylinderVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const CylinderVolume = () => {
@@ -22,10 +22,8 @@ const CylinderVolume = () => {
   })
   const [Result, setResult] = React.useState({
     Volume: 0,
-    radius_unit: '',
-    radius: '',
+    radius: 0,
     height: 0,
-    height_unit: '',
     units: ''
   })
 
@@ -56,14 +54,12 @@ const CylinderVolume = () => {
           try {
             const { payload: cylindricalVolume } = await calculateMath(payload)
             console.log('=====>', cylindricalVolume)
-            const { volume, units, radius, radius_unit, height, height_unit } = cylindricalVolume
+            const { volume, units, radius, height } = cylindricalVolume
             if (typeof cylindricalVolume === 'object') {
               setResult({
                 Volume: volume,
                 radius: radius,
-                radius_unit: radius_unit,
                 height: height,
-                height_unit: height_unit,
                 units: units
               })
             }
@@ -76,8 +72,8 @@ const CylinderVolume = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.radius} />
               <CustomForm
-                label={LABELS.radius}
                 type={INPUT_TYPE.number}
                 id="radius"
                 placeholder={PLACEHOLDERS.number}
@@ -86,7 +82,6 @@ const CylinderVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="radius_unit"
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
@@ -94,8 +89,8 @@ const CylinderVolume = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -104,30 +99,18 @@ const CylinderVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
               <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
-              <Typography variant="subtitle1"> Radius Unit: {Result.radius_unit}</Typography>
               <Typography variant="subtitle1"> height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> height unit: {Result.height_unit}</Typography>
               <Typography variant="subtitle1"> Units: {Result.units}</Typography>
 
 

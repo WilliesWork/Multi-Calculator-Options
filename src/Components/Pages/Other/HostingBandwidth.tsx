@@ -1,13 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { HostingBandwidthI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const HostingBandwidth = () => {
   const classes = useStyles()
@@ -18,7 +19,8 @@ const HostingBandwidth = () => {
     monthly_usage_unit: '',
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    hostingBandwidthPerMonth: 0,
+    unit: ''
   })
 
   return (
@@ -38,20 +40,21 @@ const HostingBandwidth = () => {
           const payload: HostingBandwidthI = {
             monthly_usage,
             monthly_usage_unit,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'HostingBandwidthConverter'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: hostingBandwidthConverter } = await calculateOthers(payload)
+            console.log('=====>', hostingBandwidthConverter)
+            const { hostingBandwidthPerMonth, unit,
+            } = hostingBandwidthConverter
+            if (typeof hostingBandwidthConverter === 'object') {
+              setResult({
+                hostingBandwidthPerMonth: hostingBandwidthPerMonth,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -60,8 +63,8 @@ const HostingBandwidth = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.resistanceValues} />
               <CustomForm
-                label={LABELS.resistanceValues}
                 type={INPUT_TYPE.number}
                 id="monthly_usage"
                 placeholder={PLACEHOLDERS.number}
@@ -70,27 +73,16 @@ const HostingBandwidth = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="monthly_usage_unit"
                 value={values.monthly_usage_unit}
                 onChange={handleChange('monthly_usage_unit')}
               />
             </div>
 
-
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Hosting bandwidth per month: {Result.hostingBandwidthPerMonth}{Result.unit}</Typography>
             </div>
 
           </form>

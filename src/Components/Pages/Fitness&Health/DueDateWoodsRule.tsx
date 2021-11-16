@@ -41,7 +41,7 @@ const DueDateWoodsRule = () => {
             first_date_of_last_period,
             days,
             type,
-            //  method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

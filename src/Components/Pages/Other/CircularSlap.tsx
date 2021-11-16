@@ -1,13 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { CircularSlapI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const CircularSlap = () => {
   const classes = useStyles()
@@ -23,7 +24,8 @@ const CircularSlap = () => {
     quantity: ""
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    concreteNeeded: 0,
+    unit: ''
   })
 
   return (
@@ -52,21 +54,21 @@ const CircularSlap = () => {
             outer_diameter_unit,
             inner_diameter,
             inner_diameter_unit,
-            quantity
-            // method: 'ballSurfaceAreaCalculator'
+            quantity,
+            method: 'CircularSlabOrTubeConcreteCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: circularSlabOrTubeConcrete } = await calculateOthers(payload)
+            console.log('=====>', circularSlabOrTubeConcrete)
+            const { concreteNeeded, unit } = circularSlabOrTubeConcrete
+            if (typeof circularSlabOrTubeConcrete === 'object') {
+              setResult({
+                concreteNeeded: concreteNeeded,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -75,8 +77,8 @@ const CircularSlap = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.length} />
               <CustomForm
-                label={LABELS.length}
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
@@ -85,7 +87,6 @@ const CircularSlap = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="length_unit"
                 value={values.length_unit}
                 onChange={handleChange('length_unit')}
@@ -93,8 +94,8 @@ const CircularSlap = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.outerDiameter} />
               <CustomForm
-                label={LABELS.outerDiameter}
                 type={INPUT_TYPE.number}
                 id="outer_diameter"
                 placeholder={PLACEHOLDERS.number}
@@ -103,7 +104,6 @@ const CircularSlap = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="outer_diameter_unit"
                 value={values.outer_diameter_unit}
                 onChange={handleChange('outer_diameter_unit')}
@@ -111,8 +111,8 @@ const CircularSlap = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.innerDiameter} />
               <CustomForm
-                label={LABELS.innerDiameter}
                 type={INPUT_TYPE.number}
                 id="inner_diameter"
                 placeholder={PLACEHOLDERS.number}
@@ -121,7 +121,6 @@ const CircularSlap = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="inner_diameter_unit"
                 value={values.inner_diameter_unit}
                 onChange={handleChange('inner_diameter_unit')}
@@ -129,8 +128,8 @@ const CircularSlap = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.quantity} />
               <CustomForm
-                label={LABELS.quantity}
                 type={INPUT_TYPE.number}
                 id="quantity"
                 placeholder={PLACEHOLDERS.number}
@@ -139,19 +138,10 @@ const CircularSlap = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Amount of concrete needed: {Result.concreteNeeded}{Result.unit}</Typography>
             </div>
 
           </form>

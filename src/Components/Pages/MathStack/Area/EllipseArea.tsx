@@ -1,14 +1,15 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { EllipseAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
+
 
 const EllipseArea = () => {
   const classes = useStyles()
@@ -21,10 +22,10 @@ const EllipseArea = () => {
     semi_major_axes_b_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Major_axes_a: 0,
-    Major_axes_b: 0,
-    Area: 0,
-    units: ''
+    semi_major_axes_a: 0,
+    semi_major_axes_b: 0,
+    area: 0,
+    unit: ''
   })
 
   return (
@@ -54,13 +55,14 @@ const EllipseArea = () => {
           try {
             const { payload: ellipseArea } = await calculateMath(payload)
             console.log('=====>', ellipseArea)
-            const {area, units, submittedsemi_major_axes_a, submitted_semi_major_axes_b} = ellipseArea
+            const { area, unit, semi_major_axes_a, semi_major_axes_b, height
+            } = ellipseArea
             if (typeof ellipseArea === 'object') {
               setResult({
-               Area: area,
-               Major_axes_a: submittedsemi_major_axes_a,
-               Major_axes_b: submitted_semi_major_axes_b,
-               units: units
+                area: area,
+                semi_major_axes_a: semi_major_axes_a,
+                semi_major_axes_b: semi_major_axes_b,
+                unit: unit
               })
             }
             resetForm()
@@ -72,8 +74,8 @@ const EllipseArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.semiMajorAxesA} />
               <CustomForm
-                label={LABELS.semiMajorAxesA}
                 type={INPUT_TYPE.number}
                 id="semi_major_axes_a"
                 placeholder={PLACEHOLDERS.number}
@@ -82,7 +84,6 @@ const EllipseArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="semi_major_axes_a_unit"
                 value={values.semi_major_axes_a_unit}
                 onChange={handleChange('semi_major_axes_a_unit')}
@@ -90,8 +91,8 @@ const EllipseArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.semiMajorAxesB} />
               <CustomForm
-                label={LABELS.semiMajorAxesB}
                 type={INPUT_TYPE.number}
                 id="semi_major_axes_b"
                 placeholder={PLACEHOLDERS.number}
@@ -100,29 +101,19 @@ const EllipseArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="semi_major_axes_b_unit"
                 value={values.semi_major_axes_b_unit}
                 onChange={handleChange('semi_major_axes_b_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
-              <Typography variant="subtitle1"> Major axes A: {Result.Major_axes_a}</Typography>
-              <Typography variant="subtitle1"> Major axes B: {Result.Major_axes_b}</Typography>
-              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
+              <Typography variant="subtitle1">Area: {Result.area}</Typography>
+              <Typography variant="subtitle1">Semi major axes A: {Result.semi_major_axes_a}</Typography>
+              <Typography variant="subtitle1">Semi major axes B: {Result.semi_major_axes_b}</Typography>
+              <Typography variant="subtitle1">Units: {Result.unit}</Typography>
 
             </div>
 

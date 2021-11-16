@@ -1,13 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { CurbAndGutterBarrierI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomForm, CustomSelect, Label, CustomBtn } from '../../custom'
+import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const CurbAndGutterBarrier = () => {
   const classes = useStyles()
@@ -27,7 +28,8 @@ const CurbAndGutterBarrier = () => {
     quantity: '',
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    concreteNeeded: 0,
+    unit: ''
   })
 
   return (
@@ -65,20 +67,20 @@ const CurbAndGutterBarrier = () => {
             length,
             length_unit,
             quantity,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'CurbAndGutterBarrierConcreteCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: trapSpeedMethod } = await calculateOthers(payload)
+            console.log('=====>', trapSpeedMethod)
+            const { concreteNeeded, unit, } = trapSpeedMethod
+            if (typeof trapSpeedMethod === 'object') {
+              setResult({
+                concreteNeeded: concreteNeeded,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -88,8 +90,8 @@ const CurbAndGutterBarrier = () => {
           <form onSubmit={handleSubmit} className="form-container">
 
             <div className="form-row">
+              <Label title={LABELS.curbDepth} />
               <CustomForm
-                label={LABELS.curbDepth}
                 type={INPUT_TYPE.number}
                 id="curb_depth"
                 placeholder={PLACEHOLDERS.number}
@@ -98,7 +100,6 @@ const CurbAndGutterBarrier = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="curb_depth_unit"
                 value={values.curb_depth_unit}
                 onChange={handleChange('curb_depth_unit')}
@@ -106,8 +107,8 @@ const CurbAndGutterBarrier = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.curbHeight} />
               <CustomForm
-                label={LABELS.curbHeight}
                 type={INPUT_TYPE.number}
                 id="curb_height"
                 placeholder={PLACEHOLDERS.number}
@@ -116,7 +117,6 @@ const CurbAndGutterBarrier = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="curb_height_unit"
                 value={values.curb_height_unit}
                 onChange={handleChange('curb_height_unit')}
@@ -124,8 +124,8 @@ const CurbAndGutterBarrier = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.flagThickness} />
               <CustomForm
-                label={LABELS.flagThickness}
                 type={INPUT_TYPE.number}
                 id="flag_thickness"
                 placeholder={PLACEHOLDERS.number}
@@ -134,7 +134,6 @@ const CurbAndGutterBarrier = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="flag_thickness_unit"
                 value={values.flag_thickness_unit}
                 onChange={handleChange('flag_thickness_unit')}
@@ -142,8 +141,8 @@ const CurbAndGutterBarrier = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.gutterWidth} />
               <CustomForm
-                label={LABELS.gutterWidth}
                 type={INPUT_TYPE.number}
                 id="gutter_width"
                 placeholder={PLACEHOLDERS.number}
@@ -152,7 +151,6 @@ const CurbAndGutterBarrier = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="gutter_width_unit"
                 value={values.gutter_width_unit}
                 onChange={handleChange('gutter_width_unit')}
@@ -160,8 +158,8 @@ const CurbAndGutterBarrier = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.length} />
               <CustomForm
-                label={LABELS.length}
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
@@ -170,7 +168,6 @@ const CurbAndGutterBarrier = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="length_unit"
                 value={values.length_unit}
                 onChange={handleChange('length_unit')}
@@ -178,8 +175,8 @@ const CurbAndGutterBarrier = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.quantity} />
               <CustomForm
-                label={LABELS.quantity}
                 type={INPUT_TYPE.number}
                 id="quantity"
                 placeholder={PLACEHOLDERS.number}
@@ -188,19 +185,10 @@ const CurbAndGutterBarrier = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Amount of concrete needed: {Result.concreteNeeded}{Result.unit}</Typography>
             </div>
 
           </form>

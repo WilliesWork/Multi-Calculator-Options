@@ -1,13 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { ConductorResitorI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const ConductorResitor = () => {
   const classes = useStyles()
@@ -21,7 +22,8 @@ const ConductorResitor = () => {
     conductivity: ""
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    resistance: 0,
+    unit: ''
   })
 
   return (
@@ -46,21 +48,22 @@ const ConductorResitor = () => {
             length_unit,
             diameter,
             diameter_unit,
-            conductivity
-            // method: 'ballSurfaceAreaCalculator'
+            conductivity,
+            method: 'ResistanceOfAConductor'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: resistanceOfAConductor } = await calculateOthers(payload)
+            console.log('=====>', resistanceOfAConductor)
+            const { resistance, unit,
+            } = resistanceOfAConductor
+            if (typeof resistanceOfAConductor === 'object') {
+              setResult({
+                resistance: resistance,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -69,8 +72,8 @@ const ConductorResitor = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.length} />
               <CustomForm
-                label={LABELS.length}
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
@@ -79,7 +82,6 @@ const ConductorResitor = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="length_unit"
                 value={values.length_unit}
                 onChange={handleChange('length_unit')}
@@ -87,8 +89,8 @@ const ConductorResitor = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.diameter} />
               <CustomForm
-                label={LABELS.diameter}
                 type={INPUT_TYPE.number}
                 id="diameter"
                 placeholder={PLACEHOLDERS.number}
@@ -97,7 +99,6 @@ const ConductorResitor = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="diameter_unit"
                 value={values.diameter_unit}
                 onChange={handleChange('diameter_unit')}
@@ -106,8 +107,8 @@ const ConductorResitor = () => {
 
 
             <div className="form-row">
+              <Label title={LABELS.conductivity} />
               <CustomForm
-                label={LABELS.conductivity}
                 type={INPUT_TYPE.number}
                 id="conductivity"
                 placeholder={PLACEHOLDERS.number}
@@ -116,19 +117,10 @@ const ConductorResitor = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Resistance: {Result.resistance}{Result.unit}</Typography>
             </div>
 
           </form>

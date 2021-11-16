@@ -1,18 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { ConicalFrustumVolumeI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-<<<<<<< HEAD
-import { CustomForm, CustomSelect, Label } from '../../../custom'
-=======
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
->>>>>>> 0516ca12cf9a019fcf5affa722a7b58d59cf6a97
 
 const ConicalFrustumVolume = () => {
   const classes = useStyles()
@@ -65,13 +61,13 @@ const ConicalFrustumVolume = () => {
           try {
             const { payload: conicalFrustrumVolume } = await calculateMath(payload)
             console.log('=====>', conicalFrustrumVolume)
-            const { volume, units, r, R, h } = conicalFrustrumVolume
+            const { volume, units, topR, bottomR, height } = conicalFrustrumVolume
             if (typeof conicalFrustrumVolume === 'object') {
               setResult({
                 Volume: volume,
-                topRadius: R,
-                bottomRadius: R,
-                height: h,
+                topRadius: topR,
+                bottomRadius: bottomR,
+                height: height,
                 units: units
               })
             }
@@ -118,7 +114,6 @@ const ConicalFrustumVolume = () => {
             </div>
 
             <div className="form-row">
-              <Label title={LABELS.topRadius} />
               <Label title={LABELS.height} />
               <CustomForm
                 type={INPUT_TYPE.number}
@@ -135,16 +130,7 @@ const ConicalFrustumVolume = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>

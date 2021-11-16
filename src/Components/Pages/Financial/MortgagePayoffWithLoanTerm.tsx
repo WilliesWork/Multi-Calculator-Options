@@ -44,7 +44,7 @@ const MortgagePayoffWithLoanTerm = () => {
             total_payments_years,
             payments_made_years,
             loan_amount,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'mortagePayOffCalculatorWithLoanTerm'
           }
           console.log(JSON.stringify(payload))
           try {

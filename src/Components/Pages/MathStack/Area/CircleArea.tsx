@@ -1,13 +1,13 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { CircleAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const CircleArea = () => {
@@ -49,11 +49,11 @@ const CircleArea = () => {
             const { payload: circleArea } = await calculateMath(payload)
             console.log('=====>', circleArea)
             if (typeof circleArea === 'object') {
-              const {area, units, submittedradius, submittedunit} = circleArea
+              const { area, units, submittedradius, submittedunit } = circleArea
               setResult({
                 Area: area,
                 units: units,
-                Submitted_radius : submittedradius,
+                Submitted_radius: submittedradius,
                 Submitted_unit: submittedunit
               })
             }
@@ -66,8 +66,8 @@ const CircleArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.radius} />
               <CustomForm
-                label={LABELS.radius}
                 type={INPUT_TYPE.number}
                 id="radius"
                 placeholder={PLACEHOLDERS.number}
@@ -76,30 +76,19 @@ const CircleArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="radius_unit"
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
               <Typography variant="subtitle1"> Submitted Radius: {Result.Submitted_radius}</Typography>
               <Typography variant="subtitle1"> Submitted Unit: {Result.Submitted_unit}</Typography>
               <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-
             </div>
 
           </form>

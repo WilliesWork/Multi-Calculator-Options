@@ -44,7 +44,7 @@ const PaybackWithinTimeframe = () => {
             credit_card_balance,
             months,
             year,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'PaybackWithinCertainTimeframe'
           }
           console.log(JSON.stringify(payload))
           try {

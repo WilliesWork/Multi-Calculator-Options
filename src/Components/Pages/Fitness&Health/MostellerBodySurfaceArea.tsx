@@ -43,8 +43,8 @@ const MostellerBodySurfaceArea = () => {
             height,
             height_unit,
             weight,
-            weight_unit
-            // method: 'ballSurfaceAreaCalculator'
+            weight_unit,
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

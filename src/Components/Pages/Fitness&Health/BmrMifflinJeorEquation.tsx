@@ -49,8 +49,8 @@ const BmrMifflinJeorEquation = () => {
             weight,
             weight_unit,
             gender,
-            age
-            // method: 'ballSurfaceAreaCalculator'
+            age,
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

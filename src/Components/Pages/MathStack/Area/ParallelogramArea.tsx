@@ -1,12 +1,14 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
-import { ParallelogramAreaI } from '../../../../Types'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
+
+import { ParallelogramAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const ParallelogramArea = () => {
   const classes = useStyles()
@@ -19,8 +21,10 @@ const ParallelogramArea = () => {
     height_unit: ''
   })
   const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-    Area: 0
+    area: 0,
+    breadth: 0,
+    height: 0,
+    unit: ''
   })
 
   return (
@@ -44,20 +48,23 @@ const ParallelogramArea = () => {
             breadth_unit,
             height,
             height_unit,
-            // method: 'ParallelogramAreaCalculator'
+            method: 'parallelogramArea'
           }
           console.log(JSON.stringify(payload))
           try {
-            //  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-            //   console.log('=====>', calsurfaceArea)
-            //   if (typeof calsurfaceArea === 'object') {
-            //     console.log(calsurfaceArea)
-            //     // setResult({
-            //     //   surfaceArea: calsurfaceArea,
-            //     //   Area: calsurfaceArea.Area
-            //     // })
-            //   }
-            //   resetForm() 
+            const { payload: parallelogramArea } = await calculateMath(payload)
+            console.log('=====>', parallelogramArea)
+            const { area, unit, breadth, height
+            } = parallelogramArea
+            if (typeof parallelogramArea === 'object') {
+              setResult({
+                area: area,
+                breadth: breadth,
+                height: height,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -66,8 +73,8 @@ const ParallelogramArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.breadth} />
               <CustomForm
-                label={LABELS.breadth}
                 type={INPUT_TYPE.number}
                 id="breadth"
                 placeholder={PLACEHOLDERS.number}
@@ -76,7 +83,6 @@ const ParallelogramArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="breadth_unit"
                 value={values.breadth_unit}
                 onChange={handleChange('breadth_unit')}
@@ -84,8 +90,8 @@ const ParallelogramArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -94,25 +100,20 @@ const ParallelogramArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Area: {Result.area}</Typography>
+              <Typography variant="subtitle1"> Breadth: {Result.breadth}</Typography>
+              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
+              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
+
             </div>
 
           </form>

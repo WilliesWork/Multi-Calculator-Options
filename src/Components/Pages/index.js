@@ -1,8 +1,5 @@
 // Area
 export { default as CircleArea } from "./MathStack/Area/CircleArea";
-export { default as ConeArea } from "./MathStack/Area/ConeArea";
-export { default as CubeArea } from "./MathStack/Area/CubeArea";
-export { default as CylindricalTank } from "./MathStack/Area/CylindricalTank";
 export { default as EllipseArea } from "./MathStack/Area/EllipseArea";
 export { default as ParallelogramArea } from "./MathStack/Area/ParallelogramArea";
 export { default as RectangularArea } from "./MathStack/Area/RectangularArea";
@@ -17,6 +14,9 @@ export { default as ConicalFrustrumSurfaceArea } from "./MathStack/SurfaceArea/C
 export { default as EllipsoidSurfaceArea } from "./MathStack/SurfaceArea/EllipsoidSurfaceArea";
 export { default as SphericalCapSurfaceArea } from "./MathStack/SurfaceArea/SphericalCapSurfaceArea";
 export { default as SquarePyramidSurfaceArea } from "./MathStack/SurfaceArea/SquarePyramidSurfaceArea";
+export { default as CylindricalTankSurfArea } from "./MathStack/SurfaceArea/CylindricalTankSurfArea";
+export { default as CubeSurfArea } from "./MathStack/SurfaceArea/CubeSurfArea";
+export { default as ConeSurfArea } from "./MathStack/SurfaceArea/ConeSurfArea";
 
 // Volume
 export { default as CapsuleVolume } from "./MathStack/Volume/CapsuleVolume";

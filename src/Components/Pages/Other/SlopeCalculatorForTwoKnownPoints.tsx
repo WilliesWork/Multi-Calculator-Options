@@ -7,7 +7,8 @@ import { SlopeCalculatorForTwoKnownPointsI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const SlopeCalculatorForTwoKnownPoints = () => {
   const classes = useStyles()
@@ -20,7 +21,8 @@ const SlopeCalculatorForTwoKnownPoints = () => {
     x_2: '',
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    slope: 0,
+    unit: ''
   })
 
   return (
@@ -44,20 +46,20 @@ const SlopeCalculatorForTwoKnownPoints = () => {
             y_2,
             x_1,
             x_2,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'IfThe2PointsAreKnownSlopeCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: slopeWithTwoKnownPoints } = await calculateOthers(payload)
+            console.log('=====>', slopeWithTwoKnownPoints)
+            const { slope, unit } = slopeWithTwoKnownPoints
+            if (typeof slopeWithTwoKnownPoints === 'object') {
+              setResult({
+                slope: slope,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -66,8 +68,8 @@ const SlopeCalculatorForTwoKnownPoints = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.x1} />
               <CustomForm
-                label={LABELS.x1}
                 type={INPUT_TYPE.number}
                 id="x_1"
                 placeholder={PLACEHOLDERS.number}
@@ -77,8 +79,8 @@ const SlopeCalculatorForTwoKnownPoints = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.y1} />
               <CustomForm
-                label={LABELS.y1}
                 type={INPUT_TYPE.number}
                 id="y_1"
                 placeholder={PLACEHOLDERS.number}
@@ -88,8 +90,8 @@ const SlopeCalculatorForTwoKnownPoints = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.x2} />
               <CustomForm
-                label={LABELS.x2}
                 type={INPUT_TYPE.number}
                 id="x_2"
                 placeholder={PLACEHOLDERS.number}
@@ -99,8 +101,8 @@ const SlopeCalculatorForTwoKnownPoints = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.y2} />
               <CustomForm
-                label={LABELS.y2}
                 type={INPUT_TYPE.number}
                 id="y_2"
                 placeholder={PLACEHOLDERS.number}
@@ -109,19 +111,10 @@ const SlopeCalculatorForTwoKnownPoints = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Slope: {Result.slope}{Result.unit}</Typography>
             </div>
 
           </form>

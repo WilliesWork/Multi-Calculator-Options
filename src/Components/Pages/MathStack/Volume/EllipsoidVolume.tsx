@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
@@ -7,7 +7,7 @@ import { EllipsoidVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const EllipsoidVolume = () => {
@@ -61,14 +61,14 @@ const EllipsoidVolume = () => {
           try {
             const { payload: ellipsoidVolume } = await calculateMath(payload)
             console.log('=====>', ellipsoidVolume)
-            const {volume, units, submittedaxis1, submitted_axis2, submitted_axis3} = ellipsoidVolume
+            const { volume, units, submittedaxis1, submitted_axis2, submitted_axis3 } = ellipsoidVolume
             if (typeof ellipsoidVolume === 'object') {
               setResult({
-               Volume: volume,
-               submitted_axis1: submittedaxis1,
-               submitted_axis2: submitted_axis2,
-               submitted_axis3: submitted_axis3,
-               units: units
+                Volume: volume,
+                submitted_axis1: submittedaxis1,
+                submitted_axis2: submitted_axis2,
+                submitted_axis3: submitted_axis3,
+                units: units
               })
             }
             resetForm()
@@ -80,8 +80,8 @@ const EllipsoidVolume = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.axis1} />
               <CustomForm
-                label={LABELS.axis1}
                 type={INPUT_TYPE.number}
                 id="axis1"
                 placeholder={PLACEHOLDERS.number}
@@ -90,7 +90,6 @@ const EllipsoidVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="axis1_unit"
                 value={values.axis1_unit}
                 onChange={handleChange('axis1_unit')}
@@ -98,8 +97,8 @@ const EllipsoidVolume = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.axis2} />
               <CustomForm
-                label={LABELS.axis2}
                 type={INPUT_TYPE.number}
                 id="axis2"
                 placeholder={PLACEHOLDERS.number}
@@ -108,7 +107,6 @@ const EllipsoidVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="axis2_unit"
                 value={values.axis2_unit}
                 onChange={handleChange('axis2_unit')}
@@ -116,8 +114,8 @@ const EllipsoidVolume = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.axis3} />
               <CustomForm
-                label={LABELS.axis3}
                 type={INPUT_TYPE.number}
                 id="axis3"
                 placeholder={PLACEHOLDERS.number}
@@ -126,23 +124,13 @@ const EllipsoidVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="axis3_unit"
                 value={values.axis3_unit}
                 onChange={handleChange('axis3_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
@@ -150,8 +138,6 @@ const EllipsoidVolume = () => {
               <Typography variant="subtitle1"> Submitted axis 2: {Result.submitted_axis2}</Typography>
               <Typography variant="subtitle1"> Submitted axis 3: {Result.submitted_axis3}</Typography>
               <Typography variant="subtitle1"> units: {Result.units}</Typography>
-
-
             </div>
 
           </form>

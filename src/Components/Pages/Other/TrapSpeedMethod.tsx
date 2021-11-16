@@ -7,7 +7,8 @@ import { TrapSpeedMethodI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const TrapSpeedMethod = () => {
   const classes = useStyles()
@@ -20,7 +21,10 @@ const TrapSpeedMethod = () => {
     speed_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    trap_speed: 0,
+    weight: 0,
+    speed: 0,
+    unit: '',
   })
 
   return (
@@ -44,20 +48,23 @@ const TrapSpeedMethod = () => {
             weight_unit,
             speed,
             speed_unit,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'TheTrapSpeedMethod'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: trapSpeedMethod } = await calculateOthers(payload)
+            console.log('=====>', trapSpeedMethod)
+            const { trap_speed, unit, weight, speed,
+            } = trapSpeedMethod
+            if (typeof trapSpeedMethod === 'object') {
+              setResult({
+                trap_speed: trap_speed,
+                weight: weight,
+                speed: speed,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -66,8 +73,8 @@ const TrapSpeedMethod = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.weight} />
               <CustomForm
-                label={LABELS.weight}
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}
@@ -76,7 +83,6 @@ const TrapSpeedMethod = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="weight_unit"
                 value={values.weight_unit}
                 onChange={handleChange('weight_unit')}
@@ -84,8 +90,8 @@ const TrapSpeedMethod = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.speed} />
               <CustomForm
-                label={LABELS.speed}
                 type={INPUT_TYPE.number}
                 id="speed"
                 placeholder={PLACEHOLDERS.number}
@@ -94,27 +100,19 @@ const TrapSpeedMethod = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="speed_unit"
                 value={values.speed_unit}
                 onChange={handleChange('speed_unit')}
               />
             </div>
 
-
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Trap speed: {Result.trap_speed}</Typography>
+              <Typography variant="subtitle1"> Weight: {Result.weight}</Typography>
+              <Typography variant="subtitle1"> Speed: {Result.speed}</Typography>
+              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
             </div>
 
           </form>

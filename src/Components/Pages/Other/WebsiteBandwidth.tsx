@@ -1,13 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { WebsiteBandwidthI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const WebsiteBandwidth = () => {
   const classes = useStyles()
@@ -21,7 +22,11 @@ const WebsiteBandwidth = () => {
     redundancy_factor: ""
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    website_bandwidth: '',
+    page_views: '',
+    page_size: '',
+    redundancy_factor: '',
+    unit: ''
   })
 
   return (
@@ -46,21 +51,25 @@ const WebsiteBandwidth = () => {
             page_views_unit,
             page_size,
             page_size_unit,
-            redundancy_factor
-            // method: 'ballSurfaceAreaCalculator'
+            redundancy_factor,
+            method: 'WebsiteBandwidthCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: websiteBandwidth } = await calculateOthers(payload)
+            console.log('=====>', websiteBandwidth)
+            const { website_bandwidth, unit, page_views, page_size, redundancy_factor
+            } = websiteBandwidth
+            if (typeof websiteBandwidth === 'object') {
+              setResult({
+                website_bandwidth: website_bandwidth,
+                page_views: page_views,
+                page_size: page_size,
+                redundancy_factor: redundancy_factor,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -69,8 +78,8 @@ const WebsiteBandwidth = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.pageViews} />
               <CustomForm
-                label={LABELS.pageViews}
                 type={INPUT_TYPE.number}
                 id="page_views"
                 placeholder={PLACEHOLDERS.number}
@@ -79,7 +88,6 @@ const WebsiteBandwidth = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="page_views_unit"
                 value={values.page_views_unit}
                 onChange={handleChange('page_views_unit')}
@@ -87,8 +95,8 @@ const WebsiteBandwidth = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.pageSize} />
               <CustomForm
-                label={LABELS.pageSize}
                 type={INPUT_TYPE.number}
                 id="page_size"
                 placeholder={PLACEHOLDERS.number}
@@ -97,7 +105,6 @@ const WebsiteBandwidth = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="page_size_unit"
                 value={values.page_size_unit}
                 onChange={handleChange('page_size_unit')}
@@ -106,8 +113,8 @@ const WebsiteBandwidth = () => {
 
 
             <div className="form-row">
+              <Label title={LABELS.redundancyFactor} />
               <CustomForm
-                label={LABELS.redundancyFactor}
                 type={INPUT_TYPE.number}
                 id="redundancy_factor"
                 placeholder={PLACEHOLDERS.number}
@@ -116,19 +123,14 @@ const WebsiteBandwidth = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Website bandwidth: {Result.website_bandwidth}</Typography>
+              <Typography variant="subtitle1"> Page views: {Result.page_views}</Typography>
+              <Typography variant="subtitle1"> Page size: {Result.page_size}</Typography>
+              <Typography variant="subtitle1"> Redanduncy factor: {Result.redundancy_factor}</Typography>
+              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
             </div>
 
           </form>

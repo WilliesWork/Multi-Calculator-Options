@@ -47,7 +47,7 @@ const InternationalSystemBfc = () => {
             gender,
             hip,
             waist,
-            //  method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

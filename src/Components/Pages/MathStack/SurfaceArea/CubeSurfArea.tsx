@@ -1,28 +1,30 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 
 import { CubeAreaI } from '../../../../Types'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
-const CubeArea = () => {
+const CubeSurfArea = () => {
   const classes = useStyles();
   const [initialFormValues] = React.useState({
     edge_length: '',
     edge_unit: ''
   })
   const [Result, setResult] = React.useState({
-    CubeArea: 0,
-    Area: 0
+    surfaceArea: 0,
+    edge_length: 0,
+    unit: ''
   })
   return (
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.cubeArea}
+          {CALCULATORS.cubeSurfArea}
         </Typography>
       </Grid>
 
@@ -37,20 +39,22 @@ const CubeArea = () => {
           const payload: CubeAreaI = {
             edge_length,
             edge_unit,
-            method: 'cubeAreaCalculator'
+            method: 'cubeSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calculateCubeArea } = await CalculateCubeArea(payload)
-            // console.log('=====>', calculateCubeArea)
-            // if (typeof calculateCubeArea === 'object') {
-            //   console.log(calculateCubeArea)
-            //   setResult({
-            //     CubeArea: calculateCubeArea.CubeArea,
-            //     Area: calculateCubeArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: cubeSurfaceArea } = await calculateMath(payload)
+            console.log('=====>', cubeSurfaceArea)
+            const { surfaceArea, unit, edge_length,
+            } = cubeSurfaceArea
+            if (typeof cubeSurfaceArea === 'object') {
+              setResult({
+                surfaceArea: surfaceArea,
+                edge_length: edge_length,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -59,8 +63,8 @@ const CubeArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.edgeLength} />
               <CustomForm
-                label={LABELS.edgeLength}
                 type={INPUT_TYPE.number}
                 id="edge_length"
                 placeholder={PLACEHOLDERS.number}
@@ -69,26 +73,19 @@ const CubeArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="edge_unit"
                 value={values.edge_unit}
                 onChange={handleChange('edge_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Surface area: {Result.surfaceArea}</Typography>
+              <Typography variant="subtitle1"> Edge length: {Result.edge_length}</Typography>
+              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
+
             </div>
 
           </form>
@@ -98,4 +95,4 @@ const CubeArea = () => {
   )
 }
 
-export default CubeArea
+export default CubeSurfArea

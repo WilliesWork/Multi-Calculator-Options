@@ -50,7 +50,7 @@ const BloodAlcoholContent = () => {
             hours_of_drinking,
             minutes_of_drinking,
             number_of_standard_drinks,
-            //method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

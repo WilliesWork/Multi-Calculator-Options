@@ -1,12 +1,14 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
+
 import { ConicalFrustrumSurfaceAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const ConicalFrustrumSurfaceArea = () => {
   const classes = useStyles()
@@ -22,7 +24,10 @@ const ConicalFrustrumSurfaceArea = () => {
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
-    Area: 0
+    top_radius: 0,
+    bottom_radius: 0,
+    height: 0,
+    unit: ''
   })
 
   return (
@@ -50,20 +55,24 @@ const ConicalFrustrumSurfaceArea = () => {
             bottom_radius_unit,
             height,
             height_unit,
-            method: 'conicalFrustrumSurfaceAreaCalculator'
+            method: 'ConicalFrustumSurfaceArea'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: ConicalFrustumSurfaceArea } = await calculateMath(payload)
+            console.log('=====>', ConicalFrustumSurfaceArea)
+            const { surfaceArea, top_radius, bottom_radius, height, unit
+            } = ConicalFrustumSurfaceArea
+            if (typeof ConicalFrustumSurfaceArea === 'object') {
+              setResult({
+                surfaceArea: surfaceArea,
+                top_radius: top_radius,
+                bottom_radius: bottom_radius,
+                height: height,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -72,8 +81,8 @@ const ConicalFrustrumSurfaceArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.topRadius} />
               <CustomForm
-                label={LABELS.topRadius}
                 type={INPUT_TYPE.number}
                 id="top_radius"
                 placeholder={PLACEHOLDERS.number}
@@ -82,7 +91,6 @@ const ConicalFrustrumSurfaceArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="top_radius_unit"
                 value={values.top_radius_unit}
                 onChange={handleChange('top_radius_unit')}
@@ -90,8 +98,8 @@ const ConicalFrustrumSurfaceArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.bottomRadius} />
               <CustomForm
-                label={LABELS.bottomRadius}
                 type={INPUT_TYPE.number}
                 id="bottom_radius"
                 placeholder={PLACEHOLDERS.number}
@@ -100,7 +108,6 @@ const ConicalFrustrumSurfaceArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="bottom_radius_unit"
                 value={values.bottom_radius_unit}
                 onChange={handleChange('bottom_radius_unit')}
@@ -108,8 +115,8 @@ const ConicalFrustrumSurfaceArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -118,26 +125,21 @@ const ConicalFrustrumSurfaceArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
               <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Top Radius: {Result.top_radius}</Typography>
+              <Typography variant="subtitle1"> Bottom Radius: {Result.bottom_radius}</Typography>
+              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
+              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
+
             </div>
 
           </form>

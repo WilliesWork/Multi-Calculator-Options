@@ -44,7 +44,7 @@ const PresentValueOfPeriodicalDeposit = () => {
             period_deposit,
             number_of_months,
             number_of_years,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'presentValueOfPeriodDeposit'
           }
           console.log(JSON.stringify(payload))
           try {

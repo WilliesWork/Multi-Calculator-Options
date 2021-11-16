@@ -41,7 +41,7 @@ const PayBackACertainAmount = () => {
             interest_rate,
             credit_card_balance,
             monthly_payment,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'PaybackACertainAmount'
           }
           console.log(JSON.stringify(payload))
           try {

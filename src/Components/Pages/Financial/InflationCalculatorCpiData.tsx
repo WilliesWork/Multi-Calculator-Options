@@ -38,7 +38,7 @@ const InflationCalculatorCpiData = () => {
           const payload: InflationCalculatorCpiDataI = {
             current_price,
             price_in_base,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'inflationCalculatorWithUsCPIData'
           }
           console.log(JSON.stringify(payload))
           try {

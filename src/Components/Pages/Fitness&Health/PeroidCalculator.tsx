@@ -41,7 +41,7 @@ const PeroidCalculator = () => {
             start_date_of_last_cycle,
             cycle_length,
             last_period_days,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
@@ -114,7 +114,7 @@ const PeroidCalculator = () => {
 
       </Formik>
 
-    </div>
+    </div >
   )
 }
 

@@ -41,7 +41,7 @@ const StockTradingMargin = () => {
             margin_requirement,
             stock_price,
             shares,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'stockTradingMarginCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

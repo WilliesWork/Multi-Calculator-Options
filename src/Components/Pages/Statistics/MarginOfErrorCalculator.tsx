@@ -1,25 +1,27 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
+
 import { MarginErrorI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
-import CustomForm from '../../custom/CustomForm'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from './../../../Common/shared'
+import { calculateStatistics } from '../../../Services/AppCalculatorsApi'
+import { CustomBtn, CustomForm, Label } from '../../custom'
 
 const MarginOfErrorCalculator = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    z_score: '',
+    confience_level: '',
     sample_size: '',
-    standard_deviation: ''
+    population_proportion: ''
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    marginOfError: 0,
+    unit: ''
   })
 
   return (
@@ -33,28 +35,28 @@ const MarginOfErrorCalculator = () => {
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          z_score,
+          confience_level,
           sample_size,
-          standard_deviation
+          population_proportion
         }, { setSubmitting, resetForm }) => {
           const payload: MarginErrorI = {
-            z_score,
+            confience_level,
             sample_size,
-            standard_deviation,
-            method: 'marginOfErrorCalculator'
+            population_proportion,
+            method: 'FindOuttheMarginofError'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: marginOfErrorCalculator } = await calculateStatistics(payload)
+            console.log('=====>', marginOfErrorCalculator)
+            const { marginOfError, unit } = marginOfErrorCalculator
+            if (typeof marginOfErrorCalculator === 'object') {
+              setResult({
+                marginOfError: marginOfError,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -62,47 +64,43 @@ const MarginOfErrorCalculator = () => {
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
-
-            <CustomForm
-              label={LABELS.zScore}
-              type={INPUT_TYPE.number}
-              id="z_score"
-              placeholder={PLACEHOLDERS.number}
-              value={values.z_score}
-              onChange={handleChange}
-            />
-
-            <CustomForm
-              label={LABELS.standardDeviation}
-              type={INPUT_TYPE.number}
-              id="standard_deviation"
-              placeholder={PLACEHOLDERS.number}
-              value={values.standard_deviation}
-              onChange={handleChange}
-            />
-
-            <CustomForm
-              label={LABELS.sampleSize}
-              type={INPUT_TYPE.number}
-              id="sample_size"
-              placeholder={PLACEHOLDERS.number}
-              value={values.sample_size}
-              onChange={handleChange}
-            />
-
-
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
+            <div className="form-row">
+              <Label title={LABELS.confienceLevel} />
+              <CustomForm
+                type={INPUT_TYPE.number}
+                id="confience_level"
+                placeholder={PLACEHOLDERS.number}
+                value={values.confience_level}
+                onChange={handleChange}
+              />
             </div>
+
+            <div className="form-row">
+              <Label title={LABELS.populationProportion} />
+              <CustomForm
+                type={INPUT_TYPE.number}
+                id="population_proportion"
+                placeholder={PLACEHOLDERS.number}
+                value={values.population_proportion}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <Label title={LABELS.sampleSize} />
+              <CustomForm
+                type={INPUT_TYPE.number}
+                id="sample_size"
+                placeholder={PLACEHOLDERS.number}
+                value={values.sample_size}
+                onChange={handleChange}
+              />
+            </div>
+
+            <CustomBtn />
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">Margin of error: {Result.marginOfError}{Result.unit}</Typography>
             </div>
 
           </form>

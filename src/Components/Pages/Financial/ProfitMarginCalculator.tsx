@@ -38,7 +38,7 @@ const ProfitMarginCalculator = () => {
           const payload: ProfitMarginCalculatorI = {
             sales_revenue,
             cost,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'profitMarginCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

@@ -6,33 +6,15 @@ import Typography from "@material-ui/core/Typography";
 
 import useStyles from "../../../Styling/CustomStyles";
 import {
-  CircleArea,
-  ConeArea,
-  CubeArea,
-  CylindricalTank,
-  EllipseArea,
-  ParallelogramArea,
-  RectangularArea,
-  SectorArea,
-  TrapezoidArea,
-  TriangleArea,
   BallSurfaceArea,
   CapsuleSurfaceArea,
+  ConeSurfArea,
   ConicalFrustrumSurfaceArea,
+  CubeSurfArea,
+  CylindricalTankSurfArea,
   EllipsoidSurfaceArea,
   SphericalCapSurfaceArea,
   SquarePyramidSurfaceArea,
-  CapsuleVolume,
-  ConeVolume,
-  ConicalFrustumVolume,
-  CubeVolume,
-  CylinderVolume,
-  EllipsoidVolume,
-  RectangularTankVolume,
-  SphereVolume,
-  SphericalCapVolume,
-  SquarePyramidVolume,
-  TubeVolume,
 } from "../index";
 
 function SurfaceArea() {
@@ -61,7 +43,25 @@ function SurfaceArea() {
 
             <Grid item xs={12}>
               <Paper className={classes.paper2}>
+                <ConeSurfArea />
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper className={classes.paper2}>
                 <ConicalFrustrumSurfaceArea />
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper className={classes.paper2}>
+                <CubeSurfArea />
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper className={classes.paper2}>
+                <CylindricalTankSurfArea />
               </Paper>
             </Grid>
 

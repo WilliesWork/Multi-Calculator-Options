@@ -44,7 +44,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = () => {
             a_repeat_times,
             event_b,
             b_repeat_times,
-            //  method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

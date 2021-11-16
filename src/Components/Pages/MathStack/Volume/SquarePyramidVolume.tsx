@@ -7,7 +7,8 @@ import { SquarePyramidVolumeI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const SquarePyramidVolume = () => {
   const classes = useStyles()
@@ -20,7 +21,10 @@ const SquarePyramidVolume = () => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0
+    Volume: 0,
+    base: 0,
+    height: 0,
+    units: '',
   })
 
   return (
@@ -48,16 +52,18 @@ const SquarePyramidVolume = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: squarePyramidVolume } = await calculateMath(payload)
+            console.log('=====>', squarePyramidVolume)
+            const { volume, units, height, base } = squarePyramidVolume
+            if (typeof squarePyramidVolume === 'object') {
+              setResult({
+                Volume: volume,
+                base: base,
+                height: height,
+                units: units
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -66,8 +72,8 @@ const SquarePyramidVolume = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.base} />
               <CustomForm
-                label={LABELS.base}
                 type={INPUT_TYPE.number}
                 id="base"
                 placeholder={PLACEHOLDERS.number}
@@ -76,7 +82,6 @@ const SquarePyramidVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="base_unit"
                 value={values.base_unit}
                 onChange={handleChange('base_unit')}
@@ -84,8 +89,8 @@ const SquarePyramidVolume = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -94,26 +99,19 @@ const SquarePyramidVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Base: {Result.base}</Typography>
+              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
+              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
             </div>
 
           </form>

@@ -1,18 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { CapsuleVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-<<<<<<< HEAD
-import { CustomForm, CustomSelect, Figure, Label } from '../../../custom'
-=======
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomForm, CustomSelect, Figure, Label, CustomBtn } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
->>>>>>> 0516ca12cf9a019fcf5affa722a7b58d59cf6a97
 
 const CapsuleVolume = () => {
   const classes = useStyles()
@@ -74,7 +70,7 @@ const CapsuleVolume = () => {
                 radiusInheightUnit: radiusInheightUnit,
                 submitted_height: submitted_height,
                 submittedradius: submittedradius,
-               heightInradiusUnit: heightInradiusUnit
+                heightInradiusUnit: heightInradiusUnit
               })
             }
             resetForm()
@@ -86,7 +82,7 @@ const CapsuleVolume = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <Grid container xs>
-              <Grid item xs>
+              <Grid item xs={4}>
                 <div className='form-row'>
                   <Figure />
                 </div>
@@ -130,16 +126,7 @@ const CapsuleVolume = () => {
                   />
                 </div>
 
-                <div className="form mb-3">
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    type="submit"
-                    className="btn btn-primary"
-                  >
-                    {BUTTONS.calculate}
-                  </Button>
-                </div>
+                <CustomBtn />
               </Grid>
             </Grid>
             <div className="text-center mb-3">
@@ -149,8 +136,6 @@ const CapsuleVolume = () => {
               <Typography variant="subtitle1"> Submitted Height: {Result.submitted_height}</Typography>
               <Typography variant="subtitle1"> Radius in Height: {Result.radiusInheightUnit}</Typography>
               <Typography variant="subtitle1"> Height in Radius: {Result.heightInradiusUnit}</Typography>
-
-
             </div>
 
           </form>

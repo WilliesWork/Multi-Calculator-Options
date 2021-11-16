@@ -7,7 +7,8 @@ import { RectangularTankVolumeI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const RectangularTankVolume = () => {
   const classes = useStyles()
@@ -22,7 +23,11 @@ const RectangularTankVolume = () => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0
+    Volume: 0,
+    length: 0,
+    width: 0,
+    height: 0,
+    units: ''
   })
 
   return (
@@ -50,20 +55,24 @@ const RectangularTankVolume = () => {
             width_unit,
             height,
             height_unit,
-            // method: 'ballSurfaceAreaCalculator'
+            //method: 'RectangularTankVolumeCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateRectangularTankVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: rectangularTankVolume } = await calculateMath(payload)
+            console.log('=====>', rectangularTankVolume)
+            const { volume, units, length, width, height
+            } = rectangularTankVolume
+            if (typeof rectangularTankVolume === 'object') {
+              setResult({
+                Volume: volume,
+                length: length,
+                width: width,
+                height: height,
+                units: units
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -72,8 +81,8 @@ const RectangularTankVolume = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.length} />
               <CustomForm
-                label={LABELS.length}
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
@@ -82,7 +91,6 @@ const RectangularTankVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="length_unit"
                 value={values.length_unit}
                 onChange={handleChange('length_unit')}
@@ -90,8 +98,8 @@ const RectangularTankVolume = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.width} />
               <CustomForm
-                label={LABELS.width}
                 type={INPUT_TYPE.number}
                 id="width"
                 placeholder={PLACEHOLDERS.number}
@@ -100,7 +108,6 @@ const RectangularTankVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="width_unit"
                 value={values.width_unit}
                 onChange={handleChange('width_unit')}
@@ -108,8 +115,8 @@ const RectangularTankVolume = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -118,26 +125,20 @@ const RectangularTankVolume = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Length: {Result.length}</Typography>
+              <Typography variant="subtitle1"> Width: {Result.width}</Typography>
+              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
+              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
             </div>
 
           </form>

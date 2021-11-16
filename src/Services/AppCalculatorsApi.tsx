@@ -6,6 +6,8 @@ import * as FinancialFormulas from '../Types/FinanceInterfaces'
 import * as MatheMaticalFormulas from '../Types/MathInterfaces'
 import * as HealthFormulas from '../Types/HealthInterfaces'
 import * as OtherFormulas from '../Types/OtherCalculatorInterfaces'
+import * as StatisticalFormulas from '../Types/StatisticsInterfaces'
+
 
 // export const calculateMath = async (calculateArea: MatheMaticalFormulas.AllMathCalculators) => {
 //   try {
@@ -30,7 +32,7 @@ import * as OtherFormulas from '../Types/OtherCalculatorInterfaces'
 //     }
 //   }
 // }
-export const calculateMath = async (calculateArea: MatheMaticalFormulas.AllMathCalculators ) => {
+export const calculateMath = async (calculateArea: MatheMaticalFormulas.AllMathCalculators) => {
   try {
     const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, calculateArea);
 
@@ -42,22 +44,22 @@ export const calculateMath = async (calculateArea: MatheMaticalFormulas.AllMathC
 
     throw new Error('Responded with unexpected Error');
   } catch (err) {
-    console.log(JSON.stringify({err}, null, 2))
-    const {response} = err as AxiosError
+    console.log(JSON.stringify({ err }, null, 2))
+    const { response } = err as AxiosError
 
     if (response && typeof response.data.statusCode === 'number') {
 
-      const {data: {statusCode, message}, } = response
+      const { data: { statusCode, message }, } = response
 
-      if (statusCode === 401){
+      if (statusCode === 401) {
         return {
           success: false,
           payload: message
         }
       }
-  
-      if (statusCode === 404){
-        return{
+
+      if (statusCode === 404) {
+        return {
           success: false,
           payload: message
         }
@@ -72,82 +74,167 @@ export const calculateMath = async (calculateArea: MatheMaticalFormulas.AllMathC
   }
 };
 
-export const calculateHealth = async (calculateHealthPayload: HealthFormulas.BMRKatchMcArdleI | HealthFormulas.BloodAlcoholContentI | HealthFormulas.BodyFatPercentageBmiI | HealthFormulas.BodyMassIndexI | HealthFormulas.BodyMassIndexMethodTwoI | HealthFormulas.BoydFormulaSurfaceAreaI | HealthFormulas.DuBoisBodySurfaceAreaI | HealthFormulas.DueDateMittendorfWilliamI
-  | HealthFormulas.DueDateNaegeleRuleI | HealthFormulas.GehanAndGeorgeSurfaceAreaI | HealthFormulas.HaycockBodySurfaceAreaI | HealthFormulas.InternationalSystemBfcI | HealthFormulas.LeanBodyMassI | HealthFormulas.LeanBodyMassPeterFormulaI | HealthFormulas.MostellerBodySurfaceAreaI | HealthFormulas.PeroidCalculatorI | HealthFormulas.ProbabilityOfASeriesOfIndpendentEventsI
-  | HealthFormulas.RegularCycleOvulationI | HealthFormulas.SinglePointWithKnownSlopeI | HealthFormulas.TakaSchlichBodySurfaceAreaI | HealthFormulas.TakahiraBodySurfaceAreaI | HealthFormulas.USCustomarySystemBfcI | HealthFormulas.WholeBodyMassFormulaI | HealthFormulas.WholeBodyMassFormulaI) => {
+// Changed the below functions to match the calculateMath function
+export const calculateHealth = async (calculateHealthPayload: HealthFormulas.AllHealthCalculators) => {
   try {
     const { data } = await axios.post(`${BASE_URL}/api/calculator/health`, calculateHealthPayload)
 
-    const { statusCode, statusDescription, message, error } = data
-    console.log(message, error)
+    const { statusCode, message } = data;
     if (statusCode === 100) {
-      return { success: statusDescription, payload: message }
-    }
-    if (statusCode === 102) {
-      return { success: false, payload: 'Server Error' }
+      // console.log('This is ', message)
+      return { success: true, payload: message };
     }
 
-    throw new Error('Responded with unexpected Error')
+    throw new Error('Responded with unexpected Error');
   } catch (err) {
+    console.log(JSON.stringify({ err }, null, 2))
     const { response } = err as AxiosError
-    console.log(response)
+
+    if (response && typeof response.data.statusCode === 'number') {
+
+      const { data: { statusCode, message }, } = response
+
+      if (statusCode === 401) {
+        return {
+          success: false,
+          payload: message
+        }
+      }
+
+      if (statusCode === 404) {
+        return {
+          success: false,
+          payload: message
+        }
+      }
+    }
+
     return {
       success: false,
-      payload: 'Unexpected Error'
-    }
+      payload: 'Unexpected Error',
+    };
   }
-}
+};
 
-export const calculateFinances = async (calculateFinancialPayload: FinancialFormulas.AmortizedLoanFixedAmountI | FinancialFormulas.BondPayBackPredeterminedI
-  | FinancialFormulas.DefearedPaymentsLumpsumAtMaturityI | FinancialFormulas.InflationCalculatorCpiDataI | FinancialFormulas.MortgagePayOffWithoutLoanTermI |
-  FinancialFormulas.MortgagePayoffWithLoanTermI | FinancialFormulas.PayBackACertainAmountI
-  | FinancialFormulas.PaybackWithinTimeframeI | FinancialFormulas.PresentValueI | FinancialFormulas.PresentValueOfPeriodicalDepositI | FinancialFormulas.ProfitMarginCalculatorI | FinancialFormulas.StockTradingMarginI) => {
+export const calculateFinances = async (calculateFinancialPayload: FinancialFormulas.AllFinancialCalculators) => {
   try {
     const { data } = await axios.post(`${BASE_URL}/api/calculator/finacial`, calculateFinancialPayload)
 
-    const { statusCode, statusDescription, message, error } = data
-    console.log(message, error)
+    const { statusCode, message } = data;
     if (statusCode === 100) {
-      return { success: statusDescription, payload: message }
-    }
-    if (statusCode === 102) {
-      return { success: false, payload: 'Server Error' }
+      // console.log('This is ', message)
+      return { success: true, payload: message };
     }
 
-    throw new Error('Responded with unexpected Error')
+    throw new Error('Responded with unexpected Error');
   } catch (err) {
+    console.log(JSON.stringify({ err }, null, 2))
     const { response } = err as AxiosError
-    console.log(response)
+
+    if (response && typeof response.data.statusCode === 'number') {
+
+      const { data: { statusCode, message }, } = response
+
+      if (statusCode === 401) {
+        return {
+          success: false,
+          payload: message
+        }
+      }
+
+      if (statusCode === 404) {
+        return {
+          success: false,
+          payload: message
+        }
+      }
+    }
+
     return {
       success: false,
-      payload: 'Unexpected Error'
-    }
+      payload: 'Unexpected Error',
+    };
   }
-}
+};
 
-export const calculateOthers = async (calculateOtherFormulaePayload: OtherFormulas.CircularSlapI | OtherFormulas.ConcreteSquareFootingI | OtherFormulas.CurbAndGutterBarrierI
-  | OtherFormulas.HoleColumnI | OtherFormulas.StairsConcreateI) => {
+export const calculateOthers = async (calculateOtherFormulaePayload: OtherFormulas.AllOtherCalculators) => {
   try {
     const { data } = await axios.post(`${BASE_URL}/api/calculator/other`, calculateOtherFormulaePayload)
 
-    const { statusCode, statusDescription, message, error } = data
-    console.log(message, error)
+    const { statusCode, message } = data;
     if (statusCode === 100) {
-      return { success: statusDescription, payload: message }
-    }
-    if (statusCode === 102) {
-      return { success: false, payload: 'Server Error' }
+      // console.log('This is ', message)
+      return { success: true, payload: message };
     }
 
-    throw new Error('Responded with unexpected Error')
+    throw new Error('Responded with unexpected Error');
   } catch (err) {
+    console.log(JSON.stringify({ err }, null, 2))
     const { response } = err as AxiosError
-    console.log(response)
+
+    if (response && typeof response.data.statusCode === 'number') {
+
+      const { data: { statusCode, message }, } = response
+
+      if (statusCode === 401) {
+        return {
+          success: false,
+          payload: message
+        }
+      }
+
+      if (statusCode === 404) {
+        return {
+          success: false,
+          payload: message
+        }
+      }
+    }
+
     return {
       success: false,
-      payload: 'Unexpected Error'
-    }
+      payload: 'Unexpected Error',
+    };
   }
-}
+};
 
+export const calculateStatistics = async (calculateStatisticalPayload: StatisticalFormulas.AllStatisticalCalculators) => {
+  try {
+    const { data } = await axios.post(`${BASE_URL}/api/calculator/math`, calculateStatisticalPayload)
 
+    const { statusCode, message } = data;
+    if (statusCode === 100) {
+      // console.log('This is ', message)
+      return { success: true, payload: message };
+    }
+
+    throw new Error('Responded with unexpected Error');
+  } catch (err) {
+    console.log(JSON.stringify({ err }, null, 2))
+    const { response } = err as AxiosError
+
+    if (response && typeof response.data.statusCode === 'number') {
+
+      const { data: { statusCode, message }, } = response
+
+      if (statusCode === 401) {
+        return {
+          success: false,
+          payload: message
+        }
+      }
+
+      if (statusCode === 404) {
+        return {
+          success: false,
+          payload: message
+        }
+      }
+    }
+
+    return {
+      success: false,
+      payload: 'Unexpected Error',
+    };
+  }
+};

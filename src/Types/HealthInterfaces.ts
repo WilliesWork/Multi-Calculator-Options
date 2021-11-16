@@ -28,6 +28,7 @@ export interface LeanBodyMassPeterFormulaI {
   weight: string;
   weight_unit: string;
   gender: string;
+  method: string;
 }
 
 export interface BodyMassIndexMethodTwoI {
@@ -35,12 +36,14 @@ export interface BodyMassIndexMethodTwoI {
   height_unit: string;
   weight: string;
   weight_unit: string;
+  method: string;
 }
 
 export interface BMRKatchMcArdleI {
   fat: string;
   weight: string;
   weight_unit: string;
+  method: string;
 }
 
 export interface BloodAlcoholContentI {
@@ -50,6 +53,7 @@ export interface BloodAlcoholContentI {
   hours_of_drinking: string;
   minutes_of_drinking: string;
   number_of_standard_drinks: string;
+  method: string;
 }
 
 export interface USCustomarySystemBfcI {
@@ -63,6 +67,7 @@ export interface USCustomarySystemBfcI {
   hip_unit: string;
   waist: string;
   waist_unit: string;
+  method: string;
 }
 
 export interface InternationalSystemBfcI {
@@ -71,6 +76,7 @@ export interface InternationalSystemBfcI {
   gender: string;
   hip: string;
   waist: string;
+  method: string;
 }
 
 export interface BodyFatPercentageBmiI {
@@ -80,6 +86,7 @@ export interface BodyFatPercentageBmiI {
   weight_unit: string;
   gender: string;
   age: string;
+  method: string;
 }
 
 export interface DueDateNaegeleRuleI {
@@ -92,11 +99,13 @@ export interface PeroidCalculatorI {
   start_date_of_last_cycle: string;
   cycle_length: string;
   last_period_days: string;
+  method: string;
 }
 
 export interface DueDateMittendorfWilliamI {
   first_date_of_last_period: string;
   type: string;
+  method: string;
 }
 
 // Done 10 from top
@@ -108,6 +117,7 @@ export interface DuBoisBodySurfaceAreaI {
   height_unit: string;
   weight: string;
   weight_unit: string;
+  method: string;
 }
 
 //note: endpoint spelt with all I assume it should be whole
@@ -116,6 +126,7 @@ export interface WholeBodyMassFormulaI {
   height_unit: string;
   weight: string;
   weight_unit: string;
+  method: string;
 }
 
 export interface MostellerBodySurfaceAreaI {
@@ -123,6 +134,7 @@ export interface MostellerBodySurfaceAreaI {
   height_unit: string;
   weight: string;
   weight_unit: string;
+  method: string;
 }
 
 export interface HaycockBodySurfaceAreaI {
@@ -130,6 +142,7 @@ export interface HaycockBodySurfaceAreaI {
   height_unit: string;
   weight: string;
   weight_unit: string;
+  method: string;
 }
 
 export interface GehanAndGeorgeSurfaceAreaI {
@@ -137,6 +150,7 @@ export interface GehanAndGeorgeSurfaceAreaI {
   height_unit: string;
   weight: string;
   weight_unit: string;
+  method: string;
 }
 
 export interface BoydFormulaSurfaceAreaI {
@@ -144,6 +158,7 @@ export interface BoydFormulaSurfaceAreaI {
   height_unit: string;
   weight: string;
   weight_unit: string;
+  method: string;
 }
 
 export interface TakahiraBodySurfaceAreaI {
@@ -151,6 +166,7 @@ export interface TakahiraBodySurfaceAreaI {
   height_unit: string;
   weight: string;
   weight_unit: string;
+  method: string;
 }
 
 export interface TakaSchlichBodySurfaceAreaI {
@@ -159,6 +175,7 @@ export interface TakaSchlichBodySurfaceAreaI {
   weight: string;
   weight_unit: string;
   gender: string;
+  method: string;
 }
 
 //note: endpoint called if 1 point and the slope are known
@@ -167,6 +184,7 @@ export interface SinglePointWithKnownSlopeI {
   distance: string;
   x_1: string;
   slope: string;
+  method: string;
 }
 
 export interface ProbabilityOfASeriesOfIndpendentEventsI {
@@ -174,6 +192,7 @@ export interface ProbabilityOfASeriesOfIndpendentEventsI {
   event_b: string;
   a_repeat_times: string;
   b_repeat_times: string;
+  method: string;
 }
 
 // start
@@ -182,17 +201,20 @@ export interface FujimotoFormulaSurfaceAreaI {
   height_unit: string;
   weight: string;
   weight_unit: string;
+  method: string;
 }
 
 export interface DueDateParikhsRuleI {
   first_date_of_last_period: string;
   days: string;
+  method: string;
 }
 
 export interface DueDateWoodsRuleI {
   first_date_of_last_period: string;
   days: string;
   type: string;
+  method: string;
 }
 
 export interface BmrMifflinJeorEquationI {
@@ -202,6 +224,7 @@ export interface BmrMifflinJeorEquationI {
   weight_unit: string;
   gender: string;
   age: number;
+  method: string;
 }
 
 export interface BmrMifflinHarrisBenedictI {
@@ -211,5 +234,35 @@ export interface BmrMifflinHarrisBenedictI {
   weight_unit: string;
   gender: string;
   age: number;
+  method: string;
 }
 // end 11/04/2021
+
+export type AllHealthCalculators =
+  | BodyMassIndexI
+  | LeanBodyMassI
+  | RegularCycleOvulationI
+  | LeanBodyMassPeterFormulaI
+  | BodyMassIndexMethodTwoI
+  | BMRKatchMcArdleI
+  | BloodAlcoholContentI
+  | USCustomarySystemBfcI
+  | InternationalSystemBfcI
+  | DueDateNaegeleRuleI
+  | PeroidCalculatorI
+  | DueDateMittendorfWilliamI
+  | DuBoisBodySurfaceAreaI
+  | WholeBodyMassFormulaI
+  | MostellerBodySurfaceAreaI
+  | HaycockBodySurfaceAreaI
+  | GehanAndGeorgeSurfaceAreaI
+  | BoydFormulaSurfaceAreaI
+  | TakahiraBodySurfaceAreaI
+  | TakaSchlichBodySurfaceAreaI
+  | SinglePointWithKnownSlopeI
+  | ProbabilityOfASeriesOfIndpendentEventsI
+  | FujimotoFormulaSurfaceAreaI
+  | DueDateParikhsRuleI
+  | DueDateWoodsRuleI
+  | BmrMifflinJeorEquationI
+  | BmrMifflinHarrisBenedictI;

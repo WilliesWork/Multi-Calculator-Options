@@ -1,16 +1,15 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
-import { calculateMath} from '../../../../Services/AppCalculatorsApi'
-import { SurfaceAreaI } from '../../../../Types'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
+
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
+import { SurfaceAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
-import { Units } from '../../../../Common/MathUnits'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
-// import axios from 'axios'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 
 const BallSurfaceArea = () => {
   const classes = useStyles()
@@ -22,7 +21,7 @@ const BallSurfaceArea = () => {
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
-    Area: 0,
+    radius: 0,
     unit: '',
   })
 
@@ -47,16 +46,15 @@ const BallSurfaceArea = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            const { payload: calsurfaceArea } = await calculateMath(payload)
-            console.log('=====>', calsurfaceArea)
-            if (typeof calsurfaceArea === 'object') {
-              const {surfaceArea, area, unit } = calsurfaceArea
-              console.log(calsurfaceArea)
+            const { payload: ballSurfaceArea } = await calculateMath(payload)
+            console.log('=====>', ballSurfaceArea)
+            if (typeof ballSurfaceArea === 'object') {
+              const { surfaceArea, radius, unit } = ballSurfaceArea
+              console.log(ballSurfaceArea)
               setResult({
                 surfaceArea: surfaceArea,
-                Area: area,
+                radius: radius,
                 unit: unit
-
               })
             }
             resetForm()
@@ -68,8 +66,8 @@ const BallSurfaceArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.radius} />
               <CustomForm
-                label={LABELS.radius}
                 type={INPUT_TYPE.number}
                 id="radius"
                 placeholder={PLACEHOLDERS.number}
@@ -78,28 +76,18 @@ const BallSurfaceArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="radius_unit"
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
               <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
-              <Typography variant="subtitle1"> Units: {Result.unit}</Typography>
-
+              <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
+              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
             </div>
 
           </form>

@@ -1,19 +1,14 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
+
 import { EllipsoidSurfaceAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CustomForm, CustomSelect } from '../../../custom'
-import {
-  CALCULATORS,
-  BUTTONS,
-  LABELS,
-  PLACEHOLDERS,
-  IDS,
-  INPUT_TYPE
-} from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
 
 const EllipsoidSurfaceArea = () => {
   const classes = useStyles()
@@ -29,7 +24,10 @@ const EllipsoidSurfaceArea = () => {
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
-    Area: 0
+    axis1: 0,
+    axis2: 0,
+    axis3: 0,
+    unit: ''
   })
 
   return (
@@ -57,20 +55,24 @@ const EllipsoidSurfaceArea = () => {
             axis2_unit,
             axis3,
             axis3_unit,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'EllipsoidSurfaceArea'
           }
           console.log(JSON.stringify(payload))
           try {
-            /* const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-            console.log('=====>', calsurfaceArea)
-            if (typeof calsurfaceArea === 'object') {
-              console.log(calsurfaceArea)
+            const { payload: EllipsoidSurfaceArea } = await calculateMath(payload)
+            console.log('=====>', EllipsoidSurfaceArea)
+            const { surfaceArea, axis1, axis2, axis3, unit
+            } = EllipsoidSurfaceArea
+            if (typeof EllipsoidSurfaceArea === 'object') {
               setResult({
-                surfaceArea: calsurfaceArea.surfaceAreas,
-                Area: calsurfaceArea.Area
+                surfaceArea: surfaceArea,
+                axis1: axis1,
+                axis2: axis2,
+                axis3: axis3,
+                unit: unit
               })
             }
-            resetForm() */
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -79,8 +81,8 @@ const EllipsoidSurfaceArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.axis1} />
               <CustomForm
-                label={LABELS.axis1}
                 type={INPUT_TYPE.number}
                 id="axis1"
                 placeholder={PLACEHOLDERS.number}
@@ -89,7 +91,6 @@ const EllipsoidSurfaceArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="axis1_unit"
                 value={values.axis1_unit}
                 onChange={handleChange('axis1_unit')}
@@ -97,8 +98,8 @@ const EllipsoidSurfaceArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.axis2} />
               <CustomForm
-                label={LABELS.axis2}
                 type={INPUT_TYPE.number}
                 id="axis2"
                 placeholder={PLACEHOLDERS.number}
@@ -107,7 +108,6 @@ const EllipsoidSurfaceArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="axis2_unit"
                 value={values.axis2_unit}
                 onChange={handleChange('axis2_unit')}
@@ -115,8 +115,8 @@ const EllipsoidSurfaceArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.axis3} />
               <CustomForm
-                label={LABELS.axis3}
                 type={INPUT_TYPE.number}
                 id="axis3"
                 placeholder={PLACEHOLDERS.number}
@@ -125,26 +125,20 @@ const EllipsoidSurfaceArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="axis3_unit"
                 value={values.axis3_unit}
                 onChange={handleChange('axis3_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
               <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Axis 1: {Result.axis1}</Typography>
+              <Typography variant="subtitle1"> Axis 2: {Result.axis2}</Typography>
+              <Typography variant="subtitle1"> Axis 3: {Result.axis3}</Typography>
+              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
             </div>
 
           </form>

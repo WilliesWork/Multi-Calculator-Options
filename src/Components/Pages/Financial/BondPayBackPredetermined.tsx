@@ -44,7 +44,7 @@ const BondPayBackPredetermined = () => {
             predetermined_amount,
             number_of_months,
             number_of_years,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'bondPayBackPredeterminedAmountAtLoanMaturity'
           }
           console.log(JSON.stringify(payload))
           try {

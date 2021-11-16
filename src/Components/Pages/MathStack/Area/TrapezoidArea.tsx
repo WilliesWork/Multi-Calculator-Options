@@ -1,13 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { TrapezoidAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const TrapezoidArea = () => {
   const classes = useStyles()
@@ -22,8 +23,11 @@ const TrapezoidArea = () => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-    Area: 0
+    area: 0,
+    base1: 0,
+    base2: 0,
+    height: 0,
+    unit: ''
   })
 
   return (
@@ -51,20 +55,24 @@ const TrapezoidArea = () => {
             base2_unit,
             height,
             height_unit,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'TrapezoidArea'
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateTrapezoidArea(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: TrapezoidArea } = await calculateMath(payload)
+            console.log('=====>', TrapezoidArea)
+            const { area, unit, base1, base2, height
+            } = TrapezoidArea
+            if (typeof TrapezoidArea === 'object') {
+              setResult({
+                area: area,
+                base1: base1,
+                base2: base2,
+                height: height,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -73,8 +81,8 @@ const TrapezoidArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.base1} />
               <CustomForm
-                label={LABELS.base1}
                 type={INPUT_TYPE.number}
                 id="base1"
                 placeholder={PLACEHOLDERS.number}
@@ -83,7 +91,6 @@ const TrapezoidArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="base1_unit"
                 value={values.base1_unit}
                 onChange={handleChange('base1_unit')}
@@ -91,8 +98,8 @@ const TrapezoidArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.base2} />
               <CustomForm
-                label={LABELS.base2}
                 type={INPUT_TYPE.number}
                 id="base2"
                 placeholder={PLACEHOLDERS.number}
@@ -101,7 +108,6 @@ const TrapezoidArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="base2_unit"
                 value={values.base2_unit}
                 onChange={handleChange('base2_unit')}
@@ -109,8 +115,8 @@ const TrapezoidArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -119,26 +125,21 @@ const TrapezoidArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
+              <Typography variant="subtitle1"> Area: {Result.area}</Typography>
+              <Typography variant="subtitle1"> Base 1: {Result.base1}</Typography>
+              <Typography variant="subtitle1"> Base 2: {Result.base2}</Typography>
+              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
+              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
+
             </div>
 
           </form>

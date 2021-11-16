@@ -41,7 +41,7 @@ const BMRKatchMcArdle = () => {
             fat,
             weight,
             weight_unit,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

@@ -47,7 +47,7 @@ const TakaSchlichBodySurfaceArea = () => {
             weight,
             weight_unit,
             gender,
-            // method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

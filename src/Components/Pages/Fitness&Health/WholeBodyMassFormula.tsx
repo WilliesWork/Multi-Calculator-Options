@@ -44,7 +44,7 @@ const WholeBodyMassFormula = () => {
             height_unit,
             weight,
             weight_unit,
-            //  method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

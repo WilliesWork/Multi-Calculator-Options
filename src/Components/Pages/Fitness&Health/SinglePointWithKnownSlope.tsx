@@ -44,7 +44,7 @@ const SinglePointWithKnownSlope = () => {
             y_1,
             slope,
             distance,
-            //  method: 'ballSurfaceAreaCalculator'
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
