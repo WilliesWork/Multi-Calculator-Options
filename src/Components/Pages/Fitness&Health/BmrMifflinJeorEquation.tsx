@@ -8,6 +8,7 @@ import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BmrMifflinJeorEquation = () => {
   const classes = useStyles()
@@ -22,7 +23,10 @@ const BmrMifflinJeorEquation = () => {
     age: 0
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    step1: 0,
+    step2: 0,
+    step3: 0,
+    BMR: 0
   })
 
   return (
@@ -50,20 +54,22 @@ const BmrMifflinJeorEquation = () => {
             weight_unit,
             gender,
             age,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'BMRMifflinStJeor'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: MifflinJeor } = await calculateHealth(payload)
+            console.log('=====>', MifflinJeor)
+            if (typeof MifflinJeor === 'object') {
+              const { step1, step2, step3, BMR } = MifflinJeor
+              setResult({
+                step1: step1,
+                step2: step2,
+                step3: step3,
+                BMR: BMR
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -140,7 +146,11 @@ const BmrMifflinJeorEquation = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">step1:{Result.step1} </Typography>
+              <Typography variant="subtitle1">step2: {Result.step2}</Typography>
+              <Typography variant="subtitle1">step3: {Result.step3}</Typography>
+              <Typography variant="subtitle1">BMR: {Result.BMR}</Typography>
+
             </div>
 
           </form>

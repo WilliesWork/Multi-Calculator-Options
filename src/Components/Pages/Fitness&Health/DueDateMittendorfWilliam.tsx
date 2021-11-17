@@ -8,6 +8,7 @@ import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const DueDateMittendorfWilliam = () => {
   const classes = useStyles()
@@ -18,7 +19,7 @@ const DueDateMittendorfWilliam = () => {
     type: ''
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    dueDate: 0
   })
 
   return (
@@ -38,20 +39,19 @@ const DueDateMittendorfWilliam = () => {
           const payload: DueDateMittendorfWilliamI = {
             first_date_of_last_period,
             type,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'DueDateMittendorfWilliamRule'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: dueDateMittendorf } = await calculateHealth(payload)
+            console.log('=====>', dueDateMittendorf)
+            if (typeof dueDateMittendorf === 'object') {
+              const { dueDate } = dueDateMittendorf
+              setResult({
+                dueDate: dueDate
+              })
+            }
+            resetForm() 
           } catch (err) {
             console.log('====>', err)
           }
@@ -92,7 +92,7 @@ const DueDateMittendorfWilliam = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">Due Date: {Result.dueDate} </Typography>
             </div>
 
           </form>

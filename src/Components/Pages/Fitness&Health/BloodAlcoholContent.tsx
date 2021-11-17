@@ -8,6 +8,7 @@ import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BloodAlcoholContent = () => {
   const classes = useStyles()
@@ -22,7 +23,13 @@ const BloodAlcoholContent = () => {
     number_of_standard_drinks: '',
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    BAC: 0,
+    numberOfHoursAverage: 0,
+    divident: 0,
+    divisor: 0,
+    M: 0,
+    N: 0,
+    H: 0
   })
 
   return (
@@ -50,20 +57,25 @@ const BloodAlcoholContent = () => {
             hours_of_drinking,
             minutes_of_drinking,
             number_of_standard_drinks,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'bloodAlcoholContent'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: BloodAlcoholContent } = await calculateHealth(payload)
+            console.log('=====>', BloodAlcoholContent)
+            if (typeof BloodAlcoholContent === 'object') {
+              const {BAC, numberOfHoursAverage, divident, divisor, M, N, H} = BloodAlcoholContent
+              setResult({
+               BAC: BAC,
+               numberOfHoursAverage: numberOfHoursAverage,
+               divident: divident,
+               divisor: divisor,
+               M: M,
+               N: N,
+               H: H
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -145,7 +157,7 @@ const BloodAlcoholContent = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">Answer</Typography>
             </div>
 
           </form>

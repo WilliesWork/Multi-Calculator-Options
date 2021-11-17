@@ -55,7 +55,7 @@ const RectangularTankVolume = () => {
             width_unit,
             height,
             height_unit,
-            //method: 'RectangularTankVolumeCalculator'
+            method: 'RectangularTankVolumeCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

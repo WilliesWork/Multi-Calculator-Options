@@ -40,8 +40,8 @@ const SphereVolume = () => {
         }, { setSubmitting, resetForm }) => {
           const payload: SphereVolumeCalculatorI = {
             radius,
-            radius_unit
-            // method: 'ballSurfaceAreaCalculator'
+            radius_unit,
+            method: 'ballSurfaceAreaCalculator'
           }
           console.log(JSON.stringify(payload))
           try {

@@ -8,6 +8,7 @@ import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BodyMassIndexMethodTwo = () => {
   const classes = useStyles()
@@ -20,7 +21,10 @@ const BodyMassIndexMethodTwo = () => {
     weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    weightInlbs: 0,
+    heightToIn: 0,
+    bmi: 0,
+    unit: ''
   })
 
   return (
@@ -44,20 +48,22 @@ const BodyMassIndexMethodTwo = () => {
             height_unit,
             weight,
             weight_unit,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'bodyMassIndexTwo'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: bodyMassTwo } = await calculateHealth(payload)
+            console.log('=====>', bodyMassTwo)
+            if (typeof bodyMassTwo === 'object') {
+              const { bmi, unit, heightToIn, weightInlbs } = bodyMassTwo
+              setResult({
+                bmi: bmi,
+                heightToIn: heightToIn,
+                weightInlbs: weightInlbs,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -112,7 +118,13 @@ const BodyMassIndexMethodTwo = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">BMI:{Result.bmi} </Typography>
+              <Typography variant="subtitle1">Height:{Result.heightToIn} </Typography>
+              <Typography variant="subtitle1">Weight:{Result.weightInlbs} </Typography>
+              <Typography variant="subtitle1">Units:{Result.unit} </Typography>
+
+
+
             </div>
 
           </form>

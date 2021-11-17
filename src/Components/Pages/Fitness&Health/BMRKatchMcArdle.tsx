@@ -8,6 +8,7 @@ import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BMRKatchMcArdle = () => {
   const classes = useStyles()
@@ -19,7 +20,7 @@ const BMRKatchMcArdle = () => {
     weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    BMR: 0
   })
 
   return (
@@ -41,20 +42,19 @@ const BMRKatchMcArdle = () => {
             fat,
             weight,
             weight_unit,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'BMRKatchMcArdle'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: katchMcArdle } = await calculateHealth(payload)
+            console.log('=====>', katchMcArdle)
+            if (typeof katchMcArdle === 'object') {
+              const { BMR } = katchMcArdle
+              setResult({
+                BMR: BMR
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -102,7 +102,7 @@ const BMRKatchMcArdle = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">BMR:{Result.BMR} </Typography>
             </div>
 
           </form>

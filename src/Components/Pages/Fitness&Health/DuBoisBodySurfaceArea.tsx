@@ -8,6 +8,7 @@ import { Units } from '../../../Common/MathUnits'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const DuBoisBodySurfaceArea = () => {
   const classes = useStyles()
@@ -20,7 +21,10 @@ const DuBoisBodySurfaceArea = () => {
     weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    weightInKg: 0,
+    heightToMeter: 0,
+    bsa: 0,
+    unit: ''
   })
 
   return (
@@ -44,20 +48,22 @@ const DuBoisBodySurfaceArea = () => {
             height_unit,
             weight,
             weight_unit,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'DuBoisFormulaBodySurfaceArea'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: duboisFormula } = await calculateHealth(payload)
+            console.log('=====>', duboisFormula)
+            if (typeof duboisFormula === 'object') {
+              const { weightInKg, heightToMeter, bsa, unit } = duboisFormula
+              setResult({
+                weightInKg: weightInKg,
+                heightToMeter: heightToMeter,
+                bsa: bsa,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -112,7 +118,11 @@ const DuBoisBodySurfaceArea = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">bsa: {Result.bsa} </Typography>
+              <Typography variant="subtitle1">Weight: {Result.weightInKg} </Typography>
+              <Typography variant="subtitle1">Height: {Result.heightToMeter} </Typography>
+              <Typography variant="subtitle1">Units: {Result.unit} </Typography>
+
             </div>
 
           </form>

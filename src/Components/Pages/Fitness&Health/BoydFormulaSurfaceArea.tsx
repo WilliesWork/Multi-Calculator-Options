@@ -8,6 +8,7 @@ import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BoydFormulaSurfaceArea = () => {
   const classes = useStyles()
@@ -20,7 +21,10 @@ const BoydFormulaSurfaceArea = () => {
     weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    weightInKg: 0,
+    heightToMeter: 0,
+    bsa: 0,
+    unit: 0,
   })
 
   return (
@@ -44,20 +48,22 @@ const BoydFormulaSurfaceArea = () => {
             height_unit,
             weight,
             weight_unit,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'BoydFormulaBodySurfaceArea'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: boydFormula } = await calculateHealth(payload)
+            console.log('=====>', boydFormula)
+            if (typeof boydFormula === 'object') {
+              const { weightInKg, heightToMeter, bsa, unit } = boydFormula
+              setResult({
+                bsa: bsa,
+                heightToMeter: heightToMeter,
+                weightInKg: weightInKg,
+                unit: unit
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -112,7 +118,11 @@ const BoydFormulaSurfaceArea = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">Bsa: {Result.bsa}</Typography>
+              <Typography variant="subtitle1">Weight: {Result.weightInKg}</Typography>
+              <Typography variant="subtitle1">Height: {Result.heightToMeter}</Typography>
+              <Typography variant="subtitle1">Unit: {Result.unit}</Typography>
+
             </div>
 
           </form>

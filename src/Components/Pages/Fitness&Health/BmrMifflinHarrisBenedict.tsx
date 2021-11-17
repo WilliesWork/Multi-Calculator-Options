@@ -8,6 +8,7 @@ import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BmrMifflinHarrisBenedict = () => {
   const classes = useStyles()
@@ -22,7 +23,7 @@ const BmrMifflinHarrisBenedict = () => {
     age: 0
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    BMR: 0
   })
 
   return (
@@ -50,20 +51,19 @@ const BmrMifflinHarrisBenedict = () => {
             weight_unit,
             gender,
             age,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'BMRHarrisBenedict'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
+              const { payload: MifflinHarris } = await calculateHealth(payload)
+             console.log('=====>', MifflinHarris)
+             if (typeof MifflinHarris === 'object') {
+               const {BMR} = MifflinHarris
                setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
+                BMR: BMR
                })
              }
-             resetForm() */
+             resetForm() 
           } catch (err) {
             console.log('====>', err)
           }
@@ -140,7 +140,7 @@ const BmrMifflinHarrisBenedict = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">Answer: {Result.BMR}</Typography>
             </div>
 
           </form>

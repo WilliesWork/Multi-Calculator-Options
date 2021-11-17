@@ -8,6 +8,7 @@ import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
 import { CustomForm, CustomSelect } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BodyFatPercentageBmi = () => {
   const classes = useStyles()
@@ -22,7 +23,8 @@ const BodyFatPercentageBmi = () => {
     age: '',
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    BFI: 0,
+    BMI: 0
   })
 
   return (
@@ -50,20 +52,20 @@ const BodyFatPercentageBmi = () => {
             weight_unit,
             gender,
             age,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'BodyMassIndexBFP'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
+              const { payload: BodyFatPercentage } = await calculateHealth(payload)
+             console.log('=====>', BodyFatPercentage)
+             if (typeof BodyFatPercentage === 'object') {
+               const {BMI, BFI } = BodyFatPercentage
                setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
+                 BMI: BMI,
+                 BFI: BFI
                })
              }
-             resetForm() */
+             resetForm() 
           } catch (err) {
             console.log('====>', err)
           }
@@ -140,7 +142,9 @@ const BodyFatPercentageBmi = () => {
               </Button>
             </div>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">BFI: {Result.BFI}</Typography>
+              <Typography variant="subtitle1">BMI: {Result.BMI}</Typography>
+
             </div>
 
           </form>
