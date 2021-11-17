@@ -1,13 +1,14 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { InternationalSystemBfcI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomForm, CustomSelect, Label, CustomBtn } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const InternationalSystemBfc = () => {
   const classes = useStyles()
@@ -21,7 +22,7 @@ const InternationalSystemBfc = () => {
     waist: '',
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    bfc: 0
   })
 
   return (
@@ -47,20 +48,19 @@ const InternationalSystemBfc = () => {
             gender,
             hip,
             waist,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'InternationalSystemUnitBFP'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: internationalSystemBFC } = await calculateHealth(payload)
+            console.log('=====>', internationalSystemBFC)
+            if (typeof internationalSystemBFC === 'object') {
+              const { bfc } = internationalSystemBFC
+              setResult({
+                bfc: bfc,
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -69,8 +69,8 @@ const InternationalSystemBfc = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -80,8 +80,8 @@ const InternationalSystemBfc = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.neck} />
               <CustomForm
-                label={LABELS.neck}
                 type={INPUT_TYPE.number}
                 id="neck"
                 placeholder={PLACEHOLDERS.number}
@@ -91,8 +91,8 @@ const InternationalSystemBfc = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.hip} />
               <CustomForm
-                label={LABELS.hip}
                 type={INPUT_TYPE.number}
                 id="hip"
                 placeholder={PLACEHOLDERS.number}
@@ -102,8 +102,8 @@ const InternationalSystemBfc = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.waist} />
               <CustomForm
-                label={LABELS.waist}
                 type={INPUT_TYPE.number}
                 id="waist"
                 placeholder={PLACEHOLDERS.number}
@@ -113,8 +113,8 @@ const InternationalSystemBfc = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.gender} />
               <CustomForm
-                label={LABELS.gender}
                 type={INPUT_TYPE.text}
                 id="gender"
                 placeholder={PLACEHOLDERS.gender}
@@ -123,18 +123,10 @@ const InternationalSystemBfc = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">BFC: {Result.bfc}</Typography>
             </div>
 
           </form>

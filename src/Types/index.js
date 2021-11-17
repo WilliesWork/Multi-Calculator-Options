@@ -51,8 +51,6 @@ export {
   BoydFormulaSurfaceAreaI,
   TakahiraBodySurfaceAreaI,
   TakaSchlichBodySurfaceAreaI,
-  SinglePointWithKnownSlopeI,
-  ProbabilityOfASeriesOfIndpendentEventsI,
   FujimotoFormulaSurfaceAreaI,
   DueDateParikhsRuleI,
   DueDateWoodsRuleI,
@@ -80,6 +78,7 @@ export {
   SampleSizeI,
   ProbablityOfTwoEventsI,
   ProbablitySolverForTwoEventsI,
+  ProbabilityOfASeriesOfIndpendentEventsI,
 } from "./StatisticsInterfaces";
 
 export {
@@ -97,4 +96,5 @@ export {
   HorsepowerCalculationI,
   WebsiteBandwidthI,
   HostingBandwidthI,
+  SinglePointWithKnownSlopeI,
 } from "./OtherCalculatorInterfaces";

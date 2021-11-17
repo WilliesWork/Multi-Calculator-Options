@@ -178,23 +178,6 @@ export interface TakaSchlichBodySurfaceAreaI {
   method: string;
 }
 
-//note: endpoint called if 1 point and the slope are known
-export interface SinglePointWithKnownSlopeI {
-  y_1: string;
-  distance: string;
-  x_1: string;
-  slope: string;
-  method: string;
-}
-
-export interface ProbabilityOfASeriesOfIndpendentEventsI {
-  event_a: string;
-  event_b: string;
-  a_repeat_times: string;
-  b_repeat_times: string;
-  method: string;
-}
-
 // start
 export interface FujimotoFormulaSurfaceAreaI {
   height: string;
@@ -259,8 +242,6 @@ export type AllHealthCalculators =
   | BoydFormulaSurfaceAreaI
   | TakahiraBodySurfaceAreaI
   | TakaSchlichBodySurfaceAreaI
-  | SinglePointWithKnownSlopeI
-  | ProbabilityOfASeriesOfIndpendentEventsI
   | FujimotoFormulaSurfaceAreaI
   | DueDateParikhsRuleI
   | DueDateWoodsRuleI

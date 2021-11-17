@@ -1,13 +1,14 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { PeroidCalculatorI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const PeroidCalculator = () => {
   const classes = useStyles()
@@ -19,7 +20,7 @@ const PeroidCalculator = () => {
     last_period_days: ''
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    period: 0
   })
 
   return (
@@ -41,20 +42,19 @@ const PeroidCalculator = () => {
             start_date_of_last_cycle,
             cycle_length,
             last_period_days,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'PeriodCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: periodCalculator } = await calculateHealth(payload)
+            console.log('=====>', periodCalculator)
+            if (typeof periodCalculator === 'object') {
+              const { period } = periodCalculator
+              setResult({
+                period: period,
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -63,8 +63,8 @@ const PeroidCalculator = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.previousCycleStartDate} />
               <CustomForm
-                label={LABELS.previousCycleStartDate}
                 type={INPUT_TYPE.date}
                 id="start_date_of_last_cycle"
                 placeholder={PLACEHOLDERS.number}
@@ -74,8 +74,8 @@ const PeroidCalculator = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.cycleLength} />
               <CustomForm
-                label={LABELS.cycleLength}
                 type={INPUT_TYPE.number}
                 id="cycle_length"
                 placeholder={PLACEHOLDERS.number}
@@ -85,8 +85,8 @@ const PeroidCalculator = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.lastPeriodDays} />
               <CustomForm
-                label={LABELS.lastPeriodDays}
                 type={INPUT_TYPE.number}
                 id="last_period_days"
                 placeholder={PLACEHOLDERS.number}
@@ -95,18 +95,10 @@ const PeroidCalculator = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">Period: {Result.period}</Typography>
             </div>
 
           </form>

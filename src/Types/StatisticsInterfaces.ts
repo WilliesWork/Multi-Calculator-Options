@@ -32,8 +32,17 @@ export interface ProbablitySolverForTwoEventsI {
 
 //end 11/04/2021
 
+export interface ProbabilityOfASeriesOfIndpendentEventsI {
+  event_a: string;
+  event_b: string;
+  a_repeat_times: string;
+  b_repeat_times: string;
+  method: string;
+}
+
 export type AllStatisticalCalculators =
   | SampleSizeI
   | MarginErrorI
   | ProbablityOfTwoEventsI
-  | ProbablitySolverForTwoEventsI;
+  | ProbablitySolverForTwoEventsI
+  | ProbabilityOfASeriesOfIndpendentEventsI;

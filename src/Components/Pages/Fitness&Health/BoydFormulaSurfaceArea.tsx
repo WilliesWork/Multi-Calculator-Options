@@ -1,13 +1,13 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { BoydFormulaSurfaceAreaI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomForm, CustomSelect, Label, CustomBtn } from '../../custom'
 import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BoydFormulaSurfaceArea = () => {
@@ -72,8 +72,8 @@ const BoydFormulaSurfaceArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -82,7 +82,6 @@ const BoydFormulaSurfaceArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -90,8 +89,8 @@ const BoydFormulaSurfaceArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.weight} />
               <CustomForm
-                label={LABELS.weight}
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}
@@ -100,29 +99,18 @@ const BoydFormulaSurfaceArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="weight_unit"
                 value={values.weight_unit}
                 onChange={handleChange('weight_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Bsa: {Result.bsa}</Typography>
+              <Typography variant="subtitle1">Boyd formula surface area: {Result.bsa}{Result.unit}</Typography>
               <Typography variant="subtitle1">Weight: {Result.weightInKg}</Typography>
               <Typography variant="subtitle1">Height: {Result.heightToMeter}</Typography>
-              <Typography variant="subtitle1">Unit: {Result.unit}</Typography>
-
             </div>
 
           </form>

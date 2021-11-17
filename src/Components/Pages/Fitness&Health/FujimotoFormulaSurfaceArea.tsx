@@ -1,13 +1,14 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { FujimotoFormulaSurfaceAreaI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomForm, CustomSelect, Label, CustomBtn } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const FujimotoFormulaSurfaceArea = () => {
   const classes = useStyles()
@@ -20,7 +21,7 @@ const FujimotoFormulaSurfaceArea = () => {
     weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    bodySurfaceArea: 0
   })
 
   return (
@@ -44,20 +45,19 @@ const FujimotoFormulaSurfaceArea = () => {
             height_unit,
             weight,
             weight_unit,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'FujimotoFormulaBodySurfaceArea'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: fujimotoFormulaBodySurfaceArea } = await calculateHealth(payload)
+            console.log('=====>', fujimotoFormulaBodySurfaceArea)
+            if (typeof fujimotoFormulaBodySurfaceArea === 'object') {
+              const { bodySurfaceArea } = fujimotoFormulaBodySurfaceArea
+              setResult({
+                bodySurfaceArea: bodySurfaceArea,
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -66,8 +66,8 @@ const FujimotoFormulaSurfaceArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -76,7 +76,6 @@ const FujimotoFormulaSurfaceArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -84,8 +83,8 @@ const FujimotoFormulaSurfaceArea = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.weight} />
               <CustomForm
-                label={LABELS.weight}
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}
@@ -94,25 +93,16 @@ const FujimotoFormulaSurfaceArea = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="weight_unit"
                 value={values.weight_unit}
                 onChange={handleChange('weight_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">Body surface area: {Result.bodySurfaceArea}</Typography>
             </div>
 
           </form>

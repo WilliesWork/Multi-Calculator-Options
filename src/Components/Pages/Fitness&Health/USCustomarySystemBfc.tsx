@@ -1,13 +1,14 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { USCustomarySystemBfcI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const USCustomarySystemBfc = () => {
   const classes = useStyles()
@@ -26,7 +27,7 @@ const USCustomarySystemBfc = () => {
     gender: '',
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    bfc: 0
   })
 
   return (
@@ -62,20 +63,19 @@ const USCustomarySystemBfc = () => {
             waist_unit,
             abdomen,
             gender,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'USCustomarySystemBFP'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: usCustomarySystemBFC } = await calculateHealth(payload)
+            console.log('=====>', usCustomarySystemBFC)
+            if (typeof usCustomarySystemBFC === 'object') {
+              const { bfc } = usCustomarySystemBFC
+              setResult({
+                bfc: bfc,
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -84,8 +84,8 @@ const USCustomarySystemBfc = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -94,7 +94,6 @@ const USCustomarySystemBfc = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -102,8 +101,8 @@ const USCustomarySystemBfc = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.neck} />
               <CustomForm
-                label={LABELS.neck}
                 type={INPUT_TYPE.number}
                 id="neck"
                 placeholder={PLACEHOLDERS.number}
@@ -112,7 +111,6 @@ const USCustomarySystemBfc = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="neck_unit"
                 value={values.neck_unit}
                 onChange={handleChange('neck_unit')}
@@ -120,8 +118,8 @@ const USCustomarySystemBfc = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.hip} />
               <CustomForm
-                label={LABELS.hip}
                 type={INPUT_TYPE.number}
                 id="hip"
                 placeholder={PLACEHOLDERS.number}
@@ -130,7 +128,6 @@ const USCustomarySystemBfc = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="hip_unit"
                 value={values.hip_unit}
                 onChange={handleChange('hip_unit')}
@@ -138,8 +135,8 @@ const USCustomarySystemBfc = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.waist} />
               <CustomForm
-                label={LABELS.waist}
                 type={INPUT_TYPE.number}
                 id="waist"
                 placeholder={PLACEHOLDERS.number}
@@ -148,7 +145,6 @@ const USCustomarySystemBfc = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="waist_unit"
                 value={values.waist_unit}
                 onChange={handleChange('waist_unit')}
@@ -156,8 +152,8 @@ const USCustomarySystemBfc = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.abdomen} />
               <CustomForm
-                label={LABELS.abdomen}
                 type={INPUT_TYPE.number}
                 id="abdomen"
                 placeholder={PLACEHOLDERS.number}
@@ -167,8 +163,8 @@ const USCustomarySystemBfc = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.gender} />
               <CustomForm
-                label={LABELS.gender}
                 type={INPUT_TYPE.text}
                 id="gender"
                 placeholder={PLACEHOLDERS.gender}
@@ -177,18 +173,10 @@ const USCustomarySystemBfc = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">BFC: {Result.bfc}</Typography>
             </div>
 
           </form>

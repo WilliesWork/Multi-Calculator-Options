@@ -1,13 +1,14 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { DueDateNaegeleRuleI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomForm, CustomSelect, Label, CustomBtn } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const DueDateNaegeleRule = () => {
   const classes = useStyles()
@@ -19,7 +20,7 @@ const DueDateNaegeleRule = () => {
     method: '',
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    dueDate: 0
   })
 
   return (
@@ -40,20 +41,19 @@ const DueDateNaegeleRule = () => {
           const payload: DueDateNaegeleRuleI = {
             first_date_of_last_period,
             days,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'DueDateNaegeleRule'
           }
           console.log(JSON.stringify(payload))
           try {
-            /*  const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-             console.log('=====>', calsurfaceArea)
-             if (typeof calsurfaceArea === 'object') {
-               console.log(calsurfaceArea)
-               setResult({
-                 surfaceArea: calsurfaceArea.surfaceAreas,
-                 Area: calsurfaceArea.Area
-               })
-             }
-             resetForm() */
+            const { payload: dueDateNaegeleRule } = await calculateHealth(payload)
+            console.log('=====>', dueDateNaegeleRule)
+            if (typeof dueDateNaegeleRule === 'object') {
+              const { dueDate } = dueDateNaegeleRule
+              setResult({
+                dueDate: dueDate
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -62,8 +62,8 @@ const DueDateNaegeleRule = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.firstDateofLastPeriod} />
               <CustomForm
-                label={LABELS.firstDateofLastPeriod}
                 type={INPUT_TYPE.date}
                 id="first_date_of_last_period"
                 placeholder={PLACEHOLDERS.number}
@@ -73,8 +73,8 @@ const DueDateNaegeleRule = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.days} />
               <CustomForm
-                label={LABELS.days}
                 type={INPUT_TYPE.number}
                 id="days"
                 placeholder={PLACEHOLDERS.number}
@@ -84,8 +84,8 @@ const DueDateNaegeleRule = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.method} />
               <CustomForm
-                label={LABELS.method}
                 type={INPUT_TYPE.text}
                 id="method"
                 placeholder={PLACEHOLDERS.method}
@@ -94,18 +94,10 @@ const DueDateNaegeleRule = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1">Due date: {Result.dueDate}</Typography>
             </div>
 
           </form>

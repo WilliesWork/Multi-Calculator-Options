@@ -1,13 +1,13 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { DueDateMittendorfWilliamI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomForm, CustomSelect, Label, CustomBtn } from '../../custom'
 import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const DueDateMittendorfWilliam = () => {
@@ -51,7 +51,7 @@ const DueDateMittendorfWilliam = () => {
                 dueDate: dueDate
               })
             }
-            resetForm() 
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -60,8 +60,8 @@ const DueDateMittendorfWilliam = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.firstDateofLastPeriod} />
               <CustomForm
-                label={LABELS.firstDateofLastPeriod}
                 type={INPUT_TYPE.date}
                 id="first_date_of_last_period"
                 placeholder={PLACEHOLDERS.date}
@@ -71,8 +71,8 @@ const DueDateMittendorfWilliam = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.type} />
               <CustomForm
-                label={LABELS.type}
                 type={INPUT_TYPE.text}
                 id="type"
                 placeholder={PLACEHOLDERS.type}
@@ -81,16 +81,8 @@ const DueDateMittendorfWilliam = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
               <Typography variant="subtitle1">Due Date: {Result.dueDate} </Typography>
             </div>

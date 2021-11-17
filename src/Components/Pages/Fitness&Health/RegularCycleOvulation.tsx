@@ -1,14 +1,14 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { RegularCycleOvulationI } from '../../../Types'
 import { RootState } from '../../../redux/store'
-import { Units } from '../../../Common/MathUnits'
 import useStyles from './../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from './../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from './../../../Common/shared'
+import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const RegularCycleOvulation = () => {
   const classes = useStyles()
@@ -40,20 +40,20 @@ const RegularCycleOvulation = () => {
           const payload: RegularCycleOvulationI = {
             cycle_days,
             previous_cycle_start_date,
-            method: 'ballSurfaceAreaCalculator'
+            method: 'regularCycleOvulationCalculator'
           }
           console.log(JSON.stringify(payload))
           try {
-            /* const { payload: calsurfaceArea } = await CalculateSurfaceArea(payload)
-            console.log('=====>', calsurfaceArea)
-            if (typeof calsurfaceArea === 'object') {
-              console.log(calsurfaceArea)
+            const { payload: regularOvulationCycle } = await calculateHealth(payload)
+            console.log('=====>', regularOvulationCycle)
+            if (typeof regularOvulationCycle === 'object') {
+              const { importantDatesForCurrentCycle, importantDatesNextSixCycles } = regularOvulationCycle
               setResult({
-                surfaceArea: calsurfaceArea.surfaceAreas,
-                Area: calsurfaceArea.Area
+                importantDatesForCurrentCycle: importantDatesForCurrentCycle,
+                importantDatesNextSixCycles: importantDatesNextSixCycles
               })
             }
-            resetForm() */
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -62,8 +62,8 @@ const RegularCycleOvulation = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.previousCycleStartDate} />
               <CustomForm
-                label={LABELS.previousCycleStartDate}
                 type={INPUT_TYPE.date}
                 id="previous_cycle_start_date"
                 placeholder={PLACEHOLDERS.number}
@@ -73,8 +73,8 @@ const RegularCycleOvulation = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.cycleDays} />
               <CustomForm
-                label={LABELS.cycleDays}
                 type={INPUT_TYPE.number}
                 id="cycle_days"
                 placeholder={PLACEHOLDERS.number}
@@ -83,16 +83,8 @@ const RegularCycleOvulation = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
               <Typography variant="subtitle1">Important dates for current cycle: {Result.importantDatesForCurrentCycle}</Typography>
               <Typography variant="subtitle1">Important dates for next 6 cycles: {Result.importantDatesNextSixCycles}</Typography>

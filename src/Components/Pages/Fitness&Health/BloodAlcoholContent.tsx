@@ -1,13 +1,13 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { BloodAlcoholContentI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
 import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BloodAlcoholContent = () => {
@@ -64,15 +64,15 @@ const BloodAlcoholContent = () => {
             const { payload: BloodAlcoholContent } = await calculateHealth(payload)
             console.log('=====>', BloodAlcoholContent)
             if (typeof BloodAlcoholContent === 'object') {
-              const {BAC, numberOfHoursAverage, divident, divisor, M, N, H} = BloodAlcoholContent
+              const { BAC, numberOfHoursAverage, divident, divisor, M, N, H } = BloodAlcoholContent
               setResult({
-               BAC: BAC,
-               numberOfHoursAverage: numberOfHoursAverage,
-               divident: divident,
-               divisor: divisor,
-               M: M,
-               N: N,
-               H: H
+                BAC: BAC,
+                numberOfHoursAverage: numberOfHoursAverage,
+                divident: divident,
+                divisor: divisor,
+                M: M,
+                N: N,
+                H: H
               })
             }
             resetForm()
@@ -85,8 +85,8 @@ const BloodAlcoholContent = () => {
           <form onSubmit={handleSubmit} className="form-container">
 
             <div className="form-row">
+              <Label title={LABELS.weight} />
               <CustomForm
-                label={LABELS.weight}
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}
@@ -95,7 +95,6 @@ const BloodAlcoholContent = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="weight_unit"
                 value={values.weight_unit}
                 onChange={handleChange('weight_unit')}
@@ -103,8 +102,8 @@ const BloodAlcoholContent = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.gender} />
               <CustomForm
-                label={LABELS.gender}
                 type={INPUT_TYPE.text}
                 id="gender"
                 placeholder={PLACEHOLDERS.gender}
@@ -114,8 +113,8 @@ const BloodAlcoholContent = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.hoursOfDrinking} />
               <CustomForm
-                label={LABELS.hoursOfDrinking}
                 type={INPUT_TYPE.number}
                 id="hours_of_drinking"
                 placeholder={PLACEHOLDERS.number}
@@ -125,8 +124,8 @@ const BloodAlcoholContent = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.minutesOfDrinking} />
               <CustomForm
-                label={LABELS.minutesOfDrinking}
                 type={INPUT_TYPE.number}
                 id="minutes_of_drinking"
                 placeholder={PLACEHOLDERS.number}
@@ -136,8 +135,8 @@ const BloodAlcoholContent = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.numberOfStandardDrinks} />
               <CustomForm
-                label={LABELS.numberOfStandardDrinks}
                 type={INPUT_TYPE.number}
                 id="number_of_standard_drinks"
                 placeholder={PLACEHOLDERS.number}
@@ -146,18 +145,10 @@ const BloodAlcoholContent = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Answer</Typography>
+              <Typography variant="subtitle1">Blood alcohol content: {Result.BAC}</Typography>
             </div>
 
           </form>

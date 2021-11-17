@@ -53,9 +53,8 @@ export { default as LeanBodyMass } from "./Fitness&Health/LeanBodyMass";
 export { default as LeanBodyMassPeterFormula } from "./Fitness&Health/LeanBodyMassPeterFormula";
 export { default as MostellerBodySurfaceArea } from "./Fitness&Health/MostellerBodySurfaceArea";
 export { default as PeroidCalculator } from "./Fitness&Health/PeroidCalculator";
-export { default as ProbabilityOfASeriesOfIndpendentEvents } from "./Fitness&Health/ProbabilityOfASeriesOfIndpendentEvents";
 export { default as RegularCycleOvulation } from "./Fitness&Health/RegularCycleOvulation";
-export { default as SinglePointWithKnownSlope } from "./Fitness&Health/SinglePointWithKnownSlope";
+
 export { default as TakaSchlichBodySurfaceArea } from "./Fitness&Health/TakaSchlichBodySurfaceArea";
 export { default as TakahiraBodySurfaceArea } from "./Fitness&Health/TakahiraBodySurfaceArea";
 export { default as USCustomarySystemBfc } from "./Fitness&Health/USCustomarySystemBfc";
@@ -63,6 +62,7 @@ export { default as WholeBodyMassFormula } from "./Fitness&Health/WholeBodyMassF
 
 // Statistics
 export { default as MarginOfErrorCalculator } from "./Statistics/MarginOfErrorCalculator";
+export { default as ProbabilityOfASeriesOfIndpendentEvents } from "./Statistics/ProbabilityOfASeriesOfIndpendentEvents";
 export { default as ProbablityOfTwoEvents } from "./Statistics/ProbablityOfTwoEvents";
 export { default as ProbablitySolverForTwoEvents } from "./Statistics/ProbablitySolverForTwoEvents";
 export { default as SampleSizeCalculator } from "./Statistics/SampleSizeCalculator";
@@ -78,6 +78,7 @@ export { default as HorsepowerCalculation } from "./Other/HorsepowerCalculation"
 export { default as HostingBandwidth } from "./Other/HostingBandwidth";
 export { default as ParrallelResitor } from "./Other/ParrallelResitor";
 export { default as SeriesResistor } from "./Other/SeriesResistor";
+export { default as SinglePointWithKnownSlope } from "./Other/SinglePointWithKnownSlope";
 export { default as SlopeCalculatorForTwoKnownPoints } from "./Other/SlopeCalculatorForTwoKnownPoints";
 export { default as StairsConcreate } from "./Other/StairsConcreate";
 export { default as TrapSpeedMethod } from "./Other/TrapSpeedMethod";

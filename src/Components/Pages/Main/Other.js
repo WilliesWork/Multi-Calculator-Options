@@ -15,6 +15,7 @@ import {
   HostingBandwidth,
   ParrallelResitor,
   SeriesResistor,
+  SinglePointWithKnownSlope,
   SlopeCalculatorForTwoKnownPoints,
   StairsConcreate,
   TrapSpeedMethod,
@@ -91,6 +92,12 @@ function Other() {
         <Grid item xs={6}>
           <Paper className={classes.paper2}>
             <SeriesResistor />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <SinglePointWithKnownSlope />
           </Paper>
         </Grid>
 

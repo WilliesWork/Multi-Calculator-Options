@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import useStyles from "../../../Styling/CustomStyles";
 import {
   MarginOfErrorCalculator,
+  ProbabilityOfASeriesOfIndpendentEvents,
   ProbablityOfTwoEvents,
   ProbablitySolverForTwoEvents,
   SampleSizeCalculator,
@@ -25,6 +26,12 @@ const Statistics = () => {
         <Grid item xs={6}>
           <Paper className={classes.paper2}>
             <MarginOfErrorCalculator />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper2}>
+            <ProbabilityOfASeriesOfIndpendentEvents />
           </Paper>
         </Grid>
 

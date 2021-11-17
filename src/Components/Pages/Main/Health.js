@@ -182,19 +182,7 @@ const Health = () => {
 
         <Grid item xs={6}>
           <Paper className={classes.paper2}>
-            <ProbabilityOfASeriesOfIndpendentEvents />
-          </Paper>
-        </Grid>
-
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
             <RegularCycleOvulation />
-          </Paper>
-        </Grid>
-
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
-            <SinglePointWithKnownSlope />
           </Paper>
         </Grid>
 

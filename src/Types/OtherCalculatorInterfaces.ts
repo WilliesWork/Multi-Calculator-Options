@@ -127,6 +127,15 @@ export interface HostingBandwidthI {
 }
 // end 11/04/2021
 
+//note: endpoint called if 1 point and the slope are known
+export interface SinglePointWithKnownSlopeI {
+  y_1: string;
+  distance: string;
+  x_1: string;
+  slope: string;
+  method: string;
+}
+
 export type AllOtherCalculators =
   | ConcreteSquareFootingI
   | CircularSlapI
@@ -141,4 +150,5 @@ export type AllOtherCalculators =
   | ConductorResitorI
   | HorsepowerCalculationI
   | WebsiteBandwidthI
-  | HostingBandwidthI;
+  | HostingBandwidthI
+  | SinglePointWithKnownSlopeI;

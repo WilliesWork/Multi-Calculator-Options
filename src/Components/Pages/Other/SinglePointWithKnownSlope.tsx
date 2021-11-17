@@ -3,63 +3,58 @@ import { Formik } from 'formik'
 import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-import { TakaSchlichBodySurfaceAreaI } from '../../../Types'
+import { SinglePointWithKnownSlopeI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
-import { calculateHealth } from '../../../Services/AppCalculatorsApi'
+import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
-const TakaSchlichBodySurfaceArea = () => {
+const SinglePointWithKnownSlope = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
   console.log(measures)
   const [initialFormValues] = React.useState({
-    height: '',
-    height_unit: '',
-    weight: '',
-    weight_unit: '',
-    gender: '',
+    x_1: '',
+    y_1: '',
+    slope: '',
+    distance: ''
   })
   const [Result, setResult] = React.useState({
-    bodySurfaceArea: 0,
-    unit: ''
+    equation: 0,
   })
 
   return (
     <div>
       <Grid item xs={12}>
         <Typography className="text-center" variant="h5" gutterBottom>
-          {CALCULATORS.takaSchlichBodySurfaceArea}
+          {CALCULATORS.singlePointWithKnownSlope}
         </Typography>
       </Grid>
 
       <Formik
         initialValues={initialFormValues}
         onSubmit={async ({
-          height,
-          height_unit,
-          weight,
-          weight_unit,
-          gender,
+          x_1,
+          y_1,
+          slope,
+          distance
         }, { setSubmitting, resetForm }) => {
-          const payload: TakaSchlichBodySurfaceAreaI = {
-            height,
-            height_unit,
-            weight,
-            weight_unit,
-            gender,
-            method: 'SchlichFormulaBodySurfaceArea'
+          const payload: SinglePointWithKnownSlopeI = {
+            x_1,
+            y_1,
+            slope,
+            distance,
+            method: 'If1PointAndTheSlopeAreKnown'
           }
           console.log(JSON.stringify(payload))
           try {
-            const { payload: takaSchlichBodySurfaceArea } = await calculateHealth(payload)
-            console.log('=====>', takaSchlichBodySurfaceArea)
-            if (typeof takaSchlichBodySurfaceArea === 'object') {
-              const { bodySurfaceArea, unit } = takaSchlichBodySurfaceArea
+            const { payload: singlePointWithKnowPoint } = await calculateOthers(payload)
+            console.log('=====>', singlePointWithKnowPoint)
+            if (typeof singlePointWithKnowPoint === 'object') {
+              const { equation } = singlePointWithKnowPoint
               setResult({
-                bodySurfaceArea: bodySurfaceArea,
-                unit: unit
+                equation: equation,
               })
             }
             resetForm()
@@ -71,46 +66,45 @@ const TakaSchlichBodySurfaceArea = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
-              <Label title={LABELS.height} />
+              <Label title={LABELS.x1} />
               <CustomForm
                 type={INPUT_TYPE.number}
-                id="height"
+                id="x_1"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
+                value={values.x_1}
                 onChange={handleChange}
-              />
-
-              <CustomSelect
-                id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 
             <div className="form-row">
-              <Label title={LABELS.weight} />
+              <Label title={LABELS.y1} />
               <CustomForm
                 type={INPUT_TYPE.number}
-                id="weight"
+                id="y_1"
                 placeholder={PLACEHOLDERS.number}
-                value={values.weight}
+                value={values.y_1}
                 onChange={handleChange}
-              />
-
-              <CustomSelect
-                id="weight_unit"
-                value={values.weight_unit}
-                onChange={handleChange('weight_unit')}
               />
             </div>
 
             <div className="form-row">
-              <Label title={LABELS.gender} />
+              <Label title={LABELS.slope} />
               <CustomForm
-                type={INPUT_TYPE.text}
-                id="gender"
-                placeholder={PLACEHOLDERS.gender}
-                value={values.gender}
+                type={INPUT_TYPE.number}
+                id="slope"
+                placeholder={PLACEHOLDERS.number}
+                value={values.slope}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <Label title={LABELS.distance} />
+              <CustomForm
+                type={INPUT_TYPE.number}
+                id="distance"
+                placeholder={PLACEHOLDERS.number}
+                value={values.distance}
                 onChange={handleChange}
               />
             </div>
@@ -118,7 +112,7 @@ const TakaSchlichBodySurfaceArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Body surface area: {Result.bodySurfaceArea}</Typography>
+              <Typography variant="subtitle1">Equation: {Result.equation}</Typography>
             </div>
 
           </form>
@@ -130,4 +124,4 @@ const TakaSchlichBodySurfaceArea = () => {
   )
 }
 
-export default TakaSchlichBodySurfaceArea
+export default SinglePointWithKnownSlope

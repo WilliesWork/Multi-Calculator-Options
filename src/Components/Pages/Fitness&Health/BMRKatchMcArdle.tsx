@@ -1,13 +1,13 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { BMRKatchMcArdleI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
 import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BMRKatchMcArdle = () => {
@@ -20,7 +20,8 @@ const BMRKatchMcArdle = () => {
     weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    BMR: 0
+    BMR: 0,
+    unit: ''
   })
 
   return (
@@ -49,9 +50,10 @@ const BMRKatchMcArdle = () => {
             const { payload: katchMcArdle } = await calculateHealth(payload)
             console.log('=====>', katchMcArdle)
             if (typeof katchMcArdle === 'object') {
-              const { BMR } = katchMcArdle
+              const { BMR, unit } = katchMcArdle
               setResult({
-                BMR: BMR
+                BMR: BMR,
+                unit: unit
               })
             }
             resetForm()
@@ -63,8 +65,8 @@ const BMRKatchMcArdle = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.fat} />
               <CustomForm
-                label={LABELS.fat}
                 type={INPUT_TYPE.number}
                 id="fat"
                 placeholder={PLACEHOLDERS.number}
@@ -74,8 +76,8 @@ const BMRKatchMcArdle = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.weight} />
               <CustomForm
-                label={LABELS.weight}
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}
@@ -84,25 +86,16 @@ const BMRKatchMcArdle = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="weight_unit"
                 value={values.weight_unit}
                 onChange={handleChange('weight_unit')}
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">BMR:{Result.BMR} </Typography>
+              <Typography variant="subtitle1">BMR: {Result.BMR}{Result.unit}</Typography>
             </div>
 
           </form>

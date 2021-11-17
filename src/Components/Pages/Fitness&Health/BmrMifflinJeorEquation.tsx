@@ -1,13 +1,13 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { BmrMifflinJeorEquationI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomForm, CustomSelect, Label, CustomBtn } from '../../custom'
 import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BmrMifflinJeorEquation = () => {
@@ -26,7 +26,8 @@ const BmrMifflinJeorEquation = () => {
     step1: 0,
     step2: 0,
     step3: 0,
-    BMR: 0
+    BMR: 0,
+    unit: ''
   })
 
   return (
@@ -61,12 +62,13 @@ const BmrMifflinJeorEquation = () => {
             const { payload: MifflinJeor } = await calculateHealth(payload)
             console.log('=====>', MifflinJeor)
             if (typeof MifflinJeor === 'object') {
-              const { step1, step2, step3, BMR } = MifflinJeor
+              const { step1, step2, step3, BMR, unit } = MifflinJeor
               setResult({
                 step1: step1,
                 step2: step2,
                 step3: step3,
-                BMR: BMR
+                BMR: BMR,
+                unit: unit
               })
             }
             resetForm()
@@ -78,8 +80,8 @@ const BmrMifflinJeorEquation = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.height} />
               <CustomForm
-                label={LABELS.height}
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -88,7 +90,6 @@ const BmrMifflinJeorEquation = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -96,8 +97,8 @@ const BmrMifflinJeorEquation = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.weight} />
               <CustomForm
-                label={LABELS.weight}
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}
@@ -106,7 +107,6 @@ const BmrMifflinJeorEquation = () => {
               />
 
               <CustomSelect
-                label={LABELS.unit}
                 id="weight_unit"
                 value={values.weight_unit}
                 onChange={handleChange('weight_unit')}
@@ -114,8 +114,8 @@ const BmrMifflinJeorEquation = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.gender} />
               <CustomForm
-                label={LABELS.gender}
                 type={INPUT_TYPE.text}
                 id="gender"
                 placeholder={PLACEHOLDERS.gender}
@@ -125,8 +125,8 @@ const BmrMifflinJeorEquation = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.age} />
               <CustomForm
-                label={LABELS.age}
                 type={INPUT_TYPE.number}
                 id="age"
                 placeholder={PLACEHOLDERS.number}
@@ -135,22 +135,13 @@ const BmrMifflinJeorEquation = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
+
             <div className="text-center mb-3">
               <Typography variant="subtitle1">step1:{Result.step1} </Typography>
               <Typography variant="subtitle1">step2: {Result.step2}</Typography>
               <Typography variant="subtitle1">step3: {Result.step3}</Typography>
-              <Typography variant="subtitle1">BMR: {Result.BMR}</Typography>
-
+              <Typography variant="subtitle1">BMR: {Result.BMR}{Result.unit}</Typography>
             </div>
 
           </form>
