@@ -1,13 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { PresentValueI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomForm, CustomBtn, Label } from '../../custom'
+import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const PresentValue = () => {
   const classes = useStyles()
@@ -20,7 +21,9 @@ const PresentValue = () => {
     number_of_years: "",
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    PV: 0,
+    totalInterest: 0,
+    currency: ''
   })
 
   return (
@@ -48,16 +51,17 @@ const PresentValue = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: presentValueOfFutureMoney } = await calculateFinances(payload)
+            console.log('=====>', presentValueOfFutureMoney)
+            const { PV, totalInterest, currency } = presentValueOfFutureMoney
+            if (typeof presentValueOfFutureMoney === 'object') {
+              setResult({
+                PV: PV,
+                totalInterest: totalInterest,
+                currency: currency
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -66,8 +70,8 @@ const PresentValue = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.interestRate} />
               <CustomForm
-                label={LABELS.interestRate}
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
@@ -77,8 +81,8 @@ const PresentValue = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.predeterminedAmount} />
               <CustomForm
-                label={LABELS.predeterminedAmount}
                 type={INPUT_TYPE.number}
                 id="predetermined_amount"
                 placeholder={PLACEHOLDERS.number}
@@ -88,8 +92,8 @@ const PresentValue = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.numberOfMonths} />
               <CustomForm
-                label={LABELS.numberOfMonths}
                 type={INPUT_TYPE.number}
                 id="number_of_months"
                 placeholder={PLACEHOLDERS.number}
@@ -99,8 +103,8 @@ const PresentValue = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.numberOfYears} />
               <CustomForm
-                label={LABELS.numberOfYears}
                 type={INPUT_TYPE.number}
                 id="number_of_years"
                 placeholder={PLACEHOLDERS.number}
@@ -109,20 +113,11 @@ const PresentValue = () => {
               />
             </div>
 
-
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Present value: {Result.currency}{Result.PV}</Typography>
+              <Typography variant="subtitle1"> Total interest: {Result.currency}{Result.totalInterest}</Typography>
             </div>
 
           </form>

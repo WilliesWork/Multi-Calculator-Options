@@ -7,7 +7,8 @@ import { ProfitMarginCalculatorI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const ProfitMarginCalculator = () => {
   const classes = useStyles()
@@ -18,7 +19,10 @@ const ProfitMarginCalculator = () => {
     cost: "",
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    grossMargin: 0,
+    grossProfit: 0,
+    markUp: 0,
+    currency: ''
   })
 
   return (
@@ -42,16 +46,18 @@ const ProfitMarginCalculator = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: profitMarginCalculator } = await calculateFinances(payload)
+            console.log('=====>', profitMarginCalculator)
+            const { grossMargin, grossProfit, markUp, currency } = profitMarginCalculator
+            if (typeof profitMarginCalculator === 'object') {
+              setResult({
+                grossMargin: grossMargin,
+                grossProfit: grossProfit,
+                markUp: markUp,
+                currency: currency
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -60,8 +66,8 @@ const ProfitMarginCalculator = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.salesRevenue} />
               <CustomForm
-                label={LABELS.salesRevenue}
                 type={INPUT_TYPE.number}
                 id="sales_revenue"
                 placeholder={PLACEHOLDERS.number}
@@ -71,8 +77,8 @@ const ProfitMarginCalculator = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.cost} />
               <CustomForm
-                label={LABELS.cost}
                 type={INPUT_TYPE.number}
                 id="cost"
                 placeholder={PLACEHOLDERS.number}
@@ -82,19 +88,12 @@ const ProfitMarginCalculator = () => {
             </div>
 
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Gross margin: {Result.grossMargin}%</Typography>
+              <Typography variant="subtitle1"> Gross profit: {Result.currency}{Result.grossProfit}</Typography>
+              <Typography variant="subtitle1"> Mark up: {Result.markUp}%</Typography>
             </div>
 
           </form>

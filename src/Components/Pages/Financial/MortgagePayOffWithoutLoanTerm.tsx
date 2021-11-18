@@ -1,13 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { MortgagePayOffWithoutLoanTermI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const MortgagePayOffWithoutLoanTerm = () => {
   const classes = useStyles()
@@ -19,7 +20,10 @@ const MortgagePayOffWithoutLoanTerm = () => {
     monthly_payment: "",
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    answer: 0,
+    years: 0,
+    months: 0,
+
   })
 
   return (
@@ -45,16 +49,17 @@ const MortgagePayOffWithoutLoanTerm = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: mortgagePayoffCalculator } = await calculateFinances(payload)
+            console.log('=====>', mortgagePayoffCalculator)
+            const { answer, years, months } = mortgagePayoffCalculator
+            if (typeof mortgagePayoffCalculator === 'object') {
+              setResult({
+                answer: answer,
+                years: years,
+                months: months
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -63,8 +68,8 @@ const MortgagePayOffWithoutLoanTerm = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.interestRate} />
               <CustomForm
-                label={LABELS.interestRate}
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
@@ -74,8 +79,8 @@ const MortgagePayOffWithoutLoanTerm = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.principalBalance} />
               <CustomForm
-                label={LABELS.principalBalance}
                 type={INPUT_TYPE.number}
                 id="principal_balance"
                 placeholder={PLACEHOLDERS.number}
@@ -85,8 +90,8 @@ const MortgagePayOffWithoutLoanTerm = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.monthlyPayment} />
               <CustomForm
-                label={LABELS.monthlyPayment}
                 type={INPUT_TYPE.number}
                 id="monthly_payment"
                 placeholder={PLACEHOLDERS.number}
@@ -95,20 +100,11 @@ const MortgagePayOffWithoutLoanTerm = () => {
               />
             </div>
 
-
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Answer: {Result.answer}</Typography>
+              <Typography variant="subtitle1"> Payoff in: {Result.years} years and {Result.months} months</Typography>
             </div>
 
           </form>

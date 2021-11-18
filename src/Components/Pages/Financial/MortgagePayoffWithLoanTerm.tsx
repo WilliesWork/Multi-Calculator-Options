@@ -7,7 +7,8 @@ import { MortgagePayoffWithLoanTermI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const MortgagePayoffWithLoanTerm = () => {
   const classes = useStyles()
@@ -20,7 +21,8 @@ const MortgagePayoffWithLoanTerm = () => {
     loan_amount: "",
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    balance: 0,
+    currency: ''
   })
 
   return (
@@ -48,16 +50,16 @@ const MortgagePayoffWithLoanTerm = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: mortgagePayoffWithLoanTerm } = await calculateFinances(payload)
+            console.log('=====>', mortgagePayoffWithLoanTerm)
+            const { balance, currency } = mortgagePayoffWithLoanTerm
+            if (typeof mortgagePayoffWithLoanTerm === 'object') {
+              setResult({
+                balance: balance,
+                currency: currency
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -66,8 +68,8 @@ const MortgagePayoffWithLoanTerm = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.interestRate} />
               <CustomForm
-                label={LABELS.interestRate}
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
@@ -77,8 +79,8 @@ const MortgagePayoffWithLoanTerm = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.paymentsMade} />
               <CustomForm
-                label={LABELS.paymentsMade}
                 type={INPUT_TYPE.number}
                 id="payments_made_years"
                 placeholder={PLACEHOLDERS.number}
@@ -88,8 +90,8 @@ const MortgagePayoffWithLoanTerm = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.totalPaymentsperYear} />
               <CustomForm
-                label={LABELS.totalPaymentsperYear}
                 type={INPUT_TYPE.number}
                 id="total_payments_years"
                 placeholder={PLACEHOLDERS.number}
@@ -99,8 +101,8 @@ const MortgagePayoffWithLoanTerm = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.loanAmount} />
               <CustomForm
-                label={LABELS.loanAmount}
                 type={INPUT_TYPE.number}
                 id="loan_amount"
                 placeholder={PLACEHOLDERS.number}
@@ -109,20 +111,10 @@ const MortgagePayoffWithLoanTerm = () => {
               />
             </div>
 
-
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Balance: {Result.currency}{Result.balance}</Typography>
             </div>
 
           </form>

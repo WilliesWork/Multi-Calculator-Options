@@ -7,7 +7,8 @@ import { PaybackWithinTimeframeI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const PaybackWithinTimeframe = () => {
   const classes = useStyles()
@@ -20,7 +21,8 @@ const PaybackWithinTimeframe = () => {
     year: "",
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    paybackPeriod: 0,
+    duration: ''
   })
 
   return (
@@ -48,16 +50,16 @@ const PaybackWithinTimeframe = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: paybackWithinACertainTimeframe } = await calculateFinances(payload)
+            console.log('=====>', paybackWithinACertainTimeframe)
+            const { paybackPeriod, duration } = paybackWithinACertainTimeframe
+            if (typeof paybackWithinACertainTimeframe === 'object') {
+              setResult({
+                paybackPeriod: paybackPeriod,
+                duration: duration
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -66,8 +68,8 @@ const PaybackWithinTimeframe = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.interestRate} />
               <CustomForm
-                label={LABELS.interestRate}
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
@@ -77,8 +79,8 @@ const PaybackWithinTimeframe = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.months} />
               <CustomForm
-                label={LABELS.months}
                 type={INPUT_TYPE.number}
                 id="months"
                 placeholder={PLACEHOLDERS.number}
@@ -88,8 +90,8 @@ const PaybackWithinTimeframe = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.creditCardBalance} />
               <CustomForm
-                label={LABELS.creditCardBalance}
                 type={INPUT_TYPE.number}
                 id="credit_card_balance"
                 placeholder={PLACEHOLDERS.number}
@@ -99,8 +101,8 @@ const PaybackWithinTimeframe = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.year} />
               <CustomForm
-                label={LABELS.year}
                 type={INPUT_TYPE.number}
                 id="year"
                 placeholder={PLACEHOLDERS.number}
@@ -110,19 +112,10 @@ const PaybackWithinTimeframe = () => {
             </div>
 
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Payback period: {Result.paybackPeriod}{Result.duration}</Typography>
             </div>
 
           </form>

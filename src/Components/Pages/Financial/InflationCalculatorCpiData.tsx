@@ -1,13 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { InflationCalculatorCpiDataI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const InflationCalculatorCpiData = () => {
   const classes = useStyles()
@@ -18,7 +19,8 @@ const InflationCalculatorCpiData = () => {
     price_in_base: "",
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    inflation: 0,
+    currency: ''
   })
 
   return (
@@ -42,16 +44,16 @@ const InflationCalculatorCpiData = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: inflationCalculator } = await calculateFinances(payload)
+            console.log('=====>', inflationCalculator)
+            const { inflation, currency } = inflationCalculator
+            if (typeof inflationCalculator === 'object') {
+              setResult({
+                inflation: inflation,
+                currency: currency
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -60,8 +62,8 @@ const InflationCalculatorCpiData = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.currentPrice} />
               <CustomForm
-                label={LABELS.currentPrice}
                 type={INPUT_TYPE.number}
                 id="current_price"
                 placeholder={PLACEHOLDERS.number}
@@ -71,8 +73,8 @@ const InflationCalculatorCpiData = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.priceInBase} />
               <CustomForm
-                label={LABELS.priceInBase}
                 type={INPUT_TYPE.number}
                 id="price_in_base"
                 placeholder={PLACEHOLDERS.number}
@@ -81,19 +83,10 @@ const InflationCalculatorCpiData = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Inflation: {Result.currency}{Result.inflation}</Typography>
             </div>
 
           </form>

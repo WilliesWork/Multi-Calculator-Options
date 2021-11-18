@@ -1,13 +1,14 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { StockTradingMarginI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
+import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const StockTradingMargin = () => {
   const classes = useStyles()
@@ -19,7 +20,8 @@ const StockTradingMargin = () => {
     shares: "",
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    amountRequired: 0,
+    currency: ''
   })
 
   return (
@@ -45,16 +47,16 @@ const StockTradingMargin = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: stockTradingMarginCalculator } = await calculateFinances(payload)
+            console.log('=====>', stockTradingMarginCalculator)
+            const { amountRequired, currency } = stockTradingMarginCalculator
+            if (typeof stockTradingMarginCalculator === 'object') {
+              setResult({
+                amountRequired: amountRequired,
+                currency: currency
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -63,8 +65,8 @@ const StockTradingMargin = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.marginRequirement} />
               <CustomForm
-                label={LABELS.marginRequirement}
                 type={INPUT_TYPE.number}
                 id="margin_requirement"
                 placeholder={PLACEHOLDERS.number}
@@ -74,8 +76,8 @@ const StockTradingMargin = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.stockPrice} />
               <CustomForm
-                label={LABELS.stockPrice}
                 type={INPUT_TYPE.number}
                 id="stock_price"
                 placeholder={PLACEHOLDERS.number}
@@ -85,8 +87,8 @@ const StockTradingMargin = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.shares} />
               <CustomForm
-                label={LABELS.shares}
                 type={INPUT_TYPE.number}
                 id="shares"
                 placeholder={PLACEHOLDERS.number}
@@ -95,19 +97,10 @@ const StockTradingMargin = () => {
               />
             </div>
 
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Amount required: {Result.currency}{Result.amountRequired}</Typography>
             </div>
 
           </form>

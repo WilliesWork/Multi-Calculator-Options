@@ -7,7 +7,8 @@ import { PayBackACertainAmountI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect } from '../../custom'
+import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const PayBackACertainAmount = () => {
   const classes = useStyles()
@@ -19,7 +20,10 @@ const PayBackACertainAmount = () => {
     monthly_payment: "",
   })
   const [Result, setResult] = React.useState({
-    Answer: 0
+    monthlyPay: 0,
+    $profit: 0,
+    totalPayments: 0,
+    currency: ''
   })
 
   return (
@@ -45,16 +49,18 @@ const PayBackACertainAmount = () => {
           }
           console.log(JSON.stringify(payload))
           try {
-            // const { payload: calsurfaceArea } = await calculateCylinderVolume(payload)
-            // console.log('=====>', calsurfaceArea)
-            // if (typeof calsurfaceArea === 'object') {
-            //   console.log(calsurfaceArea)
-            //   setResult({
-            //     surfaceArea: calsurfaceArea.surfaceAreas,
-            //     Area: calsurfaceArea.Area
-            //   })
-            // }
-            // resetForm()
+            const { payload: paybackACertainAmount } = await calculateFinances(payload)
+            console.log('=====>', paybackACertainAmount)
+            const { monthlyPay, $profit, totalPayments, currency } = paybackACertainAmount
+            if (typeof paybackACertainAmount === 'object') {
+              setResult({
+                monthlyPay: monthlyPay,
+                $profit: $profit,
+                totalPayments: totalPayments,
+                currency: currency
+              })
+            }
+            resetForm()
           } catch (err) {
             console.log('====>', err)
           }
@@ -63,8 +69,8 @@ const PayBackACertainAmount = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
+              <Label title={LABELS.interestRate} />
               <CustomForm
-                label={LABELS.interestRate}
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
@@ -74,8 +80,8 @@ const PayBackACertainAmount = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.creditCardBalance} />
               <CustomForm
-                label={LABELS.creditCardBalance}
                 type={INPUT_TYPE.number}
                 id="credit_card_balance"
                 placeholder={PLACEHOLDERS.number}
@@ -85,8 +91,8 @@ const PayBackACertainAmount = () => {
             </div>
 
             <div className="form-row">
+              <Label title={LABELS.monthlyPayment} />
               <CustomForm
-                label={LABELS.monthlyPayment}
                 type={INPUT_TYPE.number}
                 id="monthly_payment"
                 placeholder={PLACEHOLDERS.number}
@@ -95,27 +101,19 @@ const PayBackACertainAmount = () => {
               />
             </div>
 
-
-            <div className="form mb-3">
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className="btn btn-primary"
-              >
-                {BUTTONS.calculate}
-              </Button>
-            </div>
+            <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Answer: {Result.Answer}</Typography>
+              <Typography variant="subtitle1"> Monthly pay: {Result.currency}{Result.monthlyPay}</Typography>
+              <Typography variant="subtitle1"> Profit: {Result.currency}{Result.$profit}</Typography>
+              <Typography variant="subtitle1"> Total payments: {Result.currency}{Result.totalPayments}</Typography>
             </div>
 
           </form>
         )}
 
       </Formik>
-    </div>
+    </div >
   )
 }
 
