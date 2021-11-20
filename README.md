@@ -40,7 +40,14 @@ Instead, it will copy all the configuration files and the transitive dependencie
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ### ws changes
-* Created `Label` & `CustomBtn` components.
-* Bundled interfaces for use in `AppCalculatorApi`.
-* Added a `method` state missing in certain interfaces.
-* Named `method` in most calculators except fitness & health.
+
+- Created `Label` & `CustomBtn` components.
+- Bundled interfaces for use in `AppCalculatorApi`.
+- Added a `method` state missing in certain interfaces.
+- Named `method` in most calculators except fitness & health.
+
+### ws changes 20/11/21
+
+- Created a `Lib` (library) folder storing JSON files.
+- Added specific SI units, and more to be added.
+- Completed basic UI for financial calculators.
