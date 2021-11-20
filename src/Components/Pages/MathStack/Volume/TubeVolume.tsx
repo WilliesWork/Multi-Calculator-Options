@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { TubeVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
@@ -27,7 +27,7 @@ const TubeVolume = () => {
     outer_diameter: 0,
     inner_diameter: 0,
     length: 0,
-    units: ''
+    unit: ''
   })
 
   return (
@@ -68,7 +68,7 @@ const TubeVolume = () => {
                 outer_diameter: outer_diameter,
                 inner_diameter: inner_diameter,
                 length: length,
-                units: units
+                unit: units
               })
             }
             resetForm()
@@ -90,6 +90,7 @@ const TubeVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="outer_diameter_unit"
                 value={values.outer_diameter_unit}
                 onChange={handleChange('outer_diameter_unit')}
@@ -107,6 +108,7 @@ const TubeVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="inner_diameter_unit"
                 value={values.inner_diameter_unit}
                 onChange={handleChange('inner_diameter_unit')}
@@ -124,6 +126,7 @@ const TubeVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="length_unit"
                 value={values.length_unit}
                 onChange={handleChange('length_unit')}
@@ -133,11 +136,9 @@ const TubeVolume = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Volume: {Result.Volume} {Result.unit}<sup>3</sup></Typography>
               <Typography variant="subtitle1"> Outer Diameter: {Result.outer_diameter}</Typography>
               <Typography variant="subtitle1"> Inner Diameter: {Result.inner_diameter}</Typography>
-              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-
             </div>
 
           </form>

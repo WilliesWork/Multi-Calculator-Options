@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { ConicalFrustumVolumeI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
@@ -27,7 +27,7 @@ const ConicalFrustumVolume = () => {
     topRadius: 0,
     bottomRadius: 0,
     height: 0,
-    units: ''
+    unit: ''
   })
 
   return (
@@ -68,7 +68,7 @@ const ConicalFrustumVolume = () => {
                 topRadius: topR,
                 bottomRadius: bottomR,
                 height: height,
-                units: units
+                unit: units
               })
             }
             resetForm()
@@ -90,6 +90,7 @@ const ConicalFrustumVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="top_radius_unit"
                 value={values.top_radius_unit}
                 onChange={handleChange('top_radius_unit')}
@@ -107,6 +108,7 @@ const ConicalFrustumVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="bottom_radius_unit"
                 value={values.bottom_radius_unit}
                 onChange={handleChange('bottom_radius_unit')}
@@ -124,6 +126,7 @@ const ConicalFrustumVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -133,12 +136,10 @@ const ConicalFrustumVolume = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Volume: {Result.Volume} {Result.unit}<sup>3</sup></Typography>
               <Typography variant="subtitle1"> Top Radius: {Result.topRadius}</Typography>
               <Typography variant="subtitle1"> Bottom Radius: {Result.bottomRadius}</Typography>
               <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> Units : {Result.units}</Typography>
-
             </div>
 
           </form>

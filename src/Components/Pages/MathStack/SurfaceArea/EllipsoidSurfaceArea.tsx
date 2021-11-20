@@ -91,6 +91,7 @@ const EllipsoidSurfaceArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="axis1_unit"
                 value={values.axis1_unit}
                 onChange={handleChange('axis1_unit')}
@@ -108,6 +109,7 @@ const EllipsoidSurfaceArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="axis2_unit"
                 value={values.axis2_unit}
                 onChange={handleChange('axis2_unit')}
@@ -125,6 +127,7 @@ const EllipsoidSurfaceArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="axis3_unit"
                 value={values.axis3_unit}
                 onChange={handleChange('axis3_unit')}
@@ -134,11 +137,10 @@ const EllipsoidSurfaceArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
+              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea} {Result.unit}<sup>2</sup></Typography>
               <Typography variant="subtitle1"> Axis 1: {Result.axis1}</Typography>
               <Typography variant="subtitle1"> Axis 2: {Result.axis2}</Typography>
               <Typography variant="subtitle1"> Axis 3: {Result.axis3}</Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
             </div>
 
           </form>

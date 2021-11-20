@@ -87,6 +87,7 @@ const CylindricalTankSurfArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="radius_unit"
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
@@ -104,6 +105,7 @@ const CylindricalTankSurfArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -113,13 +115,11 @@ const CylindricalTankSurfArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Tank Surface Area: {Result.surfaceArea}</Typography>
+              <Typography variant="subtitle1">Tank Surface Area: {Result.surfaceArea} {Result.unit}<sup>2</sup></Typography>
               <Typography variant="subtitle1">Base Surface Area: {Result.baseSurfaceArea}</Typography>
               <Typography variant="subtitle1">Lateral Surface Area: {Result.lateralSurfaceArea}</Typography>
               <Typography variant="subtitle1">Radius: {Result.radius}</Typography>
               <Typography variant="subtitle1">Height: {Result.height}</Typography>
-              <Typography variant="subtitle1">Unit: {Result.unit}</Typography>
-
             </div>
 
           </form>

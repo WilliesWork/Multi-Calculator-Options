@@ -22,8 +22,6 @@ const ParallelogramArea = () => {
   })
   const [Result, setResult] = React.useState({
     area: 0,
-    breadth: 0,
-    height: 0,
     unit: ''
   })
 
@@ -54,13 +52,11 @@ const ParallelogramArea = () => {
           try {
             const { payload: parallelogramArea } = await calculateMath(payload)
             console.log('=====>', parallelogramArea)
-            const { area, unit, breadth, height
+            const { area, unit
             } = parallelogramArea
             if (typeof parallelogramArea === 'object') {
               setResult({
                 area: area,
-                breadth: breadth,
-                height: height,
                 unit: unit
               })
             }
@@ -83,6 +79,7 @@ const ParallelogramArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="breadth_unit"
                 value={values.breadth_unit}
                 onChange={handleChange('breadth_unit')}
@@ -100,6 +97,7 @@ const ParallelogramArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -109,11 +107,7 @@ const ParallelogramArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.area}</Typography>
-              <Typography variant="subtitle1"> Breadth: {Result.breadth}</Typography>
-              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
-
+              <Typography variant="subtitle1"> Area: {Result.area}{Result.unit}</Typography>
             </div>
 
           </form>

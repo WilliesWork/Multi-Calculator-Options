@@ -61,7 +61,7 @@ const CapsuleVolume = () => {
               const { volumeInRadiusUnit,
                 volumeInHeightUnit,
                 radiusInheightUnit,
-                heightInradiusUnit,
+                $heightInradiusUnit,
                 submittedradius,
                 submitted_height } = capsuleVolume
               setResult({
@@ -70,7 +70,7 @@ const CapsuleVolume = () => {
                 radiusInheightUnit: radiusInheightUnit,
                 submitted_height: submitted_height,
                 submittedradius: submittedradius,
-                heightInradiusUnit: heightInradiusUnit
+                heightInradiusUnit: $heightInradiusUnit
               })
             }
             resetForm()
@@ -90,9 +90,7 @@ const CapsuleVolume = () => {
 
               <Grid item xs>
                 <div className="form-row">
-
                   <Label title={LABELS.radius} />
-
                   <CustomForm
                     type={INPUT_TYPE.number}
                     id="radius"
@@ -102,6 +100,7 @@ const CapsuleVolume = () => {
                   />
 
                   <CustomSelect
+                    measurement="length"
                     id="radius_unit"
                     value={values.radius_unit}
                     onChange={handleChange('radius_unit')}
@@ -110,7 +109,6 @@ const CapsuleVolume = () => {
 
                 <div className="form-row">
                   <Label title={LABELS.height} />
-
                   <CustomForm
                     type={INPUT_TYPE.number}
                     id="height"
@@ -120,6 +118,7 @@ const CapsuleVolume = () => {
                   />
 
                   <CustomSelect
+                    measurement="length"
                     id="height_unit"
                     value={values.height_unit}
                     onChange={handleChange('height_unit')}
@@ -130,8 +129,8 @@ const CapsuleVolume = () => {
               </Grid>
             </Grid>
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Volume in Radius: {Result.volumeInRadiusUnit}</Typography>
-              <Typography variant="subtitle1"> Volume in Height: {Result.volumeInHeightUnit}</Typography>
+              <Typography variant="subtitle1"> Volume in Radius unit: {Result.volumeInRadiusUnit}</Typography>
+              <Typography variant="subtitle1"> Volume in Height unit: {Result.volumeInHeightUnit}</Typography>
               <Typography variant="subtitle1"> Submitted Radius: {Result.submittedradius}</Typography>
               <Typography variant="subtitle1"> Submitted Height: {Result.submitted_height}</Typography>
               <Typography variant="subtitle1"> Radius in Height: {Result.radiusInheightUnit}</Typography>

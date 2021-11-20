@@ -73,6 +73,7 @@ const CubeSurfArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="edge_unit"
                 value={values.edge_unit}
                 onChange={handleChange('edge_unit')}
@@ -82,10 +83,8 @@ const CubeSurfArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Surface area: {Result.surfaceArea}</Typography>
+              <Typography variant="subtitle1"> Surface area: {Result.surfaceArea} {Result.unit}<sup>2</sup></Typography>
               <Typography variant="subtitle1"> Edge length: {Result.edge_length}</Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
-
             </div>
 
           </form>

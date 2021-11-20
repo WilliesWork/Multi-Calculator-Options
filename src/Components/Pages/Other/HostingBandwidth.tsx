@@ -63,7 +63,7 @@ const HostingBandwidth = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
-              <Label title={LABELS.resistanceValues} />
+              <Label title={LABELS.monthlyUsage} />
               <CustomForm
                 type={INPUT_TYPE.number}
                 id="monthly_usage"
@@ -73,6 +73,7 @@ const HostingBandwidth = () => {
               />
 
               <CustomSelect
+                measurement="storage"
                 id="monthly_usage_unit"
                 value={values.monthly_usage_unit}
                 onChange={handleChange('monthly_usage_unit')}

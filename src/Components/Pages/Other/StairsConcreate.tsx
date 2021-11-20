@@ -94,6 +94,7 @@ const StairsConcreate = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="run_unit"
                 value={values.run_unit}
                 onChange={handleChange('run_unit')}
@@ -111,6 +112,7 @@ const StairsConcreate = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="rise_unit"
                 value={values.rise_unit}
                 onChange={handleChange('rise_unit')}
@@ -128,6 +130,7 @@ const StairsConcreate = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="width_unit"
                 value={values.width_unit}
                 onChange={handleChange('width_unit')}
@@ -145,6 +148,7 @@ const StairsConcreate = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="platform_depth_unit"
                 value={values.platform_depth_unit}
                 onChange={handleChange('platform_depth_unit')}

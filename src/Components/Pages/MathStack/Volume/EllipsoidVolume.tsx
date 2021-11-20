@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { EllipsoidVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
@@ -27,7 +27,7 @@ const EllipsoidVolume = () => {
     submitted_axis3: 0,
     submitted_axis2: 0,
     submitted_axis1: 0,
-    units: '',
+    unit: '',
   })
 
   return (
@@ -68,7 +68,7 @@ const EllipsoidVolume = () => {
                 submitted_axis1: submittedaxis1,
                 submitted_axis2: submitted_axis2,
                 submitted_axis3: submitted_axis3,
-                units: units
+                unit: units
               })
             }
             resetForm()
@@ -90,6 +90,7 @@ const EllipsoidVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="axis1_unit"
                 value={values.axis1_unit}
                 onChange={handleChange('axis1_unit')}
@@ -107,6 +108,7 @@ const EllipsoidVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="axis2_unit"
                 value={values.axis2_unit}
                 onChange={handleChange('axis2_unit')}
@@ -124,6 +126,7 @@ const EllipsoidVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="axis3_unit"
                 value={values.axis3_unit}
                 onChange={handleChange('axis3_unit')}
@@ -133,11 +136,10 @@ const EllipsoidVolume = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Volume: {Result.Volume} {Result.unit}<sup>3</sup></Typography>
               <Typography variant="subtitle1"> Submitted axis 1: {Result.submitted_axis1}</Typography>
               <Typography variant="subtitle1"> Submitted axis 2: {Result.submitted_axis2}</Typography>
               <Typography variant="subtitle1"> Submitted axis 3: {Result.submitted_axis3}</Typography>
-              <Typography variant="subtitle1"> units: {Result.units}</Typography>
             </div>
 
           </form>

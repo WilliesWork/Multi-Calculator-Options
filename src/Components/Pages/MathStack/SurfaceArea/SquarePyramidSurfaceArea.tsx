@@ -83,6 +83,7 @@ const SquarePyramidSurfaceArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="base_edge_unit"
                 value={values.base_edge_unit}
                 onChange={handleChange('base_edge_unit')}
@@ -100,6 +101,7 @@ const SquarePyramidSurfaceArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -109,10 +111,9 @@ const SquarePyramidSurfaceArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
+              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea} {Result.unit}<sup>2</sup></Typography>
               <Typography variant="subtitle1"> Base Edge: {Result.base_edge}</Typography>
               <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
             </div>
 
           </form>

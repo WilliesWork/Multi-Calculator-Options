@@ -83,6 +83,7 @@ const TrapSpeedMethod = () => {
               />
 
               <CustomSelect
+                measurement="weight"
                 id="weight_unit"
                 value={values.weight_unit}
                 onChange={handleChange('weight_unit')}
@@ -100,6 +101,7 @@ const TrapSpeedMethod = () => {
               />
 
               <CustomSelect
+                measurement="speed"
                 id="speed_unit"
                 value={values.speed_unit}
                 onChange={handleChange('speed_unit')}

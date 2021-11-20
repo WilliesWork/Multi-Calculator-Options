@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { CubeVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
@@ -21,7 +21,7 @@ const CubeVolume = () => {
   const [Result, setResult] = React.useState({
     Volume: 0,
     edge_length: 0,
-    units: '',
+    unit: '',
   })
 
   return (
@@ -53,7 +53,7 @@ const CubeVolume = () => {
               setResult({
                 Volume: volume,
                 edge_length: edge_length,
-                units: units
+                unit: units
               })
             }
             resetForm()
@@ -75,6 +75,7 @@ const CubeVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="edge_unit"
                 value={values.edge_unit}
                 onChange={handleChange('edge_unit')}
@@ -84,10 +85,8 @@ const CubeVolume = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Volume: {Result.Volume} {Result.unit}<sup>3</sup></Typography>
               <Typography variant="subtitle1"> Edge Length: {Result.edge_length}</Typography>
-              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-
             </div>
 
           </form>

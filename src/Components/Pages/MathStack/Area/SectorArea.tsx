@@ -22,8 +22,6 @@ const SectorArea = () => {
   })
   const [Result, setResult] = React.useState({
     area: 0,
-    radius: 0,
-    angle: 0,
     unit: ''
   })
 
@@ -54,13 +52,11 @@ const SectorArea = () => {
           try {
             const { payload: sectorArea } = await calculateMath(payload)
             console.log('=====>', sectorArea)
-            const { area, unit, radius, angle
+            const { area, unit
             } = sectorArea
             if (typeof sectorArea === 'object') {
               setResult({
                 area: area,
-                radius: radius,
-                angle: angle,
                 unit: unit
               })
             }
@@ -83,6 +79,7 @@ const SectorArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="radius_unit"
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
@@ -100,6 +97,7 @@ const SectorArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="angle_unit"
                 value={values.angle_unit}
                 onChange={handleChange('angle_unit')}
@@ -109,10 +107,7 @@ const SectorArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.area}</Typography>
-              <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
-              <Typography variant="subtitle1"> Angle: {Result.angle}</Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
+              <Typography variant="subtitle1"> Area: {Result.area}{Result.unit}</Typography>
             </div>
 
           </form>

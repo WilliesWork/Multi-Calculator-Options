@@ -24,9 +24,6 @@ const RectangularArea = () => {
   })
   const [Result, setResult] = React.useState({
     area: 0,
-    length: 0,
-    width: 0,
-    height: 0,
     unit: ''
   })
 
@@ -61,14 +58,11 @@ const RectangularArea = () => {
           try {
             const { payload: rectangleArea } = await calculateMath(payload)
             console.log('=====>', rectangleArea)
-            const { area, unit, length, width, height
+            const { area, unit
             } = rectangleArea
             if (typeof rectangleArea === 'object') {
               setResult({
                 area: area,
-                length: length,
-                width: width,
-                height: height,
                 unit: unit
               })
             }
@@ -92,6 +86,7 @@ const RectangularArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="length_unit"
                 value={values.length_unit}
                 onChange={handleChange('length_unit')}
@@ -110,6 +105,7 @@ const RectangularArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="width_unit"
                 value={values.width_unit}
                 onChange={handleChange('width_unit')}
@@ -127,6 +123,7 @@ const RectangularArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -137,11 +134,7 @@ const RectangularArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.area}</Typography>
-              <Typography variant="subtitle1"> Length: {Result.length}</Typography>
-              <Typography variant="subtitle1"> Width: {Result.width}</Typography>
-              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
+              <Typography variant="subtitle1"> Area: {Result.area}{Result.unit}</Typography>
             </div>
 
           </form>

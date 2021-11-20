@@ -79,6 +79,7 @@ const ElapsedTimeMethod = () => {
               />
 
               <CustomSelect
+                measurement="weight"
                 id="weight_unit"
                 value={values.weight_unit}
                 onChange={handleChange('weight_unit')}
@@ -96,6 +97,7 @@ const ElapsedTimeMethod = () => {
               />
 
               <CustomSelect
+                measurement="time"
                 id="time_unit"
                 value={values.time_unit}
                 onChange={handleChange('time_unit')}

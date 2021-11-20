@@ -84,6 +84,7 @@ const ConeSurfArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="radius_unit"
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
@@ -101,6 +102,7 @@ const ConeSurfArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -110,10 +112,9 @@ const ConeSurfArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">LateralSurfaceArea: {Result.$lateralSurfaceArea} </Typography>
+              <Typography variant="subtitle1">LateralSurfaceArea: {Result.$lateralSurfaceArea} {Result.units}<sup>2</sup></Typography>
               <Typography variant="subtitle1">BaseSurfaceArea: {Result.baseSurfaceSrea} </Typography>
               <Typography variant="subtitle1">TotalConeSurfaceArea: {Result.totalConeSurfaceArea} </Typography>
-              <Typography variant="subtitle1">Units: {Result.units} </Typography>
             </div>
 
           </form>

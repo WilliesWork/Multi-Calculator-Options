@@ -87,6 +87,7 @@ const CircularSlap = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="length_unit"
                 value={values.length_unit}
                 onChange={handleChange('length_unit')}
@@ -104,6 +105,7 @@ const CircularSlap = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="outer_diameter_unit"
                 value={values.outer_diameter_unit}
                 onChange={handleChange('outer_diameter_unit')}
@@ -121,6 +123,7 @@ const CircularSlap = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="inner_diameter_unit"
                 value={values.inner_diameter_unit}
                 onChange={handleChange('inner_diameter_unit')}

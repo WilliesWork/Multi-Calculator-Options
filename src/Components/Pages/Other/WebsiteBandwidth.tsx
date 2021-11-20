@@ -88,6 +88,7 @@ const WebsiteBandwidth = () => {
               />
 
               <CustomSelect
+                measurement="storage"
                 id="page_views_unit"
                 value={values.page_views_unit}
                 onChange={handleChange('page_views_unit')}
@@ -105,6 +106,7 @@ const WebsiteBandwidth = () => {
               />
 
               <CustomSelect
+                measurement="storage"
                 id="page_size_unit"
                 value={values.page_size_unit}
                 onChange={handleChange('page_size_unit')}

@@ -22,8 +22,6 @@ const EllipseArea = () => {
     semi_major_axes_b_unit: "",
   })
   const [Result, setResult] = React.useState({
-    semi_major_axes_a: 0,
-    semi_major_axes_b: 0,
     area: 0,
     unit: ''
   })
@@ -55,13 +53,11 @@ const EllipseArea = () => {
           try {
             const { payload: ellipseArea } = await calculateMath(payload)
             console.log('=====>', ellipseArea)
-            const { area, unit, semi_major_axes_a, semi_major_axes_b, height
+            const { area, unit
             } = ellipseArea
             if (typeof ellipseArea === 'object') {
               setResult({
                 area: area,
-                semi_major_axes_a: semi_major_axes_a,
-                semi_major_axes_b: semi_major_axes_b,
                 unit: unit
               })
             }
@@ -84,6 +80,7 @@ const EllipseArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="semi_major_axes_a_unit"
                 value={values.semi_major_axes_a_unit}
                 onChange={handleChange('semi_major_axes_a_unit')}
@@ -101,6 +98,7 @@ const EllipseArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="semi_major_axes_b_unit"
                 value={values.semi_major_axes_b_unit}
                 onChange={handleChange('semi_major_axes_b_unit')}
@@ -110,11 +108,7 @@ const EllipseArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Area: {Result.area}</Typography>
-              <Typography variant="subtitle1">Semi major axes A: {Result.semi_major_axes_a}</Typography>
-              <Typography variant="subtitle1">Semi major axes B: {Result.semi_major_axes_b}</Typography>
-              <Typography variant="subtitle1">Units: {Result.unit}</Typography>
-
+              <Typography variant="subtitle1">Area: {Result.area}{Result.unit}</Typography>
             </div>
 
           </form>

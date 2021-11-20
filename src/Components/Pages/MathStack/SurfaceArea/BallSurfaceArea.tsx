@@ -76,6 +76,7 @@ const BallSurfaceArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="radius_unit"
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
@@ -85,9 +86,8 @@ const BallSurfaceArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
+              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea} {Result.unit}<sup>2</sup></Typography>
               <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
             </div>
 
           </form>

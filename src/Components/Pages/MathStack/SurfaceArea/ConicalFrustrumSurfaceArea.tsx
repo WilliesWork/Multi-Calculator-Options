@@ -91,6 +91,7 @@ const ConicalFrustrumSurfaceArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="top_radius_unit"
                 value={values.top_radius_unit}
                 onChange={handleChange('top_radius_unit')}
@@ -108,6 +109,7 @@ const ConicalFrustrumSurfaceArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="bottom_radius_unit"
                 value={values.bottom_radius_unit}
                 onChange={handleChange('bottom_radius_unit')}
@@ -125,6 +127,7 @@ const ConicalFrustrumSurfaceArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -134,12 +137,10 @@ const ConicalFrustrumSurfaceArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
+              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea} {Result.unit}<sup>2</sup></Typography>
               <Typography variant="subtitle1"> Top Radius: {Result.top_radius}</Typography>
               <Typography variant="subtitle1"> Bottom Radius: {Result.bottom_radius}</Typography>
               <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
-
             </div>
 
           </form>

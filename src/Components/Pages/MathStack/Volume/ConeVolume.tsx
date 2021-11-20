@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { ConeVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
@@ -21,10 +21,12 @@ const ConeVolume = () => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0,
-    radius: 0,
-    height: 0,
-    units: ''
+    volumeInRadiusUnit: 0,
+    volumeInHeightUnit: 0,
+    radiusToHeightUnit: 0,
+    heightToRadiusUnit: 0,
+    radiusUnit: '',
+    heightUnit: ''
   })
 
   return (
@@ -53,14 +55,16 @@ const ConeVolume = () => {
           console.log(JSON.stringify(payload))
           try {
             const { payload: coneVolume } = await calculateMath(payload)
-            const { volume, units, radius, height } = coneVolume
+            const { units, volumeInRadiusUnit, volumeInHeightUnit, radiusToHeightUnit, heightToRadiusUnit, radiusUnit, heightUnit } = coneVolume
             console.log('=====>', coneVolume)
             if (typeof coneVolume === 'object') {
               setResult({
-                Volume: volume,
-                radius: radius,
-                height: height,
-                units: units
+                volumeInRadiusUnit: volumeInRadiusUnit,
+                volumeInHeightUnit: volumeInHeightUnit,
+                radiusToHeightUnit: radiusToHeightUnit,
+                heightToRadiusUnit: heightToRadiusUnit,
+                radiusUnit: radiusUnit,
+                heightUnit: heightUnit
               })
             }
             resetForm()
@@ -82,6 +86,7 @@ const ConeVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="radius_unit"
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
@@ -99,6 +104,7 @@ const ConeVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -108,10 +114,10 @@ const ConeVolume = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
-              <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
-              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
+              <Typography variant="subtitle1"> Volume in given radius unit: {Result.volumeInRadiusUnit} {Result.radiusUnit}<sup>3</sup></Typography>
+              <Typography variant="subtitle1"> Volume in given height unit: {Result.volumeInHeightUnit} {Result.heightUnit}<sup>3</sup></Typography>
+              <Typography variant="subtitle1"> Radius to height unit: {Result.radiusToHeightUnit}</Typography>
+              <Typography variant="subtitle1"> Height to radius unit: {Result.heightToRadiusUnit}</Typography>
 
             </div>
 

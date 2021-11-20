@@ -24,9 +24,6 @@ const TrapezoidArea = () => {
   })
   const [Result, setResult] = React.useState({
     area: 0,
-    base1: 0,
-    base2: 0,
-    height: 0,
     unit: ''
   })
 
@@ -61,14 +58,11 @@ const TrapezoidArea = () => {
           try {
             const { payload: TrapezoidArea } = await calculateMath(payload)
             console.log('=====>', TrapezoidArea)
-            const { area, unit, base1, base2, height
+            const { area, unit
             } = TrapezoidArea
             if (typeof TrapezoidArea === 'object') {
               setResult({
                 area: area,
-                base1: base1,
-                base2: base2,
-                height: height,
                 unit: unit
               })
             }
@@ -91,6 +85,7 @@ const TrapezoidArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="base1_unit"
                 value={values.base1_unit}
                 onChange={handleChange('base1_unit')}
@@ -108,6 +103,7 @@ const TrapezoidArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="base2_unit"
                 value={values.base2_unit}
                 onChange={handleChange('base2_unit')}
@@ -125,6 +121,7 @@ const TrapezoidArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -134,12 +131,7 @@ const TrapezoidArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.area}</Typography>
-              <Typography variant="subtitle1"> Base 1: {Result.base1}</Typography>
-              <Typography variant="subtitle1"> Base 2: {Result.base2}</Typography>
-              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
-
+              <Typography variant="subtitle1"> Area: {Result.area}{Result.unit}</Typography>
             </div>
 
           </form>

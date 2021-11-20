@@ -76,6 +76,7 @@ const MostellerBodySurfaceArea = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -93,6 +94,7 @@ const MostellerBodySurfaceArea = () => {
               />
 
               <CustomSelect
+                measurement="weight"
                 id="weight_unit"
                 value={values.weight_unit}
                 onChange={handleChange('weight_unit')}

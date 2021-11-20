@@ -87,6 +87,7 @@ const ConcreteSquareFooting = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="length_unit"
                 value={values.length_unit}
                 onChange={handleChange('length_unit')}
@@ -104,6 +105,7 @@ const ConcreteSquareFooting = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="width_unit"
                 value={values.width_unit}
                 onChange={handleChange('width_unit')}
@@ -121,6 +123,7 @@ const ConcreteSquareFooting = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="breadth_unit"
                 value={values.breadth_unit}
                 onChange={handleChange('breadth_unit')}

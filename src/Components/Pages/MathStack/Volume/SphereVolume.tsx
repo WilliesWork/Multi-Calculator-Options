@@ -1,12 +1,12 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { SphereVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
@@ -21,7 +21,7 @@ const SphereVolume = () => {
   const [Result, setResult] = React.useState({
     Volume: 0,
     radius: '',
-    units: ''
+    unit: ''
   })
 
   return (
@@ -53,7 +53,7 @@ const SphereVolume = () => {
               setResult({
                 Volume: volume,
                 radius: radius,
-                units: units
+                unit: units
               })
             }
             resetForm()
@@ -75,6 +75,7 @@ const SphereVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="radius_unit"
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
@@ -84,10 +85,8 @@ const SphereVolume = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Volume: {Result.Volume} {Result.unit}<sup>3</sup></Typography>
               <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
-              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-
             </div>
 
           </form>

@@ -1,12 +1,12 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { SquarePyramidVolumeI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
@@ -24,7 +24,7 @@ const SquarePyramidVolume = () => {
     Volume: 0,
     base: 0,
     height: 0,
-    units: '',
+    unit: '',
   })
 
   return (
@@ -60,7 +60,7 @@ const SquarePyramidVolume = () => {
                 Volume: volume,
                 base: base,
                 height: height,
-                units: units
+                unit: units
               })
             }
             resetForm()
@@ -82,6 +82,7 @@ const SquarePyramidVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="base_unit"
                 value={values.base_unit}
                 onChange={handleChange('base_unit')}
@@ -99,6 +100,7 @@ const SquarePyramidVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -108,10 +110,9 @@ const SquarePyramidVolume = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Volume: {Result.Volume} {Result.unit}<sup>3</sup></Typography>
               <Typography variant="subtitle1"> Base: {Result.base}</Typography>
               <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
             </div>
 
           </form>

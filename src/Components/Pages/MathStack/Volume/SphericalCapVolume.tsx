@@ -1,12 +1,12 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { SphericalCapVolumeI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
@@ -24,7 +24,7 @@ const SphericalCapVolume = () => {
     Volume: 0,
     radius: 0,
     height: 0,
-    units: '',
+    unit: '',
   })
 
   return (
@@ -61,7 +61,7 @@ const SphericalCapVolume = () => {
                 Volume: volume,
                 radius: radius,
                 height: height,
-                units: units
+                unit: units
               })
             }
             resetForm()
@@ -83,6 +83,7 @@ const SphericalCapVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="radius_unit"
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
@@ -100,6 +101,7 @@ const SphericalCapVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -109,11 +111,9 @@ const SphericalCapVolume = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Volume: {Result.Volume} {Result.unit}<sup>3</sup></Typography>
               <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
               <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-
             </div>
 
           </form>

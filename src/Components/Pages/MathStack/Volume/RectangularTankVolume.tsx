@@ -1,12 +1,12 @@
 import React from 'react'
-import { Button, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { RectangularTankVolumeI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
+import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
@@ -27,7 +27,7 @@ const RectangularTankVolume = () => {
     length: 0,
     width: 0,
     height: 0,
-    units: ''
+    unit: ''
   })
 
   return (
@@ -69,7 +69,7 @@ const RectangularTankVolume = () => {
                 length: length,
                 width: width,
                 height: height,
-                units: units
+                unit: units
               })
             }
             resetForm()
@@ -91,6 +91,7 @@ const RectangularTankVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="length_unit"
                 value={values.length_unit}
                 onChange={handleChange('length_unit')}
@@ -108,6 +109,7 @@ const RectangularTankVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="width_unit"
                 value={values.width_unit}
                 onChange={handleChange('width_unit')}
@@ -125,6 +127,7 @@ const RectangularTankVolume = () => {
               />
 
               <CustomSelect
+                measurement="length"
                 id="height_unit"
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
@@ -134,11 +137,10 @@ const RectangularTankVolume = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
+              <Typography variant="subtitle1"> Volume: {Result.Volume} {Result.unit}<sup>3</sup></Typography>
               <Typography variant="subtitle1"> Length: {Result.length}</Typography>
               <Typography variant="subtitle1"> Width: {Result.width}</Typography>
               <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> Units: {Result.units}</Typography>
             </div>
 
           </form>
