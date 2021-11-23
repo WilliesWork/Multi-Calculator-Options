@@ -12,8 +12,6 @@ import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Commo
 
 const EllipsoidSurfaceArea = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     axis1: '',
     axis1_unit: '',

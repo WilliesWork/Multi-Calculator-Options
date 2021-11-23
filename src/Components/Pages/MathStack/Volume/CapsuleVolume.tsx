@@ -12,8 +12,6 @@ import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const CapsuleVolume = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -82,12 +80,6 @@ const CapsuleVolume = () => {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <Grid container xs>
-              <Grid item xs={4}>
-                <div className='form-row'>
-                  <Figure />
-                </div>
-              </Grid>
-
               <Grid item xs>
                 <div className="form-row">
                   <Label title={LABELS.radius} />

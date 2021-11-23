@@ -239,7 +239,8 @@ export const INPUT_TYPE = {
 };
 
 export const COLORS = {
-  primary: "#58C4A0",
+  gradient: "linear-gradient(90deg, #3300cc 0%, #3366ff 100%)",
+  primary: "#3300cc",
   secondary: "#F1EFE8",
   light_text_color: "#F0ECEC",
   background: "#F0ECEC",

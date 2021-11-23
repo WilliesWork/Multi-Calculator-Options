@@ -12,8 +12,6 @@ import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const PeroidCalculator = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     start_date_of_last_cycle: '',
     cycle_length: '',

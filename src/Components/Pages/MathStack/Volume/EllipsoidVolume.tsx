@@ -12,8 +12,6 @@ import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const EllipsoidVolume = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     axis1: "",
     axis1_unit: "",

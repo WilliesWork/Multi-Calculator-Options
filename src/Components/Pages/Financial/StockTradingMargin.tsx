@@ -12,8 +12,6 @@ import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const StockTradingMargin = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     margin_requirement: "",
     stock_price: "",

@@ -6,6 +6,8 @@ import Typography from "@material-ui/core/Typography";
 
 import useStyles from "../../../Styling/CustomStyles";
 import { CollapsibleMenu } from "./../../Content";
+import { CALCULATORS } from "./../../../Common/shared";
+
 import {
   CapsuleVolume,
   ConeVolume,
@@ -19,6 +21,7 @@ import {
   SquarePyramidVolume,
   TubeVolume,
 } from "../index";
+import { CustomTabs, ResultTabs, CalculatorTabs } from "../../custom";
 
 function Volume() {
   const classes = useStyles();
@@ -30,9 +33,12 @@ function Volume() {
       <hr />
       <Grid container xs={12}>
         {/* Calculator Grid */}
-        <Grid item xs={8}>
+        <Grid item xs={6}>
           <Paper className={classes.paperBackground}>
-            <Grid item xs={12}>
+            <CalculatorTabs tabTitle={CALCULATORS.capsuleVol}>
+              <CapsuleVolume />
+            </CalculatorTabs>
+            {/* <Grid item xs={12}>
               <Paper className={classes.paper2}>
                 <CapsuleVolume />
               </Paper>
@@ -96,12 +102,18 @@ function Volume() {
               <Paper className={classes.paper2}>
                 <TubeVolume />
               </Paper>
-            </Grid>
+            </Grid> */}
+          </Paper>
+        </Grid>
+
+        <Grid item xs={4}>
+          <Paper className={classes.paperBackground}>
+            <ResultTabs/>
           </Paper>
         </Grid>
 
         {/* Ad Grid */}
-        <Grid item xs={4}>
+        <Grid item xs={2}>
           <Paper className={classes.paper2}>
             <CollapsibleMenu />
           </Paper>

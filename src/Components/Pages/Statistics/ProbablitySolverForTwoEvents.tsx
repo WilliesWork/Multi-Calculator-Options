@@ -12,8 +12,6 @@ import { CustomBtn, Label, CustomForm } from '../../custom'
 
 const ProbablitySolverForTwoEvents = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     probability_of_a: '',
     probability_of_b: '',

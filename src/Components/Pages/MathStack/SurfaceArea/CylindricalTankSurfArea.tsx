@@ -11,9 +11,7 @@ import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const CylindricalTankSurfArea = () => {
-  const classes = useStyles();
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
+  const classes = useStyles()
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",

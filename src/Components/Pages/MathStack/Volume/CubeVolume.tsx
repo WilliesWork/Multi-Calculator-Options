@@ -12,8 +12,6 @@ import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const CubeVolume = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     edge_length: "",
     edge_unit: "",

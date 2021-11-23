@@ -12,8 +12,6 @@ import { calculateStatistics } from '../../../Services/AppCalculatorsApi'
 
 const ProbabilityOfASeriesOfIndpendentEvents = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     event_a: '',
     a_repeat_times: '',

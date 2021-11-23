@@ -12,8 +12,6 @@ import { CustomBtn, CustomForm, Label } from '../../custom'
 
 const MarginOfErrorCalculator = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     confience_level: '',
     sample_size: '',

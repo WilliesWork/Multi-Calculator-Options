@@ -12,8 +12,6 @@ import { CustomBtn, Label, CustomForm } from '../../custom'
 
 const ProbablityOfTwoEvents = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     event_a: '',
     event_b: '',

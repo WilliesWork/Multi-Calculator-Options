@@ -12,8 +12,6 @@ import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const SphereVolume = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",

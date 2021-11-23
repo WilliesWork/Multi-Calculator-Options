@@ -13,8 +13,6 @@ import { ConeAreaResultI } from '../../../../Types/PaylaodResponeI'
 
 const ConeSurfArea = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",

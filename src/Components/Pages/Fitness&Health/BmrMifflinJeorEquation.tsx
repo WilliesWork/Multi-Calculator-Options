@@ -12,8 +12,6 @@ import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BmrMifflinJeorEquation = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',

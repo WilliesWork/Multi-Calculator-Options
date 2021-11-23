@@ -12,8 +12,6 @@ import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const DueDateParikhsRule = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     first_date_of_last_period: '',
     days: ''

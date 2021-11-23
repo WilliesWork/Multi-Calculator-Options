@@ -12,8 +12,6 @@ import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const HorsepowerCalculation = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     force: "",
     force_unit: "",

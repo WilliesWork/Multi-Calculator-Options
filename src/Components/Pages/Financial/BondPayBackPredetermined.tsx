@@ -12,8 +12,6 @@ import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const BondPayBackPredetermined = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     interest_rate: "",
     predetermined_amount: "",

@@ -1,5 +1,5 @@
-import { alpha, makeStyles } from "@material-ui/core/styles";
-import { COLORS } from "./../Common/shared";
+import { alpha, makeStyles, Theme } from "@material-ui/core/styles";
+import { COLORS } from "../Common/shared";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -65,23 +65,33 @@ const useStyles = makeStyles((theme) => ({
   },
 
   paper2: {
-    padding: theme.spacing(2),
-    margin: theme.spacing(2),
+    padding: theme.spacing(0),
     textAlign: "none",
     color: theme.palette.text.secondary,
   },
   paperBackground: {
-    padding: theme.spacing(2),
-    margin: theme.spacing(2),
+    margin: theme.spacing(1),
     textAlign: "none",
     color: theme.palette.text.secondary,
-    backgroundColor: COLORS.paper_background,
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: 20,
   },
   formControl: {
     padding: theme.spacing(2),
   },
   image: {
     height: theme.spacing(3),
+  },
+
+  tabRoot: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: 20,
+  },
+  tabContainer: {
+    backgroundColor: "transparent",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 }));
 

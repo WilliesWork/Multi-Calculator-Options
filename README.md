@@ -51,3 +51,10 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 - Created a `Lib` (library) folder storing JSON files.
 - Added specific SI units, and more to be added.
 - Completed basic UI for financial calculators.
+
+### ws changes 23/11/21
+
+- created tabs for on-going UI changes.
+- created a `calculatorsSlice` and `RootReducer` that combines reducers into one for the `store`.
+- created a `selectCalculators` and `selectUnits` state in their respective reducers, that will be used in the components, exported from the redux folder.
+- created separate components for the calculator and the result found in the `Components/custom` folder, pending revision.

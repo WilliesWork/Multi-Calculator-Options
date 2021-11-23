@@ -13,8 +13,6 @@ import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const EllipseArea = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     semi_major_axes_a: "",
     semi_major_axes_a_unit: "",

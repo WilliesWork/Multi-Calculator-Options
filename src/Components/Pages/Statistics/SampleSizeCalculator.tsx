@@ -12,8 +12,6 @@ import { CustomBtn, Label, CustomForm } from '../../custom'
 
 const SampleSizeCalculator = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     confience_level: '',
     population_proportion: '',

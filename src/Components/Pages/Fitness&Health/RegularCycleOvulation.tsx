@@ -12,8 +12,6 @@ import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const RegularCycleOvulation = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     cycle_days: '',
     previous_cycle_start_date: ''

@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { CircleAreaI } from '../../../../Types'
-import { RootState } from '../../../../redux/store'
+import { selectCalculators } from '../../../../redux/slice/CalculatorsSlice'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
 import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
@@ -12,8 +12,6 @@ import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const CircleArea = () => {
   const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
