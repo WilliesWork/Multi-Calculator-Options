@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { NavBar } from '../navbar/navbar'
 import { CalcOptions } from '../calculator/calcOptions'

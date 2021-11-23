@@ -1,3 +1,6 @@
+//
+export { default as NoComponent } from './NoComponent';
+
 // Area
 export { default as CircleArea } from "./mathStack/Area/CircleArea";
 export { default as EllipseArea } from "./mathStack/Area/EllipseArea";
@@ -98,7 +101,6 @@ export { default as PresentValueOfPeriodicalDeposit } from "./financial/PresentV
 export { default as ProfitMarginCalculator } from "./financial/ProfitMarginCalculator";
 export { default as StockTradingMargin } from "./financial/StockTradingMargin";
 
-export { default as Home } from "./Home";
 export { default as Math } from "./main/Math";
 export { default as Area } from "./main/Area";
 export { default as SurfaceArea } from "./main/SurfaceArea";

@@ -10,6 +10,7 @@ import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../common/s
 import { calculateStatistics } from '../../../services/AppCalculatorsApi'
 import { CustomBtn, Label, CustomForm } from '../../custom'
 
+
 const ProbablityOfTwoEvents = () => {
   const classes = useStyles()
   const measures = useSelector((state: RootState) => state.unitMeasures)
