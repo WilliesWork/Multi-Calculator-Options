@@ -7,7 +7,7 @@ import { ConicalFrustumVolumeI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const ConicalFrustumVolume = () => {
@@ -79,7 +79,7 @@ const ConicalFrustumVolume = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.topRadius} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="top_radius"
                 placeholder={PLACEHOLDERS.number}
@@ -97,7 +97,7 @@ const ConicalFrustumVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.bottomRadius} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="bottom_radius"
                 placeholder={PLACEHOLDERS.number}
@@ -115,7 +115,7 @@ const ConicalFrustumVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.height} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}

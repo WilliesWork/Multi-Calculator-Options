@@ -7,7 +7,7 @@ import { RegularCycleOvulationI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from './../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from './../../../Common/shared'
-import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { CustomTextInput, CustomSelect, CustomBtn, Label } from '../../custom'
 import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const RegularCycleOvulation = () => {
@@ -61,7 +61,7 @@ const RegularCycleOvulation = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.previousCycleStartDate} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.date}
                 id="previous_cycle_start_date"
                 placeholder={PLACEHOLDERS.number}
@@ -72,7 +72,7 @@ const RegularCycleOvulation = () => {
 
             <div className="form-row">
               <Label title={LABELS.cycleDays} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="cycle_days"
                 placeholder={PLACEHOLDERS.number}

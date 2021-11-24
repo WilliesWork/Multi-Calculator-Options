@@ -8,7 +8,7 @@ import { RootState } from '../../../redux/store'
 import useStyles from './../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from './../../../Common/shared'
 import { calculateStatistics } from '../../../Services/AppCalculatorsApi'
-import { CustomBtn, Label, CustomForm } from '../../custom'
+import { CustomBtn, Label, CustomTextInput } from '../../custom'
 
 const SampleSizeCalculator = () => {
   const classes = useStyles()
@@ -65,7 +65,7 @@ const SampleSizeCalculator = () => {
 
             <div className="form-row">
               <Label title={LABELS.confienceLevel} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="confience_level"
                 placeholder={PLACEHOLDERS.number}
@@ -76,7 +76,7 @@ const SampleSizeCalculator = () => {
 
             <div className="form-row">
               <Label title={LABELS.standardDeviation} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="population_proportion"
                 placeholder={PLACEHOLDERS.number}
@@ -87,7 +87,7 @@ const SampleSizeCalculator = () => {
 
             <div className="form-row">
               <Label title={LABELS.marginOfError} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="margin_of_error"
                 placeholder={PLACEHOLDERS.number}

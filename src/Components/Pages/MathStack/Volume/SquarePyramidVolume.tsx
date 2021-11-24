@@ -7,7 +7,7 @@ import { SquarePyramidVolumeI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const SquarePyramidVolume = () => {
@@ -71,7 +71,7 @@ const SquarePyramidVolume = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.base} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="base"
                 placeholder={PLACEHOLDERS.number}
@@ -89,7 +89,7 @@ const SquarePyramidVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.height} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}

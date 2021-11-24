@@ -7,7 +7,7 @@ import { TrapezoidAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const TrapezoidArea = () => {
@@ -74,7 +74,7 @@ const TrapezoidArea = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.base1} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="base1"
                 placeholder={PLACEHOLDERS.number}
@@ -92,7 +92,7 @@ const TrapezoidArea = () => {
 
             <div className="form-row">
               <Label title={LABELS.base2} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="base2"
                 placeholder={PLACEHOLDERS.number}
@@ -110,7 +110,7 @@ const TrapezoidArea = () => {
 
             <div className="form-row">
               <Label title={LABELS.height} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}

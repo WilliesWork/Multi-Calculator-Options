@@ -11,7 +11,7 @@ import TabPanel from './TabPanel';
 import { CapsuleVolumeCalculatorI } from '../../Types'
 import { RootState } from '../../redux/store'
 import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE, COLORS } from '../../Common/shared'
-import { CustomForm, CustomSelect, Figure, Label, CustomBtn } from '../custom'
+import { CustomTextInput, CustomSelect, Figure, Label, CustomBtn } from '../custom'
 import { calculateMath } from './../../Services/AppCalculatorsApi'
 
 interface CalculatorProps {
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '50%',
     height: '10%',
     float: 'inline-start',
-    
+
 
   },
   rightTabContainer: {

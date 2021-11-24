@@ -7,7 +7,7 @@ import { StairsConcreateI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../custom'
 import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const StairsConcreate = () => {
@@ -83,7 +83,7 @@ const StairsConcreate = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.run} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="run"
                 placeholder={PLACEHOLDERS.number}
@@ -101,7 +101,7 @@ const StairsConcreate = () => {
 
             <div className="form-row">
               <Label title={LABELS.rise} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="rise"
                 placeholder={PLACEHOLDERS.number}
@@ -119,7 +119,7 @@ const StairsConcreate = () => {
 
             <div className="form-row">
               <Label title={LABELS.width} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="width"
                 placeholder={PLACEHOLDERS.number}
@@ -137,7 +137,7 @@ const StairsConcreate = () => {
 
             <div className="form-row">
               <Label title={LABELS.platformDepth} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="platform_depth"
                 placeholder={PLACEHOLDERS.number}
@@ -155,7 +155,7 @@ const StairsConcreate = () => {
 
             <div className="form-row">
               <Label title={LABELS.steps} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="steps"
                 placeholder={PLACEHOLDERS.number}

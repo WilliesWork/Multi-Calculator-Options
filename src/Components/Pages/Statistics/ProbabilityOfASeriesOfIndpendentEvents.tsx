@@ -7,7 +7,7 @@ import { ProbabilityOfASeriesOfIndpendentEventsI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { CustomTextInput, CustomSelect, CustomBtn, Label } from '../../custom'
 import { calculateStatistics } from '../../../Services/AppCalculatorsApi'
 
 const ProbabilityOfASeriesOfIndpendentEvents = () => {
@@ -67,7 +67,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.eventA} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="event_a"
                 placeholder={PLACEHOLDERS.number}
@@ -78,7 +78,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.aRepeatTimes} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="a_repeat_times"
                 placeholder={PLACEHOLDERS.number}
@@ -89,7 +89,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.eventB} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="event_b"
                 placeholder={PLACEHOLDERS.number}
@@ -100,7 +100,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.bRepeatTimes} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="b_repeat_times"
                 placeholder={PLACEHOLDERS.number}

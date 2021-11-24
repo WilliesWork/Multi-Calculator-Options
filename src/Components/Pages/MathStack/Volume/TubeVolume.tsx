@@ -7,7 +7,7 @@ import { TubeVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const TubeVolume = () => {
@@ -79,7 +79,7 @@ const TubeVolume = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.outerDiameter} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="outer_diameter"
                 placeholder={PLACEHOLDERS.number}
@@ -97,7 +97,7 @@ const TubeVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.innerDiameter} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="inner_diameter"
                 placeholder={PLACEHOLDERS.number}
@@ -115,7 +115,7 @@ const TubeVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.length} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}

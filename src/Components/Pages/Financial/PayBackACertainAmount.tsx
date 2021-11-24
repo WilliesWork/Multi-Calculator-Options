@@ -7,7 +7,7 @@ import { PayBackACertainAmountI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { CustomTextInput, CustomSelect, CustomBtn, Label } from '../../custom'
 import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const PayBackACertainAmount = () => {
@@ -68,7 +68,7 @@ const PayBackACertainAmount = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.interestRate} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
@@ -79,7 +79,7 @@ const PayBackACertainAmount = () => {
 
             <div className="form-row">
               <Label title={LABELS.creditCardBalance} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="credit_card_balance"
                 placeholder={PLACEHOLDERS.number}
@@ -90,7 +90,7 @@ const PayBackACertainAmount = () => {
 
             <div className="form-row">
               <Label title={LABELS.monthlyPayment} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="monthly_payment"
                 placeholder={PLACEHOLDERS.number}

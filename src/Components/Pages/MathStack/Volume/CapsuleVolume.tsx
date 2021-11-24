@@ -7,7 +7,7 @@ import { CapsuleVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomForm, CustomSelect, Figure, Label, CustomBtn } from '../../../custom'
+import { CustomTextInput, CustomSelect, Figure, Label, CustomBtn } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const CapsuleVolume = () => {
@@ -83,7 +83,7 @@ const CapsuleVolume = () => {
               <Grid item xs>
                 <div className="form-row">
                   <Label title={LABELS.radius} />
-                  <CustomForm
+                  <CustomTextInput
                     type={INPUT_TYPE.number}
                     id="radius"
                     placeholder={PLACEHOLDERS.number}
@@ -101,7 +101,7 @@ const CapsuleVolume = () => {
 
                 <div className="form-row">
                   <Label title={LABELS.height} />
-                  <CustomForm
+                  <CustomTextInput
                     type={INPUT_TYPE.number}
                     id="height"
                     placeholder={PLACEHOLDERS.number}

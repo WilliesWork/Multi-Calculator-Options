@@ -8,7 +8,7 @@ import { RootState } from '../../../redux/store'
 import useStyles from './../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from './../../../Common/shared'
 import { calculateStatistics } from '../../../Services/AppCalculatorsApi'
-import { CustomBtn, CustomForm, Label } from '../../custom'
+import { CustomBtn, CustomTextInput, Label } from '../../custom'
 
 const MarginOfErrorCalculator = () => {
   const classes = useStyles()
@@ -64,7 +64,7 @@ const MarginOfErrorCalculator = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.confienceLevel} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="confience_level"
                 placeholder={PLACEHOLDERS.number}
@@ -75,7 +75,7 @@ const MarginOfErrorCalculator = () => {
 
             <div className="form-row">
               <Label title={LABELS.populationProportion} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="population_proportion"
                 placeholder={PLACEHOLDERS.number}
@@ -86,7 +86,7 @@ const MarginOfErrorCalculator = () => {
 
             <div className="form-row">
               <Label title={LABELS.sampleSize} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="sample_size"
                 placeholder={PLACEHOLDERS.number}

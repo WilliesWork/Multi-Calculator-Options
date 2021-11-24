@@ -7,7 +7,7 @@ import { PresentValueOfPeriodicalDepositI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { CustomTextInput, CustomSelect, CustomBtn, Label } from '../../custom'
 import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const PresentValueOfPeriodicalDeposit = () => {
@@ -73,7 +73,7 @@ const PresentValueOfPeriodicalDeposit = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.interestRate} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
@@ -84,7 +84,7 @@ const PresentValueOfPeriodicalDeposit = () => {
 
             <div className="form-row">
               <Label title={LABELS.periodDeposit} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="period_deposit"
                 placeholder={PLACEHOLDERS.number}
@@ -95,7 +95,7 @@ const PresentValueOfPeriodicalDeposit = () => {
 
             <div className="form-row">
               <Label title={LABELS.numberOfMonths} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="number_of_months"
                 placeholder={PLACEHOLDERS.number}
@@ -106,7 +106,7 @@ const PresentValueOfPeriodicalDeposit = () => {
 
             <div className="form-row">
               <Label title={LABELS.numberOfYears} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="number_of_years"
                 placeholder={PLACEHOLDERS.number}

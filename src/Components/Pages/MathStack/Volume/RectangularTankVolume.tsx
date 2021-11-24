@@ -7,7 +7,7 @@ import { RectangularTankVolumeI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const RectangularTankVolume = () => {
@@ -80,7 +80,7 @@ const RectangularTankVolume = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.length} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
@@ -98,7 +98,7 @@ const RectangularTankVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.width} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="width"
                 placeholder={PLACEHOLDERS.number}
@@ -116,7 +116,7 @@ const RectangularTankVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.height} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}

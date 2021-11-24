@@ -7,7 +7,7 @@ import { TriangleAreaI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const TriangleArea = () => {
@@ -80,7 +80,7 @@ const TriangleArea = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.sideA} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="sideA"
                 placeholder={PLACEHOLDERS.number}
@@ -98,7 +98,7 @@ const TriangleArea = () => {
 
             <div className="form-row">
               <Label title={LABELS.sideB} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="sideB"
                 placeholder={PLACEHOLDERS.number}
@@ -116,7 +116,7 @@ const TriangleArea = () => {
 
             <div className="form-row">
               <Label title={LABELS.sideC} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="sideC"
                 placeholder={PLACEHOLDERS.number}

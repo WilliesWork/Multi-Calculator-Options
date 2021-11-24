@@ -7,7 +7,7 @@ import { DueDateParikhsRuleI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect, Label, CustomBtn } from '../../custom'
+import { CustomTextInput, CustomSelect, Label, CustomBtn } from '../../custom'
 import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const DueDateParikhsRule = () => {
@@ -59,7 +59,7 @@ const DueDateParikhsRule = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.firstDateofLastPeriod} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.date}
                 id="first_date_of_last_period"
                 placeholder={PLACEHOLDERS.date}
@@ -70,7 +70,7 @@ const DueDateParikhsRule = () => {
 
             <div className="form-row">
               <Label title={LABELS.days} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="days"
                 placeholder={PLACEHOLDERS.number}

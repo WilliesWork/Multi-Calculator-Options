@@ -7,7 +7,7 @@ import { WebsiteBandwidthI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../custom'
 import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const WebsiteBandwidth = () => {
@@ -77,7 +77,7 @@ const WebsiteBandwidth = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.pageViews} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="page_views"
                 placeholder={PLACEHOLDERS.number}
@@ -95,7 +95,7 @@ const WebsiteBandwidth = () => {
 
             <div className="form-row">
               <Label title={LABELS.pageSize} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="page_size"
                 placeholder={PLACEHOLDERS.number}
@@ -114,7 +114,7 @@ const WebsiteBandwidth = () => {
 
             <div className="form-row">
               <Label title={LABELS.redundancyFactor} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="redundancy_factor"
                 placeholder={PLACEHOLDERS.number}

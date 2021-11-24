@@ -8,7 +8,7 @@ import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
 import { calculateStatistics } from '../../../Services/AppCalculatorsApi'
-import { CustomBtn, Label, CustomForm } from '../../custom'
+import { CustomBtn, Label, CustomTextInput } from '../../custom'
 
 const ProbablitySolverForTwoEvents = () => {
   const classes = useStyles()
@@ -80,7 +80,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityOfA} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_of_a"
                 placeholder={PLACEHOLDERS.number}
@@ -91,7 +91,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityOfB} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_of_b"
                 placeholder={PLACEHOLDERS.number}
@@ -102,7 +102,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityOfANotOccuring} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_of_a_not_occuring"
                 placeholder={PLACEHOLDERS.number}
@@ -113,7 +113,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityOfBNotOccuring} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_of_b_not_occuring"
                 placeholder={PLACEHOLDERS.number}
@@ -124,7 +124,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityOfAAndBBothOccuring} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_of_a_and_b_both_occuring"
                 placeholder={PLACEHOLDERS.number}
@@ -135,7 +135,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityThatAOrBOrBothOccur} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_that_a_or_b_or_both_occur"
                 placeholder={PLACEHOLDERS.number}
@@ -146,7 +146,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityThatAOrBOccursButNotBoth} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_that_a_or_b_occurs_but_not_both"
                 placeholder={PLACEHOLDERS.number}
@@ -157,7 +157,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityOfNeitherANorBOccuring} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_of_neither_a_nor_b_occuring"
                 placeholder={PLACEHOLDERS.number}

@@ -7,7 +7,7 @@ import { EllipsoidVolumeCalculatorI } from '../../../../Types'
 import { RootState } from '../../../../redux/store'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const EllipsoidVolume = () => {
@@ -79,7 +79,7 @@ const EllipsoidVolume = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.axis1} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="axis1"
                 placeholder={PLACEHOLDERS.number}
@@ -97,7 +97,7 @@ const EllipsoidVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.axis2} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="axis2"
                 placeholder={PLACEHOLDERS.number}
@@ -115,7 +115,7 @@ const EllipsoidVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.axis3} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="axis3"
                 placeholder={PLACEHOLDERS.number}

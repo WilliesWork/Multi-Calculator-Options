@@ -7,7 +7,7 @@ import { InflationCalculatorCpiDataI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { CustomTextInput, CustomSelect, CustomBtn, Label } from '../../custom'
 import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const InflationCalculatorCpiData = () => {
@@ -61,7 +61,7 @@ const InflationCalculatorCpiData = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.currentPrice} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="current_price"
                 placeholder={PLACEHOLDERS.number}
@@ -72,7 +72,7 @@ const InflationCalculatorCpiData = () => {
 
             <div className="form-row">
               <Label title={LABELS.priceInBase} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="price_in_base"
                 placeholder={PLACEHOLDERS.number}

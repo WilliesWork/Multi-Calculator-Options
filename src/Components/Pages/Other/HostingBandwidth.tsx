@@ -7,7 +7,7 @@ import { HostingBandwidthI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../custom'
 import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const HostingBandwidth = () => {
@@ -62,7 +62,7 @@ const HostingBandwidth = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.monthlyUsage} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="monthly_usage"
                 placeholder={PLACEHOLDERS.number}

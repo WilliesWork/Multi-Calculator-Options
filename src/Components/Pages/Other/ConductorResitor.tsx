@@ -7,7 +7,7 @@ import { ConductorResitorI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../custom'
 import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const ConductorResitor = () => {
@@ -71,7 +71,7 @@ const ConductorResitor = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.length} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
@@ -89,7 +89,7 @@ const ConductorResitor = () => {
 
             <div className="form-row">
               <Label title={LABELS.diameter} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="diameter"
                 placeholder={PLACEHOLDERS.number}
@@ -108,7 +108,7 @@ const ConductorResitor = () => {
 
             <div className="form-row">
               <Label title={LABELS.conductivity} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="conductivity"
                 placeholder={PLACEHOLDERS.number}

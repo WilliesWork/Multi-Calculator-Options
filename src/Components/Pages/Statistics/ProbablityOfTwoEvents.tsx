@@ -8,7 +8,7 @@ import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
 import { calculateStatistics } from '../../../Services/AppCalculatorsApi'
-import { CustomBtn, Label, CustomForm } from '../../custom'
+import { CustomBtn, Label, CustomTextInput } from '../../custom'
 
 const ProbablityOfTwoEvents = () => {
   const classes = useStyles()
@@ -62,7 +62,7 @@ const ProbablityOfTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.eventA} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="event_a"
                 placeholder={PLACEHOLDERS.number}
@@ -73,7 +73,7 @@ const ProbablityOfTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.eventB} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="event_b"
                 placeholder={PLACEHOLDERS.number}

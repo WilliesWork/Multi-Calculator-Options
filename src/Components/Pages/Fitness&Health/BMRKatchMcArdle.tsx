@@ -7,7 +7,7 @@ import { BMRKatchMcArdleI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../custom'
 import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BMRKatchMcArdle = () => {
@@ -64,7 +64,7 @@ const BMRKatchMcArdle = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.fat} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="fat"
                 placeholder={PLACEHOLDERS.number}
@@ -75,7 +75,7 @@ const BMRKatchMcArdle = () => {
 
             <div className="form-row">
               <Label title={LABELS.weight} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}

@@ -7,7 +7,7 @@ import { StockTradingMarginI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { CustomTextInput, CustomSelect, CustomBtn, Label } from '../../custom'
 import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const StockTradingMargin = () => {
@@ -64,7 +64,7 @@ const StockTradingMargin = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.marginRequirement} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="margin_requirement"
                 placeholder={PLACEHOLDERS.number}
@@ -75,7 +75,7 @@ const StockTradingMargin = () => {
 
             <div className="form-row">
               <Label title={LABELS.stockPrice} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="stock_price"
                 placeholder={PLACEHOLDERS.number}
@@ -86,7 +86,7 @@ const StockTradingMargin = () => {
 
             <div className="form-row">
               <Label title={LABELS.shares} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="shares"
                 placeholder={PLACEHOLDERS.number}

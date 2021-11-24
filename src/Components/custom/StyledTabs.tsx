@@ -21,6 +21,6 @@ const StyledTabs = withStyles((theme: Theme) => ({
     },
 
   },
-}))((props: StyledTabsProps) => <Tabs variant="fullWidth" {...props} TabIndicatorProps={{ children: <span /> }} />);
+}))((props: any) => <Tabs variant="fullWidth" {...props} TabIndicatorProps={{ children: <span /> }} />);
 
 export default StyledTabs

@@ -7,7 +7,7 @@ import { DueDateNaegeleRuleI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect, Label, CustomBtn } from '../../custom'
+import { CustomTextInput, CustomSelect, Label, CustomBtn } from '../../custom'
 import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const DueDateNaegeleRule = () => {
@@ -61,7 +61,7 @@ const DueDateNaegeleRule = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.firstDateofLastPeriod} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.date}
                 id="first_date_of_last_period"
                 placeholder={PLACEHOLDERS.number}
@@ -72,7 +72,7 @@ const DueDateNaegeleRule = () => {
 
             <div className="form-row">
               <Label title={LABELS.days} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="days"
                 placeholder={PLACEHOLDERS.number}
@@ -83,7 +83,7 @@ const DueDateNaegeleRule = () => {
 
             <div className="form-row">
               <Label title={LABELS.method} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.text}
                 id="method"
                 placeholder={PLACEHOLDERS.method}

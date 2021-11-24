@@ -7,7 +7,7 @@ import { BodyMassIndexMethodTwoI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../custom'
 import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BodyMassIndexMethodTwo = () => {
@@ -71,7 +71,7 @@ const BodyMassIndexMethodTwo = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.height} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -89,7 +89,7 @@ const BodyMassIndexMethodTwo = () => {
 
             <div className="form-row">
               <Label title={LABELS.weight} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}

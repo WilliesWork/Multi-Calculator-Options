@@ -7,7 +7,7 @@ import { USCustomarySystemBfcI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { CustomTextInput, CustomSelect, CustomBtn, Label } from '../../custom'
 import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const USCustomarySystemBfc = () => {
@@ -83,7 +83,7 @@ const USCustomarySystemBfc = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.height} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
@@ -101,7 +101,7 @@ const USCustomarySystemBfc = () => {
 
             <div className="form-row">
               <Label title={LABELS.neck} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="neck"
                 placeholder={PLACEHOLDERS.number}
@@ -119,7 +119,7 @@ const USCustomarySystemBfc = () => {
 
             <div className="form-row">
               <Label title={LABELS.hip} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="hip"
                 placeholder={PLACEHOLDERS.number}
@@ -137,7 +137,7 @@ const USCustomarySystemBfc = () => {
 
             <div className="form-row">
               <Label title={LABELS.waist} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="waist"
                 placeholder={PLACEHOLDERS.number}
@@ -155,7 +155,7 @@ const USCustomarySystemBfc = () => {
 
             <div className="form-row">
               <Label title={LABELS.abdomen} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="abdomen"
                 placeholder={PLACEHOLDERS.number}
@@ -166,7 +166,7 @@ const USCustomarySystemBfc = () => {
 
             <div className="form-row">
               <Label title={LABELS.gender} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.text}
                 id="gender"
                 placeholder={PLACEHOLDERS.gender}

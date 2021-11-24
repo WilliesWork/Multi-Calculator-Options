@@ -7,7 +7,7 @@ import { PeroidCalculatorI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../custom'
 import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const PeroidCalculator = () => {
@@ -62,7 +62,7 @@ const PeroidCalculator = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.previousCycleStartDate} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.date}
                 id="start_date_of_last_cycle"
                 placeholder={PLACEHOLDERS.number}
@@ -73,7 +73,7 @@ const PeroidCalculator = () => {
 
             <div className="form-row">
               <Label title={LABELS.cycleLength} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="cycle_length"
                 placeholder={PLACEHOLDERS.number}
@@ -84,7 +84,7 @@ const PeroidCalculator = () => {
 
             <div className="form-row">
               <Label title={LABELS.lastPeriodDays} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="last_period_days"
                 placeholder={PLACEHOLDERS.number}

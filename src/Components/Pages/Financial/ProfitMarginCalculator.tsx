@@ -7,7 +7,7 @@ import { ProfitMarginCalculatorI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { CustomTextInput, CustomSelect, CustomBtn, Label } from '../../custom'
 import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const ProfitMarginCalculator = () => {
@@ -65,7 +65,7 @@ const ProfitMarginCalculator = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.salesRevenue} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="sales_revenue"
                 placeholder={PLACEHOLDERS.number}
@@ -76,7 +76,7 @@ const ProfitMarginCalculator = () => {
 
             <div className="form-row">
               <Label title={LABELS.cost} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="cost"
                 placeholder={PLACEHOLDERS.number}

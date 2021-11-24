@@ -7,7 +7,7 @@ import { BloodAlcoholContentI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../custom'
 import { calculateHealth } from '../../../Services/AppCalculatorsApi'
 
 const BloodAlcoholContent = () => {
@@ -84,7 +84,7 @@ const BloodAlcoholContent = () => {
 
             <div className="form-row">
               <Label title={LABELS.weight} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}
@@ -102,7 +102,7 @@ const BloodAlcoholContent = () => {
 
             <div className="form-row">
               <Label title={LABELS.gender} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.text}
                 id="gender"
                 placeholder={PLACEHOLDERS.gender}
@@ -113,7 +113,7 @@ const BloodAlcoholContent = () => {
 
             <div className="form-row">
               <Label title={LABELS.hoursOfDrinking} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="hours_of_drinking"
                 placeholder={PLACEHOLDERS.number}
@@ -124,7 +124,7 @@ const BloodAlcoholContent = () => {
 
             <div className="form-row">
               <Label title={LABELS.minutesOfDrinking} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="minutes_of_drinking"
                 placeholder={PLACEHOLDERS.number}
@@ -135,7 +135,7 @@ const BloodAlcoholContent = () => {
 
             <div className="form-row">
               <Label title={LABELS.numberOfStandardDrinks} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="number_of_standard_drinks"
                 placeholder={PLACEHOLDERS.number}

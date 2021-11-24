@@ -7,7 +7,7 @@ import { MortgagePayoffWithLoanTermI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { CustomTextInput, CustomSelect, CustomBtn, Label } from '../../custom'
 import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const MortgagePayoffWithLoanTerm = () => {
@@ -67,7 +67,7 @@ const MortgagePayoffWithLoanTerm = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.interestRate} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
@@ -78,7 +78,7 @@ const MortgagePayoffWithLoanTerm = () => {
 
             <div className="form-row">
               <Label title={LABELS.paymentsMade} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="payments_made_years"
                 placeholder={PLACEHOLDERS.number}
@@ -89,7 +89,7 @@ const MortgagePayoffWithLoanTerm = () => {
 
             <div className="form-row">
               <Label title={LABELS.totalPaymentsperYear} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="total_payments_years"
                 placeholder={PLACEHOLDERS.number}
@@ -100,7 +100,7 @@ const MortgagePayoffWithLoanTerm = () => {
 
             <div className="form-row">
               <Label title={LABELS.loanAmount} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="loan_amount"
                 placeholder={PLACEHOLDERS.number}

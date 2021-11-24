@@ -7,7 +7,7 @@ import { CircleAreaI } from '../../../../Types'
 import { selectCalculators } from '../../../../redux/slice/CalculatorsSlice'
 import useStyles from '../../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../Common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
+import { CustomBtn, CustomTextInput, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../Services/AppCalculatorsApi'
 
 const CircleArea = () => {
@@ -61,7 +61,7 @@ const CircleArea = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.radius} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="radius"
                 placeholder={PLACEHOLDERS.number}

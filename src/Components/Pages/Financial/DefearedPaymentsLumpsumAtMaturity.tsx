@@ -7,7 +7,7 @@ import { DefearedPaymentsLumpsumAtMaturityI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { CustomTextInput, CustomSelect, CustomBtn, Label } from '../../custom'
 import { calculateFinances } from '../../../Services/AppCalculatorsApi'
 
 const DefearedPaymentsLumpsumAtMaturity = () => {
@@ -69,7 +69,7 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.interestRate} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
@@ -80,7 +80,7 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
 
             <div className="form-row">
               <Label title={LABELS.creditCardBalance} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="loan_amount"
                 placeholder={PLACEHOLDERS.number}
@@ -91,7 +91,7 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
 
             <div className="form-row">
               <Label title={LABELS.numberOfMonths} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="number_of_months"
                 placeholder={PLACEHOLDERS.number}
@@ -102,7 +102,7 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
 
             <div className="form-row">
               <Label title={LABELS.numberOfYears} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="number_of_years"
                 placeholder={PLACEHOLDERS.number}

@@ -7,7 +7,7 @@ import { SinglePointWithKnownSlopeI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
+import { CustomTextInput, CustomSelect, CustomBtn, Label } from '../../custom'
 import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const SinglePointWithKnownSlope = () => {
@@ -65,7 +65,7 @@ const SinglePointWithKnownSlope = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.x1} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="x_1"
                 placeholder={PLACEHOLDERS.number}
@@ -76,7 +76,7 @@ const SinglePointWithKnownSlope = () => {
 
             <div className="form-row">
               <Label title={LABELS.y1} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="y_1"
                 placeholder={PLACEHOLDERS.number}
@@ -87,7 +87,7 @@ const SinglePointWithKnownSlope = () => {
 
             <div className="form-row">
               <Label title={LABELS.slope} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="slope"
                 placeholder={PLACEHOLDERS.number}
@@ -98,7 +98,7 @@ const SinglePointWithKnownSlope = () => {
 
             <div className="form-row">
               <Label title={LABELS.distance} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="distance"
                 placeholder={PLACEHOLDERS.number}

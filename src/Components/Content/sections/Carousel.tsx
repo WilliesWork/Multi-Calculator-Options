@@ -7,22 +7,25 @@ import {
   MDBCarouselCaption,
 } from 'mdb-react-ui-kit';
 
-import Ad1 from '../../../Common/assets/ad1.png'
+import Ad1 from '../../../Common/assets/ad1@2x.png'
+import Ad2 from '../../../Common/assets/ad2@2x.png'
+import Ad3 from '../../../Common/assets/ad3@2x.png'
+
 
 const Carousel = () => {
   return (
-    <MDBCarousel fade style={{ height: 200 }}>
+    <MDBCarousel showIndicators fade >
       <MDBCarouselInner>
         <MDBCarouselItem className='active'>
           <MDBCarouselElement src={Ad1} alt='...' />
         </MDBCarouselItem>
 
         <MDBCarouselItem>
-          <MDBCarouselElement src='https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg' alt='...' />
+          <MDBCarouselElement src={Ad2} alt='...' />
         </MDBCarouselItem>
 
         <MDBCarouselItem>
-          <MDBCarouselElement src='https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg' alt='...' />
+          <MDBCarouselElement src={Ad3} alt='...' />
           {/* <MDBCarouselCaption>
             <h5>Third slide label</h5>
             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>

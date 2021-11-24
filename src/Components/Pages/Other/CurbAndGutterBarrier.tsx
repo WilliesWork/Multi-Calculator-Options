@@ -7,7 +7,7 @@ import { CurbAndGutterBarrierI } from '../../../Types'
 import { RootState } from '../../../redux/store'
 import useStyles from '../../../Styling/CustomStyles'
 import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../Common/shared'
-import { CustomForm, CustomSelect, Label, CustomBtn } from '../../custom'
+import { CustomTextInput, CustomSelect, Label, CustomBtn } from '../../custom'
 import { calculateOthers } from '../../../Services/AppCalculatorsApi'
 
 const CurbAndGutterBarrier = () => {
@@ -89,7 +89,7 @@ const CurbAndGutterBarrier = () => {
 
             <div className="form-row">
               <Label title={LABELS.curbDepth} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="curb_depth"
                 placeholder={PLACEHOLDERS.number}
@@ -107,7 +107,7 @@ const CurbAndGutterBarrier = () => {
 
             <div className="form-row">
               <Label title={LABELS.curbHeight} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="curb_height"
                 placeholder={PLACEHOLDERS.number}
@@ -125,7 +125,7 @@ const CurbAndGutterBarrier = () => {
 
             <div className="form-row">
               <Label title={LABELS.flagThickness} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="flag_thickness"
                 placeholder={PLACEHOLDERS.number}
@@ -143,7 +143,7 @@ const CurbAndGutterBarrier = () => {
 
             <div className="form-row">
               <Label title={LABELS.gutterWidth} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="gutter_width"
                 placeholder={PLACEHOLDERS.number}
@@ -161,7 +161,7 @@ const CurbAndGutterBarrier = () => {
 
             <div className="form-row">
               <Label title={LABELS.length} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
@@ -179,7 +179,7 @@ const CurbAndGutterBarrier = () => {
 
             <div className="form-row">
               <Label title={LABELS.quantity} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="quantity"
                 placeholder={PLACEHOLDERS.number}
