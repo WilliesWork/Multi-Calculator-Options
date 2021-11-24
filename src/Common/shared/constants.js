@@ -239,13 +239,16 @@ export const INPUT_TYPE = {
 };
 
 export const COLORS = {
-  gradient: "linear-gradient(90deg, #3300cc 0%, #3366ff 100%)",
-  primary: "#3300cc",
-  secondary: "#F1EFE8",
+  gradient: "linear-gradient(90deg, #3128AF 0%, #499FB8 100%)",
+  primary: "#353DB0",
+  secondary: "#e4e4e4",
   light_text_color: "#F0ECEC",
   background: "#F0ECEC",
+  gradientBackground: "linear-gradient(90deg, #fbfbfb 0%, #d1d1d1 100%)",
   paper_background: "#A8A79F",
-  text: "#595959",
+  text: "#8591b0",
+  onGradient: '#ffffff',
+
 };
 
 export const CALC_LABELS = {

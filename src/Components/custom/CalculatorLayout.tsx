@@ -12,7 +12,7 @@ import { RootState } from '../../redux/store'
 import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE, COLORS } from '../../Common/shared'
 import { CustomForm, CustomSelect, Figure, Label, CustomBtn } from '../custom'
 import { calculateMath } from './../../Services/AppCalculatorsApi'
-import { CollapsibleMenu } from '../Content';
+import { CollapsibleMenu, Carousel } from '../Content';
 
 interface CalculatorLayoutProps {
     children?: React.ReactNode;
@@ -80,7 +80,7 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
                             </div>
                             <div className={rightTabContainer}>
 
-                                <Typography>Bion</Typography>
+                                <Typography>Linear gradient</Typography>
                             </div>
                             <TabPanel value={value} index={0}>
                                 <Formik
@@ -131,9 +131,18 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
 
                 </Grid>
                 <Grid item xs={2}>
-                    <Paper className={paperBackground}>
-                        <CollapsibleMenu />
-                    </Paper>
+                    <Grid item xs={12}>
+                        <Paper className={paperBackground}>
+                            <Carousel />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Paper className={paperBackground}>
+                            <CollapsibleMenu />
+                        </Paper>
+                    </Grid>
+
+
                 </Grid>
             </Grid>
         </>

@@ -1,4 +1,4 @@
-import FIGURE from './../../Common/Assets/Images/image-placeholder.jpg'
+import FIGURE from './../../Common/assets/image-placeholder.jpg'
 import useStyles from './../../Styling/CustomStyles'
 
 function Figure() {

@@ -9,9 +9,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { useHistory } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
-import useStyles from "./../../../Styling/CustomStyles";
+import useStyles from "../../../Styling/CustomStyles";
 import { Font, FontProvider } from "../../Font";
 import { COLORS } from "../../../Common/shared";
+
 const NavBar = (props) => {
   let history = useHistory();
   const classes = useStyles();
