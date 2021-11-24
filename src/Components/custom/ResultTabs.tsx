@@ -3,6 +3,8 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import StyledTabs from './StyledTabs';
 import StyledTab from './StyledTab';
 import TabPanel from './TabPanel';
+import { Typography } from '@material-ui/core';
+import { COLORS } from '../../Common/shared';
 
 interface ResultsProps {
   children?: React.ReactNode;
@@ -23,10 +25,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: 20,
   },
   tabContainer: {
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    display: 'flex',
+    background: COLORS.gradient,
+    color: COLORS.light_text_color,
+    justifyContent: 'center',
+    width: '70%',
+    float: 'inline-end',
+    borderBottomLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
+
 }));
 
 const ResultTabs = (props: ResultsProps) => {
@@ -41,10 +49,11 @@ const ResultTabs = (props: ResultsProps) => {
   return (
     <div className={classes.root}>
       <div className={classes.tabContainer}>
-        <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
+        {/* <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
           <StyledTab label="Result" {...a11yProps(0)} />
           <StyledTab label="" {...a11yProps(1)} />
-        </StyledTabs>
+        </StyledTabs> */}
+        <Typography>Result</Typography>
       </div>
       <TabPanel value={value} index={0}>
         {children}

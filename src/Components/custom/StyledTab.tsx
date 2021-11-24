@@ -19,11 +19,11 @@ const StyledTab = withStyles((theme: Theme) =>
       '&:focus': {
         opacity: 1,
       },
-      '&:nth-child(even)': {
+      '&:nth-child(odd)': {
         borderBottomLeftRadius: 20,
         borderTopRightRadius: 20,
       },
-      '&:nth-child(odd)': {
+      '&:nth-child(even)': {
         borderBottomRightRadius: 20,
         borderTopLeftRadius: 20,
       },
