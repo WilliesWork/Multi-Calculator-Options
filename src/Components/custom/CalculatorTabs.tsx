@@ -83,7 +83,7 @@ function CalculatorTabs(props: CalculatorProps) {
           <StyledTab label={tabTitle} {...a11yProps(0)} />
           <StyledTab label={tabTitle} {...a11yProps(1)} />
         </StyledTabs> */}
-        <Typography>Bion</Typography>
+        <Typography>Test</Typography>
       </div>
       <TabPanel value={value} index={0}>
         {children}

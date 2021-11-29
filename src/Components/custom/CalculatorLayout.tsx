@@ -7,12 +7,11 @@ import StyledTabs from './StyledTabs';
 import StyledTab from './StyledTab';
 import TabPanel from './TabPanel';
 
-import { CapsuleVolumeCalculatorI } from '../../Types'
-import { RootState } from '../../redux/store'
 import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE, COLORS } from '../../Common/shared'
 import { CustomTextInput, CustomSelect, Figure, Label, CustomBtn } from '../custom'
-import { calculateMath } from './../../Services/AppCalculatorsApi'
+import TestCalculator from './TestCalculator'
 import { CollapsibleMenu, Carousel } from '../Content';
+import { CircleArea, EllipseArea, ParallelogramArea } from '../TestCalculators'
 
 interface CalculatorLayoutProps {
     children?: React.ReactNode;
@@ -43,40 +42,38 @@ const useStyles = makeStyles((theme: Theme) => ({
         borderBottomLeftRadius: 20,
         borderTopRightRadius: 20,
     },
-    resultTabContainer: {
-        display: 'flex',
-        background: COLORS.gradient,
-        color: COLORS.light_text_color,
-        justifyContent: 'center',
-        width: '70%',
-        float: 'inline-end',
-        '&:nth-child(even)': {
-            borderBottomLeftRadius: 20,
-            borderTopRightRadius: 20,
-        },
-        '&:nth-child(odd)': {
-            borderBottomRightRadius: 20,
-            borderTopLeftRadius: 20,
-        },
-    },
     paperBackground: {
         margin: theme.spacing(1),
         color: theme.palette.text.secondary,
         backgroundColor: theme.palette.background.paper,
         borderRadius: 20,
     },
+    sideBarPaperBackground: {
+        margin: theme.spacing(1),
+        backgroundColor: 'transparent',
+        borderRadius: 20,
+    },
 }));
 
+function a11yProps(index: any) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
+
 const CalculatorLayout = (props: CalculatorLayoutProps) => {
-    const { children } = props
-    const { tabRoot, rightTabContainer, leftTabContainer, paperBackground } = useStyles()
+    const { children, calculatorTitle } = props
+    const { tabRoot, rightTabContainer, leftTabContainer, paperBackground, sideBarPaperBackground } = useStyles()
     const [value, setValue] = React.useState(0);
     const [searchText, setSearchText] = React.useState('');
-    const [initialFormValues] = React.useState({})
-    const [Result, setResult] = React.useState({})
 
     const handleChange = (event: any) => {
         setSearchText(event.target.value);
+    };
+
+    const onTabClick = (event: React.ChangeEvent<{}>, newValue: number) => {
+        setValue(newValue);
     };
 
     return (
@@ -86,40 +83,27 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
                 <Grid item xs={6}>
                     <Paper className={paperBackground}>
                         <div className={tabRoot}>
-                            <StyledTabs>
-                                <div className={leftTabContainer}>
-                                    <Typography>Formular: xxx</Typography>
+                            <StyledTabs value={value} onChange={onTabClick} >
+                                <StyledTab label="Circle area" {...a11yProps(0)} />
+                                <StyledTab label="Ellipse area" {...a11yProps(1)} />
+                                <StyledTab label="Parallelogram area" {...a11yProps(2)} />
+
+                                {/* <div className={leftTabContainer}>
+                                    <Typography></Typography>
                                 </div>
                                 <div className={rightTabContainer}>
-                                    <Typography>Linear gradient</Typography>
-                                </div>
+                                    <Typography>Sign Up</Typography>
+                                </div> */}
                             </StyledTabs>
 
                             <TabPanel value={value} index={0}>
-                                <Formik
-                                    initialValues={initialFormValues}
-                                    onSubmit={async ({
-                                    }, { setSubmitting, resetForm }) => {
-                                        try {
-                                            resetForm()
-                                        } catch (err) {
-                                            console.log('====>', err)
-                                        }
-                                    }}
-                                >
-                                    {({ values, handleChange, handleSubmit, isSubmitting }) => (
-                                        <form onSubmit={handleSubmit} className="form-container">
-                                            <Grid container xs>
-                                                <Grid item xs>
-                                                    <CustomBtn />
-                                                </Grid>
-                                            </Grid>
-                                        </form>
-                                    )}
-                                </Formik>
+                                <CircleArea />
                             </TabPanel>
                             <TabPanel value={value} index={1}>
-                                willie
+                                <EllipseArea />
+                            </TabPanel>
+                            <TabPanel value={value} index={2}>
+                                <ParallelogramArea />
                             </TabPanel>
                         </div>
                     </Paper>
@@ -138,11 +122,8 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
                                 </div>
                             </StyledTabs>
 
-                            <TabPanel value={value} index={0}>
+                            <TabPanel value={value} index={9}>
                                 {children}
-                            </TabPanel>
-                            <TabPanel value={value} index={1}>
-                                Result
                             </TabPanel>
                         </div>
                     </Paper>
@@ -152,7 +133,7 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
                 <Grid item xs={2}>
                     {/* Carousel */}
                     <Grid item xs={12}>
-                        <Paper className={paperBackground}>
+                        <Paper elevation={0} className={sideBarPaperBackground}>
                             <Carousel />
                         </Paper>
                     </Grid>
@@ -170,7 +151,7 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
 
                     {/* Menu */}
                     <Grid item xs={12}>
-                        <Paper className={paperBackground}>
+                        <Paper elevation={0} className={sideBarPaperBackground}>
                             <CollapsibleMenu />
                         </Paper>
                     </Grid>

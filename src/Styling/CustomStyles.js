@@ -66,14 +66,16 @@ const useStyles = makeStyles((theme) => ({
 
   paper2: {
     padding: theme.spacing(0),
-    textAlign: "none",
     color: theme.palette.text.secondary,
   },
   paperBackground: {
     margin: theme.spacing(1),
-    textAlign: "none",
     color: theme.palette.text.secondary,
     backgroundColor: theme.palette.background.paper,
+    borderRadius: 20,
+  },
+  sideBarPaperBackground: {
+    margin: theme.spacing(1),
     borderRadius: 20,
   },
   formControl: {

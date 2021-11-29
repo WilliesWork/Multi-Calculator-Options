@@ -11,26 +11,28 @@ interface StyledTabProps {
 const StyledTab = withStyles((theme: Theme) =>
   createStyles({
     root: {
-      textTransform: 'none',
-      color: '#fff',
-      background: COLORS.gradient,
-      fontWeight: theme.typography.fontWeightBold,
-      fontSize: theme.typography.pxToRem(15),
+      color: COLORS.primary,
+      height: '10%',
+      background: theme.palette.background.paper,
       '&:focus': {
         opacity: 1,
       },
-      '&:nth-child(odd)': {
-        borderBottomLeftRadius: 20,
-        borderTopRightRadius: 20,
-      },
-      '&:nth-child(even)': {
-        borderBottomRightRadius: 20,
+      '&:nth-child(1)': {
         borderTopLeftRadius: 20,
+        borderBottomRightRadius: 20,
+      },
+      '&:nth-child(2)': {
+        borderBottomRightRadius: 20,
+        borderBottomLeftRadius: 20,
+      },
+      '&:nth-child(3)': {
+        borderTopRightRadius: 20,
+        borderBottomLeftRadius: 20,
       },
     },
     selected: {
-      color: 'rgba(2, 0, 36, 1)',
-      background: theme.palette.background.paper,
+      color: COLORS.light_text_color,
+      background: COLORS.gradient,
     },
   }),
 )((props: StyledTabProps) => <Tab disableRipple {...props} />);

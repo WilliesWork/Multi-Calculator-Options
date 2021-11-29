@@ -97,6 +97,7 @@ export const CALCULATORS = {
 
 export const BUTTONS = {
   calculate: "Calculate",
+  clear: "Clear",
 };
 
 export const PLACEHOLDERS = {
@@ -231,6 +232,7 @@ export const IDS = {
 };
 
 export const INPUT_TYPE = {
+  email: "email",
   text: "text",
   number: "number",
   button: "button",

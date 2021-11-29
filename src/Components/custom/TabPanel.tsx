@@ -11,8 +11,15 @@ interface TabPanelProps {
   value: any;
 }
 
+const useStyles = makeStyles((theme: Theme) => ({
+  container: {
+    padding: theme.spacing(2),
+  }
+}))
+
 const TabPanel = (props: TabPanelProps) => {
   const { children, value, index, ...other } = props;
+  const classes = useStyles()
 
   return (
     <div
@@ -23,7 +30,7 @@ const TabPanel = (props: TabPanelProps) => {
       {...other}
     >
       {value === index && (
-        <Container>
+        <Container className={classes.container}>
           <Grid>{children}</Grid>
         </Container>
       )}

@@ -52,26 +52,15 @@ const useStyles = makeStyles((theme: Theme) => ({
         borderBottomLeftRadius: 20,
         borderTopRightRadius: 20,
     },
-    resultTabContainer: {
-        display: 'flex',
-        background: COLORS.gradient,
-        color: COLORS.light_text_color,
-        justifyContent: 'center',
-        width: '70%',
-        float: 'inline-end',
-        '&:nth-child(even)': {
-            borderBottomLeftRadius: 20,
-            borderTopRightRadius: 20,
-        },
-        '&:nth-child(odd)': {
-            borderBottomRightRadius: 20,
-            borderTopLeftRadius: 20,
-        },
-    },
     paperBackground: {
         margin: theme.spacing(1),
         color: theme.palette.text.secondary,
         backgroundColor: theme.palette.background.paper,
+        borderRadius: 20,
+    },
+    sideBarPaperBackground: {
+        margin: theme.spacing(1),
+        backgroundColor: 'transparent',
         borderRadius: 20,
     },
 }));
@@ -79,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const CalculatorLayout = (props: CalculatorLayoutProps) => {
     const { children, template } = props
     const { title, payload, initialValues, result, hasCustomSelect, fields } = template
-    const { tabRoot, rightTabContainer, leftTabContainer, paperBackground } = useStyles()
+    const { tabRoot, rightTabContainer, leftTabContainer, paperBackground, sideBarPaperBackground } = useStyles()
     const [value, setValue] = React.useState(0);
     const [searchText, setSearchText] = React.useState('');
     const [initialFormValues] = React.useState(initialValues)
@@ -121,10 +110,10 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
                         <div className={tabRoot}>
                             <StyledTabs>
                                 <div className={leftTabContainer}>
-                                    <Typography>{title}</Typography>
+                                    <Typography></Typography>
                                 </div>
                                 <div className={rightTabContainer}>
-                                    <Typography>Linear gradient</Typography>
+                                    <Typography>{title}</Typography>
                                 </div>
                             </StyledTabs>
 
@@ -142,7 +131,7 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
                                     }}
                                 >
                                     {({ values, handleChange, handleSubmit, isSubmitting }) => (
-                                        <form onSubmit={handleSubmit} className="</form>form-container">
+                                        <form onSubmit={handleSubmit} className="form-container">
                                             <Container>
                                                 {renderFields({ fields, handleChange })}
                                                 <CustomBtn />
@@ -181,7 +170,7 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
                 <Grid item xs={2}>
                     {/* Carousel */}
                     <Grid item xs={12}>
-                        <Paper className={paperBackground}>
+                        <Paper elevation={0} className={sideBarPaperBackground}>
                             <Carousel />
                         </Paper>
                     </Grid>
@@ -199,7 +188,7 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
 
                     {/* Menu */}
                     <Grid item xs={12}>
-                        <Paper className={paperBackground}>
+                        <Paper elevation={0} className={sideBarPaperBackground}>
                             <CollapsibleMenu />
                         </Paper>
                     </Grid>
