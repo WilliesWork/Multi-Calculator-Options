@@ -8,7 +8,7 @@ import { SearchForm } from '../forms/searchForm'
 import { useHistory } from "react-router-dom";
 import iconImage from '../../common/assets/icon.svg'
 
-function NavBar(){
+function NavBar(props:any){
         const history = useHistory();
         return(
             <Box

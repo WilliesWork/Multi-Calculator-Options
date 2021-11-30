@@ -17,7 +17,7 @@ import path from "path"
 
 const financialUrl = "/financepage"
 const mathUrl = "/mathcategories"
-const othersUrl = "/others"
+const othersUrl = "/otherpage"
 
 // Page routes
 const routes = [
@@ -667,7 +667,7 @@ const financialRoutes =
 
 //  Others page route
 
-const OthersRoutes = {
+const othersRoutes = {
         categoryName: "Others Calculators",
         subCategories:[
               {
@@ -913,4 +913,4 @@ const otherRoutes = [
         component: HorsePowerConverter
     }
 ]
-export { routes, financialRoutes, otherRoutes, mathRoutes }
+export { routes, financialRoutes, otherRoutes, mathRoutes, othersRoutes }

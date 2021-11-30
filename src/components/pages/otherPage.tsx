@@ -3,7 +3,9 @@ import { NavBar2 } from '../navbar/navbar2'
 import { Box, Typography } from '@mui/material'
 import { OtherOptions } from '../calculator/otherOptions'
 import { Slide } from '../slider/slider'
-import { otherRoutes } from '../../routes/routes'
+import { othersRoutes } from '../../routes/routes'
+import { SearchForm } from '../forms/searchForm'
+import AddLayout from '../layouts/AddLayout';
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,15 +23,27 @@ function OtherPage(){
 
     return(
         <div>
-          <NavBar2 />
-          <Switch>
+         
+          <Switch>  
           <Route exact path={path}>
+            <NavBar2 otherHighLight={true}/>
+            <Box
+              sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              }}>
+                <SearchForm />
+            </Box>
             <OtherOptions />
-            <Slide />
+            <Box sx={{ marginTop: 5 }}>
+              <Slide />
+            </Box>
           </Route>
-          {otherRoutes.map((route, i) => (
+          {othersRoutes.subCategories[5].sub_calculator.map((route, i) => (
                 <Route key={route.name} path={route.path} >{
-                    <route.component />
+                    <AddLayout>
+                      <route.component />
+                    </AddLayout>
                 }</Route>
             ))}
         </Switch>

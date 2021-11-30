@@ -1,13 +1,13 @@
 import React,  { useState, useEffect } from 'react'
-import { Grid , Box, Typography, LinearProgress } from '@mui/material'
+import { Grid , Box, Typography, LinearProgress, Button } from '@mui/material'
 import { Field, Form, Formik, FormikProps } from 'formik'
 import { UniversalDisplay } from '../displays/universalDisplay'
-import { methodDataPopulationStandardDeviationCalculatorService } from '../../services/methodNames/methods'
 
 function SingleFieldForm(props:any){
     const field_name_1 = props.fieldName1
     const [results, setResult] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const propFunction = props.resultFunction
 
     return(
         <div className="container d-flex justify-content-center">
@@ -29,7 +29,8 @@ function SingleFieldForm(props:any){
                            const postDataFunction = async () => {
                                const dataReturned = await props.serviceFunction(value, props.serviceMethodName);
                                console.log(dataReturned);
-                               setResult(dataReturned)
+                               setResult(dataReturned);
+                               propFunction(dataReturned);
                            }
 
                            postDataFunction();
@@ -50,8 +51,15 @@ function SingleFieldForm(props:any){
                                         <Grid item xs={12} md={12}>
                                             <UniversalDisplay displayData={results} />
                                         </Grid>
+                                        <Grid item xs={4}>
+                                            <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="button">Clear</Button>
+                                        </Grid>
+
+                                        <Grid item xs={4}></Grid>
+                                        <Grid sx={{  display: 'flex', justifyContent: 'right' }} item xs={4}>
+                                            <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="submit">Calculate</Button>
+                                        </Grid>
                                     </Grid>
-                                    <button className="btn btn-secondary mt-4"  type="submit">Submit</button>
                                 </Form>
                             )}
                         </Formik>
@@ -67,6 +75,7 @@ function SingleFieldForm(props:any){
 function TwoFieldForm(props:any){
     const field_name_1 = props.fieldName1
     const field_name_2 = props.fieldName2
+    const propFunction = props.resultFunction
 
     const [results, setResult] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
@@ -92,7 +101,8 @@ function TwoFieldForm(props:any){
                             const postDataFunction = async () => {
                                 const dataReturned = await props.serviceFunction(value, props.serviceMethodName);
                                 console.log(dataReturned);
-                                setResult(dataReturned)
+                                setResult(dataReturned);
+                                propFunction(dataReturned);
                             }
                             postDataFunction();
                         }}>
@@ -116,11 +126,17 @@ function TwoFieldForm(props:any){
                                             </Typography>
                                             <Field className="custom-form-control" type="text" name="value_2" />
                                         </Grid>
-                                        <Grid item xs={12} md={12}>
-                                            <UniversalDisplay displayData={results} />
+                                       
+                                        <Grid item xs={4}>
+                                            <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="button">Clear</Button>
+                                        </Grid>
+
+                                        <Grid item xs={4}></Grid>
+                                        <Grid sx={{  display: 'flex', justifyContent: 'right' }} item xs={4}>
+                                            <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="submit">Calculate</Button>
                                         </Grid>
                                     </Grid>
-                                    <button className="btn btn-secondary mt-4"  type="submit">Submit</button>
+                                    
                                 </Form>
                             )}
                         </Formik>
@@ -137,6 +153,7 @@ function ThreeFieldForm(props:any){
     const field_name_1 = props.fieldName1
     const field_name_2 = props.fieldName2
     const field_name_3 = props.fieldName3
+    const propFunction = props.resultFunction
 
     const [results, setResult] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
@@ -163,7 +180,8 @@ function ThreeFieldForm(props:any){
                            const postDataFunction = async () => {
                                const dataReturned = await props.serviceFunction(value, props.serviceMethodName);
                                console.log(dataReturned);
-                               setResult(dataReturned)
+                               setResult(dataReturned);
+                               propFunction(dataReturned);
                            }
 
                            postDataFunction();
@@ -195,12 +213,17 @@ function ThreeFieldForm(props:any){
                                             </Typography>
                                             <Field className="custom-form-control" type="text" name="value_3" />
                                         </Grid>
-                                       
-                                        <Grid item xs={12} md={12}>
-                                            <UniversalDisplay displayData={results} />
+                                     
+                                        <Grid item xs={4}>
+                                            <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="button">Clear</Button>
+                                        </Grid>
+
+                                        <Grid item xs={4}></Grid>
+                                        <Grid sx={{  display: 'flex', justifyContent: 'right' }} item xs={4}>
+                                            <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="submit">Calculate</Button>
                                         </Grid>
                                     </Grid>
-                                    <button className="btn btn-secondary mt-4"  type="submit">Submit</button>
+                                    
                                 </Form>
                             )}
                         </Formik>
@@ -217,6 +240,7 @@ function ThreeFieldFormWithOptions(props:any){
     const field_name_2 = props.fieldName2
     const field_name_3 = props.fieldName3
     const field_options = props.feildOptions
+    const propFunction = props.resultFunction
 
     const [results, setResult] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
@@ -243,7 +267,8 @@ function ThreeFieldFormWithOptions(props:any){
                            const postDataFunction = async () => {
                                const dataReturned = await props.serviceFunction(value, props.serviceMethodName);
                                console.log(dataReturned);
-                               setResult(dataReturned)
+                               setResult(dataReturned);
+                               propFunction(dataReturned);
                            }
 
                            postDataFunction();
@@ -281,12 +306,16 @@ function ThreeFieldFormWithOptions(props:any){
                                             ))}
                                             </Field>
                                         </Grid>
-                                       
-                                        <Grid item xs={12} md={12}>
-                                            <UniversalDisplay displayData={results} />
+                                    
+                                        <Grid item xs={4}>
+                                            <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="button">Clear</Button>
+                                        </Grid>
+
+                                        <Grid item xs={4}></Grid>
+                                        <Grid sx={{  display: 'flex', justifyContent: 'right' }} item xs={4}>
+                                            <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="submit">Calculate</Button>
                                         </Grid>
                                     </Grid>
-                                    <button className="btn btn-secondary mt-4"  type="submit">Submit</button>
                                 </Form>
                             )}
                         </Formik>
@@ -304,6 +333,7 @@ function FourFieldForm(props:any){
     const field_name_2 = props.fieldName2
     const field_name_3 = props.fieldName3
     const field_name_4 = props.fieldName4
+    const propFunction = props.resultFunction
 
     const [results, setResult] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
@@ -332,6 +362,7 @@ function FourFieldForm(props:any){
                                const dataReturned = await props.serviceFunction(value, props.serviceMethodName);
                                console.log(dataReturned);
                                setResult(dataReturned)
+                               propFunction(dataReturned)
                            }
                            postDataFunction();
                         }}>
@@ -370,12 +401,15 @@ function FourFieldForm(props:any){
                                             </Typography>
                                             <Field className="custom-form-control" type="text" name="value_4" />
                                         </Grid>
-                                       
-                                        <Grid item xs={12} md={12}>
-                                            <UniversalDisplay displayData={results} />
+                                        <Grid item xs={4}>
+                                            <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="button">Clear</Button>
+                                        </Grid>
+
+                                        <Grid item xs={4}></Grid>
+                                        <Grid sx={{  display: 'flex', justifyContent: 'right' }} item xs={4}>
+                                            <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="submit">Calculate</Button>
                                         </Grid>
                                     </Grid>
-                                    <button className="btn btn-secondary mt-4"  type="submit">Submit</button>
                                 </Form>
                             )}
                         </Formik>
@@ -388,6 +422,7 @@ function FourFieldForm(props:any){
 }
 
 function SixFieldForm(props:any){
+    const propFunction = props.resultFunction
     const [results, setResult] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -417,6 +452,7 @@ function SixFieldForm(props:any){
                                const dataReturned = await props.serviceFunction(value, props.serviceMethodName);
                                console.log(dataReturned);
                                setResult(dataReturned)
+                               propFunction(dataReturned)
                            }
 
                            postDataFunction();
@@ -472,12 +508,16 @@ function SixFieldForm(props:any){
                                             </Typography>
                                             <Field className="custom-form-control" type="text" name="value_6" />
                                         </Grid>
-                                       
-                                        <Grid item xs={12} md={12}>
-                                            <UniversalDisplay displayData={results} />
+                                    
+                                        <Grid item xs={4}>
+                                            <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="button">Clear</Button>
+                                        </Grid>
+
+                                        <Grid item xs={4}></Grid>
+                                        <Grid sx={{  display: 'flex', justifyContent: 'right' }} item xs={4}>
+                                            <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="submit">Calculate</Button>
                                         </Grid>
                                     </Grid>
-                                    <button className="btn btn-secondary mt-4"  type="submit">Submit</button>
                                 </Form>
                             )}
                         </Formik>

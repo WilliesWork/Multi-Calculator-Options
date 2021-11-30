@@ -6,9 +6,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import { othersRoutes } from '../../routes/routes'
 import List from '@mui/material/List';
 
+
+
 var classNames = require('classnames');
 
-function SearchForm(){
+function SpecifiedSearchForm(){
 
     const history = useHistory();
 
@@ -26,7 +28,7 @@ function SearchForm(){
         const dataToArray:any = [];
         for(let i = 0; i < dataArray.length; i++){
             var a = dataArray[i].name;
-            if(a.toLocaleLowerCase().indexOf(value) > -1 && value !== ""){
+            if(a.toLocaleLowerCase().indexOf(value) > -1 ){
                 console.log("VALUES MATCH ", a.toLocaleLowerCase().indexOf(value))
                 dataToArray[i] = dataArray[i];
             }
@@ -37,33 +39,6 @@ function SearchForm(){
         }
         console.log(resultArray)
     }, [value])
-
-
-
-    useEffect(() => {
-        const checkIfClickedOutside = (e: { target: any; }) => {
-          // If the menu is open and the clicked target is not within the menu,
-          // then close the menu
-          if (isSearchOption && ref.current && !ref.current.contains(e.target)) {
-            setSearchOption(false)
-          }
-        }
-
-        document.addEventListener("mousedown", checkIfClickedOutside)
-
-        return () => {
-          // Cleanup the event listener
-          document.removeEventListener("mousedown", checkIfClickedOutside)
-        }
-    }, [isSearchOption])
-
-    const overLayStyleClasses = classNames({
-        'app-over-lay': isSearchOption
-    })
-
-    const appOverLayDisplay = classNames({
-        'app-over-lay-display': isSearchOption
-    })
 
     const commonStyles = {
         width: 300,
@@ -78,15 +53,13 @@ function SearchForm(){
     return(
         <div>
         <Box sx={{ ...commonStyles }}>
-        <div className={overLayStyleClasses} ></div>
             
             <div className="form-group d-flex justify-content-center">
                 <input
-                    onFocus = { ()=> { setSearchOption(true) }}
                     id="calc-search"
                     list="data"
                     type="text"
-                    placeholder="search for calculator"
+                    placeholder="search"
                     className="search-input"
                     value = {value}
                     onChange = {(e) => {
@@ -100,23 +73,24 @@ function SearchForm(){
             </div>
             
         </Box>
-        <Box  ref={ref} className={appOverLayDisplay} sx={{ display: 'block' }}>
+        <Box  sx={{ 
+                border: 0, 
+                display: 'block',
+                marginLeft: 2
+            }}>
             {
-                isSearchOption?
-                (
-                    resultArray.map((data:any) => {
-                        return(
-                            <Box id="" className="div-link link-search"
-                            onClick={()=>{ 
-                                history.push(data.path); 
-                            }}>{ data.name }</Box>
-                        )
-                    })
-                ): ""
+                resultArray.map((data:any) => {
+                    return(
+                        <Box id="" className="div-link"
+                        onClick={()=>{ 
+                            history.push(data.path); 
+                        }}>{ data.name }</Box>
+                    )
+                })
             }
         </Box>
         </div>
         );
 }
 
-export { SearchForm }
+export default SpecifiedSearchForm

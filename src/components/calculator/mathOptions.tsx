@@ -13,19 +13,14 @@ function MathOptions(){
     const localStorageData = JSON.parse(localStorage.webdata)
     const history = useHistory()
 
-    // const mathCategoriesData = localStorageData[1].sub_categories
-    const mathCategoriesData = mathRoutes
-    console.log(mathCategoriesData);
     const boxStyle = {
-        border: 0,
+        marginBottom: 2,
         backgroundColor: 'transparent',
-        maxWidth: 240,
+        maxWidth: 270,
         height: 250,
         borderRadius: 3,
         paddingTop: 1,
-        paddingLeft: 3,
-        textOverFlow: 'ellipsis',
-    
+        paddingBottom: 0.5,
         // boxShadow: ' 0 10px 8px 0px rgba(0, 0, 0, 0.2)'
       }
 
@@ -38,26 +33,8 @@ function MathOptions(){
       };
 
     return(
-        <div  className="container mt-4">
+        <div style={{ height: 300, }} className="container mt-4">
         <Slider  {...settings}>
-            <Box sx={{...boxStyle }}>
-                <Box sx={{ 
-                    paddingLeft: 2,
-                    width: '100',
-                    backgroundColor: 'white',
-                    borderRadius: 5, 
-                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-                    }} >  
-                    <p style={{ marginTop: 5 }}>Fraction Calculators</p>
-                </Box>
-                <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
-                    {
-                        mathRoutes.subCategories[0].sub_calculator.map((r:any) => {
-                            return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
-                        })
-                    }
-                </Box>
-            </Box>
             <Box sx={{...boxStyle }}>
                 <Box sx={{ 
                     paddingLeft: 2,
@@ -102,15 +79,6 @@ function MathOptions(){
             </Box>
         </Box>
         <Box >
-            <Box sx={{
-                        width: '100%',
-                        borderRadius: 3,
-                        color: "black",
-                        paddingBottom: 0.5,
-                    }}>
-                
-                <Slide/>
-            </Box>
         </Box>
         </div>
     );

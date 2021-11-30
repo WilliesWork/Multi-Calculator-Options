@@ -3,6 +3,9 @@ import { NavBar2 } from '../navbar/navbar2'
 import { Box, Typography } from '@mui/material'
 import { Slide } from '../slider/slider'
 import { FinanceOptions } from '../calculator/financeOptions'
+import { SearchForm } from '../forms/searchForm'
+import { financialRoutes } from '../../routes/routes'
+import AddLayout from '../layouts/AddLayout';
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,17 +21,46 @@ function FinancePage(){
 
     return(
         <div>
-          <NavBar2 />
+          
 
           <Switch>
           <Route exact path={path}>
+            <NavBar2 financialHighLight={true} />
+            <Box
+              sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              }}>
+                <SearchForm />
+            </Box>
             <FinanceOptions />
+            <Box sx={{ marginTop: 5 }}>
+              <Slide />
+            </Box>
           </Route>
-          <Route path={`${path}/test`}>
-          
-          </Route>
+          {
+            financialRoutes.subCategories[0].sub_calculator.map((r:any) => {
+              return (
+                <Route key={r} path={r.path}>
+                  <AddLayout>
+                      <r.component />
+                    </AddLayout>
+                </Route>
+              );
+            })
+          }
+          {
+            financialRoutes.subCategories[1].sub_calculator.map((r:any) => {
+              return (
+                <Route key={r} path={r.path}>
+                  <AddLayout>
+                      <r.component />
+                    </AddLayout>
+                </Route>
+              );
+            })
+          }
         </Switch>
-        <Slide />
       </div>
     );
 }

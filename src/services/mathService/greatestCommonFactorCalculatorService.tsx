@@ -8,8 +8,8 @@ export async function greatestCommonFactorCalculatorService(dataObject:any, meth
         var msg:any = data.statusDescription;
         console.log("Monkey", data)
         if(msg === "success"){
-            //console.log(data)
-            return data.message
+            console.log("GCD ",data.message.gcd)
+            return data.message.gcd
         }else{
             return false
         }

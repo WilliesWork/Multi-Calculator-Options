@@ -7,19 +7,38 @@ import { AppBar } from '@mui/material'
 import Link from '@mui/material/Link';
 import { SearchForm } from '../forms/searchForm';
 import { useHistory } from 'react-router-dom'
+const classNames = require('classnames');
 
+function NavBar2(props:any){
+    var mathHighLight = props.mathHighLight;
+    var financialHighLight = props.financialHighLight;
+    var otherHighLight = props.otherHighLight;
 
-function NavBar2(props: any){
+    var buttonStylesMath = classNames({
+        'search-button-2': true,
+        'search-button-math': mathHighLight ? true : false,
+    })
+
+    var buttonStylesOther = classNames({
+        'search-button-2': true,
+        'search-button-other': otherHighLight ? true : false,
+    })
+
+    var buttonStylesFinancial = classNames({
+        'search-button-2': true,
+        'search-button-financial': financialHighLight ? true : false,
+    })
 
     const history = useHistory()
         return(
             <Box
+                className="container"
                 sx={{
                     width: '100%',
                     paddingTop: 2,
                     marginBottom: 2
                 }}>
-                <div className="container">
+                <div>
                     <AppBar 
                         color="transparent"
                         elevation={0} 
@@ -47,23 +66,14 @@ function NavBar2(props: any){
                             </Link>
                         </Box>
                         <Box sx={{ flexGrow: 1 }}></Box>
-                        <button onClick={()=>{ history.push("/financepage") }} className="search-button-2" type="button">Financial</button>
-                        <button onClick={()=>{ history.push("/mathcategories") }} className="search-button-2" type="button">Mathematics</button>
-                        <button onClick={()=>{ history.push("/otherpage") }} className="search-button-2" type="button">Other</button>
-                        <button onClick={()=>{ history.push('/home') }} className="search-button-2" type="button">Home</button>
+                        <button onClick={()=>{ history.push("/financepage") }} className={buttonStylesFinancial} type="button">Financial</button>
+                        <button onClick={()=>{ history.push("/mathcategories") }} className={buttonStylesMath} type="button">Mathematics</button>
+                        <button onClick={()=>{ history.push("/otherpage") }} className={buttonStylesOther} type="button">Other</button>
+                        <button onClick={()=>{ history.push('/home') }} className="search-button-1" type="button">Home</button>
                     </Box>
                     </AppBar>
                 </div>
                 <Box>
-                <Typography component="div">
-                    <Box
-                        sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        }}>
-                        <SearchForm />
-                    </Box>
-                    </Typography>
                 </Box>
             </Box>
         );

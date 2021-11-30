@@ -15,67 +15,14 @@ import {
     useParams,
     useRouteMatch
   } from "react-router-dom";
-
+import ExponentForm from '../forms/math/ExponentForm'
 function TestNavBar(){
     let { path, url } = useRouteMatch();
     const history = useHistory()
+
+
         return(
-            <Box
-                sx={{
-                    width: '100%',
-                    paddingTop: 2,
-                    marginBottom: 2
-                }}>
-                <div className="container">
-                    <AppBar 
-                        color="transparent"
-                        elevation={0} 
-                        sx={{
-                            
-                        }} 
-                        position="static">
-
-                    <Box 
-                        sx={{
-                            display: 'flex',
-                            m: 1
-                        }}>
-                        <Box>
-                            <Link sx={{color: "white" }} href="#" underline="none">
-                                <Typography variant="h6" component="div" >
-                                    <Box 
-                                        sx={{
-                                            color: '#8591B0'
-                                        }}>
-                                            Test Page
-                                        </Box>
-                                    
-                                </Typography>
-                            </Link>
-                        </Box>
-                        <Box sx={{ flexGrow: 1 }}></Box>
-                        <button onClick={()=>{ history.push('/testpage/hello') }} className="search-button-2" type="button">Inner Router</button>
-                        <button onClick={()=>{ history.push('/testpage/test') }} className="search-button-2" type="button">Test Route</button>
-                        <button className="search-button-2" type="button">Other</button>
-                        <button onClick={()=>{ history.push('/') }} className="search-button-2" type="button">Home</button>
-                    </Box>
-                    </AppBar>
-                </div>
-                <Box>
-                <Typography component="div">
-                    <Box
-                        sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        }}>
-                        <SearchForm />
-                    </Box>
-                    </Typography>
-                </Box>
-
-            <CircleArea />
-            <BallSurfaceArea/>
-            </Box>
+            <ExponentForm/>
         );
     }
 

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Grid, Box, Typography, LinearProgress } from '@mui/material'
+import { Button, Grid, Box, Typography, LinearProgress } from '@mui/material'
 import { Field, Form, Formik, FormikProps } from 'formik';
-import { UniversalDisplay} from '../displays/universalDisplay'
 
 function UniversalConverterForm(props:any){
     // using the useState ehook
     const [optionsData, setData] = useState([]); //for getting units
     const [results, setResult] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const propFunction = props.resultFunction
 
     //using the useEffect hook
     useEffect(() => {
@@ -22,29 +22,26 @@ function UniversalConverterForm(props:any){
     }, [])
 
     return(
-        <div className="container d-flex justify-content-center ">
+        <div className="d-flex justify-content-center ">
             <Box sx={{
-                width: '100',
+                width: '100%',
                 borderRadius: 3, 
                 display: 'flex',
                 justifyContent: 'center',
-                paddingLeft: 5,
-                paddingRight: 5
+                backgroundColor: 'white',
+                
                 }}>
-
-                  
                 <Box sx={{width: 400, m: 4,}}> 
                 <Formik
                     initialValues={{ value: '1', fromUnit: "", toUnit: "" }}
                     onSubmit={(values, actions) => {
-                      console.log("This is from unit", values)
+                      
                        const postData = async () => {
                         const data = {
                           value: values.value,
                           from_unit: values.fromUnit,
                           to_unit: values.toUnit,
                           method: props.convertMethod
-                          
                         }
 
                         setIsLoading(true)
@@ -53,6 +50,7 @@ function UniversalConverterForm(props:any){
                         if(status === "success"){
                           setIsLoading(false)
                           setResult(dataReturned.message.convertionValue)
+                          propFunction(dataReturned.message.convertionValue)
                         }
                         else{
                           setIsLoading(false)
@@ -114,13 +112,18 @@ function UniversalConverterForm(props:any){
                             (<div></div>)
                             }
                             </Grid>
-                            <Grid item xs={12} md={12}>
-                              <UniversalDisplay displayData={results} />
+                            <Grid item xs={12} >
+                              <Grid container spacing={0}>
+                                <Grid item xs={4}>
+                                  <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="button">Clear</Button>
+                                </Grid>
+                                <Grid item xs={4}></Grid>
+                                <Grid sx={{  display: 'flex', justifyContent: 'right' }} item xs={4}>
+                                  <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="submit">calculate</Button>
+                                </Grid>
                             </Grid>
-                            
-  
-                        </Grid>
-                        <button className="btn btn-secondary mt-4"  type="submit">Submit</button>
+                          </Grid>
+                        </Grid>   
                     </Form>
                     )}
                     </Formik>

@@ -8,8 +8,7 @@ export async function leastCommonMultipleCalculatorService(dataObject:any, metho
         var msg:any = data.statusDescription;
         console.log("Monkey", data)
         if(msg === "success"){
-            //console.log(data)
-            return data.message
+            return data.message.leastCommonMultipe
         }else{
             return false
         }
