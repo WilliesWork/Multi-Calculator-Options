@@ -152,11 +152,7 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
                                                 const { payload: calculatorObject } = await calculateMath(payload)
                                                 console.log('=====>', calculatorObject)
                                                 if (typeof calculatorObject === 'object') {
-                                                    /* const { area, units } = calculatorObject
-                                                    setResult({
-                                                        area: area,
-                                                        unit: units,
-                                                    }) */
+                                                    /* Dispatch object and method to the store */
                                                     dispatch(calculateData({ calculatorObject, method }))
                                                 }
 
