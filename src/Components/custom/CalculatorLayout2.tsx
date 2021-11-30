@@ -1,18 +1,26 @@
 import React, { FC } from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Typography, Grid, Container, Paper } from '@material-ui/core'
-import { Formik } from 'formik'
+import { Formik, Form } from 'formik'
 
 import StyledTabs from './StyledTabs';
 import StyledTab from './StyledTab';
 import TabPanel from './TabPanel';
+import NoIndexTabPanel from './NoIndexTabPanel';
 
-import { CapsuleVolumeCalculatorI } from '../../Types'
-import { RootState } from '../../redux/store'
-import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE, COLORS } from '../../Common/shared'
-import { CustomTextInput, CustomSelect, Figure, Label, CustomBtn } from '.'
+import { useAppDispatch, useAppSelector, selectCalculators, calculateData } from '../../redux'
+import { PLACEHOLDERS, INPUT_TYPE, COLORS } from '../../Common/shared'
 import { calculateMath } from '../../Services/AppCalculatorsApi'
 import { CollapsibleMenu, Carousel } from '../Content';
+import {
+    CustomTextInput,
+    CustomSelect,
+    CustomResetBtn,
+    Label,
+    CustomBtn,
+    CustomSearchInput
+} from './index'
+
 
 interface CalculatorLayoutProps {
     children?: React.ReactNode;
@@ -22,7 +30,7 @@ interface CalculatorLayoutProps {
 
 interface FieldsI {
     label: string;
-    type: string | number;
+    type: string | any;
     id: string;
     placeholder: string;
     select: any;
@@ -67,33 +75,47 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const CalculatorLayout = (props: CalculatorLayoutProps) => {
     const { children, template } = props
-    const { title, payload, initialValues, result, hasCustomSelect, fields } = template
-    const { tabRoot, rightTabContainer, leftTabContainer, paperBackground, sideBarPaperBackground } = useStyles()
+    const { results } = useAppSelector(selectCalculators)
+    const dispatch = useAppDispatch()
+    const {
+        title,
+        method,
+        initialValues,
+        hasCustomSelect,
+        fields
+    } = template
     const [value, setValue] = React.useState(0);
     const [searchText, setSearchText] = React.useState('');
-    const [initialFormValues] = React.useState(initialValues)
-    const [Result, setResult] = React.useState(result)
+    // const [Result, setResult] = React.useState(result)
+    const {
+        tabRoot,
+        rightTabContainer,
+        leftTabContainer,
+        paperBackground,
+        sideBarPaperBackground
+    } = useStyles()
+
 
     const handleSearchChange = (event: any) => {
         setSearchText(event.target.value);
     };
 
-    const renderFields = ({ fields, handleChange }: { fields: FieldsI[], handleChange: any }) => {
+    const renderFields = (fields: FieldsI[]) => {
         return fields.map(({ label, type, id, placeholder, select }) => {
             return (
                 <div className="form-row">
                     <Label title={label} />
                     <CustomTextInput
                         type={type}
-                        id="radius"
+                        id={id}
+                        name={id}
                         placeholder={placeholder}
-                        onChange={handleChange}
                     />
 
                     <CustomSelect
                         measurement={select.measurement}
                         id={select.id}
-                        onChange={handleChange('radius_unit')}
+                        name="radius_unit"
                     />
                 </div>
             )
@@ -103,71 +125,92 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
     return (
         <>
             <Grid container xs={12}>
+                <Grid container item xs={12} sm={10}>
+                    {/* Form grid */}
+                    <Grid item xs={12} sm={8}>
+                        <Paper className={paperBackground}>
+                            <div className={tabRoot}>
+                                <StyledTabs>
+                                    <div className={leftTabContainer}>
+                                        <Typography></Typography>
+                                    </div>
+                                    <div className={rightTabContainer}>
+                                        <Typography>{title}</Typography>
+                                    </div>
+                                </StyledTabs>
 
-                {/* Form grid */}
-                <Grid item xs={6}>
-                    <Paper className={paperBackground}>
-                        <div className={tabRoot}>
-                            <StyledTabs>
-                                <div className={leftTabContainer}>
-                                    <Typography></Typography>
-                                </div>
-                                <div className={rightTabContainer}>
-                                    <Typography>{title}</Typography>
-                                </div>
-                            </StyledTabs>
+                                <TabPanel value={value} index={0}>
+                                    <Formik
+                                        initialValues={initialValues}
+                                        onSubmit={async (values, { setSubmitting }) => {
+                                            const payload = {
+                                                ...values,
+                                                method
+                                            }
+                                            console.log("VALUES: ", values)
+                                            try {
+                                                const { payload: calculatorObject } = await calculateMath(payload)
+                                                console.log('=====>', calculatorObject)
+                                                if (typeof calculatorObject === 'object') {
+                                                    /* const { area, units } = calculatorObject
+                                                    setResult({
+                                                        area: area,
+                                                        unit: units,
+                                                    }) */
+                                                    dispatch(calculateData({ calculatorObject, method }))
+                                                }
 
-                            <TabPanel value={value} index={0}>
-                                <Formik
-                                    initialValues={initialFormValues}
-                                    onSubmit={async ({
-                                    }, { setSubmitting, resetForm }) => {
-                                        console.log(payload)
-                                        try {
-                                            resetForm()
-                                        } catch (err) {
-                                            console.log('====>', err)
-                                        }
-                                    }}
-                                >
-                                    {({ values, handleChange, handleSubmit, isSubmitting }) => (
-                                        <form onSubmit={handleSubmit} className="form-container">
-                                            <Container>
-                                                {renderFields({ fields, handleChange })}
-                                                <CustomBtn />
-                                            </Container>
-                                        </form>
-                                    )}
-                                </Formik>
+                                            } catch (err) {
+                                                console.log('====>', err)
+                                            }
+                                        }}
+                                    >
+                                        {({ isSubmitting, resetForm }) => (
+                                            <Form className="form-container">
+                                                {renderFields(fields)}
+                                                <div
+                                                    className="form-row"
+                                                    style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                                                >
+                                                    <CustomBtn />
+                                                    <CustomResetBtn
+                                                        onHandleClick={() => resetForm()}
+                                                    />
+                                                </div>
+                                            </Form>
+                                        )}
+                                    </Formik>
 
-                            </TabPanel>
-                        </div>
-                    </Paper>
+                                </TabPanel>
+                            </div>
+                        </Paper>
+                    </Grid>
+
+                    {/* Result grid */}
+                    <Grid item xs={12} sm={4}>
+                        <Paper className={paperBackground}>
+                            <div className={tabRoot}>
+                                <StyledTabs>
+                                    <div className={leftTabContainer}>
+                                        <Typography></Typography>
+                                    </div>
+                                    <div className={rightTabContainer}>
+                                        <Typography>Result</Typography>
+                                    </div>
+                                </StyledTabs>
+
+                                <NoIndexTabPanel>
+                                    <Typography variant="h6" >{results}</Typography>
+                                </NoIndexTabPanel>
+                            </div>
+                        </Paper>
+                    </Grid>
                 </Grid>
 
-                {/* Result grid */}
-                <Grid item xs={4}>
-                    <Paper className={paperBackground}>
-                        <div className={tabRoot}>
-                            <StyledTabs>
-                                <div className={leftTabContainer}>
-                                    <Typography></Typography>
-                                </div>
-                                <div className={rightTabContainer}>
-                                    <Typography>Result</Typography>
-                                </div>
-                            </StyledTabs>
-
-                            <TabPanel value={value} index={0}>
-                                {children}
-                            </TabPanel>
-                        </div>
-                    </Paper>
-                </Grid>
 
 
                 {/* Ad & menu grid */}
-                <Grid item xs={2}>
+                <Grid item xs={12} sm={2}>
                     {/* Carousel */}
                     <Grid item xs={12}>
                         <Paper elevation={0} className={sideBarPaperBackground}>
@@ -177,9 +220,10 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
 
                     {/* Search input */}
                     <Grid>
-                        <CustomTextInput
+                        <CustomSearchInput
                             type={INPUT_TYPE.text}
                             id='search'
+                            name="search"
                             placeholder={PLACEHOLDERS.search}
                             value={searchText}
                             onChange={handleSearchChange}

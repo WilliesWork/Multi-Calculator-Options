@@ -71,8 +71,6 @@ const ProbabilityOfASeriesOfIndpendentEvents = () => {
                 type={INPUT_TYPE.number}
                 id="event_a"
                 placeholder={PLACEHOLDERS.number}
-                value={values.event_a}
-                onChange={handleChange}
               />
             </div>
 
@@ -82,8 +80,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = () => {
                 type={INPUT_TYPE.number}
                 id="a_repeat_times"
                 placeholder={PLACEHOLDERS.number}
-                value={values.a_repeat_times}
-                onChange={handleChange}
+
               />
             </div>
 
@@ -93,8 +90,6 @@ const ProbabilityOfASeriesOfIndpendentEvents = () => {
                 type={INPUT_TYPE.number}
                 id="event_b"
                 placeholder={PLACEHOLDERS.number}
-                value={values.event_b}
-                onChange={handleChange}
               />
             </div>
 
@@ -104,8 +99,6 @@ const ProbabilityOfASeriesOfIndpendentEvents = () => {
                 type={INPUT_TYPE.number}
                 id="b_repeat_times"
                 placeholder={PLACEHOLDERS.number}
-                value={values.b_repeat_times}
-                onChange={handleChange}
               />
             </div>
 

@@ -72,15 +72,11 @@ const ElapsedTimeMethod = () => {
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}
-                value={values.weight}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="weight"
                 id="weight_unit"
-                value={values.weight_unit}
-                onChange={handleChange('weight_unit')}
               />
             </div>
 
@@ -90,15 +86,11 @@ const ElapsedTimeMethod = () => {
                 type={INPUT_TYPE.number}
                 id="time"
                 placeholder={PLACEHOLDERS.number}
-                value={values.time}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="time"
                 id="time_unit"
-                value={values.time_unit}
-                onChange={handleChange('time_unit')}
               />
             </div>
 

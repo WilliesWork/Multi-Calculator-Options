@@ -66,8 +66,6 @@ const DueDateWoodsRule = () => {
                 type={INPUT_TYPE.date}
                 id="first_date_of_last_period"
                 placeholder={PLACEHOLDERS.number}
-                value={values.first_date_of_last_period}
-                onChange={handleChange}
               />
             </div>
 
@@ -77,8 +75,6 @@ const DueDateWoodsRule = () => {
                 type={INPUT_TYPE.number}
                 id="days"
                 placeholder={PLACEHOLDERS.number}
-                value={values.days}
-                onChange={handleChange}
               />
             </div>
 
@@ -88,8 +84,6 @@ const DueDateWoodsRule = () => {
                 type={INPUT_TYPE.text}
                 id="type"
                 placeholder={PLACEHOLDERS.type}
-                value={values.type}
-                onChange={handleChange}
               />
             </div>
 

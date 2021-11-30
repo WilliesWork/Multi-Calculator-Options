@@ -84,15 +84,11 @@ const ConicalFrustrumSurfaceArea = () => {
                 type={INPUT_TYPE.number}
                 id="top_radius"
                 placeholder={PLACEHOLDERS.number}
-                value={values.top_radius}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="top_radius_unit"
-                value={values.top_radius_unit}
-                onChange={handleChange('top_radius_unit')}
               />
             </div>
 
@@ -102,15 +98,11 @@ const ConicalFrustrumSurfaceArea = () => {
                 type={INPUT_TYPE.number}
                 id="bottom_radius"
                 placeholder={PLACEHOLDERS.number}
-                value={values.bottom_radius}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="bottom_radius_unit"
-                value={values.bottom_radius_unit}
-                onChange={handleChange('bottom_radius_unit')}
               />
             </div>
 
@@ -120,15 +112,11 @@ const ConicalFrustrumSurfaceArea = () => {
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 

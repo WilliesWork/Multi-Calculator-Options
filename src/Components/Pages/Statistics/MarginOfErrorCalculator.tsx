@@ -68,8 +68,7 @@ const MarginOfErrorCalculator = () => {
                 type={INPUT_TYPE.number}
                 id="confience_level"
                 placeholder={PLACEHOLDERS.number}
-                value={values.confience_level}
-                onChange={handleChange}
+
               />
             </div>
 
@@ -79,8 +78,7 @@ const MarginOfErrorCalculator = () => {
                 type={INPUT_TYPE.number}
                 id="population_proportion"
                 placeholder={PLACEHOLDERS.number}
-                value={values.population_proportion}
-                onChange={handleChange}
+
               />
             </div>
 
@@ -90,8 +88,7 @@ const MarginOfErrorCalculator = () => {
                 type={INPUT_TYPE.number}
                 id="sample_size"
                 placeholder={PLACEHOLDERS.number}
-                value={values.sample_size}
-                onChange={handleChange}
+
               />
             </div>
 

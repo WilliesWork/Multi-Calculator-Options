@@ -72,8 +72,6 @@ const InternationalSystemBfc = () => {
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
-                onChange={handleChange}
               />
             </div>
 
@@ -83,8 +81,6 @@ const InternationalSystemBfc = () => {
                 type={INPUT_TYPE.number}
                 id="neck"
                 placeholder={PLACEHOLDERS.number}
-                value={values.neck}
-                onChange={handleChange}
               />
             </div>
 
@@ -94,8 +90,6 @@ const InternationalSystemBfc = () => {
                 type={INPUT_TYPE.number}
                 id="hip"
                 placeholder={PLACEHOLDERS.number}
-                value={values.hip}
-                onChange={handleChange}
               />
             </div>
 
@@ -105,8 +99,6 @@ const InternationalSystemBfc = () => {
                 type={INPUT_TYPE.number}
                 id="waist"
                 placeholder={PLACEHOLDERS.number}
-                value={values.waist}
-                onChange={handleChange}
               />
             </div>
 
@@ -116,8 +108,6 @@ const InternationalSystemBfc = () => {
                 type={INPUT_TYPE.text}
                 id="gender"
                 placeholder={PLACEHOLDERS.gender}
-                value={values.gender}
-                onChange={handleChange}
               />
             </div>
 

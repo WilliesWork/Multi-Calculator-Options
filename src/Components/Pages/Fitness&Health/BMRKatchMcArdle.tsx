@@ -68,8 +68,6 @@ const BMRKatchMcArdle = () => {
                 type={INPUT_TYPE.number}
                 id="fat"
                 placeholder={PLACEHOLDERS.number}
-                value={values.fat}
-                onChange={handleChange}
               />
             </div>
 
@@ -79,15 +77,11 @@ const BMRKatchMcArdle = () => {
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}
-                value={values.weight}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="weight"
                 id="weight_unit"
-                value={values.weight_unit}
-                onChange={handleChange('weight_unit')}
               />
             </div>
 

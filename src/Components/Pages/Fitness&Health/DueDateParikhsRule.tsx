@@ -63,8 +63,6 @@ const DueDateParikhsRule = () => {
                 type={INPUT_TYPE.date}
                 id="first_date_of_last_period"
                 placeholder={PLACEHOLDERS.date}
-                value={values.first_date_of_last_period}
-                onChange={handleChange}
               />
             </div>
 
@@ -74,8 +72,6 @@ const DueDateParikhsRule = () => {
                 type={INPUT_TYPE.number}
                 id="days"
                 placeholder={PLACEHOLDERS.number}
-                value={values.days}
-                onChange={handleChange}
               />
             </div>
 

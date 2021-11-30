@@ -75,15 +75,11 @@ const SquarePyramidVolume = () => {
                 type={INPUT_TYPE.number}
                 id="base"
                 placeholder={PLACEHOLDERS.number}
-                value={values.base}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="base_unit"
-                value={values.base_unit}
-                onChange={handleChange('base_unit')}
               />
             </div>
 
@@ -93,15 +89,11 @@ const SquarePyramidVolume = () => {
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 

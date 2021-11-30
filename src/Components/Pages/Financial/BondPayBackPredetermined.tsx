@@ -73,8 +73,6 @@ const BondPayBackPredetermined = () => {
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
-                value={values.interest_rate}
-                onChange={handleChange}
               />
             </div>
 
@@ -84,8 +82,6 @@ const BondPayBackPredetermined = () => {
                 type={INPUT_TYPE.number}
                 id="predetermined_amount"
                 placeholder={PLACEHOLDERS.number}
-                value={values.predetermined_amount}
-                onChange={handleChange}
               />
             </div>
 
@@ -95,8 +91,6 @@ const BondPayBackPredetermined = () => {
                 type={INPUT_TYPE.number}
                 id="number_of_months"
                 placeholder={PLACEHOLDERS.number}
-                value={values.number_of_months}
-                onChange={handleChange}
               />
             </div>
 
@@ -106,8 +100,6 @@ const BondPayBackPredetermined = () => {
                 type={INPUT_TYPE.number}
                 id="number_of_years"
                 placeholder={PLACEHOLDERS.number}
-                value={values.number_of_years}
-                onChange={handleChange}
               />
             </div>
 

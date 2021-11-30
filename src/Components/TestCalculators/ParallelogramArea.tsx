@@ -11,12 +11,12 @@ function FormComponent() {
       <form className="form-container">
         <div className="form-row">
           <Label title={LABELS.breadth} />
-          <CustomTextInput
+          {/* <CustomTextInput
             type={INPUT_TYPE.number}
             id="breadth"
             placeholder={PLACEHOLDERS.number}
           />
-
+ */}
           <CustomSelect
             measurement="length"
             id="breadth_unit"
@@ -25,11 +25,11 @@ function FormComponent() {
 
         <div className="form-row">
           <Label title={LABELS.height} />
-          <CustomTextInput
+          {/* <CustomTextInput
             type={INPUT_TYPE.number}
             id="height"
             placeholder={PLACEHOLDERS.number}
-          />
+          /> */}
 
           <CustomSelect
             measurement="length"

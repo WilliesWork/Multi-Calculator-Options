@@ -78,15 +78,11 @@ const HorsepowerCalculation = () => {
                 type={INPUT_TYPE.number}
                 id="force"
                 placeholder={PLACEHOLDERS.number}
-                value={values.force}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="force"
                 id="force_unit"
-                value={values.force_unit}
-                onChange={handleChange('force_unit')}
               />
             </div>
 
@@ -96,15 +92,11 @@ const HorsepowerCalculation = () => {
                 type={INPUT_TYPE.number}
                 id="distance"
                 placeholder={PLACEHOLDERS.number}
-                value={values.distance}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="distance_unit"
-                value={values.distance_unit}
-                onChange={handleChange('distance_unit')}
               />
             </div>
 
@@ -114,15 +106,11 @@ const HorsepowerCalculation = () => {
                 type={INPUT_TYPE.number}
                 id="time"
                 placeholder={PLACEHOLDERS.number}
-                value={values.time}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="time"
                 id="time_unit"
-                value={values.time_unit}
-                onChange={handleChange('time_unit')}
               />
             </div>
 

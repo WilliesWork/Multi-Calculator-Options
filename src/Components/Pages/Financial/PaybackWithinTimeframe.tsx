@@ -71,8 +71,6 @@ const PaybackWithinTimeframe = () => {
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
-                value={values.interest_rate}
-                onChange={handleChange}
               />
             </div>
 
@@ -82,8 +80,6 @@ const PaybackWithinTimeframe = () => {
                 type={INPUT_TYPE.number}
                 id="months"
                 placeholder={PLACEHOLDERS.number}
-                value={values.months}
-                onChange={handleChange}
               />
             </div>
 
@@ -93,8 +89,6 @@ const PaybackWithinTimeframe = () => {
                 type={INPUT_TYPE.number}
                 id="credit_card_balance"
                 placeholder={PLACEHOLDERS.number}
-                value={values.credit_card_balance}
-                onChange={handleChange}
               />
             </div>
 
@@ -104,8 +98,6 @@ const PaybackWithinTimeframe = () => {
                 type={INPUT_TYPE.number}
                 id="year"
                 placeholder={PLACEHOLDERS.number}
-                value={values.year}
-                onChange={handleChange}
               />
             </div>
 

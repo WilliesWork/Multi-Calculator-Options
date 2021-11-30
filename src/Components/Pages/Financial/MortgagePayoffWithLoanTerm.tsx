@@ -71,8 +71,6 @@ const MortgagePayoffWithLoanTerm = () => {
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
-                value={values.interest_rate}
-                onChange={handleChange}
               />
             </div>
 
@@ -82,8 +80,6 @@ const MortgagePayoffWithLoanTerm = () => {
                 type={INPUT_TYPE.number}
                 id="payments_made_years"
                 placeholder={PLACEHOLDERS.number}
-                value={values.payments_made_years}
-                onChange={handleChange}
               />
             </div>
 
@@ -93,8 +89,6 @@ const MortgagePayoffWithLoanTerm = () => {
                 type={INPUT_TYPE.number}
                 id="total_payments_years"
                 placeholder={PLACEHOLDERS.number}
-                value={values.total_payments_years}
-                onChange={handleChange}
               />
             </div>
 
@@ -104,8 +98,6 @@ const MortgagePayoffWithLoanTerm = () => {
                 type={INPUT_TYPE.number}
                 id="loan_amount"
                 placeholder={PLACEHOLDERS.number}
-                value={values.loan_amount}
-                onChange={handleChange}
               />
             </div>
 

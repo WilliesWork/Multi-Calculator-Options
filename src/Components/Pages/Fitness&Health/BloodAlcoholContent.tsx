@@ -88,15 +88,11 @@ const BloodAlcoholContent = () => {
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}
-                value={values.weight}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="weight"
                 id="weight_unit"
-                value={values.weight_unit}
-                onChange={handleChange('weight_unit')}
               />
             </div>
 
@@ -106,8 +102,6 @@ const BloodAlcoholContent = () => {
                 type={INPUT_TYPE.text}
                 id="gender"
                 placeholder={PLACEHOLDERS.gender}
-                value={values.gender}
-                onChange={handleChange}
               />
             </div>
 
@@ -117,8 +111,6 @@ const BloodAlcoholContent = () => {
                 type={INPUT_TYPE.number}
                 id="hours_of_drinking"
                 placeholder={PLACEHOLDERS.number}
-                value={values.hours_of_drinking}
-                onChange={handleChange}
               />
             </div>
 
@@ -128,8 +120,6 @@ const BloodAlcoholContent = () => {
                 type={INPUT_TYPE.number}
                 id="minutes_of_drinking"
                 placeholder={PLACEHOLDERS.number}
-                value={values.minutes_of_drinking}
-                onChange={handleChange}
               />
             </div>
 
@@ -139,8 +129,6 @@ const BloodAlcoholContent = () => {
                 type={INPUT_TYPE.number}
                 id="number_of_standard_drinks"
                 placeholder={PLACEHOLDERS.number}
-                value={values.number_of_standard_drinks}
-                onChange={handleChange}
               />
             </div>
 

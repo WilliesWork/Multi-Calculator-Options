@@ -93,15 +93,11 @@ const CurbAndGutterBarrier = () => {
                 type={INPUT_TYPE.number}
                 id="curb_depth"
                 placeholder={PLACEHOLDERS.number}
-                value={values.curb_depth}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="curb_depth_unit"
-                value={values.curb_depth_unit}
-                onChange={handleChange('curb_depth_unit')}
               />
             </div>
 
@@ -111,15 +107,11 @@ const CurbAndGutterBarrier = () => {
                 type={INPUT_TYPE.number}
                 id="curb_height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.curb_height}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="curb_height_unit"
-                value={values.curb_height_unit}
-                onChange={handleChange('curb_height_unit')}
               />
             </div>
 
@@ -129,15 +121,11 @@ const CurbAndGutterBarrier = () => {
                 type={INPUT_TYPE.number}
                 id="flag_thickness"
                 placeholder={PLACEHOLDERS.number}
-                value={values.flag_thickness}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="flag_thickness_unit"
-                value={values.flag_thickness_unit}
-                onChange={handleChange('flag_thickness_unit')}
               />
             </div>
 
@@ -147,15 +135,11 @@ const CurbAndGutterBarrier = () => {
                 type={INPUT_TYPE.number}
                 id="gutter_width"
                 placeholder={PLACEHOLDERS.number}
-                value={values.gutter_width}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="gutter_width_unit"
-                value={values.gutter_width_unit}
-                onChange={handleChange('gutter_width_unit')}
               />
             </div>
 
@@ -165,15 +149,11 @@ const CurbAndGutterBarrier = () => {
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
-                value={values.length}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="length_unit"
-                value={values.length_unit}
-                onChange={handleChange('length_unit')}
               />
             </div>
 
@@ -183,8 +163,6 @@ const CurbAndGutterBarrier = () => {
                 type={INPUT_TYPE.number}
                 id="quantity"
                 placeholder={PLACEHOLDERS.number}
-                value={values.quantity}
-                onChange={handleChange}
               />
             </div>
 

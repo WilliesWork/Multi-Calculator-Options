@@ -69,8 +69,6 @@ const ProfitMarginCalculator = () => {
                 type={INPUT_TYPE.number}
                 id="sales_revenue"
                 placeholder={PLACEHOLDERS.number}
-                value={values.sales_revenue}
-                onChange={handleChange}
               />
             </div>
 
@@ -80,8 +78,6 @@ const ProfitMarginCalculator = () => {
                 type={INPUT_TYPE.number}
                 id="cost"
                 placeholder={PLACEHOLDERS.number}
-                value={values.cost}
-                onChange={handleChange}
               />
             </div>
 

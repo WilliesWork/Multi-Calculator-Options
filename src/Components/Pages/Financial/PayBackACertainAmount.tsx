@@ -72,8 +72,6 @@ const PayBackACertainAmount = () => {
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
-                value={values.interest_rate}
-                onChange={handleChange}
               />
             </div>
 
@@ -83,8 +81,6 @@ const PayBackACertainAmount = () => {
                 type={INPUT_TYPE.number}
                 id="credit_card_balance"
                 placeholder={PLACEHOLDERS.number}
-                value={values.credit_card_balance}
-                onChange={handleChange}
               />
             </div>
 
@@ -94,8 +90,6 @@ const PayBackACertainAmount = () => {
                 type={INPUT_TYPE.number}
                 id="monthly_payment"
                 placeholder={PLACEHOLDERS.number}
-                value={values.monthly_payment}
-                onChange={handleChange}
               />
             </div>
 

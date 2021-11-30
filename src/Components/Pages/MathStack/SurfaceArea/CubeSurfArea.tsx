@@ -68,15 +68,11 @@ const CubeSurfArea = () => {
                 type={INPUT_TYPE.number}
                 id="edge_length"
                 placeholder={PLACEHOLDERS.number}
-                value={values.edge_length}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="edge_unit"
-                value={values.edge_unit}
-                onChange={handleChange('edge_unit')}
               />
             </div>
 

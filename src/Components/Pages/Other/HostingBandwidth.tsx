@@ -66,15 +66,11 @@ const HostingBandwidth = () => {
                 type={INPUT_TYPE.number}
                 id="monthly_usage"
                 placeholder={PLACEHOLDERS.number}
-                value={values.monthly_usage}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="storage"
                 id="monthly_usage_unit"
-                value={values.monthly_usage_unit}
-                onChange={handleChange('monthly_usage_unit')}
               />
             </div>
 

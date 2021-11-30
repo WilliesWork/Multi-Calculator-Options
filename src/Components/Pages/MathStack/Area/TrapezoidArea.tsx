@@ -78,15 +78,11 @@ const TrapezoidArea = () => {
                 type={INPUT_TYPE.number}
                 id="base1"
                 placeholder={PLACEHOLDERS.number}
-                value={values.base1}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="base1_unit"
-                value={values.base1_unit}
-                onChange={handleChange('base1_unit')}
               />
             </div>
 
@@ -96,15 +92,11 @@ const TrapezoidArea = () => {
                 type={INPUT_TYPE.number}
                 id="base2"
                 placeholder={PLACEHOLDERS.number}
-                value={values.base2}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="base2_unit"
-                value={values.base2_unit}
-                onChange={handleChange('base2_unit')}
               />
             </div>
 
@@ -114,15 +106,11 @@ const TrapezoidArea = () => {
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 

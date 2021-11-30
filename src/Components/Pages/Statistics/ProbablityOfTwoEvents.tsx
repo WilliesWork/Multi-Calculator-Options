@@ -66,8 +66,6 @@ const ProbablityOfTwoEvents = () => {
                 type={INPUT_TYPE.number}
                 id="event_a"
                 placeholder={PLACEHOLDERS.number}
-                value={values.event_a}
-                onChange={handleChange}
               />
             </div>
 
@@ -77,8 +75,6 @@ const ProbablityOfTwoEvents = () => {
                 type={INPUT_TYPE.number}
                 id="event_b"
                 placeholder={PLACEHOLDERS.number}
-                value={values.event_b}
-                onChange={handleChange}
               />
             </div>
 

@@ -3,11 +3,8 @@ import { CircleAreaI } from './../Types'
 
 export const circleAreaCalculator = {
   title: CALCULATORS.circleArea,
-  payload: {
-    radius: '',
-    radius_unit: '',
-    method: "circleArea"
-  },
+  calculatorObject: 'circleArea',
+  method: "circleArea",
   initialValues: {
     radius: '',
     radius_unit: ''

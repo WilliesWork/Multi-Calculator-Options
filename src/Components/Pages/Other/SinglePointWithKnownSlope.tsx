@@ -69,8 +69,6 @@ const SinglePointWithKnownSlope = () => {
                 type={INPUT_TYPE.number}
                 id="x_1"
                 placeholder={PLACEHOLDERS.number}
-                value={values.x_1}
-                onChange={handleChange}
               />
             </div>
 
@@ -80,8 +78,6 @@ const SinglePointWithKnownSlope = () => {
                 type={INPUT_TYPE.number}
                 id="y_1"
                 placeholder={PLACEHOLDERS.number}
-                value={values.y_1}
-                onChange={handleChange}
               />
             </div>
 
@@ -91,8 +87,6 @@ const SinglePointWithKnownSlope = () => {
                 type={INPUT_TYPE.number}
                 id="slope"
                 placeholder={PLACEHOLDERS.number}
-                value={values.slope}
-                onChange={handleChange}
               />
             </div>
 
@@ -102,8 +96,6 @@ const SinglePointWithKnownSlope = () => {
                 type={INPUT_TYPE.number}
                 id="distance"
                 placeholder={PLACEHOLDERS.number}
-                value={values.distance}
-                onChange={handleChange}
               />
             </div>
 

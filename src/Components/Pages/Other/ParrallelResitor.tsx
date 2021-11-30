@@ -63,8 +63,6 @@ const ParrallelResitor = () => {
                 type={INPUT_TYPE.number}
                 id="resistance_values"
                 placeholder={PLACEHOLDERS.number}
-                value={values.resistance_values}
-                onChange={handleChange}
               />
             </div>
 

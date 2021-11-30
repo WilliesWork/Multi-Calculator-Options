@@ -84,15 +84,11 @@ const RectangularTankVolume = () => {
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
-                value={values.length}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="length_unit"
-                value={values.length_unit}
-                onChange={handleChange('length_unit')}
               />
             </div>
 
@@ -102,15 +98,11 @@ const RectangularTankVolume = () => {
                 type={INPUT_TYPE.number}
                 id="width"
                 placeholder={PLACEHOLDERS.number}
-                value={values.width}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="width_unit"
-                value={values.width_unit}
-                onChange={handleChange('width_unit')}
               />
             </div>
 
@@ -120,15 +112,11 @@ const RectangularTankVolume = () => {
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 

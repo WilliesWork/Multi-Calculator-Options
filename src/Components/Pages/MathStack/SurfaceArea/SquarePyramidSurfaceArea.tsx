@@ -76,15 +76,11 @@ const SquarePyramidSurfaceArea = () => {
                 type={INPUT_TYPE.number}
                 id="base_edge"
                 placeholder={PLACEHOLDERS.number}
-                value={values.base_edge}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="base_edge_unit"
-                value={values.base_edge_unit}
-                onChange={handleChange('base_edge_unit')}
               />
             </div>
 
@@ -94,15 +90,11 @@ const SquarePyramidSurfaceArea = () => {
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 

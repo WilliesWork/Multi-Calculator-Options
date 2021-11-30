@@ -1,5 +1,5 @@
 import * as React from 'react'
-//import { Units } from './../../Common/MathUnits'
+import { Field } from 'formik';
 
 import Capacity from './../../Lib/Capacity.json'
 import Length from './../../Lib/Length.json'
@@ -11,17 +11,17 @@ import Weight from './../../Lib/Weight.json'
 
 
 const CustomSelect = (props: any) => {
-  const { id, value, onChange, measurement } = props
+  const { id, value, measurement } = props
 
   // If you have a better way to make this happen, have at it using the Units file, comparing the `measurement` to the `type`, and return the units for that object.
   if (measurement === "capacity") {
     return (
       <div className="form-group col">
-        <select
+        <Field
+          as="select"
           id={id}
           className="form-control"
           value={value}
-          onChange={onChange}
         >
           <option selected style={{ fontWeight: 'bold', fontStyle: 'italic' }}>Select unit</option>
           {Capacity.map(({ type, units }) => (
@@ -34,18 +34,18 @@ const CustomSelect = (props: any) => {
               </option>
             ))
           ))}
-        </select>
+        </Field>
       </div>
     )
 
   } else if (measurement === "length") {
     return (
       <div className="form-group col">
-        <select
+        <Field
+          as="select"
           id={id}
           className="form-control"
           value={value}
-          onChange={onChange}
         >
           <option selected style={{ fontWeight: 'bold', fontStyle: 'italic' }}>Select unit</option>
           {Length.map(({ type, units }) => (
@@ -58,18 +58,18 @@ const CustomSelect = (props: any) => {
               </option>
             ))
           ))}
-        </select>
+        </Field>
       </div>
     )
 
   } else if (measurement === "speed") {
     return (
       <div className="form-group col">
-        <select
+        <Field
+          as="select"
           id={id}
           className="form-control"
           value={value}
-          onChange={onChange}
         >
           <option selected style={{ fontWeight: 'bold', fontStyle: 'italic' }}>Select unit</option>
           {Speed.map(({ type, units }) => (
@@ -82,18 +82,18 @@ const CustomSelect = (props: any) => {
               </option>
             ))
           ))}
-        </select>
+        </Field>
       </div>
     )
 
   } else if (measurement === "storage") {
     return (
       <div className="form-group col">
-        <select
+        <Field
+          as="select"
           id={id}
           className="form-control"
           value={value}
-          onChange={onChange}
         >
           <option selected style={{ fontWeight: 'bold', fontStyle: 'italic' }}>Select unit</option>
           {Storage.map(({ type, units }) => (
@@ -106,18 +106,18 @@ const CustomSelect = (props: any) => {
               </option>
             ))
           ))}
-        </select>
+        </Field>
       </div>
     )
 
   } else if (measurement === "time") {
     return (
       <div className="form-group col">
-        <select
+        <Field
+          as="select"
           id={id}
           className="form-control"
           value={value}
-          onChange={onChange}
         >
           <option selected style={{ fontWeight: 'bold', fontStyle: 'italic' }}>Select unit</option>
           {Time.map(({ type, units }) => (
@@ -130,17 +130,17 @@ const CustomSelect = (props: any) => {
               </option>
             ))
           ))}
-        </select>
+        </Field>
       </div>
     )
   } else if (measurement === "weight") {
     return (
       <div className="form-group col">
-        <select
+        <Field
+          as="select"
           id={id}
           className="form-control"
           value={value}
-          onChange={onChange}
         >
           <option selected style={{ fontWeight: 'bold', fontStyle: 'italic' }}>Select unit</option>
           {Weight.map(({ type, units }) => (
@@ -153,17 +153,17 @@ const CustomSelect = (props: any) => {
               </option>
             ))
           ))}
-        </select>
+        </Field>
       </div>
     )
   } else {
     return (
       <div className="form-group col">
-        <select
+        <Field
+          as="select"
           id={id}
           className="form-control"
           value={value}
-          onChange={onChange}
         >
           <option selected style={{ fontWeight: 'bold', fontStyle: 'italic' }}>Select unit</option>
           {Units.map(({ type, units }) => (
@@ -176,7 +176,7 @@ const CustomSelect = (props: any) => {
               </option>
             ))
           ))}
-        </select>
+        </Field>
       </div>
     )
   }

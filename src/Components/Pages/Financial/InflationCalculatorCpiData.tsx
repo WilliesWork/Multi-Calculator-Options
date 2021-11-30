@@ -65,8 +65,6 @@ const InflationCalculatorCpiData = () => {
                 type={INPUT_TYPE.number}
                 id="current_price"
                 placeholder={PLACEHOLDERS.number}
-                value={values.current_price}
-                onChange={handleChange}
               />
             </div>
 
@@ -76,8 +74,6 @@ const InflationCalculatorCpiData = () => {
                 type={INPUT_TYPE.number}
                 id="price_in_base"
                 placeholder={PLACEHOLDERS.number}
-                value={values.price_in_base}
-                onChange={handleChange}
               />
             </div>
 

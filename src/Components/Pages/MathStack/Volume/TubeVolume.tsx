@@ -83,15 +83,11 @@ const TubeVolume = () => {
                 type={INPUT_TYPE.number}
                 id="outer_diameter"
                 placeholder={PLACEHOLDERS.number}
-                value={values.outer_diameter}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="outer_diameter_unit"
-                value={values.outer_diameter_unit}
-                onChange={handleChange('outer_diameter_unit')}
               />
             </div>
 
@@ -101,15 +97,11 @@ const TubeVolume = () => {
                 type={INPUT_TYPE.number}
                 id="inner_diameter"
                 placeholder={PLACEHOLDERS.number}
-                value={values.inner_diameter}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="inner_diameter_unit"
-                value={values.inner_diameter_unit}
-                onChange={handleChange('inner_diameter_unit')}
               />
             </div>
 
@@ -119,15 +111,11 @@ const TubeVolume = () => {
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
-                value={values.length}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="length_unit"
-                value={values.length_unit}
-                onChange={handleChange('length_unit')}
               />
             </div>
 

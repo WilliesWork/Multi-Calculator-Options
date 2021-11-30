@@ -80,15 +80,11 @@ const ConcreteSquareFooting = () => {
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
-                value={values.length}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="length_unit"
-                value={values.length_unit}
-                onChange={handleChange('length_unit')}
               />
             </div>
 
@@ -98,15 +94,11 @@ const ConcreteSquareFooting = () => {
                 type={INPUT_TYPE.number}
                 id="width"
                 placeholder={PLACEHOLDERS.number}
-                value={values.width}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="width_unit"
-                value={values.width_unit}
-                onChange={handleChange('width_unit')}
               />
             </div>
 
@@ -116,15 +108,11 @@ const ConcreteSquareFooting = () => {
                 type={INPUT_TYPE.number}
                 id="breadth"
                 placeholder={PLACEHOLDERS.number}
-                value={values.breadth}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="breadth_unit"
-                value={values.breadth_unit}
-                onChange={handleChange('breadth_unit')}
               />
             </div>
 
@@ -134,8 +122,6 @@ const ConcreteSquareFooting = () => {
                 type={INPUT_TYPE.number}
                 id="quantity"
                 placeholder={PLACEHOLDERS.number}
-                value={values.quantity}
-                onChange={handleChange}
               />
             </div>
 

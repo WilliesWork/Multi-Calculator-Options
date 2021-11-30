@@ -75,15 +75,11 @@ const ConductorResitor = () => {
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
-                value={values.length}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="length_unit"
-                value={values.length_unit}
-                onChange={handleChange('length_unit')}
               />
             </div>
 
@@ -93,15 +89,11 @@ const ConductorResitor = () => {
                 type={INPUT_TYPE.number}
                 id="diameter"
                 placeholder={PLACEHOLDERS.number}
-                value={values.diameter}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="diameter_unit"
-                value={values.diameter_unit}
-                onChange={handleChange('diameter_unit')}
               />
             </div>
 
@@ -112,8 +104,6 @@ const ConductorResitor = () => {
                 type={INPUT_TYPE.number}
                 id="conductivity"
                 placeholder={PLACEHOLDERS.number}
-                value={values.conductivity}
-                onChange={handleChange}
               />
             </div>
 

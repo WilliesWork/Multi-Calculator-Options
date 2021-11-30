@@ -75,15 +75,11 @@ const HoleColumn = () => {
                 type={INPUT_TYPE.number}
                 id="diameter"
                 placeholder={PLACEHOLDERS.number}
-                value={values.diameter}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="diameter_unit"
-                value={values.diameter_unit}
-                onChange={handleChange('diameter_unit')}
               />
             </div>
 
@@ -93,15 +89,11 @@ const HoleColumn = () => {
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 
@@ -112,8 +104,6 @@ const HoleColumn = () => {
                 type={INPUT_TYPE.number}
                 id="quantity"
                 placeholder={PLACEHOLDERS.number}
-                value={values.quantity}
-                onChange={handleChange}
               />
             </div>
 

@@ -77,15 +77,11 @@ const BmrMifflinHarrisBenedict = () => {
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 
@@ -95,15 +91,11 @@ const BmrMifflinHarrisBenedict = () => {
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}
-                value={values.weight}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="weight"
                 id="weight_unit"
-                value={values.weight_unit}
-                onChange={handleChange('weight_unit')}
               />
             </div>
 
@@ -113,8 +105,6 @@ const BmrMifflinHarrisBenedict = () => {
                 type={INPUT_TYPE.text}
                 id="gender"
                 placeholder={PLACEHOLDERS.gender}
-                value={values.gender}
-                onChange={handleChange}
               />
             </div>
 
@@ -124,8 +114,6 @@ const BmrMifflinHarrisBenedict = () => {
                 type={INPUT_TYPE.number}
                 id="age"
                 placeholder={PLACEHOLDERS.number}
-                value={values.age}
-                onChange={handleChange}
               />
             </div>
 

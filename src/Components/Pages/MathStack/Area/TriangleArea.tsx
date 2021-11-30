@@ -84,15 +84,11 @@ const TriangleArea = () => {
                 type={INPUT_TYPE.number}
                 id="sideA"
                 placeholder={PLACEHOLDERS.number}
-                value={values.sideA}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="sideA_unit"
-                value={values.sideA_unit}
-                onChange={handleChange('sideA_unit')}
               />
             </div>
 
@@ -102,15 +98,11 @@ const TriangleArea = () => {
                 type={INPUT_TYPE.number}
                 id="sideB"
                 placeholder={PLACEHOLDERS.number}
-                value={values.sideB}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="sideB_unit"
-                value={values.sideB_unit}
-                onChange={handleChange('sideB_unit')}
               />
             </div>
 
@@ -120,15 +112,11 @@ const TriangleArea = () => {
                 type={INPUT_TYPE.number}
                 id="sideC"
                 placeholder={PLACEHOLDERS.number}
-                value={values.sideC}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="sideC_unit"
-                value={values.sideC_unit}
-                onChange={handleChange('sideC_unit')}
               />
             </div>
 

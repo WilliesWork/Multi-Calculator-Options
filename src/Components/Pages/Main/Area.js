@@ -27,7 +27,7 @@ function Area() {
         {/* Calculator Grid */}
         <Grid item xs={8}>
           <Paper className={classes.paperBackground}>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Paper className={classes.paper2}>
                 <CircleArea />
               </Paper>
@@ -67,7 +67,7 @@ function Area() {
               <Paper className={classes.paper2}>
                 <TriangleArea />
               </Paper>
-            </Grid>
+            </Grid> */}
           </Paper>
         </Grid>
 

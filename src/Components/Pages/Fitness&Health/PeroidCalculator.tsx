@@ -66,8 +66,6 @@ const PeroidCalculator = () => {
                 type={INPUT_TYPE.date}
                 id="start_date_of_last_cycle"
                 placeholder={PLACEHOLDERS.number}
-                value={values.start_date_of_last_cycle}
-                onChange={handleChange}
               />
             </div>
 
@@ -77,8 +75,6 @@ const PeroidCalculator = () => {
                 type={INPUT_TYPE.number}
                 id="cycle_length"
                 placeholder={PLACEHOLDERS.number}
-                value={values.cycle_length}
-                onChange={handleChange}
               />
             </div>
 
@@ -88,8 +84,6 @@ const PeroidCalculator = () => {
                 type={INPUT_TYPE.number}
                 id="last_period_days"
                 placeholder={PLACEHOLDERS.number}
-                value={values.last_period_days}
-                onChange={handleChange}
               />
             </div>
 

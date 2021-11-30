@@ -71,8 +71,6 @@ const SlopeCalculatorForTwoKnownPoints = () => {
                 type={INPUT_TYPE.number}
                 id="x_1"
                 placeholder={PLACEHOLDERS.number}
-                value={values.x_1}
-                onChange={handleChange}
               />
             </div>
 
@@ -82,8 +80,6 @@ const SlopeCalculatorForTwoKnownPoints = () => {
                 type={INPUT_TYPE.number}
                 id="y_1"
                 placeholder={PLACEHOLDERS.number}
-                value={values.y_1}
-                onChange={handleChange}
               />
             </div>
 
@@ -93,8 +89,6 @@ const SlopeCalculatorForTwoKnownPoints = () => {
                 type={INPUT_TYPE.number}
                 id="x_2"
                 placeholder={PLACEHOLDERS.number}
-                value={values.x_2}
-                onChange={handleChange}
               />
             </div>
 
@@ -104,8 +98,6 @@ const SlopeCalculatorForTwoKnownPoints = () => {
                 type={INPUT_TYPE.number}
                 id="y_2"
                 placeholder={PLACEHOLDERS.number}
-                value={values.y_2}
-                onChange={handleChange}
               />
             </div>
 

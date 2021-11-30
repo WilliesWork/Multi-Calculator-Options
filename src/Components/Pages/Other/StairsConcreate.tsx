@@ -87,15 +87,11 @@ const StairsConcreate = () => {
                 type={INPUT_TYPE.number}
                 id="run"
                 placeholder={PLACEHOLDERS.number}
-                value={values.run}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="run_unit"
-                value={values.run_unit}
-                onChange={handleChange('run_unit')}
               />
             </div>
 
@@ -105,15 +101,11 @@ const StairsConcreate = () => {
                 type={INPUT_TYPE.number}
                 id="rise"
                 placeholder={PLACEHOLDERS.number}
-                value={values.rise}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="rise_unit"
-                value={values.rise_unit}
-                onChange={handleChange('rise_unit')}
               />
             </div>
 
@@ -123,15 +115,11 @@ const StairsConcreate = () => {
                 type={INPUT_TYPE.number}
                 id="width"
                 placeholder={PLACEHOLDERS.number}
-                value={values.width}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="width_unit"
-                value={values.width_unit}
-                onChange={handleChange('width_unit')}
               />
             </div>
 
@@ -141,15 +129,11 @@ const StairsConcreate = () => {
                 type={INPUT_TYPE.number}
                 id="platform_depth"
                 placeholder={PLACEHOLDERS.number}
-                value={values.platform_depth}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="platform_depth_unit"
-                value={values.platform_depth_unit}
-                onChange={handleChange('platform_depth_unit')}
               />
             </div>
 
@@ -159,8 +143,6 @@ const StairsConcreate = () => {
                 type={INPUT_TYPE.number}
                 id="steps"
                 placeholder={PLACEHOLDERS.number}
-                value={values.steps}
-                onChange={handleChange}
               />
             </div>
 

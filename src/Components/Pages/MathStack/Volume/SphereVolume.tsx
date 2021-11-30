@@ -68,15 +68,11 @@ const SphereVolume = () => {
                 type={INPUT_TYPE.number}
                 id="radius"
                 placeholder={PLACEHOLDERS.number}
-                value={values.radius}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="radius_unit"
-                value={values.radius_unit}
-                onChange={handleChange('radius_unit')}
               />
             </div>
 

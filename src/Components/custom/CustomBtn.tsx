@@ -12,9 +12,9 @@ const ColorButton = withStyles((theme) => ({
       backgroundColor: green[400],
     },
   },
-}))(Button);
+}))((props: any) => <Button {...props} />);
 
-const CustomBtn = () => {
+const CustomBtn = (props: any) => {
   return (
     <div className="form d-grid gap-2 d-md-flex justify-content-md-start">
       <ColorButton
@@ -23,6 +23,7 @@ const CustomBtn = () => {
         color="primary"
         type="submit"
         className="btn btn-primary"
+        {...props}
       >
         {BUTTONS.calculate}
       </ColorButton>

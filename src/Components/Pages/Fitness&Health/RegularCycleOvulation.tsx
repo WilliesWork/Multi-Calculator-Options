@@ -65,8 +65,6 @@ const RegularCycleOvulation = () => {
                 type={INPUT_TYPE.date}
                 id="previous_cycle_start_date"
                 placeholder={PLACEHOLDERS.number}
-                value={values.previous_cycle_start_date}
-                onChange={handleChange}
               />
             </div>
 
@@ -76,8 +74,6 @@ const RegularCycleOvulation = () => {
                 type={INPUT_TYPE.number}
                 id="cycle_days"
                 placeholder={PLACEHOLDERS.number}
-                value={values.cycle_days}
-                onChange={handleChange}
               />
             </div>
 

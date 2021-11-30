@@ -11,12 +11,12 @@ function FormComponent() {
       <form className="form-container">
         <div className="form-row">
           <Label title={LABELS.semiMajorAxesA} />
-          <CustomTextInput
+          {/* <CustomTextInput
             type={INPUT_TYPE.number}
             id="semi_major_axes_a"
             name="semi_major_axes_a"
             placeholder={PLACEHOLDERS.number}
-          />
+          /> */}
 
           <CustomSelect
             measurement="length"
@@ -26,12 +26,12 @@ function FormComponent() {
 
         <div className="form-row">
           <Label title={LABELS.semiMajorAxesB} />
-          <CustomTextInput
+          {/* <CustomTextInput
             type={INPUT_TYPE.number}
             id="semi_major_axes_b"
             name="semi_major_axes_b"
             placeholder={PLACEHOLDERS.number}
-          />
+          /> */}
 
           <CustomSelect
             measurement="length"

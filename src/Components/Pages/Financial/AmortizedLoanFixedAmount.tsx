@@ -71,8 +71,6 @@ const AmortizedLoanFixedAmount = () => {
                 type={INPUT_TYPE.number}
                 id="interest_rate"
                 placeholder={PLACEHOLDERS.number}
-                value={values.interest_rate}
-                onChange={handleChange}
               />
             </div>
 
@@ -82,8 +80,6 @@ const AmortizedLoanFixedAmount = () => {
                 type={INPUT_TYPE.number}
                 id="number_of_months"
                 placeholder={PLACEHOLDERS.number}
-                value={values.number_of_months}
-                onChange={handleChange}
               />
             </div>
 
@@ -93,8 +89,6 @@ const AmortizedLoanFixedAmount = () => {
                 type={INPUT_TYPE.number}
                 id="present_value"
                 placeholder={PLACEHOLDERS.number}
-                value={values.present_value}
-                onChange={handleChange}
               />
             </div>
 
@@ -104,8 +98,6 @@ const AmortizedLoanFixedAmount = () => {
                 type={INPUT_TYPE.number}
                 id="number_of_years"
                 placeholder={PLACEHOLDERS.number}
-                value={values.number_of_years}
-                onChange={handleChange}
               />
             </div>
 

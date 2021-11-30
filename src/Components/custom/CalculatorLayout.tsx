@@ -6,9 +6,10 @@ import { Formik } from 'formik'
 import StyledTabs from './StyledTabs';
 import StyledTab from './StyledTab';
 import TabPanel from './TabPanel';
+import NoIndexTabPanel from './NoIndexTabPanel'
 
 import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE, COLORS } from '../../Common/shared'
-import { CustomTextInput, CustomSelect, Figure, Label, CustomBtn } from '../custom'
+import { CustomTextInput, CustomSelect, Figure, Label, CustomBtn, CustomSearchInput } from '../custom'
 import TestCalculator from './TestCalculator'
 import { CollapsibleMenu, Carousel } from '../Content';
 import { CircleArea, EllipseArea, ParallelogramArea } from '../TestCalculators'
@@ -68,7 +69,7 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
     const [value, setValue] = React.useState(0);
     const [searchText, setSearchText] = React.useState('');
 
-    const handleChange = (event: any) => {
+    const handleTextChange = (event: any) => {
         setSearchText(event.target.value);
     };
 
@@ -122,9 +123,9 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
                                 </div>
                             </StyledTabs>
 
-                            <TabPanel value={value} index={9}>
+                            <NoIndexTabPanel>
                                 {children}
-                            </TabPanel>
+                            </NoIndexTabPanel>
                         </div>
                     </Paper>
                 </Grid>
@@ -140,12 +141,13 @@ const CalculatorLayout = (props: CalculatorLayoutProps) => {
 
                     {/* Search input */}
                     <Grid>
-                        <CustomTextInput
+                        <CustomSearchInput
                             type={INPUT_TYPE.text}
                             id='search'
+                            name='search'
                             placeholder={PLACEHOLDERS.search}
                             value={searchText}
-                            onChange={handleChange}
+                            onChange={handleTextChange}
                         />
                     </Grid>
 

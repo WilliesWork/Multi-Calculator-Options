@@ -73,15 +73,11 @@ const EllipseArea = () => {
                 type={INPUT_TYPE.number}
                 id="semi_major_axes_a"
                 placeholder={PLACEHOLDERS.number}
-                value={values.semi_major_axes_a}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="semi_major_axes_a_unit"
-                value={values.semi_major_axes_a_unit}
-                onChange={handleChange('semi_major_axes_a_unit')}
               />
             </div>
 
@@ -91,15 +87,11 @@ const EllipseArea = () => {
                 type={INPUT_TYPE.number}
                 id="semi_major_axes_b"
                 placeholder={PLACEHOLDERS.number}
-                value={values.semi_major_axes_b}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="semi_major_axes_b_unit"
-                value={values.semi_major_axes_b_unit}
-                onChange={handleChange('semi_major_axes_b_unit')}
               />
             </div>
 

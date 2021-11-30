@@ -83,15 +83,11 @@ const EllipsoidVolume = () => {
                 type={INPUT_TYPE.number}
                 id="axis1"
                 placeholder={PLACEHOLDERS.number}
-                value={values.axis1}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="axis1_unit"
-                value={values.axis1_unit}
-                onChange={handleChange('axis1_unit')}
               />
             </div>
 
@@ -101,15 +97,11 @@ const EllipsoidVolume = () => {
                 type={INPUT_TYPE.number}
                 id="axis2"
                 placeholder={PLACEHOLDERS.number}
-                value={values.axis2}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="axis2_unit"
-                value={values.axis2_unit}
-                onChange={handleChange('axis2_unit')}
               />
             </div>
 
@@ -119,15 +111,11 @@ const EllipsoidVolume = () => {
                 type={INPUT_TYPE.number}
                 id="axis3"
                 placeholder={PLACEHOLDERS.number}
-                value={values.axis3}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="axis3_unit"
-                value={values.axis3_unit}
-                onChange={handleChange('axis3_unit')}
               />
             </div>
 

@@ -87,15 +87,11 @@ const USCustomarySystemBfc = () => {
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 
@@ -105,15 +101,11 @@ const USCustomarySystemBfc = () => {
                 type={INPUT_TYPE.number}
                 id="neck"
                 placeholder={PLACEHOLDERS.number}
-                value={values.neck}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="neck_unit"
-                value={values.neck_unit}
-                onChange={handleChange('neck_unit')}
               />
             </div>
 
@@ -123,15 +115,11 @@ const USCustomarySystemBfc = () => {
                 type={INPUT_TYPE.number}
                 id="hip"
                 placeholder={PLACEHOLDERS.number}
-                value={values.hip}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="hip_unit"
-                value={values.hip_unit}
-                onChange={handleChange('hip_unit')}
               />
             </div>
 
@@ -141,15 +129,11 @@ const USCustomarySystemBfc = () => {
                 type={INPUT_TYPE.number}
                 id="waist"
                 placeholder={PLACEHOLDERS.number}
-                value={values.waist}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="waist_unit"
-                value={values.waist_unit}
-                onChange={handleChange('waist_unit')}
               />
             </div>
 
@@ -159,8 +143,6 @@ const USCustomarySystemBfc = () => {
                 type={INPUT_TYPE.number}
                 id="abdomen"
                 placeholder={PLACEHOLDERS.number}
-                value={values.abdomen}
-                onChange={handleChange}
               />
             </div>
 
@@ -170,8 +152,6 @@ const USCustomarySystemBfc = () => {
                 type={INPUT_TYPE.text}
                 id="gender"
                 placeholder={PLACEHOLDERS.gender}
-                value={values.gender}
-                onChange={handleChange}
               />
             </div>
 

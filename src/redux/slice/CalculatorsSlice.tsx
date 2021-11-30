@@ -2,13 +2,13 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from '../store'
 
 interface CalculatorState {
-  result: {},
+  results: any,
   isCalculating: boolean
 }
 
 // Initial states
 const initialState: CalculatorState = {
-  result: {},
+  results: '',
   isCalculating: false,
 };
 
@@ -16,9 +16,19 @@ export const calcsSlice = createSlice({
   name: "calcSlice",
   initialState,
   reducers: {
-    calculateData: (state, action: PayloadAction<any[]>) => {
+    calculateData: (state, action: PayloadAction<any>) => {
+      // destructure payload
+      const { calculatorObject, method } = action.payload
+
+      // Optional state to hide or show the result container
       state.isCalculating = true;
-      state.result = action.payload;
+
+      // If statements that match the method to return the right payload for the calculator
+      if (method === "circleArea") {
+        state.results = `Area = ${calculatorObject.area}${calculatorObject.units}2`
+        //  console.log("CIRCLEAREA: ", calculatorObject.area)
+      }
+
     },
   },
 });

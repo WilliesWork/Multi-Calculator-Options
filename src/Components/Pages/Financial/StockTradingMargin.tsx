@@ -68,8 +68,6 @@ const StockTradingMargin = () => {
                 type={INPUT_TYPE.number}
                 id="margin_requirement"
                 placeholder={PLACEHOLDERS.number}
-                value={values.margin_requirement}
-                onChange={handleChange}
               />
             </div>
 
@@ -79,8 +77,6 @@ const StockTradingMargin = () => {
                 type={INPUT_TYPE.number}
                 id="stock_price"
                 placeholder={PLACEHOLDERS.number}
-                value={values.stock_price}
-                onChange={handleChange}
               />
             </div>
 
@@ -90,8 +86,6 @@ const StockTradingMargin = () => {
                 type={INPUT_TYPE.number}
                 id="shares"
                 placeholder={PLACEHOLDERS.number}
-                value={values.shares}
-                onChange={handleChange}
               />
             </div>
 

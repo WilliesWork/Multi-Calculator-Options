@@ -72,15 +72,11 @@ const ParallelogramArea = () => {
                 type={INPUT_TYPE.number}
                 id="breadth"
                 placeholder={PLACEHOLDERS.number}
-                value={values.breadth}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="breadth_unit"
-                value={values.breadth_unit}
-                onChange={handleChange('breadth_unit')}
               />
             </div>
 
@@ -90,15 +86,11 @@ const ParallelogramArea = () => {
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 

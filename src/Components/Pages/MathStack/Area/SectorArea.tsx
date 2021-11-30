@@ -72,15 +72,11 @@ const SectorArea = () => {
                 type={INPUT_TYPE.number}
                 id="radius"
                 placeholder={PLACEHOLDERS.number}
-                value={values.radius}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="radius_unit"
-                value={values.radius_unit}
-                onChange={handleChange('radius_unit')}
               />
             </div>
 
@@ -90,15 +86,11 @@ const SectorArea = () => {
                 type={INPUT_TYPE.number}
                 id="angle"
                 placeholder={PLACEHOLDERS.number}
-                value={values.angle}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="angle_unit"
-                value={values.angle_unit}
-                onChange={handleChange('angle_unit')}
               />
             </div>
 

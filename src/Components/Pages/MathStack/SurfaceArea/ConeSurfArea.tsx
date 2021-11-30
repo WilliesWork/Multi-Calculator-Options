@@ -77,15 +77,11 @@ const ConeSurfArea = () => {
                 type={INPUT_TYPE.number}
                 id="radius"
                 placeholder={PLACEHOLDERS.number}
-                value={values.radius}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="radius_unit"
-                value={values.radius_unit}
-                onChange={handleChange('radius_unit')}
               />
             </div>
 
@@ -95,15 +91,11 @@ const ConeSurfArea = () => {
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}
-                value={values.height}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="length"
                 id="height_unit"
-                value={values.height_unit}
-                onChange={handleChange('height_unit')}
               />
             </div>
 

@@ -76,15 +76,11 @@ const TrapSpeedMethod = () => {
                 type={INPUT_TYPE.number}
                 id="weight"
                 placeholder={PLACEHOLDERS.number}
-                value={values.weight}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="weight"
                 id="weight_unit"
-                value={values.weight_unit}
-                onChange={handleChange('weight_unit')}
               />
             </div>
 
@@ -94,15 +90,11 @@ const TrapSpeedMethod = () => {
                 type={INPUT_TYPE.number}
                 id="speed"
                 placeholder={PLACEHOLDERS.number}
-                value={values.speed}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="speed"
                 id="speed_unit"
-                value={values.speed_unit}
-                onChange={handleChange('speed_unit')}
               />
             </div>
 

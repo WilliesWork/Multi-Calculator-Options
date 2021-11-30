@@ -1,6 +1,7 @@
 export { default as CalculatorTabs } from "./CalculatorTabs";
 export { default as CustomBtn } from "./CustomBtn";
 export { default as CustomResetBtn } from "./CustomResetBtn";
+export { default as CustomSearchInput } from "./CustomSearchInput";
 export { default as CustomSelect } from "./CustomSelect";
 export { default as CustomTabs } from "./CustomTabs";
 export { default as CustomTextInput } from "./CustomTextInput";

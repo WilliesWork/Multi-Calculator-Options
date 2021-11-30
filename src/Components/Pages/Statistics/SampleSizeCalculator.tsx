@@ -69,8 +69,6 @@ const SampleSizeCalculator = () => {
                 type={INPUT_TYPE.number}
                 id="confience_level"
                 placeholder={PLACEHOLDERS.number}
-                value={values.confience_level}
-                onChange={handleChange}
               />
             </div>
 
@@ -80,8 +78,6 @@ const SampleSizeCalculator = () => {
                 type={INPUT_TYPE.number}
                 id="population_proportion"
                 placeholder={PLACEHOLDERS.number}
-                value={values.population_proportion}
-                onChange={handleChange}
               />
             </div>
 
@@ -91,8 +87,6 @@ const SampleSizeCalculator = () => {
                 type={INPUT_TYPE.number}
                 id="margin_of_error"
                 placeholder={PLACEHOLDERS.number}
-                value={values.margin_of_error}
-                onChange={handleChange}
               />
             </div>
 

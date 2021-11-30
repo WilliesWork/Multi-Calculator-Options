@@ -84,8 +84,6 @@ const ProbablitySolverForTwoEvents = () => {
                 type={INPUT_TYPE.number}
                 id="probability_of_a"
                 placeholder={PLACEHOLDERS.number}
-                value={values.probability_of_a}
-                onChange={handleChange}
               />
             </div>
 
@@ -95,8 +93,6 @@ const ProbablitySolverForTwoEvents = () => {
                 type={INPUT_TYPE.number}
                 id="probability_of_b"
                 placeholder={PLACEHOLDERS.number}
-                value={values.probability_of_b}
-                onChange={handleChange}
               />
             </div>
 
@@ -106,8 +102,6 @@ const ProbablitySolverForTwoEvents = () => {
                 type={INPUT_TYPE.number}
                 id="probability_of_a_not_occuring"
                 placeholder={PLACEHOLDERS.number}
-                value={values.probability_of_a_not_occuring}
-                onChange={handleChange}
               />
             </div>
 
@@ -117,8 +111,6 @@ const ProbablitySolverForTwoEvents = () => {
                 type={INPUT_TYPE.number}
                 id="probability_of_b_not_occuring"
                 placeholder={PLACEHOLDERS.number}
-                value={values.probability_of_b_not_occuring}
-                onChange={handleChange}
               />
             </div>
 
@@ -128,8 +120,6 @@ const ProbablitySolverForTwoEvents = () => {
                 type={INPUT_TYPE.number}
                 id="probability_of_a_and_b_both_occuring"
                 placeholder={PLACEHOLDERS.number}
-                value={values.probability_of_a_and_b_both_occuring}
-                onChange={handleChange}
               />
             </div>
 
@@ -139,8 +129,6 @@ const ProbablitySolverForTwoEvents = () => {
                 type={INPUT_TYPE.number}
                 id="probability_that_a_or_b_or_both_occur"
                 placeholder={PLACEHOLDERS.number}
-                value={values.probability_that_a_or_b_or_both_occur}
-                onChange={handleChange}
               />
             </div>
 
@@ -150,8 +138,6 @@ const ProbablitySolverForTwoEvents = () => {
                 type={INPUT_TYPE.number}
                 id="probability_that_a_or_b_occurs_but_not_both"
                 placeholder={PLACEHOLDERS.number}
-                value={values.probability_that_a_or_b_occurs_but_not_both}
-                onChange={handleChange}
               />
             </div>
 
@@ -161,8 +147,6 @@ const ProbablitySolverForTwoEvents = () => {
                 type={INPUT_TYPE.number}
                 id="probability_of_neither_a_nor_b_occuring"
                 placeholder={PLACEHOLDERS.number}
-                value={values.probability_of_neither_a_nor_b_occuring}
-                onChange={handleChange}
               />
             </div>
 

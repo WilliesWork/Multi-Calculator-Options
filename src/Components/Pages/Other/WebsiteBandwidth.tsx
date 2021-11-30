@@ -81,15 +81,11 @@ const WebsiteBandwidth = () => {
                 type={INPUT_TYPE.number}
                 id="page_views"
                 placeholder={PLACEHOLDERS.number}
-                value={values.page_views}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="storage"
                 id="page_views_unit"
-                value={values.page_views_unit}
-                onChange={handleChange('page_views_unit')}
               />
             </div>
 
@@ -99,15 +95,11 @@ const WebsiteBandwidth = () => {
                 type={INPUT_TYPE.number}
                 id="page_size"
                 placeholder={PLACEHOLDERS.number}
-                value={values.page_size}
-                onChange={handleChange}
               />
 
               <CustomSelect
                 measurement="storage"
                 id="page_size_unit"
-                value={values.page_size_unit}
-                onChange={handleChange('page_size_unit')}
               />
             </div>
 
@@ -118,8 +110,6 @@ const WebsiteBandwidth = () => {
                 type={INPUT_TYPE.number}
                 id="redundancy_factor"
                 placeholder={PLACEHOLDERS.number}
-                value={values.redundancy_factor}
-                onChange={handleChange}
               />
             </div>
 
