@@ -73,6 +73,10 @@ export const methodZscoreCalculator = "ZscoreCalculator"
 export const methodGPACalculator = "GPACalculator"
 export const methodGradeCalculator = "GradeCalculator"
 export const methodFinalGradeCalculator = "FinalGradeCalculator"
+export const methodFractionCalculator = "FractionCalculator"
+export const methodTDEECalculator = "TDEECalculator"
+export const methodProteinCalculator = "ProteinCalculator"
+
 
 //Others Method Names
 export const methodAgeCalculator = "AgeCalculator"
