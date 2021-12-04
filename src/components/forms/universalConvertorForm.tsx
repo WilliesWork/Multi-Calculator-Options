@@ -63,8 +63,8 @@ function UniversalConverterForm(props:any){
                     {(props: FormikProps<any>) => (
                     <Form >
                       
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} md={4}> 
+                        <Grid container spacing={4} sx={{border:"solid"}}>
+                            <Grid item xs={12} md={4} sx={{border:"solid", borderColor:'red'}}> 
                                 <Typography component="div">
                                     <Box sx={{ fontSize: 18, fontWeight: 500}}>
                                         Value

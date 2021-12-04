@@ -11,7 +11,6 @@ function SingleFieldForm(props:any){
 
     return(
         <div className="container d-flex justify-content-center">
-
             <Box sx={{
                 width: '100',
                 borderRadius: 3, 

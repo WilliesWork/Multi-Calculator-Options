@@ -1,4 +1,4 @@
-import * as React from "react"
+import React from "react"
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography';
@@ -8,6 +8,9 @@ import Link from '@mui/material/Link';
 import { SearchForm } from '../forms/searchForm';
 import { useHistory } from 'react-router-dom'
 import { CircleArea,Area,BallSurfaceArea} from './index'
+import { FibonacciCalculator } from '../TemperalComponentsFolder/math/FibonacciCalculator'
+import { FactorCalculator } from  '../TemperalComponentsFolder/math/FactorCalculator'
+import { ArithmeticSequenceCalculator } from  '../TemperalComponentsFolder/math/ArithmeticSequenceCalculator'
 import {
     BrowserRouter as Router,
     Switch,
@@ -16,15 +19,6 @@ import {
     useRouteMatch
   } from "react-router-dom";
 import ExponentForm from '../forms/math/ExponentForm'
-function TestNavBar(){
-    let { path, url } = useRouteMatch();
-    const history = useHistory()
-
-
-        return(
-            <ExponentForm/>
-        );
-    }
 
     function Topic() {
         // The <Route> that rendered this component has a
@@ -43,8 +37,8 @@ function TestNavBar(){
 
 export default function TestPage(){
     return(
-        <div>
-            <TestNavBar/>
-        </div>
+        <>
+          <ArithmeticSequenceCalculator />
+        </>
     );
 }

@@ -27,3 +27,9 @@ export interface MatrixCalculator{
     method: string
 }
 
+export interface ArithmeticSequenceCalculator{ 
+    first_term:string,
+    common_difference: string,
+    number_of_observation: string,
+    method: string
+}
