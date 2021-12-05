@@ -4,6 +4,7 @@ import SpecifiedSearchForm from '../forms/SpecifiedSearchForm'
 import { SingleSlider } from '../slider/SingleSlider'
 import { NavBar2 } from '../navbar/navbar2'
 
+
 export default function AddLayout({children}:any){
     return(
         <>

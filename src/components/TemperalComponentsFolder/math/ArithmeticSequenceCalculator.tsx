@@ -1,3 +1,8 @@
+/**
+ * 
+ * THIS MAKES THE Arithmetic Sequence Calculator FORM
+ */
+
 import React, { useRef } from 'react'
 import CustomForm from '../../forms/CustomForm'
 import { Field, Form, Formik, FormikProps } from 'formik'
@@ -5,26 +10,17 @@ import { mathMainService } from '../../../services/mathService/mathMainService'
 import Anime from 'react-animejs-wrapper'
 import AddLayout from '../../layouts/AddLayout'
 import { Box, Grid } from '@mui/material'
-
-const boxStyle = {
-    width: 1,
-    p: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: 10,
-    minHeight: 150
- }
+const Latex = require('react-latex');
 
  const innerBoxStyle = {
     width: 400,
-    minHeight: 300,
+    minHeight: 150,
     borderRadius: 10,
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
     backgroundColor: 'white'
  }
 
-export function ArithmeticSequenceCalculator(){
-
+export default function ArithmeticSequenceCalculator(){
     const animatedSquaresRef1 = useRef(null)
     const animatedSquaresRef2= useRef(null)
   
@@ -67,7 +63,16 @@ export function ArithmeticSequenceCalculator(){
                             method: "ArithmeticSequenceCalculator"
                         }}
                         onSubmit = {(values)=>{
-                            console.log("I am submmited ", values)
+                            const data = {
+                                first_term: values.first_term,
+                                common_difference: values.common_difference,
+                                number_of_observation: values.number_of_observation,
+                                method: values.method
+                            }
+
+                            const responseData = await mathMainService(data)
+
+                            console.log(responseData)
                         }}>
                             
                         {({
@@ -133,11 +138,8 @@ export function ArithmeticSequenceCalculator(){
                                        </Grid>
                                        <Grid item xs={4}></Grid>
                                        <Grid item xs={4}>
-                                       <Box>
-                                                <button type="button" onClick={()=>{
-                                                    play1();
-                                                    play2();
-                                                }}>
+                                            <Box>
+                                                <button type="submit">
                                                     Calculate
                                                 </button>
                                             </Box>
@@ -149,6 +151,12 @@ export function ArithmeticSequenceCalculator(){
                     </Formik>
                 </div>
             </Anime>
+
+
+            {/*
+                Component displays the results 
+            
+            */}
 
             <Anime
                 style={{
@@ -162,13 +170,28 @@ export function ArithmeticSequenceCalculator(){
                     easing: 'easeInOutSine',
                     autoplay: false,
                 }}>
-                 <div style={innerBoxStyle}>
-                    <p>Display Answer</p>
-                </div>
+                 <Box style={innerBoxStyle} >
+                    <Box sx={{  minHeight: 300, display:'flex', flexDirection:'column' }}>
+                        <Box sx={{marginLeft: 5}}>
+                            <Box sx={{marginBottom: 2}}>
+                                <Latex displayMode={false}>{`$a_{n} = a+(n-1)d$`}</Latex>
+                            </Box>
+                            <Box sx={{marginBottom: 2}}>
+                                <Latex displayMode={false}>{`$S_{n} = \\displaystyle \\sum_{i=1}^{10} t_i$`}</Latex>
+                            </Box>
+                            <Box sx={{marginBottom: 2}}>
+                                <Latex displayMode={false}>{`$answer = $`}</Latex>
+                            </Box>
+                        </Box>
+                        <Box sx={{flexGrow: 1}}>
+                            {/* 
+                                Flex box pushes submit button down
+                            */}
+                        </Box>
+                    </Box>
+                </Box>
             </Anime>
-            
             </Box>
-            
         </AddLayout>
     );
 }

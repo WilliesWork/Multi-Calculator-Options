@@ -7,10 +7,12 @@ import { AppBar } from '@mui/material'
 import Link from '@mui/material/Link';
 import { SearchForm } from '../forms/searchForm';
 import { useHistory } from 'react-router-dom'
-import { CircleArea,Area,BallSurfaceArea} from './index'
-import { FibonacciCalculator } from '../TemperalComponentsFolder/math/FibonacciCalculator'
-import { FactorCalculator } from  '../TemperalComponentsFolder/math/FactorCalculator'
-import { ArithmeticSequenceCalculator } from  '../TemperalComponentsFolder/math/ArithmeticSequenceCalculator'
+
+// 
+import ArithmeticSequenceCalculator from  '../TemperalComponentsFolder/math/ArithmeticSequenceCalculator'
+import AverageCalculator from '../TemperalComponentsFolder/math//AverageCalculator'
+
+//
 import {
     BrowserRouter as Router,
     Switch,
@@ -39,6 +41,7 @@ export default function TestPage(){
     return(
         <>
           <ArithmeticSequenceCalculator />
+          {/* <AverageCalculator /> */}
         </>
     );
 }

@@ -5,7 +5,8 @@ import * as INTERFACES from '../types/mathTypes'
 export async function mathMainService(
     dataObject:
     INTERFACES.FibonacciCalculator|
-    INTERFACES.ArithmeticSequenceCalculator
+    INTERFACES.ArithmeticSequenceCalculator|
+    INTERFACES.AverageCalculator
     ){
     try{
         const { data } = await axiosInstance.post(mathRoute, dataObject);

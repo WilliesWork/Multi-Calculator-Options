@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import CustomForm from '../../forms/CustomForm'
 import { Field, Form, Formik, FormikProps } from 'formik'
+import { mathMainService } from '../../../services/mathService/mathMainService'
+import Anime from 'react-animejs-wrapper'
+import AddLayout from '../../layouts/AddLayout'
+import { Box, Grid } from '@mui/material'
 
 export function ZscoreCalculator(){
     return(
@@ -27,8 +31,7 @@ export function ZscoreCalculator(){
                             <label style={{ marginRight: 10 }}>Raw Acore</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="raw_score"
                                 onChange={handleChange}
                                 value={values.raw_score}
                                 placeholder=""
@@ -38,8 +41,7 @@ export function ZscoreCalculator(){
                             <label style={{ marginRight: 10 }}>Population Mean</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="population_mean"
                                 onChange={handleChange}
                                 value={values.population_mean}
                                 placeholder=""
@@ -49,8 +51,7 @@ export function ZscoreCalculator(){
                             <label style={{ marginRight: 10 }}>Standard Deviation</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="standard_deviation"
                                 onChange={handleChange}
                                 value={values.standard_deviation}
                                 placeholder=""

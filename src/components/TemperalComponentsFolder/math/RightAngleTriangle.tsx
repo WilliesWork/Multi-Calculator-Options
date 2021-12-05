@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import CustomForm from '../../forms/CustomForm'
 import { Field, Form, Formik, FormikProps } from 'formik'
+import { mathMainService } from '../../../services/mathService/mathMainService'
+import Anime from 'react-animejs-wrapper'
+import AddLayout from '../../layouts/AddLayout'
+import { Box, Grid } from '@mui/material'
 
 export function RightAngleTriangle(){
     return(
@@ -28,8 +32,7 @@ export function RightAngleTriangle(){
                             <label style={{ marginRight: 10 }}>Side A</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="sideA"
                                 onChange={handleChange}
                                 value={values.sideA}
                                 placeholder=""
@@ -39,7 +42,7 @@ export function RightAngleTriangle(){
                             <label style={{ marginRight: 10 }}>Side B</label>
                             <CustomForm
                                 type="text"
-                                name="name"
+                                name="sideB"
                                 id="fibonacci"
                                 onChange={handleChange}
                                 value={values.sideB}
@@ -50,8 +53,7 @@ export function RightAngleTriangle(){
                             <label style={{ marginRight: 10 }}>Side C</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="sideC"
                                 onChange={handleChange}
                                 value={values.sideC}
                                 placeholder=""
@@ -61,8 +63,7 @@ export function RightAngleTriangle(){
                             <label style={{ marginRight: 10 }}>Perimeter</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="perimeter"
                                 onChange={handleChange}
                                 value={values.perimeter}
                                 placeholder=""

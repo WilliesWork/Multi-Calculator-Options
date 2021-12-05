@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import { SixFieldForm } from '../../forms/GeneralForms'
-import { Box } from '@mui/material'
-import { pythagoreanTheoremCalculatorService } from '../../../services/mathService/pythagoreanTheoremCalculatorService'
-import { methodPythagoreanTheoremCalculator } from '../../../services/methodNames/methods'
+import React, { useRef } from 'react'
+import CustomForm from '../../forms/CustomForm'
+import { Field, Form, Formik, FormikProps } from 'formik'
+import { mathMainService } from '../../../services/mathService/mathMainService'
+import Anime from 'react-animejs-wrapper'
+import AddLayout from '../../layouts/AddLayout'
+import { Box, Grid } from '@mui/material'
 
 const boxStyle = {
-    border: 0,
     width: 1,
     p: 1,
     display: 'flex',
@@ -15,76 +16,206 @@ const boxStyle = {
  }
 
  const innerBoxStyle = {
-    width: 500,
-    borderRadius: 3,
+    width: 400,
+    minHeight: 300,
+    borderRadius: 10,
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
     backgroundColor: 'white'
  }
 
- const displayStyle = {
-    marginLeft: 5,
-    width: 500,
-    height: '100%',
-    borderRadius: 3,
-    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-    backgroundColor: 'white',
-    minHeight: 200
-}
-
- function DisplayResult(props:any){
-
-    return(
-        <Box sx={{ ...displayStyle }}>
-            <Box
-                sx={{
-                    textAlign: 'left',
-                    fontSize: 18,
-                    fontWeight: 800,
-                    color: '#4173B5',
-                    paddingLeft: 5
-                }}>
-                Result
-            </Box>
-            <Box sx={{ textAlign: 'center' }}>
-                {
-                    props.result
-                }
-            </Box>
-        </Box>
-    );
- }
-
 
 function PythagoreanTheoremCalculator(){
-    const [result, setResult] = useState(0)
 
-    const getResult = (resultData:any) =>{
-        console.log("This is result from AreaConverter", resultData)
-        setResult(resultData)
-    }
+    const animatedSquaresRef1 = useRef(null)
+    const animatedSquaresRef2= useRef(null)
+  
+    // @ts-ignore: Object is possibly 'null'.
+    const play1 = () => animatedSquaresRef1.current.play();
+    // @ts-ignore: Object is possibly 'null'.
+    const play2 = () => animatedSquaresRef2.current.play();
 
-     return(
-         <Box sx={{ ...boxStyle }}>
-             <Box sx={{ ...innerBoxStyle }}>
-                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <Box sx={{height:30, width: '100%' }}></Box>
-                    <Box sx={{
-                            height:30, width: '100%', 
-                            backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                            borderRadius: '0 10px 3px', 
-                        }}></Box>
-                 </Box>
-                 <SixFieldForm 
-                 fieldName1="A Value"
-                 fieldName2="A Squared"
-                 fieldName3="B Value"
-                 fieldName4="B Squared"
-                 fieldName5="C value"
-                 fieldName6="C squared"
-                 serviceFunction={pythagoreanTheoremCalculatorService}
-                 serviceMethodName = {methodPythagoreanTheoremCalculator}/>
-             </Box>
-         </Box>
+
+    return(
+        <AddLayout>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Anime
+                style={{
+                    position: 'absolute',
+                }}
+                ref={animatedSquaresRef1}
+                config={{
+                    translateX: -250,
+                //   direction: 'alternate',
+                    easing: 'easeInOutSine',
+                    autoplay: false,
+                }}>
+                <div style={innerBoxStyle}>
+                    
+
+                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                        <Box sx={{height:30, width: '100%' }}></Box>
+                        <Box sx={{
+                                height:30, width: '100%', 
+                                backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
+                                borderRadius: '0 10px 3px', 
+                            }}></Box>
+                    </Box>
+                    <Formik
+                        initialValues={{ 
+                            a_value:"",
+                            aSquared: "",
+                            b_value: "",
+                            bSquared:"",
+                            c_value: "",
+                            cSquared: "",
+                            method: "PythagoreanTheoremCalculator"
+                        }}
+                        onSubmit = {(values)=>{
+                            console.log("I am submmited ", values)
+                        }}>
+                            
+                        {({
+                            values,
+                            handleChange,
+                            handleSubmit,
+                            isSubmitting
+                        }) => (
+                            <form onSubmit={handleSubmit}>
+                                <Box sx={{  minHeight: 300, display:'flex', flexDirection:'column' }}>
+                                    <Grid container={true} >
+
+                                        <Grid item={true} xs={5} ><Box>A Value</Box></Grid>
+                                        <Grid item={true} xs={7}>
+                                            <CustomForm
+                                                type="text"
+                                                name="a_value"
+                                                onChange={handleChange}
+                                                value={values.a_value}
+                                                placeholder=""
+                                            />
+                                        </Grid>
+                
+                                        <Grid item xs={5}><label style={{ marginRight: 10 }}>A Squared</label></Grid>
+                                        <Grid item xs={7}>
+                                        <CustomForm
+                                            type="text"
+                                            name="aSquared"
+                                            onChange={handleChange}
+                                            value={values.aSquared}
+                                            placeholder=""
+                                        />
+                                        </Grid>
+                                    
+                                        <Grid item xs={5}><label style={{ marginRight: 10 }}>B Value</label></Grid>
+                                        <Grid item xs={7}>
+                                            <CustomForm
+                                                type="text"
+                                                name="b_value"
+                                                onChange={handleChange}
+                                                value={values.b_value}
+                                                placeholder=""
+                                            />
+                                        
+                                        </Grid>     
+
+                                        <Grid item xs={5}><label style={{ marginRight: 10 }}>B Squared</label></Grid>
+                                        <Grid item xs={7}>
+                                            <CustomForm
+                                                type="text"
+                                                name="bSquared"
+                                                onChange={handleChange}
+                                                value={values.bSquared}
+                                                placeholder=""
+                                            />
+                                        
+                                        </Grid>        
+
+                                        <Grid item xs={5}><label style={{ marginRight: 10 }}>C Value</label></Grid>
+                                        <Grid item xs={7}>
+                                            <CustomForm
+                                                type="text"
+                                                name="c_value"
+                                                onChange={handleChange}
+                                                value={values.c_value}
+                                                placeholder=""
+                                            />
+                                        
+                                        </Grid>        
+
+                                        <Grid item xs={5}><label style={{ marginRight: 10 }}>C Squared</label></Grid>
+                                        <Grid item xs={7}>
+                                            <CustomForm
+                                                type="text"
+                                                name="cSquared"
+                                                onChange={handleChange}
+                                                value={values.cSquared}
+                                                placeholder=""
+                                            />
+                                        
+                                        </Grid>      
+                                    </Grid>
+                                    <Box sx={{ flexGrow: 1}}>
+                                        {/* 
+                                            Flex box pushes submit button down
+                                        */}
+                                    </Box>
+
+                                   <Grid container sx={{ border:''}}>
+                                       <Grid item xs={4}>
+                                            <Box>
+                                                <button type="button" onClick={()=>{
+                                                    play1();
+                                                    play2();
+                                                }}>
+                                                    Clear
+                                                </button>
+                                            </Box>
+                                       </Grid>
+                                       <Grid item xs={4}></Grid>
+                                       <Grid item xs={4}>
+                                       <Box>
+                                                <button type="button" onClick={()=>{
+                                                    play1();
+                                                    play2();
+                                                }}>
+                                                    Calculate
+                                                </button>
+                                            </Box>
+                                       </Grid>
+                                   </Grid>
+                                </Box>
+                            </form>
+                        )}
+                    </Formik>
+                </div>
+            </Anime>
+
+
+            {/*
+                Component displays the results 
+            
+            */}
+
+            <Anime
+                style={{
+                    position: 'absolute',
+                    zIndex: -5
+                }}
+                ref={animatedSquaresRef2}
+                config={{
+                    translateX: 200,
+                //   direction: 'alternate',
+                    easing: 'easeInOutSine',
+                    autoplay: false,
+                }}>
+                 <div style={innerBoxStyle}>
+                    <p>Display Answer</p>
+                </div>
+            </Anime>
+            
+            </Box>
+            
+        </AddLayout>
     );
 }
 

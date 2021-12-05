@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import CustomForm from '../../forms/CustomForm'
 import { Field, Form, Formik, FormikProps } from 'formik'
+import { mathMainService } from '../../../services/mathService/mathMainService'
+import Anime from 'react-animejs-wrapper'
+import AddLayout from '../../layouts/AddLayout'
+import { Box, Grid } from '@mui/material'
 
 export function RatioCalculator(){
     return(
@@ -28,8 +32,7 @@ export function RatioCalculator(){
                             <label style={{ marginRight: 10 }}>A</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="a"
                                 onChange={handleChange}
                                 value={values.a}
                                 placeholder=""
@@ -39,8 +42,7 @@ export function RatioCalculator(){
                             <label style={{ marginRight: 10 }}>B</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="b"
                                 onChange={handleChange}
                                 value={values.b}
                                 placeholder=""
@@ -50,8 +52,7 @@ export function RatioCalculator(){
                             <label style={{ marginRight: 10 }}>C</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="c"
                                 onChange={handleChange}
                                 value={values.c}
                                 placeholder=""
@@ -61,8 +62,7 @@ export function RatioCalculator(){
                             <label style={{ marginRight: 10 }}>D</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="d"
                                 onChange={handleChange}
                                 value={values.d}
                                 placeholder=""

@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import CustomForm from '../../forms/CustomForm'
 import { Field, Form, Formik, FormikProps } from 'formik'
+import { mathMainService } from '../../../services/mathService/mathMainService'
+import Anime from 'react-animejs-wrapper'
+import AddLayout from '../../layouts/AddLayout'
+import { Box, Grid } from '@mui/material'
 
 export function ProteinCalculator(){
     return(
@@ -32,8 +36,7 @@ export function ProteinCalculator(){
                             <label style={{ marginRight: 10 }}>Height</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="height"
                                 onChange={handleChange}
                                 value={values.height}
                                 placeholder=""
@@ -43,8 +46,7 @@ export function ProteinCalculator(){
                             <label style={{ marginRight: 10 }}>Height Unit</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="height_unit"
                                 onChange={handleChange}
                                 value={values.height_unit}
                                 placeholder=""
@@ -54,8 +56,7 @@ export function ProteinCalculator(){
                             <label style={{ marginRight: 10 }}>Weight</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="weight"
                                 onChange={handleChange}
                                 value={values.weight}
                                 placeholder=""
@@ -65,8 +66,7 @@ export function ProteinCalculator(){
                             <label style={{ marginRight: 10 }}>Weight Unit</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="weight_unit"
                                 onChange={handleChange}
                                 value={values.weight_unit}
                                 placeholder=""
@@ -76,8 +76,7 @@ export function ProteinCalculator(){
                             <label style={{ marginRight: 10 }}>Gender</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="gender"
                                 onChange={handleChange}
                                 value={values.gender}
                                 placeholder=""
@@ -87,8 +86,7 @@ export function ProteinCalculator(){
                             <label style={{ marginRight: 10 }}>Age</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="age"
                                 onChange={handleChange}
                                 value={values.age}
                                 placeholder=""
@@ -98,8 +96,7 @@ export function ProteinCalculator(){
                             <label style={{ marginRight: 10 }}>Activity</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="activity"
                                 onChange={handleChange}
                                 value={values.activity}
                                 placeholder=""
@@ -109,8 +106,7 @@ export function ProteinCalculator(){
                             <label style={{ marginRight: 10 }}>BMR Estimation Formula</label>
                             <CustomForm
                                 type="text"
-                                name="name"
-                                id="fibonacci"
+                                name="BMR_estimation_formula"
                                 onChange={handleChange}
                                 value={values.BMR_estimation_formula}
                                 placeholder=""

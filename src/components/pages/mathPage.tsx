@@ -24,9 +24,9 @@ function MathPage(){
             <div className="container d-flex justify-content-center mb-4">
                 <h4>Math Page</h4>
             </div>
-            <StatisticsCalculator/>
+            {/* <StatisticsCalculator/> */}
             <AverageCalculator />
-            <PopulationStandardDeviationCalculator />
+            {/* <PopulationStandardDeviationCalculator />
             <SampleStandardDeviationCalculator/>
             <ConfidenceIntervalCalculator />
             <PercentageCalculator/>
@@ -40,7 +40,7 @@ function MathPage(){
             <GeneralRootCalculator />
             <GeometricSequencestCalculator />
             <PythagoreanTheoremCalculator />
-            <PermutationCalculator />
+            <PermutationCalculator /> */}
         </div>
     );
 }
