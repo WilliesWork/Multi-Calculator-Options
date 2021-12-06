@@ -1,4 +1,6 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect }from 'react'
+import { CustomFormBtn } from '../../custom/CustomFormBtn'
+import { NavBar2 } from '../../navbar/navbar2'
 import CustomForm from '../../forms/CustomForm'
 import { Field, Form, Formik, FormikProps } from 'formik'
 import { mathMainService } from '../../../services/mathService/mathMainService'
@@ -6,66 +8,199 @@ import Anime from 'react-animejs-wrapper'
 import AddLayout from '../../layouts/AddLayout'
 import { Box, Grid } from '@mui/material'
 
-export function FinalGradeCalculator(){
+const innerBoxStyle = {
+    width: 400,
+    height: 300,
+    borderRadius: 10,
+    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
+    backgroundColor: 'white'
+ }
+
+
+function FinalGradeCalculator(){
+    const [value, setValue] = useState("")
+    const animatedSquaresRef1 = useRef(null)
+    const animatedSquaresRef2= useRef(null)
+  
+    // @ts-ignore: Object is possibly 'null'.
+    const play1 = () => animatedSquaresRef1.current.play();
+    // @ts-ignore: Object is possibly 'null'.
+    const play2 = () => animatedSquaresRef2.current.play();
+    useEffect(()=>{
+        if(value){
+            play1();
+            play2();
+        }
+    })
+
+
     return(
         <>
-            <Formik
-                initialValues={{ 
-                    desired_grade:"",
-                    current_grade:"",
-                    weight_of_final:"",
-                    method: "FinalGradeCalculator"
+        <NavBar2 pagename="Factor Calculator"/>
+        <AddLayout>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Anime
+                style={{
+                    position: 'absolute',
                 }}
-                onSubmit = {(values)=>{
-                    console.log("I am submmited ", values)
+                ref={animatedSquaresRef1}
+                config={{
+                    translateX: -250,
+                //   direction: 'alternate',
+                    easing: 'easeInOutSine',
+                    autoplay: false,
                 }}>
+                <div style={innerBoxStyle}>
                     
-                {({
-                    values,
-                    handleChange,
-                    handleSubmit,
-                    isSubmitting,
-                }) => (
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <label style={{ marginRight: 10 }}>Desired Grad</label>
-                            <CustomForm
-                                type="text"
-                                name="name"
-                                id="fibonacci"
-                                onChange={handleChange}
-                                value={values.desired_grade}
-                                placeholder=""
-                            />
-                        </div>
-                        <div>
-                            <label style={{ marginRight: 10 }}>Current Grade</label>
-                            <CustomForm
-                                type="text"
-                                name="name"
-                                id="fibonacci"
-                                onChange={handleChange}
-                                value={values.current_grade}
-                                placeholder=""
-                            />
-                        </div>
-                        <div>
-                            <label style={{ marginRight: 10 }}>Weight Of Final</label>
-                            <CustomForm
-                                type="text"
-                                name="name"
-                                id="fibonacci"
-                                onChange={handleChange}
-                                value={values.weight_of_final}
-                                placeholder=""
-                            />
-                        </div>
-                        <button type="submit">
-                            Submit
-                        </button>
-                    </form>
-                )}
-            </Formik>
+
+                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                        <Box sx={{height:30, width: '100%' }}></Box>
+                        <Box sx={{
+                                height:30, width: '100%', 
+                                backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
+                                borderRadius: '0 10px 3px', 
+                            }}></Box>
+                    </Box>
+                    <Formik
+                        initialValues={{ 
+                            
+                            desired_grade: "",
+                            current_grade: "",
+                            weight_of_final: "",
+                            method: "FinalGradeCalculator"
+                        }}
+                        onSubmit = {(values)=>{
+                            const data = {
+                                desired_grade: values.desired_grade,
+                                current_grade: values.current_grade,
+                                weight_of_final: values.weight_of_final,
+                                method: values.method
+                            }
+
+                            console.log(data)
+                            const postData = async () => {
+                                const responseData = await mathMainService(data)
+                                var msg:any = responseData.statusDescription;
+                                if(msg === "success"){
+                                    setValue(responseData.message.finalGrade)
+                                    console.log(responseData.message.finalGrade)
+                                }
+                            }
+                            postData()
+                        }}>
+                            
+                        {({
+                            values,
+                            handleChange,
+                            handleSubmit,
+                            isSubmitting
+                        }) => (
+                            <form onSubmit={handleSubmit}>
+                                  <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
+                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                        <Grid item={true} xs={5} ><Box>Desired Grade</Box></Grid>
+                                        <Grid item={true} xs={7}>
+                                            <CustomForm
+                                                type="text"
+                                                name="desired_grade"
+                                                onChange={handleChange}
+                                                value={values.desired_grade}
+                                                placeholder=""
+                                            />
+                                        </Grid>
+                                        <Grid item={true} xs={5} ><Box>Current Grade</Box></Grid>
+                                        <Grid item={true} xs={7}>
+                                            <CustomForm
+                                                type="text"
+                                                name="current_grade"
+                                                onChange={handleChange}
+                                                value={values.current_grade}
+                                                placeholder=""
+                                            />
+                                        </Grid>
+                                        <Grid item={true} xs={5} ><Box>Weight of Final</Box></Grid>
+                                        <Grid item={true} xs={7}>
+                                            <CustomForm
+                                                type="text"
+                                                name="weight_of_final"
+                                                onChange={handleChange}
+                                                value={values.weight_of_final}
+                                                placeholder=""
+                                            />
+                                        </Grid>
+                                                            
+                                    </Grid>
+                                    <Box sx={{ flexGrow: 1}}>
+                                        {/* 
+                                            Flex box pushes submit button down
+                                        */}
+                                    </Box>
+
+                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                       <Grid item xs={4}>
+                                            <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                <CustomFormBtn 
+                                                type="button" 
+                                                handleClick={()=>{ 
+                                                    play1();
+                                                    play2();
+                                                 }} 
+                                                name="Clear"/>
+                                            </Box>
+                                       </Grid>
+                                       <Grid item xs={4}></Grid>
+                                       <Grid item xs={4}>
+                                            <Box sx={{display:"flex", justifyContent:"end"}}>
+                                                <CustomFormBtn type="submit" name="Calculate"/>
+                                            </Box>
+                                       </Grid>
+                                   </Grid>
+                                </Box>
+                            </form>
+                        )}
+                    </Formik>
+                </div>
+            </Anime>
+
+
+            {/*
+                Component displays the results 
+            
+            */}
+
+            <Anime
+                style={{
+                    position: 'absolute',
+                    zIndex: -5
+                }}
+                ref={animatedSquaresRef2}
+                config={{
+                    translateX: 200,
+                //   direction: 'alternate',
+                    easing: 'easeInOutSine',
+                    autoplay: false,
+                }}>
+                 <Box style={innerBoxStyle}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                        <Box sx={{height:30, width: '100%' }}></Box>
+                        <Box sx={{
+                                height:30, width: '100%', 
+                                // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
+                                borderRadius: '0 10px 3px', 
+                            }}></Box>
+                    </Box>
+                    <Box sx={{marginLeft: 5}}>
+                        <h5>Display Answer</h5>
+                        <p>{value}</p>
+                    </Box>
+                </Box>
+            </Anime>
+            
+            </Box>
+            
+        </AddLayout>
         </>
     );
 }
+
+export default FinalGradeCalculator

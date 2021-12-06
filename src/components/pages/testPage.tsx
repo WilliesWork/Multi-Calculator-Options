@@ -10,7 +10,8 @@ import { useHistory } from 'react-router-dom'
 
 // 
 import ArithmeticSequenceCalculator from  '../TemperalComponentsFolder/math/ArithmeticSequenceCalculator'
-import AverageCalculator from '../TemperalComponentsFolder/math//AverageCalculator'
+import AverageCalculator from '../TemperalComponentsFolder/math/AverageCalculator'
+import ZscoreCalculator from '../TemperalComponentsFolder/math/ZscoreCalculator'
 
 //
 import {
@@ -40,8 +41,7 @@ import ExponentForm from '../forms/math/ExponentForm'
 export default function TestPage(){
     return(
         <>
-          <ArithmeticSequenceCalculator />
-          {/* <AverageCalculator /> */}
+          <ZscoreCalculator />
         </>
     );
 }

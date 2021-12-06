@@ -45,9 +45,7 @@ function MathCategories(){
             mathRoutes.subCategories[0].sub_calculator.map((r:any) => {
               return (
                 <Route key={r} path={r.path}>
-                  <AddLayout>
                     <r.component />
-                  </AddLayout>
                 </Route>
               );
             })
@@ -56,9 +54,7 @@ function MathCategories(){
             mathRoutes.subCategories[1].sub_calculator.map((r:any) => {
               return (
                 <Route key={r} path={r.path}>
-                  <AddLayout>
-                    <r.component />
-                  </AddLayout>
+                  <r.component />
                 </Route>
               );
             })

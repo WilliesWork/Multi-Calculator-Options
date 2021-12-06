@@ -3,6 +3,7 @@ import React from 'react'
 const CustomForm = (props: any) => {
     return (
         <input
+        style={{width:'100%'}}
           name={props.name}
           id={props.id}
           type={props.type}

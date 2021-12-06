@@ -41,9 +41,7 @@ function OtherPage(){
           </Route>
           {othersRoutes.subCategories[5].sub_calculator.map((route, i) => (
                 <Route key={route.name} path={route.path} >{
-                    <AddLayout>
                       <route.component />
-                    </AddLayout>
                 }</Route>
             ))}
         </Switch>

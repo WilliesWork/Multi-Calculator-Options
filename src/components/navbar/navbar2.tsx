@@ -59,7 +59,7 @@ function NavBar2(props:any){
                                         sx={{
                                             color: '#8591B0'
                                         }}>
-                                            CalculatorMap
+                                            {props.pagename}
                                         </Box>
                                     
                                 </Typography>

@@ -8,7 +8,6 @@ import { NavBar2 } from '../navbar/navbar2'
 export default function AddLayout({children}:any){
     return(
         <>
-            <NavBar2/>
             <Box 
                 sx={{
                     border: 0,

@@ -1,31 +1,25 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import CustomForm from '../../forms/CustomForm'
 import { Field, Form, Formik, FormikProps } from 'formik'
 import { mathMainService } from '../../../services/mathService/mathMainService'
 import Anime from 'react-animejs-wrapper'
 import AddLayout from '../../layouts/AddLayout'
 import { Box, Grid } from '@mui/material'
+import { CustomFormBtn } from '../../custom/CustomFormBtn'
+import { NavBar2 } from '../../navbar/navbar2'
 
 
-const boxStyle = {
-    width: 1,
-    p: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: 10,
-    minHeight: 150
- }
-
- const innerBoxStyle = {
+const innerBoxStyle = {
     width: 400,
-    minHeight: 300,
+    height: 300,
     borderRadius: 10,
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
     backgroundColor: 'white'
  }
 
 
-function TwoDDistanceCalculator(){
+export default function TwoDDistanceCalculator(){
+    const [value, setValue] = useState("")
     const animatedSquaresRef1 = useRef(null)
     const animatedSquaresRef2= useRef(null)
   
@@ -33,160 +27,175 @@ function TwoDDistanceCalculator(){
     const play1 = () => animatedSquaresRef1.current.play();
     // @ts-ignore: Object is possibly 'null'.
     const play2 = () => animatedSquaresRef2.current.play();
-
-
+    useEffect(()=>{
+        if(value){
+            play1();
+            play2();
+        }
+    })
     return(
+        <>
+        <NavBar2 pagename="2D Distance Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <Anime
-                style={{
-                    position: 'absolute',
-                }}
-                ref={animatedSquaresRef1}
-                config={{
-                    translateX: -250,
-                //   direction: 'alternate',
-                    easing: 'easeInOutSine',
-                    autoplay: false,
-                }}>
-                <div style={innerBoxStyle}>
-                    
+                <Anime
+                    style={{
+                        position: 'absolute',
+                    }}
+                    ref={animatedSquaresRef1}
+                    config={{
+                        translateX: -250,
+                    //   direction: 'alternate',
+                        easing: 'easeInOutSine',
+                        autoplay: false,
+                    }}>
+                    <div style={innerBoxStyle}>
+                        
 
-                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:30, width: '100%' }}></Box>
-                        <Box sx={{
-                                height:30, width: '100%', 
-                                backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                borderRadius: '0 10px 3px', 
-                            }}></Box>
-                    </Box>
-                    <Formik
-                        initialValues={{ 
-                            x_1:"",
-                            x_2:"",
-                            y_1:"",
-                            y_2:"",
-                            method: "TwoDDistanceCalculator"
-                        }}
-                        onSubmit = {(values)=>{
-                            console.log("I am submmited ", values)
-                        }}>
-                            
-                        {({
-                            values,
-                            handleChange,
-                            handleSubmit,
-                            isSubmitting
-                        }) => (
-                            <form onSubmit={handleSubmit}>
-                                <Box sx={{  minHeight: 300, display:'flex', flexDirection:'column' }}>
-                                    <Grid container={true} >
+                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                            <Box sx={{height:30, width: '100%' }}></Box>
+                            <Box sx={{
+                                    height:30, width: '100%', 
+                                    backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
+                                    borderRadius: '0 10px 3px', 
+                                }}></Box>
+                        </Box>
+                        <Formik
+                            initialValues={{ 
+                                x_1:"",
+                                x_2:"",
+                                y_1:"",
+                                y_2:"",
+                                method: "TwoDDistanceCalculator"
+                            }}
+                            onSubmit = {(values)=>{
+                               
+                                const data = {
+                                    "x-1": values.x_1,
+                                    "x-2": values.x_2,
+                                    "y-1": values.y_1,
+                                    "y-2": values.y_2,
+                                    method: values.method
+                                }
+                                console.log(data)
+                                const postData = async () => {
+                                    const responseData = await mathMainService(data)
+                                    
+                                    var msg:any = responseData.statusDescription;
+                                    if(msg === "success"){
+                                        console.log("Hacking is beautiful")
+                                        setValue(responseData.message.distance)
+                                        console.log(responseData)
+                                    }
+                                }
+                                postData()
+                            }}>
+                                
+                            {(props: FormikProps<any>) => (
+                                <Form>
+                                    <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
+                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
-                                        <Grid item={true} xs={5} ><Box>x 1</Box></Grid>
-                                        <Grid item={true} xs={7}>
-                                            <CustomForm
-                                                type="text"
-                                                name="x_1"
-                                                onChange={handleChange}
-                                                value={values.x_1}
-                                                placeholder=""
-                                            />
+                                            <Grid item={true} xs={5} ><Box>x_1</Box></Grid>
+                                            <Grid item={true} xs={7}>
+                                            <Field
+                                                    type="text"
+                                                    name="x_1"
+                                                    placeholder=""
+                                                />
+                                            </Grid>
+
+                                            <Grid item={true} xs={5} ><Box>x_2</Box></Grid>
+                                            <Grid item={true} xs={7}>
+                                            <Field
+                                                    type="text"
+                                                    name="x_2"
+                                                    placeholder=""
+                                                />
+                                            </Grid>
+                                            
+                                            <Grid item={true} xs={5} ><Box>y_1</Box></Grid>
+                                            <Grid item={true} xs={7}>
+                                            <Field
+                                                    type="text"
+                                                    name="y_1"
+                                                    placeholder=""
+                                                />
+                                            </Grid>
+
+                                            <Grid item={true} xs={5} ><Box>y_2</Box></Grid>
+                                            <Grid item={true} xs={7}>
+                                            <Field
+                                                    type="text"
+                                                    name="y_2"
+                                                    placeholder=""
+                                                />
+                                            </Grid>
+
+                                            
+                                                            
                                         </Grid>
-                                        <Grid item={true} xs={5} ><Box>x 2</Box></Grid>
-                                        <Grid item={true} xs={7}>
-                                            <CustomForm
-                                                type="text"
-                                                name="x_2"
-                                                onChange={handleChange}
-                                                value={values.x_2}
-                                                placeholder=""
-                                            />
+                                        <Box sx={{ flexGrow: 1}}>
+                                            {/* 
+                                                Flex box pushes submit button down
+                                            */}
+                                        </Box>
+
+                                    <Grid container rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                        <Grid item xs={4}>
+                                                <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                    <CustomFormBtn 
+                                                    type="button" 
+                                                    handleClick={()=>{ 
+                                                        play1();
+                                                        play2();
+                                                    }} 
+                                                    name="Clear"/>
+                                                </Box>
                                         </Grid>
-                                        <Grid item={true} xs={5} ><Box>y 1</Box></Grid>
-                                        <Grid item={true} xs={7}>
-                                            <CustomForm
-                                                type="text"
-                                                name="y_1"
-                                                onChange={handleChange}
-                                                value={values.y_1}
-                                                placeholder=""
-                                            />
+                                        <Grid item xs={4}></Grid>
+                                        <Grid item xs={4}>
+                                                <Box sx={{display:"flex", justifyContent:"end"}}>
+                                                    <CustomFormBtn type="submit" name="Calculate"/>
+                                                </Box>
                                         </Grid>
-                                        <Grid item={true} xs={5} ><Box>y 2</Box></Grid>
-                                        <Grid item={true} xs={7}>
-                                            <CustomForm
-                                                type="text"
-                                                name="y_2"
-                                                onChange={handleChange}
-                                                value={values.y_2}
-                                                placeholder=""
-                                            />
-                                        </Grid>
-                                  
                                     </Grid>
-                                    <Box sx={{ flexGrow: 1}}>
-                                        {/* 
-                                            Flex box pushes submit button down
-                                        */}
                                     </Box>
+                                </Form>
+                            )}
+                        </Formik>
+                    </div>
+                </Anime>
 
-                                   <Grid container sx={{ border:''}}>
-                                       <Grid item xs={4}>
-                                            <Box>
-                                                <button type="button" onClick={()=>{
-                                                    play1();
-                                                    play2();
-                                                }}>
-                                                    Clear
-                                                </button>
-                                            </Box>
-                                       </Grid>
-                                       <Grid item xs={4}></Grid>
-                                       <Grid item xs={4}>
-                                       <Box>
-                                                <button type="button" onClick={()=>{
-                                                    play1();
-                                                    play2();
-                                                }}>
-                                                    Calculate
-                                                </button>
-                                            </Box>
-                                       </Grid>
-                                   </Grid>
-                                </Box>
-                            </form>
-                        )}
-                    </Formik>
-                </div>
-            </Anime>
-
-
-            {/*
-                Component displays the results 
-            
-            */}
-
-            <Anime
-                style={{
-                    position: 'absolute',
-                    zIndex: -5
-                }}
-                ref={animatedSquaresRef2}
-                config={{
-                    translateX: 200,
-                //   direction: 'alternate',
-                    easing: 'easeInOutSine',
-                    autoplay: false,
-                }}>
-                 <div style={innerBoxStyle}>
-                    <p>Display Answer</p>
-                </div>
-            </Anime>
-            
+                <Anime
+                    style={{
+                        position: 'absolute',
+                        zIndex: -5
+                    }}
+                    ref={animatedSquaresRef2}
+                    config={{
+                        translateX: 200,
+                    //   direction: 'alternate',
+                        easing: 'easeInOutSine',
+                        autoplay: false,
+                    }}>
+                    <Box style={innerBoxStyle}>
+                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                            <Box sx={{height:30, width: '100%' }}></Box>
+                            <Box sx={{
+                                    height:30, width: '100%', 
+                                    // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
+                                    borderRadius: '0 10px 3px', 
+                                }}></Box>
+                        </Box>
+                        <Box sx={{marginLeft: 5}}>
+                            <h5>Display Answer</h5>
+                            <p>{value}</p>
+                        </Box>
+                    </Box>
+                </Anime>
             </Box>
-            
         </AddLayout>
+        </>
     );
 }
-
-export default TwoDDistanceCalculator

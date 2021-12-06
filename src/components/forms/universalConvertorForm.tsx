@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Grid, Box, Typography, LinearProgress } from '@mui/material'
 import { Field, Form, Formik, FormikProps } from 'formik';
-
+import { CustomFormBtn } from '../custom/CustomFormBtn'
 function UniversalConverterForm(props:any){
     // using the useState ehook
     const [optionsData, setData] = useState([]); //for getting units
@@ -63,8 +63,8 @@ function UniversalConverterForm(props:any){
                     {(props: FormikProps<any>) => (
                     <Form >
                       
-                        <Grid container spacing={4} sx={{border:"solid"}}>
-                            <Grid item xs={12} md={4} sx={{border:"solid", borderColor:'red'}}> 
+                        <Grid container spacing={4}>
+                            <Grid item xs={12} md={4} > 
                                 <Typography component="div">
                                     <Box sx={{ fontSize: 18, fontWeight: 500}}>
                                         Value
@@ -115,11 +115,11 @@ function UniversalConverterForm(props:any){
                             <Grid item xs={12} >
                               <Grid container spacing={0}>
                                 <Grid item xs={4}>
-                                  <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="button">Clear</Button>
+                                  <CustomFormBtn type="button" name="Clear"/>
                                 </Grid>
                                 <Grid item xs={4}></Grid>
                                 <Grid sx={{  display: 'flex', justifyContent: 'right' }} item xs={4}>
-                                  <Button sx={{ textTransform: 'none', borderRadius: 10, width: 100, height: 20, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} type="submit">calculate</Button>
+                                  <CustomFormBtn type="submit" name="Calculate"/>
                                 </Grid>
                             </Grid>
                           </Grid>

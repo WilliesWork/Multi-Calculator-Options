@@ -240,7 +240,7 @@ export interface ProteinCalculator{
     weight: string,
     weight_unit: string,
     gender: string,
-    age: string,
+    age: number,
     activity: string,
     BMR_estimation_formula: string,
     method: string
