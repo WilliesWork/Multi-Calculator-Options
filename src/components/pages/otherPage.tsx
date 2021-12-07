@@ -26,7 +26,7 @@ function OtherPage(){
          
           <Switch>  
           <Route exact path={path}>
-            <NavBar2 otherHighLight={true}/>
+            <NavBar2 pagename="Other Calculators" otherHighLight={true}/>
             <Box
               sx={{
               display: 'flex',

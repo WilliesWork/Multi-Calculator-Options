@@ -43,6 +43,24 @@ function MathOptions(){
                     borderRadius: 5, 
                     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
                     }} >  
+                    <p style={{ marginTop: 5 }}>Fractions Calculators</p>
+                </Box>
+                <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
+                    {
+                        mathRoutes.subCategories[0].sub_calculator.map((r:any) => {
+                            return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
+                        })
+                    }
+                </Box>
+            </Box>
+            <Box sx={{...boxStyle }}>
+                <Box sx={{ 
+                    paddingLeft: 2,
+                    width: '100',
+                    backgroundColor: 'white',
+                    borderRadius: 5, 
+                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
+                    }} >  
                     <p style={{ marginTop: 5 }}>General Calculators</p>
                 </Box>
                 <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
@@ -53,9 +71,78 @@ function MathOptions(){
                     }
                 </Box>
             </Box>
-            <Box></Box>
-            <Box></Box>
-            <Box></Box>
+            <Box sx={{...boxStyle }}>
+                <Box sx={{ 
+                    paddingLeft: 2,
+                    width: '100',
+                    backgroundColor: 'white',
+                    borderRadius: 5, 
+                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
+                    }} >  
+                    <p style={{ marginTop: 5 }}>Algebra Calculators</p>
+                </Box>
+                <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
+                    {
+                        mathRoutes.subCategories[2].sub_calculator.map((r:any) => {
+                            return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
+                        })
+                    }
+                </Box>
+            </Box>
+            <Box sx={{...boxStyle }}>
+                <Box sx={{ 
+                    paddingLeft: 2,
+                    width: '100',
+                    backgroundColor: 'white',
+                    borderRadius: 5, 
+                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
+                    }} >  
+                    <p style={{ marginTop: 5 }}>Statistics Calculators</p>
+                </Box>
+                <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
+                    {
+                        mathRoutes.subCategories[3].sub_calculator.map((r:any) => {
+                            return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
+                        })
+                    }
+                </Box>
+            </Box>
+            <Box sx={{...boxStyle }}>
+                <Box sx={{ 
+                    paddingLeft: 2,
+                    width: '100',
+                    backgroundColor: 'white',
+                    borderRadius: 5, 
+                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
+                    }} >  
+                    <p style={{ marginTop: 5 }}>Geometry Calculators</p>
+                </Box>
+                <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
+                    {
+                        mathRoutes.subCategories[4].sub_calculator.map((r:any) => {
+                            return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
+                        })
+                    }
+                </Box>
+            </Box>
+            <Box sx={{...boxStyle }}>
+                <Box sx={{ 
+                    paddingLeft: 2,
+                    width: '100',
+                    backgroundColor: 'white',
+                    borderRadius: 5, 
+                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
+                    }} >  
+                    <p style={{ marginTop: 5 }}>Measurements Calculators</p>
+                </Box>
+                <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
+                    {
+                        mathRoutes.subCategories[5].sub_calculator.map((r:any) => {
+                            return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
+                        })
+                    }
+                </Box>
+            </Box>
         </Slider>
         <Box >
             <Box sx={{

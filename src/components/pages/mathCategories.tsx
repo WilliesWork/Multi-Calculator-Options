@@ -26,7 +26,7 @@ function MathCategories(){
         <div>
           <Switch>
           <Route exact path={path}>
-            <NavBar2 mathHighLight={true}/>
+            <NavBar2 pagename="Math Calculators" mathHighLight={true}/>
             <Box
               sx={{
               display: 'flex',
@@ -52,6 +52,42 @@ function MathCategories(){
           }
           {
             mathRoutes.subCategories[1].sub_calculator.map((r:any) => {
+              return (
+                <Route key={r} path={r.path}>
+                  <r.component />
+                </Route>
+              );
+            })
+          }
+           {
+            mathRoutes.subCategories[2].sub_calculator.map((r:any) => {
+              return (
+                <Route key={r} path={r.path}>
+                  <r.component />
+                </Route>
+              );
+            })
+          }
+           {
+            mathRoutes.subCategories[3].sub_calculator.map((r:any) => {
+              return (
+                <Route key={r} path={r.path}>
+                  <r.component />
+                </Route>
+              );
+            })
+          }
+           {
+            mathRoutes.subCategories[4].sub_calculator.map((r:any) => {
+              return (
+                <Route key={r} path={r.path}>
+                  <r.component />
+                </Route>
+              );
+            })
+          }
+           {
+            mathRoutes.subCategories[5].sub_calculator.map((r:any) => {
               return (
                 <Route key={r} path={r.path}>
                   <r.component />

@@ -25,7 +25,7 @@ function FinancePage(){
 
           <Switch>
           <Route exact path={path}>
-            <NavBar2 financialHighLight={true} />
+            <NavBar2 pagename="Financial Calculators" financialHighLight={true} />
             <Box
               sx={{
               display: 'flex',

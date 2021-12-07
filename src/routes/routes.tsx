@@ -81,12 +81,12 @@ const mathRoutes = {
                   {
                     name: "Fractions Calculator",
                     path: `${mathUrl}/fractionscalculator`,
-                    component: PC.NoComponent
+                    component: TPC.FractionCalculator
                   },
                   {
                     name: "Simplifying Fractions Calculator",
                     path: `${mathUrl}/simplifyfractionscalculator`,
-                    component: PC.NoComponent
+                    component: TPC.SimplifyFractionsCalculator
                   },
                   {
                     name: "Mixed Numbers Calculator",
@@ -96,23 +96,23 @@ const mathRoutes = {
                   {
                     name: "Decimal to Fraction Calculator",
                     path: `${mathUrl}/decimaltofractioncalculator`,
-                    component: PC.NoComponent
+                    component: TPC.DecimalToBinaryCalculator
                   },
                   {
                     name: "Fraction to Decimal Calculator",
                     path: `${mathUrl}/fractiontodecimalcalculator`,
-                    component: PC.NoComponent
+                    component: TPC.FractionToDecimalCalculator
 
                   },
                   {
                     name: "Fraction to Percent Calculator",
                     path: `${mathUrl}/fractiontopercentcalculator`,
-                    component: PC.NoComponent
+                    component: TPC.FractionToPercentageCalculator
                   },
                   {
                     name: "Percent to Fractions Calculator",
                     path: `${mathUrl}/percenttofractionscalculator`,
-                    component: PC.NoComponent
+                    component: TPC.PercentToFractionsCalculator
                   }
                 ]
               },
@@ -127,17 +127,17 @@ const mathRoutes = {
                   {
                     name: "Binary Calculator",
                     path:  `${mathUrl}/binarycalculator`,
-                    component: PC.NoComponent
+                    component: TPC.BinaryCalculator
                   },
                   {
                     name: "Hexadecimal Calculator",
                     path: `${mathUrl}/hexadecimalcalculator`,
-                    component: PC.NoComponent
+                    component: TPC.HexadecimalCalculator
                   },
                   {
                     name: "Ratio Calculator",
                     path: `${mathUrl}/ratiocalculator`,
-                    component: PC.NoComponent
+                    component: TPC.RatioCalculator
                   },
                   {
                     name: "Least Common Multiple (LCM) Calculator",
@@ -152,7 +152,7 @@ const mathRoutes = {
                   {
                     name: "Factor Calculator",
                     path: `${mathUrl}/factorcalculator`,
-                    component: PC.NoComponent
+                    component: TPC.FactorCalculator
                   },
                   {
                     name: "Matrix Calculator",
@@ -162,7 +162,7 @@ const mathRoutes = {
                   {
                     name: "Scientific Notation Calculator",
                     path: `${mathUrl}/sncalculator`,
-                    component: PC.NoComponent
+                    component: TPC.ScientificNotationCalculator
                   }
                 ]
               },
@@ -176,8 +176,8 @@ const mathRoutes = {
                   },
                   {
                     name: "Quadratic Formula Calculator",
-                    path: `${mathUrl}/qfcalculator`,
-                    Component: PC.NoComponent
+                    path: `${mathUrl}/quadformulacalculator`,
+                    component: TPC.QuadraticFormulaCalculator
                   },
                   {
                     name: "Roots Calculator",
@@ -202,27 +202,27 @@ const mathRoutes = {
                   {
                     name: "Standard Diviation Calculator",
                     path: `${mathUrl}/stdcalcaultor`,
-                    component: PC.NoComponent
+                    component: TPC.SampleStandardDeviationCalculator
                   },
                   {
                     name: "Fibonacci Sequency Calculator",
                     path: `${mathUrl}/fscalculator`,
-                    component: PC.NoComponent,
+                    component: TPC.FibonacciCalculator,
                   },
                   {
                     name: "Arithmetic Sequency Calculator",
                     path:`${mathUrl}/arithmeticsequencycalculator`,
-                    component: PC.NoComponent,
+                    component: TPC.ArithmeticSequenceCalculator,
                   },
                   {
                     name: "Geometric Sequency Calculator",
                     path: `${mathUrl}/geometricsequencecalculator`,
-                    component: PC.NoComponent
+                    component: TPC.GeometricSequencestCalculator
                   },
                   {
                     name: "Sample Size Calculator",
                     path: `${mathUrl}/samplesizecalculator`,
-                    component: PC.SampleSizeCalculator
+                    component: TPC.SampleStandardDeviationCalculator
                   },
                   {
                     name: "Probability Calculator",
@@ -232,7 +232,7 @@ const mathRoutes = {
                   {
                     name: "Basic Statistics Calculator",
                     path: `${mathUrl}/basicstatscalculator`,
-                    component: PC.NoComponent
+                    component: TPC.StatisticsCalculator
                   },
                   {
                     name: "Permutations and Combinantion Calculator",
@@ -242,7 +242,7 @@ const mathRoutes = {
                   {
                     name: "Z-Score Calculator",
                     path: `${mathUrl}/z-scorecalculator`,
-                    component: PC.NoComponent
+                    component: TPC.ZscoreCalculator
                   },
                   {
                     name: "Confidence Interval Calculator",
