@@ -14,7 +14,7 @@ import {
   useHistory,
   useRouteMatch
 } from "react-router-dom";
-
+import math_icon from '../../common/assets/math_icon.svg';
 
 
 function MathCategories(){
@@ -26,7 +26,7 @@ function MathCategories(){
         <div>
           <Switch>
           <Route exact path={path}>
-            <NavBar2 pagename="Math Calculators" mathHighLight={true}/>
+            <NavBar2 pageimage={math_icon} pagename="Math Calculators" mathHighLight={true}/>
             <Box
               sx={{
               display: 'flex',

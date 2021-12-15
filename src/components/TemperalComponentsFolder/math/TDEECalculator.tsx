@@ -4,10 +4,11 @@ import { Field, Form, Formik, FormikProps } from 'formik'
 import { mathMainService, otherMainService } from '../../../services/mathService/mathMainService'
 import Anime from 'react-animejs-wrapper'
 import AddLayout from '../../layouts/AddLayout'
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import { CustomFormBtn } from '../../custom/CustomFormBtn'
 import { NavBar2 } from '../../navbar/navbar2'
-
+import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+import { CustomFormikForm, CustomFormikOptions } from '../../forms/CustomForm'
 
 const innerBoxStyle = {
     width: 400,
@@ -44,20 +45,16 @@ export default function TDEECalculator(){
                     ref={animatedSquaresRef1}
                     config={{
                         translateX: -250,
-                    //   direction: 'alternate',
+                        duration: 250,
                         easing: 'easeInOutSine',
                         autoplay: false,
                     }}>
-                    <div style={innerBoxStyle}>
+                    <Box sx={{...formDisplay}}>
                         
 
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:30, width: '100%' }}></Box>
-                            <Box sx={{
-                                    height:30, width: '100%', 
-                                    backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                    borderRadius: '0 10px 3px', 
-                                }}></Box>
+                            <Box sx={{height:25, width: '100%' }}></Box>
+                            <Box sx={{...formCardStyle}}></Box>
                         </Box>
                         <Formik
                             initialValues={{ 
@@ -103,71 +100,84 @@ export default function TDEECalculator(){
                                     <Box sx={{  height: '100%', display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
-                                            <Grid item={true} xs={5} ><Box>Height</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>Height</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="height"
-                                                    placeholder=""
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
 
-                                            <Grid item={true} xs={5} ><Box>Height Unit</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>Height Unit</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="height_unit"
-                                                    placeholder=""
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
 
-                                            <Grid item={true} xs={5} ><Box>weight</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>weight</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="weight"
-                                                    placeholder=""
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
 
-                                            <Grid item={true} xs={5} ><Box>Weight Unit</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>Weight Unit</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="weight_unit"
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
 
-                                            <Grid item={true} xs={5} ><Box>Gender</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>Gender</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="gender"
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
 
-                                            <Grid item={true} xs={5} ><Box>Age</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>Age</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="age"
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
 
-                                            <Grid item={true} xs={5} ><Box>Activity</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>Activity</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="activity"
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
 
                                             
-                                            <Grid item={true} xs={5} ><Box>BMR estimation formula</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>BMR estimation formula</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="BMR_estimation_formula"
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
 
@@ -203,7 +213,7 @@ export default function TDEECalculator(){
                                 </Form>
                             )}
                         </Formik>
-                    </div>
+                    </Box>
                 </Anime>
 
                 <Anime
@@ -214,24 +224,29 @@ export default function TDEECalculator(){
                     ref={animatedSquaresRef2}
                     config={{
                         translateX: 200,
-                    //   direction: 'alternate',
+                        duration: 250,
                         easing: 'easeInOutSine',
                         autoplay: false,
                     }}>
-                    <Box style={innerBoxStyle}>
-                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:30, width: '100%' }}></Box>
-                            <Box sx={{
-                                    height:30, width: '100%', 
-                                    // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                    borderRadius: '0 10px 3px', 
-                                }}></Box>
+                    <Box sx={formDisplay}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                            <Box sx={{height:25, width: '100%' }}>
+                                <Typography>
+                                    <Box
+                                        sx={{
+                                            color:'#4072B5',
+                                            fontWeight:'bold', 
+                                            textAlign:'center'
+                                        }}>Result</Box>
+                                </Typography>
+                            </Box>
+                            <Box sx={{ ...formCardStyle }}></Box>
                         </Box>
-                        <Box sx={{marginLeft: 5}}>
-                            <h5>Display Answer</h5>
-                            <p>{value}</p>
-                        </Box>
+                    <Box sx={{marginLeft: 5}}>
+                        <p>Answer</p>
+                        <p>{value}</p>
                     </Box>
+                </Box>
                 </Anime>
             </Box>
         </AddLayout>

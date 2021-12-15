@@ -9,6 +9,12 @@ import iconLine from '../../common/assets/line.svg';
 import Slider from "react-slick";
 import { mathRoutes } from '../../routes/routes'
 
+import fractions from '../../common/assets/fractions_icon.svg';
+import general_math from '../../common/assets/general_math.svg';
+import algebra_icon from '../../common/assets/algebra_icon.svg';
+import stats from '../../common/assets/stats_icon.svg';
+import geometry_icon from '../../common/assets/geometry_icon.svg';
+
 function MathOptions(){
     const localStorageData = JSON.parse(localStorage.webdata)
     const history = useHistory()
@@ -28,7 +34,7 @@ function MathOptions(){
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 3
       };
 
@@ -36,14 +42,35 @@ function MathOptions(){
         <div style={{ height: 300, }} className="container mt-4">
         <Slider  {...settings}>
             <Box sx={{...boxStyle }}>
-                <Box sx={{ 
-                    paddingLeft: 2,
-                    width: '100',
-                    backgroundColor: 'white',
-                    borderRadius: 5, 
-                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-                    }} >  
-                    <p style={{ marginTop: 5 }}>Fractions Calculators</p>
+                <Box 
+                    sx={{ 
+                        width:'100%',
+                        height: 30, 
+                        fontSize: 22,
+                        display: 'flex',
+                        justifyContent: 'start',
+                        backgroundColor: 'white',
+                        borderRadius: 5,
+                    }}>
+                    <Box sx={{ height: 30, }}>
+                        <img style={{ height: '100%', }} alt="icon" src={fractions} />
+                    </Box>
+                    <Typography>
+                        <Box
+                            sx={{
+                                width: 240,
+                                paddingRight: 3,
+                                paddingLeft: 0.5,
+                                paddingTop: 0.5,
+                                fontSize: 16,
+                                color: '#8591B0',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden', 
+                            }}>
+                                Fraction Calculators
+                        </Box>
+                    </Typography>
+                    
                 </Box>
                 <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
                     {
@@ -54,14 +81,35 @@ function MathOptions(){
                 </Box>
             </Box>
             <Box sx={{...boxStyle }}>
-                <Box sx={{ 
-                    paddingLeft: 2,
-                    width: '100',
-                    backgroundColor: 'white',
-                    borderRadius: 5, 
-                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-                    }} >  
-                    <p style={{ marginTop: 5 }}>General Calculators</p>
+                <Box 
+                    sx={{ 
+                        width:'100%',
+                        height: 30, 
+                        fontSize: 22,
+                        display: 'flex',
+                        justifyContent: 'start',
+                        backgroundColor: 'white',
+                        borderRadius: 5,
+                    }}>
+                    <Box sx={{ height: 30, }}>
+                        <img style={{ height: '100%', }} alt="icon" src={general_math} />
+                    </Box>
+                    <Typography>
+                        <Box
+                            sx={{
+                                width: 240,
+                                paddingRight: 3,
+                                paddingLeft: 0.5,
+                                paddingTop: 0.5,
+                                fontSize: 16,
+                                color: '#8591B0',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden', 
+                            }}>
+                                General Calculators
+                        </Box>
+                    </Typography>
+                    
                 </Box>
                 <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
                     {
@@ -72,14 +120,35 @@ function MathOptions(){
                 </Box>
             </Box>
             <Box sx={{...boxStyle }}>
-                <Box sx={{ 
-                    paddingLeft: 2,
-                    width: '100',
-                    backgroundColor: 'white',
-                    borderRadius: 5, 
-                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-                    }} >  
-                    <p style={{ marginTop: 5 }}>Algebra Calculators</p>
+                <Box 
+                    sx={{ 
+                        width:'100%',
+                        height: 30, 
+                        fontSize: 22,
+                        display: 'flex',
+                        justifyContent: 'start',
+                        backgroundColor: 'white',
+                        borderRadius: 5,
+                    }}>
+                    <Box sx={{ height: 30, }}>
+                        <img style={{ height: '100%', }} alt="icon" src={algebra_icon} />
+                    </Box>
+                    <Typography>
+                        <Box
+                            sx={{
+                                width: 240,
+                                paddingRight: 3,
+                                paddingLeft: 0.5,
+                                paddingTop: 0.5,
+                                fontSize: 16,
+                                color: '#8591B0',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden', 
+                            }}>
+                                Algebra Calculators
+                        </Box>
+                    </Typography>
+                    
                 </Box>
                 <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
                     {
@@ -90,14 +159,35 @@ function MathOptions(){
                 </Box>
             </Box>
             <Box sx={{...boxStyle }}>
-                <Box sx={{ 
-                    paddingLeft: 2,
-                    width: '100',
-                    backgroundColor: 'white',
-                    borderRadius: 5, 
-                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-                    }} >  
-                    <p style={{ marginTop: 5 }}>Statistics Calculators</p>
+                <Box 
+                    sx={{ 
+                        width:'100%',
+                        height: 30, 
+                        fontSize: 22,
+                        display: 'flex',
+                        justifyContent: 'start',
+                        backgroundColor: 'white',
+                        borderRadius: 5,
+                    }}>
+                    <Box sx={{ height: 30, }}>
+                        <img style={{ height: '100%', }} alt="icon" src={stats} />
+                    </Box>
+                    <Typography>
+                        <Box
+                            sx={{
+                                width: 240,
+                                paddingRight: 3,
+                                paddingLeft: 0.5,
+                                paddingTop: 0.5,
+                                fontSize: 16,
+                                color: '#8591B0',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden', 
+                            }}>
+                                Statistics Calculators
+                        </Box>
+                    </Typography>
+                    
                 </Box>
                 <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
                     {
@@ -108,14 +198,35 @@ function MathOptions(){
                 </Box>
             </Box>
             <Box sx={{...boxStyle }}>
-                <Box sx={{ 
-                    paddingLeft: 2,
-                    width: '100',
-                    backgroundColor: 'white',
-                    borderRadius: 5, 
-                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-                    }} >  
-                    <p style={{ marginTop: 5 }}>Geometry Calculators</p>
+            <Box 
+                    sx={{ 
+                        width:'100%',
+                        height: 30, 
+                        fontSize: 22,
+                        display: 'flex',
+                        justifyContent: 'start',
+                        backgroundColor: 'white',
+                        borderRadius: 5,
+                    }}>
+                    <Box sx={{ height: 30, }}>
+                        <img style={{ height: '100%', }} alt="icon" src={geometry_icon} />
+                    </Box>
+                    <Typography>
+                        <Box
+                            sx={{
+                                width: 240,
+                                paddingRight: 3,
+                                paddingLeft: 0.5,
+                                paddingTop: 0.5,
+                                fontSize: 16,
+                                color: '#8591B0',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden', 
+                            }}>
+                                Geometry Calculators
+                        </Box>
+                    </Typography>
+                    
                 </Box>
                 <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
                     {
@@ -126,14 +237,35 @@ function MathOptions(){
                 </Box>
             </Box>
             <Box sx={{...boxStyle }}>
-                <Box sx={{ 
-                    paddingLeft: 2,
-                    width: '100',
-                    backgroundColor: 'white',
-                    borderRadius: 5, 
-                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-                    }} >  
-                    <p style={{ marginTop: 5 }}>Measurements Calculators</p>
+                <Box 
+                    sx={{ 
+                        width:'100%',
+                        height: 30, 
+                        fontSize: 22,
+                        display: 'flex',
+                        justifyContent: 'start',
+                        backgroundColor: 'white',
+                        borderRadius: 5,
+                    }}>
+                    <Box sx={{ height: 30, }}>
+                        <img style={{ height: '100%', }} alt="icon" src={geometry_icon} />
+                    </Box>
+                    <Typography>
+                        <Box
+                            sx={{
+                                width: 240,
+                                paddingRight: 3,
+                                paddingLeft: 0.5,
+                                paddingTop: 0.5,
+                                fontSize: 16,
+                                color: '#8591B0',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden', 
+                            }}>
+                                Measurement Calculators
+                        </Box>
+                    </Typography>
+                    
                 </Box>
                 <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
                     {

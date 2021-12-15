@@ -14,6 +14,7 @@ import {
   useRouteMatch
 } from "react-router-dom";
 
+import fincance_icon from '../../common/assets/finance_icon.svg';
 
 
 function FinancePage(){
@@ -25,14 +26,22 @@ function FinancePage(){
 
           <Switch>
           <Route exact path={path}>
-            <NavBar2 pagename="Financial Calculators" financialHighLight={true} />
+            <NavBar2 pageimage={fincance_icon} pagename="Financial Calculators" financialHighLight={true} />
+            {/* Hide search bar when screen is small */}
             <Box
               sx={{
-              display: 'flex',
-              justifyContent: 'center',
+                display: {
+                  lg: 'flex',
+                  md: 'flex',
+                  sm: 'none',
+                  xs: 'none'
+                },
+                justifyContent: 'center',
               }}>
                 <SearchForm />
             </Box>
+
+            
             <FinanceOptions />
             <Box sx={{ marginTop: 5 }}>
               <Slide />

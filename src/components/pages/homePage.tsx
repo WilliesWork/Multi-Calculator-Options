@@ -6,7 +6,7 @@ import { Box, Typography, CircularProgress } from '@mui/material'
 import { dataInit } from '../../services/dataInit'
 
 function HomePage() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function initialize(){
@@ -21,7 +21,7 @@ function HomePage() {
         setIsLoading(true)
       }
     }
-    initialize()
+    // initialize()
   });
 
     if(!isLoading){
@@ -41,7 +41,8 @@ function HomePage() {
           <Box
             sx={{
               textAlign: 'center',
-              fontSize: 24,
+              fontSize: 28,
+              fontWeight: 100,
               color: '#8591B0',
               marginBottom: 3,
             }}>

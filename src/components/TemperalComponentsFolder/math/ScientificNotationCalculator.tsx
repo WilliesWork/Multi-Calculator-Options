@@ -4,9 +4,11 @@ import { Field, Form, Formik, FormikProps } from 'formik'
 import { mathMainService } from '../../../services/mathService/mathMainService'
 import Anime from 'react-animejs-wrapper'
 import AddLayout from '../../layouts/AddLayout'
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import { CustomFormBtn } from '../../custom/CustomFormBtn'
 import { NavBar2 } from '../../navbar/navbar2'
+import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+import { CustomFormikForm, CustomFormikOptions } from '../../forms/CustomForm'
 
 const innerBoxStyle = {
     width: 400,
@@ -44,20 +46,16 @@ export default function ScientificNotationCalculator(){
                 ref={animatedSquaresRef1}
                 config={{
                     translateX: -250,
-                //   direction: 'alternate',
+                    duration: 250,
                     easing: 'easeInOutSine',
                     autoplay: false,
                 }}>
-                <div style={innerBoxStyle}>
+                <Box sx={{...formDisplay}}>
                     
 
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:30, width: '100%' }}></Box>
-                        <Box sx={{
-                                height:30, width: '100%', 
-                                backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                borderRadius: '0 10px 3px', 
-                            }}></Box>
+                        <Box sx={{height:25, width: '100%' }}></Box>
+                        <Box sx={{...formCardStyle}}></Box>
                     </Box>
                     <Formik
                         initialValues={{ 
@@ -90,7 +88,8 @@ export default function ScientificNotationCalculator(){
                                 <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
                                     <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
-                                        <Grid item={true} xs={5} ><Box>Value</Box></Grid>
+                                        <Grid item={true} xs={5} >
+                                            <Box sx={{...labelStyle}}>Value</Box></Grid>
                                         <Grid item={true} xs={7}>
                                             <CustomForm
                                                 type="text"
@@ -131,7 +130,7 @@ export default function ScientificNotationCalculator(){
                             </form>
                         )}
                     </Formik>
-                </div>
+                </Box>
             </Anime>
 
 
@@ -148,21 +147,26 @@ export default function ScientificNotationCalculator(){
                 ref={animatedSquaresRef2}
                 config={{
                     translateX: 200,
-                //   direction: 'alternate',
+                    duration: 250,
                     easing: 'easeInOutSine',
                     autoplay: false,
                 }}>
-                 <Box style={innerBoxStyle}>
+                 <Box sx={formDisplay}>
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:30, width: '100%' }}></Box>
-                        <Box sx={{
-                                height:30, width: '100%', 
-                                // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                borderRadius: '0 10px 3px', 
-                            }}></Box>
-                    </Box>
+                            <Box sx={{height:25, width: '100%' }}>
+                                <Typography>
+                                    <Box
+                                        sx={{
+                                            color:'#4072B5',
+                                            fontWeight:'bold', 
+                                            textAlign:'center'
+                                        }}>Result</Box>
+                                </Typography>
+                            </Box>
+                            <Box sx={{ ...formCardStyle }}></Box>
+                        </Box>
                     <Box sx={{marginLeft: 5}}>
-                        <h5>Display Answer</h5>
+                        <p>Answer</p>
                         <p>{value}</p>
                     </Box>
                 </Box>

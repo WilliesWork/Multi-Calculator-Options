@@ -4,16 +4,11 @@ import { Field, Form, Formik, FormikProps } from 'formik'
 import { mathMainService } from '../../../services/mathService/mathMainService'
 import Anime from 'react-animejs-wrapper'
 import AddLayout from '../../layouts/AddLayout'
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import { CustomFormBtn } from '../../custom/CustomFormBtn'
 import { NavBar2 } from '../../navbar/navbar2'
-
-const innerBoxStyle = {
-    width: 400,
-    borderRadius: 10,
-    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-    backgroundColor: 'white'
- }
+import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+import { CustomFormikForm, CustomFormikOptions } from '../../forms/CustomForm'
 
 
 function PythagoreanTheoremCalculator(){
@@ -44,20 +39,16 @@ function PythagoreanTheoremCalculator(){
                 ref={animatedSquaresRef1}
                 config={{
                     translateX: -250,
-                //   direction: 'alternate',
+                    duration: 250,
                     easing: 'easeInOutSine',
                     autoplay: false,
                 }}>
-                <div style={innerBoxStyle}>
+                <Box sx={{...formDisplay}}>
                     
 
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:30, width: '100%' }}></Box>
-                        <Box sx={{
-                                height:30, width: '100%', 
-                                backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                borderRadius: '0 10px 3px', 
-                            }}></Box>
+                        <Box sx={{height:25, width: '100%' }}></Box>
+                        <Box sx={{...formCardStyle}}></Box>
                     </Box>
                     <Formik
                         initialValues={{ 
@@ -96,51 +87,63 @@ function PythagoreanTheoremCalculator(){
                                 <Box sx={{  display:'flex', flexDirection:'column' }}>
                                     <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
-                                        <Grid item={true} xs={5} ><Box>a value</Box></Grid>
+                                        <Grid item={true} xs={5} >
+                                            <Box sx={{...labelStyle}}>a value</Box></Grid>
                                         <Grid item={true} xs={7}>
                                             <Field
                                                 type="text"
                                                 name="a_value"
+                                                component={CustomFormikForm}
                                             />
                                         </Grid>
                 
-                                        <Grid item xs={5}><label style={{ marginRight: 10 }}>a Squared</label></Grid>
+                                        <Grid item xs={5}>
+                                            <Box sx={{...labelStyle }}>a Squared</Box></Grid>
                                         <Grid item xs={7}>
                                         <Field
                                             type="text"
                                             name="aSquared"
+                                            component={CustomFormikForm}
                                         />
                                         </Grid>
 
-                                        <Grid item={true} xs={5} ><Box>b value</Box></Grid>
+                                        <Grid item={true} xs={5} >
+                                            <Box sx={{...labelStyle}}>b value</Box></Grid>
                                         <Grid item={true} xs={7}>
                                             <Field
                                                 type="text"
                                                 name="b_value"
+                                                component={CustomFormikForm}
                                             />
                                         </Grid>
                 
-                                        <Grid item xs={5}><label style={{ marginRight: 10 }}>b Squared</label></Grid>
+                                        <Grid item xs={5}>
+                                            <Box sx={{ ...labelStyle }}>b Squared</Box></Grid>
                                         <Grid item xs={7}>
                                         <Field
                                             type="text"
                                             name="bSquared"
+                                            component={CustomFormikForm}
                                         />
                                         </Grid>
 
-                                        <Grid item={true} xs={5} ><Box>c value</Box></Grid>
+                                        <Grid item={true} xs={5} >
+                                            <Box sx={{...labelStyle}}>c value</Box></Grid>
                                         <Grid item={true} xs={7}>
                                             <Field
                                                 type="text"
                                                 name="c_value"
+                                                component={CustomFormikForm}
                                             />
                                         </Grid>
                 
-                                        <Grid item xs={5}><label style={{ marginRight: 10 }}>c Squared</label></Grid>
+                                        <Grid item xs={5}>
+                                            <Box sx={{...labelStyle}}>c Squared</Box></Grid>
                                         <Grid item xs={7}>
                                         <Field
                                             type="text"
                                             name="cSquared"
+                                            component={CustomFormikForm}
                                         />
                                         </Grid>
                                                          
@@ -174,7 +177,7 @@ function PythagoreanTheoremCalculator(){
                             </Form>
                         )}
                     </Formik>
-                </div>
+                </Box>
             </Anime>
 
 
@@ -191,21 +194,26 @@ function PythagoreanTheoremCalculator(){
                 ref={animatedSquaresRef2}
                 config={{
                     translateX: 200,
-                //   direction: 'alternate',
+                    duration: 250,
                     easing: 'easeInOutSine',
                     autoplay: false,
                 }}>
-                 <Box style={innerBoxStyle}>
+                <Box sx={formDisplay}>
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:30, width: '100%' }}></Box>
-                        <Box sx={{
-                                height:30, width: '100%', 
-                                // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                borderRadius: '0 10px 3px', 
-                            }}></Box>
-                    </Box>
+                            <Box sx={{height:25, width: '100%' }}>
+                                <Typography>
+                                    <Box
+                                        sx={{
+                                            color:'#4072B5',
+                                            fontWeight:'bold', 
+                                            textAlign:'center'
+                                        }}>Result</Box>
+                                </Typography>
+                            </Box>
+                            <Box sx={{ ...formCardStyle }}></Box>
+                        </Box>
                     <Box sx={{marginLeft: 5}}>
-                        <h5>Display Answer</h5>
+                        <p>Answer</p>
                         <p>{value}</p>
                     </Box>
                 </Box>

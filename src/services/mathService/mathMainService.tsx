@@ -43,7 +43,8 @@ export async function mathMainService(
     INTERFACES.SquareRootCalculator|
     INTERFACES.StatisticsCalculator|
     INTERFACES.TwoDDistanceCalculator|
-    INTERFACES.ZscoreCalculator
+    INTERFACES.ZscoreCalculator|
+    INTERFACES.MassCalculator
     ){
     try{
         const { data } = await axiosInstance.post(mathRoute, dataObject);
@@ -57,6 +58,8 @@ export async function mathMainService(
         }
     }
     catch(error){
+        console.log("Print out error")
+        console.log(error)
         return error
     }
 }
@@ -64,7 +67,13 @@ export async function mathMainService(
 
 export async function otherMainService(
     dataObject:
-    INTERFACES.ProteinCalculator
+    INTERFACES.ProteinCalculator|
+    INTERFACES.FuelCostCalculator|
+    INTERFACES.GasMileageCalculator|
+    INTERFACES.ElectricityCalculator|
+    INTERFACES.PregnancyWeightGainCalculator|
+    INTERFACES.HeatIndexCalculatorUseRelativeHumidity
+    
     ){
     try{
         const { data } = await axiosInstance.post(othersRoute, dataObject);

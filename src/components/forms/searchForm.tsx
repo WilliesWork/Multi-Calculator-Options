@@ -2,11 +2,42 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Box } from '@mui/material'
 import { useHistory } from 'react-router-dom'
 import { Button } from '@mui/material'
+//icons
 import SearchIcon from '@mui/icons-material/Search';
+import DensityMediumIcon from '@mui/icons-material/DensityMedium';
+
+
 import { othersRoutes } from '../../routes/routes'
 import List from '@mui/material/List';
-
 var classNames = require('classnames');
+
+/**
+ * Hides corresponding componenets when screen size reduced 
+ */
+
+ const generalHideStyle = {
+    display: {
+        lg: 'block',
+        md: 'block',
+        sm: 'none',
+        xs: 'none'
+    }
+}
+
+/**
+ * Hides corresponding componenets when screen size reduced 
+ */
+
+ const generalRevealStyle = {
+    display: {
+        lg: 'none',
+        md: 'none',
+        sm: 'block',
+        xs: 'block'
+    }
+}
+
+// **********************************************************************
 
 function SearchForm(){
 
@@ -72,49 +103,77 @@ function SearchForm(){
         borderRadius: 25,
         borderColor: '#707070', 
         color: '#707070',
-        display: 'bloc'
+        display: {
+            lg: 'flex',
+            md: 'flex',
+            sm: 'none',
+            xs: 'none'
+        },
       };
 
     return(
         <div>
-        <Box sx={{ ...commonStyles }}>
-        <div className={overLayStyleClasses} ></div>
-            
-            <div className="form-group d-flex justify-content-center">
-                <input
-                    onFocus = { ()=> { setSearchOption(true) }}
-                    id="calc-search"
-                    list="data"
-                    type="text"
-                    placeholder="search for calculator"
-                    className="search-input"
-                    value = {value}
-                    onChange = {(e) => {
-                        console.log("button is pressed ", e.target.value)
-                        setValue(e.target.value)
-                    }}
+            <div className={overLayStyleClasses} ></div>
+            <Box sx={{ ...commonStyles }}>
+                <Box sx={{
+                    display: {
+                        lg: 'flex',
+                        md: 'flex',
+                        sm: 'none',
+                        xs: 'none'
+                    },
+                        justifyContent: 'center'
+                    }}>
+
+                    <input
+                        onFocus = { ()=> { setSearchOption(true) }}
+                        id="calc-search"
+                        list="data"
+                        type="text"
+                        placeholder="Search for Calculator"
+                        className="search-input"
+                        value = {value}
+                        onChange = {(e) => {
+                            console.log("button is pressed ", e.target.value)
+                            setValue(e.target.value)
+                        }}
                     />
-                 <Button type="button">
-                    <SearchIcon/>
-                </Button>
-            </div>
+
+                    <Button type="button">
+                        <SearchIcon/>
+                    </Button>
+                </Box>
+            </Box>
+            <Box sx={{ 
+                display: {
+                    lg: 'none',
+                    md: 'none',
+                    sm: 'flex',
+                    xs: 'flex'
+                },}}>
+                    <Button type="button">
+                        <SearchIcon/>
+                    </Button>
+                    <Button type="button">
+                        <DensityMediumIcon/>
+                    </Button>
+                </Box>
             
-        </Box>
-        <Box  ref={ref} className={appOverLayDisplay} sx={{ display: 'block' }}>
-            {
-                isSearchOption?
-                (
-                    resultArray.map((data:any) => {
-                        return(
-                            <Box id="" className="div-link link-search"
-                            onClick={()=>{ 
-                                history.push(data.path); 
-                            }}>{ data.name }</Box>
-                        )
-                    })
-                ): ""
-            }
-        </Box>
+            <Box  ref={ref} className={appOverLayDisplay} sx={{ display: 'block' }}>
+                {
+                    isSearchOption?
+                    (
+                        resultArray.map((data:any) => {
+                            return(
+                                <Box id="" className="div-link link-search"
+                                onClick={()=>{ 
+                                    history.push(data.path); 
+                                }}>{ data.name }</Box>
+                            )
+                        })
+                    ): ""
+                }
+            </Box>
         </div>
         );
 }

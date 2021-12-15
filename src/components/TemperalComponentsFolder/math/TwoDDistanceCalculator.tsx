@@ -4,9 +4,11 @@ import { Field, Form, Formik, FormikProps } from 'formik'
 import { mathMainService } from '../../../services/mathService/mathMainService'
 import Anime from 'react-animejs-wrapper'
 import AddLayout from '../../layouts/AddLayout'
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import { CustomFormBtn } from '../../custom/CustomFormBtn'
 import { NavBar2 } from '../../navbar/navbar2'
+import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+import { CustomFormikForm } from '../../forms/CustomForm'
 
 
 const innerBoxStyle = {
@@ -45,20 +47,16 @@ export default function TwoDDistanceCalculator(){
                     ref={animatedSquaresRef1}
                     config={{
                         translateX: -250,
-                    //   direction: 'alternate',
+                        duration: 250,
                         easing: 'easeInOutSine',
                         autoplay: false,
                     }}>
-                    <div style={innerBoxStyle}>
+                    <Box sx={{...formDisplay}}>
                         
 
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:30, width: '100%' }}></Box>
-                            <Box sx={{
-                                    height:30, width: '100%', 
-                                    backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                    borderRadius: '0 10px 3px', 
-                                }}></Box>
+                            <Box sx={{height:25, width: '100%' }}></Box>
+                            <Box sx={{...formCardStyle}}></Box>
                         </Box>
                         <Formik
                             initialValues={{ 
@@ -96,39 +94,43 @@ export default function TwoDDistanceCalculator(){
                                     <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
-                                            <Grid item={true} xs={5} ><Box>x_1</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>x 1</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="x_1"
-                                                    placeholder=""
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
 
-                                            <Grid item={true} xs={5} ><Box>x_2</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>x 2</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="x_2"
-                                                    placeholder=""
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
                                             
-                                            <Grid item={true} xs={5} ><Box>y_1</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>y 1</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="y_1"
-                                                    placeholder=""
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
 
-                                            <Grid item={true} xs={5} ><Box>y_2</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>y 2</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="y_2"
-                                                    placeholder=""
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
 
@@ -164,7 +166,7 @@ export default function TwoDDistanceCalculator(){
                                 </Form>
                             )}
                         </Formik>
-                    </div>
+                    </Box>
                 </Anime>
 
                 <Anime
@@ -175,24 +177,29 @@ export default function TwoDDistanceCalculator(){
                     ref={animatedSquaresRef2}
                     config={{
                         translateX: 200,
-                    //   direction: 'alternate',
+                        duration: 250,
                         easing: 'easeInOutSine',
                         autoplay: false,
                     }}>
-                    <Box style={innerBoxStyle}>
-                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:30, width: '100%' }}></Box>
-                            <Box sx={{
-                                    height:30, width: '100%', 
-                                    // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                    borderRadius: '0 10px 3px', 
-                                }}></Box>
+                    <Box sx={formDisplay}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                            <Box sx={{height:25, width: '100%' }}>
+                                <Typography>
+                                    <Box
+                                        sx={{
+                                            color:'#4072B5',
+                                            fontWeight:'bold', 
+                                            textAlign:'center'
+                                        }}>Result</Box>
+                                </Typography>
+                            </Box>
+                            <Box sx={{ ...formCardStyle }}></Box>
                         </Box>
-                        <Box sx={{marginLeft: 5}}>
-                            <h5>Display Answer</h5>
-                            <p>{value}</p>
-                        </Box>
+                    <Box sx={{marginLeft: 5}}>
+                        <p>Answer</p>
+                        <p>{value}</p>
                     </Box>
+                </Box>
                 </Anime>
             </Box>
         </AddLayout>

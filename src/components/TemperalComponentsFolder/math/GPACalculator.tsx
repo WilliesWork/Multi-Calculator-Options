@@ -5,6 +5,8 @@ import { mathMainService } from '../../../services/mathService/mathMainService'
 import Anime from 'react-animejs-wrapper'
 import AddLayout from '../../layouts/AddLayout'
 import { Box, Grid } from '@mui/material'
+import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+
 
 export function GPACalculator(){
     return(

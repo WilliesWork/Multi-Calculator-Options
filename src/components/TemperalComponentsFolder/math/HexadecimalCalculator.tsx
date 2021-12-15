@@ -4,20 +4,35 @@ import { Field, Form, Formik, FormikProps } from 'formik'
 import { mathMainService } from '../../../services/mathService/mathMainService'
 import Anime from 'react-animejs-wrapper'
 import AddLayout from '../../layouts/AddLayout'
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import { CustomFormBtn } from '../../custom/CustomFormBtn'
 import { NavBar2 } from '../../navbar/navbar2'
+import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+import { CustomFormikForm, CustomFormikOptions } from '../../forms/CustomForm'
 
-
-const innerBoxStyle = {
-    width: 400,
-    height: 300,
-    borderRadius: 10,
-    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-    backgroundColor: 'white'
- }
-
-
+function HexadecimalOperations(props:any){
+    return(
+         
+  <Box sx={{
+    display: 'flex',
+  }}>
+    <Box sx={{ marginRight:1, color:'#4072B5'  }}>:</Box>
+    <select 
+    style={{
+      width:'100%',
+      backgroundColor:'#F0F3F6',
+      border: 'none',
+      borderColor: 'red',
+      borderRadius: 7,
+      outline: 'none',
+      color:'black' 
+    }}
+    {...props} >
+      <option value="Multiply">Multiply</option>
+    </select>
+  </Box>
+    );
+}
 export default function HexadecimalCalculator(){
     const [value, setValue] = useState("")
     const animatedSquaresRef1 = useRef(null)
@@ -45,20 +60,16 @@ export default function HexadecimalCalculator(){
                     ref={animatedSquaresRef1}
                     config={{
                         translateX: -250,
-                    //   direction: 'alternate',
+                        duration: 250,
                         easing: 'easeInOutSine',
                         autoplay: false,
                     }}>
-                    <div style={innerBoxStyle}>
+                    <Box sx={{...formDisplay}}>
                         
 
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:30, width: '100%' }}></Box>
-                            <Box sx={{
-                                    height:30, width: '100%', 
-                                    backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                    borderRadius: '0 10px 3px', 
-                                }}></Box>
+                            <Box sx={{height:25, width: '100%' }}></Box>
+                            <Box sx={{...formCardStyle}}></Box>
                         </Box>
                         <Formik
                             initialValues={{ 
@@ -94,34 +105,32 @@ export default function HexadecimalCalculator(){
                                     <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
-                                            <Grid item={true} xs={5} ><Box>First Value</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>First Value</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="first_value"
-                                                    placeholder=""
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
 
-                                            <Grid item={true} xs={5} ><Box>Second Value</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>Second Value</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="second_value"
-                                                    placeholder=""
+                                                    component={CustomFormikForm}
                                                 />
                                             </Grid>
 
-                                            <Grid item={true} xs={5} ><Box>Operation</Box></Grid>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>Operation</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
-                                                    as="select"
-                                                    name="operation"
-                                                >
-                                                    <option value="red">Subtraction</option>
-                                                    <option value="Multiply">Multiply</option>
-                                                    
-                                            </Field>
+                                                    as={HexadecimalOperations}
+                                                />
                                             </Grid>
                                                             
                                         </Grid>
@@ -154,7 +163,7 @@ export default function HexadecimalCalculator(){
                                 </Form>
                             )}
                         </Formik>
-                    </div>
+                    </Box>
                 </Anime>
 
                 <Anime
@@ -165,24 +174,29 @@ export default function HexadecimalCalculator(){
                     ref={animatedSquaresRef2}
                     config={{
                         translateX: 200,
-                    //   direction: 'alternate',
+                        duration: 250,
                         easing: 'easeInOutSine',
                         autoplay: false,
                     }}>
-                    <Box style={innerBoxStyle}>
-                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:30, width: '100%' }}></Box>
-                            <Box sx={{
-                                    height:30, width: '100%', 
-                                    // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                    borderRadius: '0 10px 3px', 
-                                }}></Box>
+                    <Box sx={formDisplay}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                            <Box sx={{height:25, width: '100%' }}>
+                                <Typography>
+                                    <Box
+                                        sx={{
+                                            color:'#4072B5',
+                                            fontWeight:'bold', 
+                                            textAlign:'center'
+                                        }}>Result</Box>
+                                </Typography>
+                            </Box>
+                            <Box sx={{ ...formCardStyle }}></Box>
                         </Box>
-                        <Box sx={{marginLeft: 5}}>
-                            <h5>Display Answer</h5>
-                            <p>{value}</p>
-                        </Box>
+                    <Box sx={{marginLeft: 5}}>
+                        <p>Answer</p>
+                        <p>{value}</p>
                     </Box>
+                </Box>
                 </Anime>
             </Box>
         </AddLayout>

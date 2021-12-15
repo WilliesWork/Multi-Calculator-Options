@@ -68,7 +68,7 @@ const routes = [
 
 
 const mathRoutes = {
-        categoryName: "Financial Calculators",
+        categoryName: "Math Calculators",
         subCategories:[
               {
                 name: "Fractions Calculators",

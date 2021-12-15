@@ -9,15 +9,19 @@ import { Field, Form, Formik, FormikProps } from 'formik'
 import { mathMainService } from '../../../services/mathService/mathMainService'
 import Anime from 'react-animejs-wrapper'
 import AddLayout from '../../layouts/AddLayout'
-import { Box, Grid } from '@mui/material'
-import { CustomFormBtn } from '../../custom/CustomFormBtn'
+import { Box, Grid, Typography } from '@mui/material'
+import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import { NavBar2 } from '../../navbar/navbar2'
-const Latex = require('react-latex');
 
+import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+
+
+ const Latex = require('react-latex');
  const innerBoxStyle = {
+    border:'solid',
     width: 400,
     height: 300,
-    borderRadius: 10,
+    borderRadius: '20px',
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
     backgroundColor: 'white'
  }
@@ -44,6 +48,7 @@ export default function ArithmeticSequenceCalculator(){
         <NavBar2 pagename="Arithmetic Sequence Calculator" />
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
+                
             <Anime
                 style={{
                     position: 'absolute',
@@ -51,18 +56,14 @@ export default function ArithmeticSequenceCalculator(){
                 ref={animatedSquaresRef1}
                 config={{
                     translateX: -250,
-                //   direction: 'alternate',
                     easing: 'easeInOutSine',
                     autoplay: false,
+                    duration: 250
                 }}>
-                <div style={innerBoxStyle}>
+                <Box sx={{ ...formDisplay }}>
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:30, width: '100%' }}></Box>
-                        <Box sx={{
-                                height:30, width: '100%', 
-                                backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                borderRadius: '0 10px 3px', 
-                            }}></Box>
+                        <Box sx={{height:25, width: '100%' }}></Box>
+                        <Box sx={{ ...formCardStyle }}></Box>
                     </Box>
                     <Formik
                         initialValues={{ 
@@ -78,9 +79,11 @@ export default function ArithmeticSequenceCalculator(){
                                 number_of_observation: values.number_of_observation,
                                 method: values.method
                             }
-
+                            
                             const postData = async () => {
+                                console.log(data)
                                 const responseData = await mathMainService(data)
+                                console.log(responseData)
                                 var msg:any = responseData.statusDescription;
                                 if(msg === "success"){
                                     setValue(responseData.message.answer)
@@ -98,10 +101,13 @@ export default function ArithmeticSequenceCalculator(){
                             isSubmitting
                         }) => (
                             <form onSubmit={handleSubmit}>
-                                <Box sx={{height: 250, display:'flex', flexDirection:'column' }}>
+                                <Box sx={{minHeight: 250, display:'flex', flexDirection:'column' }}>
                                     <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                        <Grid item={true} xs={7}><Box>First Term</Box></Grid>
-                                        <Grid item={true} xs={5} sx={{display:'flex'}}>
+                                        <Grid item={true} xs={7}>
+                                            <Box sx={{ ...labelStyle }}>First Term</Box>
+                                        </Grid>
+                                        <Grid item={true} xs={5} sx={{
+                                            display:'flex'}}>
                                             <CustomForm
                                                 type="text"
                                                 name="first_term"
@@ -111,7 +117,9 @@ export default function ArithmeticSequenceCalculator(){
                                             />
                                         </Grid>
                 
-                                        <Grid item xs={7}><Box>Common Difference</Box></Grid>
+                                        <Grid item xs={7}>
+                                            <Box sx={{ ...labelStyle }}>Common Difference</Box>
+                                        </Grid>
                                         <Grid item xs={5}>
                                         <CustomForm
                                             type="text"
@@ -122,7 +130,9 @@ export default function ArithmeticSequenceCalculator(){
                                         />
                                         </Grid>
                                     
-                                        <Grid item xs={7}><Box>No# of Observations</Box></Grid>
+                                        <Grid item xs={7}>
+                                            <Box sx={{ ...labelStyle }}>No# of Observations</Box>
+                                        </Grid>
                                         <Grid item xs={5}>
                                             <CustomForm
                                                 type="text"
@@ -134,7 +144,7 @@ export default function ArithmeticSequenceCalculator(){
                                         </Grid>                    
                                     </Grid>
                                     
-                                    <Box sx={{ flexGrow: 1}}>
+                                    <Box sx={{flexGrow: 1}}>
                                         {/* 
                                             Flex box pushes submit button down
                                         */}
@@ -151,7 +161,7 @@ export default function ArithmeticSequenceCalculator(){
                                        <Grid item xs={4}></Grid>
                                        <Grid item xs={4}>
                                             <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                <CustomFormBtn type="submit" name="Calculate"/>
+                                                <CustomFormImageBtn type="submit" name="Calculate"/>
                                             </Box>
                                        </Grid>
                                    </Grid>
@@ -159,7 +169,7 @@ export default function ArithmeticSequenceCalculator(){
                             </form>
                         )}
                     </Formik>
-                </div>
+                </Box>
             </Anime>
 
 
@@ -176,19 +186,25 @@ export default function ArithmeticSequenceCalculator(){
                 ref={animatedSquaresRef2}
                 config={{
                     translateX: 200,
-                //   direction: 'alternate',
                     easing: 'easeInOutSine',
                     autoplay: false,
+                    duration: 250
                 }}>
-                 <Box style={innerBoxStyle} >
+                 <Box style={formDisplay} >
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:30, width: '100%' }}></Box>
-                        <Box sx={{
-                                height:30, width: '100%', 
-                                // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                borderRadius: '0 10px 3px', 
-                            }}></Box>
+                        <Box sx={{height:25, width: '100%' }}>
+                            <Typography>
+                                <Box
+                                    sx={{
+                                        color:'#4072B5',
+                                        fontWeight:'bold', 
+                                        textAlign:'center'
+                                    }}>Result</Box>
+                            </Typography>
+                        </Box>
+                        <Box sx={{ ...formCardStyle }}></Box>
                     </Box>
+
                     <Box sx={{marginLeft: 5}}>
                         <Box sx={{marginBottom: 2}}>
                             <Latex displayMode={false}>{`$a_{n} = a+(n-1)d$`}</Latex>

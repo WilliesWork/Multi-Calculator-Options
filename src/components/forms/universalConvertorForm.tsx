@@ -6,8 +6,8 @@ import CustomForm from '../forms/CustomForm'
 import { NavBar2 } from '../navbar/navbar2'
 import AddLayout from '../layouts/AddLayout'
 import Anime from 'react-animejs-wrapper'
+import { CustomFormikForm, CustomFormikOptions } from '../forms/CustomForm'
 const Latex = require('react-latex');
-
 
  const innerBoxStyle = {
     width: 400,
@@ -16,6 +16,7 @@ const Latex = require('react-latex');
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
     backgroundColor: 'white'
  }
+
 
 
 function UniversalConverterForm(props:any){
@@ -49,6 +50,31 @@ function UniversalConverterForm(props:any){
               play2();
           }
       },[value])
+
+    const CustomFormikOptions = (props:any) => ( 
+        <Box sx={{
+          display: 'flex',
+        }}>
+          <Box sx={{ marginRight:1, color:'#4072B5'  }}>:</Box>
+          <select 
+          style={{
+            width:'100%',
+            backgroundColor:'#F0F3F6',
+            border: 'none',
+            borderColor: 'red',
+            borderRadius: 7,
+            outline: 'none',
+            color:'black' 
+          }}
+          {...props} >
+            {optionsData.map((data, i) => (
+                <option key={data} >{
+                    data
+                }</option>
+            ))}
+          </select>
+        </Box>
+    );
 
     return(
       <>
@@ -105,31 +131,21 @@ function UniversalConverterForm(props:any){
 
                           <Grid item xs={5} ><Box>Value</Box></Grid>
                           <Grid item xs={7} > 
-                              <Field  type="text" name="value" />
+                              <Field  
+                                type="text" 
+                                name="value"
+                                component={CustomFormikForm} 
+                                />
                           </Grid>
 
                           <Grid item xs={5} ><Box>From</Box></Grid>
                           <Grid item xs={7} >
-                            <Field as="select" name="fromUnit" >
-                              <option>Select Convertion Unit</option>
-                              {optionsData.map((data, i) => (
-                                <option key={data} >{
-                                    data
-                                }</option>
-                              ))}     
-                            </Field>                            
+                                <Field as={CustomFormikOptions} name="fromUnit" />                           
                           </Grid>
 
                           <Grid item xs={5} ><Box>To</Box></Grid>
                           <Grid item xs={7}>
-                              <Field as="select" name="toUnit">
-                                <option >Select ConVertion Unit</option>
-                                {optionsData.map((data, i) => (
-                                  <option key={data} >{
-                                      data
-                                  }</option>
-                                ))}
-                              </Field>
+                                <Field as={CustomFormikOptions} name="toUnit" />
                           </Grid>
                                               
                         </Grid>

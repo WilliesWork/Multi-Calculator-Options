@@ -15,6 +15,7 @@ import {
   useRouteMatch
 } from "react-router-dom";
 
+import other_icon from '../../common/assets/other_icon.svg';
 
 
 function OtherPage(){
@@ -26,7 +27,7 @@ function OtherPage(){
          
           <Switch>  
           <Route exact path={path}>
-            <NavBar2 pagename="Other Calculators" otherHighLight={true}/>
+            <NavBar2 pageimage={other_icon} pagename="Other Calculators" otherHighLight={true}/>
             <Box
               sx={{
               display: 'flex',

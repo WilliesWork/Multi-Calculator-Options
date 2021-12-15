@@ -9,8 +9,8 @@ import { SearchForm } from '../forms/searchForm';
 import { useHistory } from 'react-router-dom'
 
 // 
-import QuadraticFormulaCalculator from  '../TemperalComponentsFolder/math/QuadraticFormulaCalculator'
-import AverageCalculator from '../TemperalComponentsFolder/math/AverageCalculator'
+import ArithmeticSequenceCalculator from  '../TemperalComponentsFolder/math/ArithmeticSequenceCalculator'
+
 
 
 //
@@ -41,7 +41,7 @@ import ExponentForm from '../forms/math/ExponentForm'
 export default function TestPage(){
     return(
         <>
-          <QuadraticFormulaCalculator />
+          <ArithmeticSequenceCalculator />
         </>
     );
 }

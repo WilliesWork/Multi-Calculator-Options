@@ -41,7 +41,7 @@ function SpecifiedSearchForm(){
     }, [value])
 
     const commonStyles = {
-        width: 300,
+        width: '100%',
         marginRight: 4,
         backgroundColor: '#FFFFFF',
         borderRadius: 25,
@@ -51,10 +51,10 @@ function SpecifiedSearchForm(){
       };
 
     return(
-        <div>
+        <Box >
         <Box sx={{ ...commonStyles }}>
             
-            <div className="form-group d-flex justify-content-center">
+            <div className="d-flex justify-content-center">
                 <input
                     id="calc-search"
                     list="data"
@@ -81,15 +81,25 @@ function SpecifiedSearchForm(){
             {
                 resultArray.map((data:any) => {
                     return(
-                        <Box id="" className="div-link"
-                        onClick={()=>{ 
-                            history.push(data.path); 
-                        }}>{ data.name }</Box>
+                        <Box sx={[
+                            {
+                                '&:hover':{
+                                    cursor: 'pointer',
+                                    backgroundColor: '#F0F3F6'
+                                }
+                            },
+                            {
+                                fontSize: 16,
+                            }
+                        ]}
+                            onClick={()=>{ 
+                                history.push(data.path); 
+                            }}>{ data.name }</Box>
                     )
                 })
             }
         </Box>
-        </div>
+        </Box>
         );
 }
 

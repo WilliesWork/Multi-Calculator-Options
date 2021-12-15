@@ -15,12 +15,14 @@ export default function AddLayout({children}:any){
                     justifyContent: 'center'
                 }} 
                 className="container"> 
-                <Grid sx={{border: 0, borderColor: 'red', width: '100%'}} container spacing={2}>
-                    <Grid item xs={9}>
-                        {children}
+                <Grid sx={{borderColor: 'red', width: '100%'}} container rowSpacing={2}>
+                    <Grid item xs={12} sm={12} md={9} >
+                        <Box sx={{minHeight: 350}}>
+                            {children}
+                        </Box>
                     </Grid>
-                    <Grid item xs={3}>
-                        <Box sx={{border: 0, borderColor: 'blue', height: 250 }}>
+                    <Grid item xs={12} sm={12} md={3} >
+                        <Box sx={{border: 0, borderColor: 'blue', width: 150, height:200 }}>
                             <SingleSlider/>
                         </Box>
                         <Box>
